@@ -1,0 +1,15 @@
+$default: #ffffff;
+$categoryColor: #00f1ff;
+$background: #1d1d1d;
+
+:root {
+  --background: #1d1d1d;
+  --text-primary: #ffffff;
+  --input: rgb(58, 58, 58);
+}
+
+[data-theme='light'] {
+  --background: #dedede;
+  --text-primary: #000000;
+  --input: rgb(199, 199, 199);
+}
