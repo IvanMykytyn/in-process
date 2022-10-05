@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/in-process/static/js/main.a72f87c7.js",
+    "index.html": "/in-process/index.html",
+    "main.a72f87c7.js.map": "/in-process/static/js/main.a72f87c7.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a72f87c7.js"
+  ]
+}
