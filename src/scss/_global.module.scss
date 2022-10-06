@@ -1,5 +1,13 @@
+
+body {
+  background-color: $background;
+  font-family: sans-serif;
+  padding: 50px;
+}
+
+
 .container {
-  max-width: 1675px;
+  max-width: 1230px;
   padding: 0 15px;
   margin: 0 auto;
 }
