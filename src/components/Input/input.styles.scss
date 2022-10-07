@@ -1,0 +1,89 @@
+@import '../../scss/vars.module';
+
+$errorTextColor: rgb(249, 95, 95);
+
+.text-field {
+  .MuiOutlinedInput-root {
+    border-radius: 12px;
+    padding-right: 0;
+  }
+
+  .MuiOutlinedInput-root input {
+    box-shadow: $innerBoxShadow;
+    border: 1px solid #b0b0b03a;
+    border-radius: 12px;
+    height: 30px;
+
+    padding: 8px 15px 6px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.1rem;
+
+    min-width: 250px;
+  }
+  .MuiOutlinedInput-root input[type='password'] {
+    font: large Verdana, sans-serif;
+    letter-spacing: 1px;
+  }
+  .MuiInputLabel-root {
+    top: -4px;
+    transition: 0.3s ease-in-out all;
+    letter-spacing: 2.5px;
+    text-transform: capitalize;
+    padding: 0 5px;
+    color: #8b9eb0;
+
+    width: 100%;
+  }
+
+  .MuiInputLabel-root[data-shrink='true'] {
+    top: -15px;
+    left: -5px;
+    color: $primaryColor;
+    font-size: 1.25rem;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border: 0;
+  }
+  .MuiFormHelperText-root {
+    padding-top: 5px;
+    text-transform: capitalize;
+    max-width: 100%;
+  }
+  .Mui-disabled {
+    opacity: 0.4;
+  }
+  .MuiInputAdornment-root {
+    position: absolute;
+    right: 5px;
+  }
+
+  &__full-width {
+    width: 100%;
+  }
+
+  &__error {
+    .MuiOutlinedInput-root input {
+      // border: 1px solid #ff9696;
+      // box-shadow: inset 1px 1px 4px rgb(250, 130, 130), inset -2px -2px 7px #fec5c5;
+      border: 1px solid #ff9696;
+      box-shadow: inset 3px 3px 5px rgb(255, 143, 143), inset -3px -3px 7px #ffd7d7;
+    }
+
+    .MuiInputLabel-root[data-shrink='true'] {
+      color: $errorTextColor;
+    }
+
+    .MuiFormHelperText-root {
+      color: $errorTextColor;
+    }
+  }
+
+  &__password {
+    .MuiOutlinedInput-root input {
+      padding-right: 50px;
+      min-width: 220px;
+      max-width: 0;
+    }
+  }
+}

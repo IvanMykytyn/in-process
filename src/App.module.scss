@@ -5,29 +5,16 @@
 
 .wrapper {
   display: flex;
-  grid-gap: 25px;
+  gap: 45px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.circle{
-  padding: 10px 15px;
-  border-radius: 10px;
-  box-shadow:  $outerBoxShadow;
-  color: #31344b;
+.inputs-wrapper{
   display: flex;
-  align-items: center;
+  gap: 45px;
+  flex-direction: column;
   justify-content: center;
-  cursor: pointer;
-  border: none;
-  background-color: inherit;
-  transition: box-shadow 0.3s ease-in-out;
-  text-transform: uppercase;
-
-  &:hover,
-  &:focus,
-  &:active{
-    box-shadow: $innerBoxShadow;
-  }
+  align-items: center;
 }
-
