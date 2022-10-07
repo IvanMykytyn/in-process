@@ -1,0 +1,18 @@
+@import "../../App.module";
+
+.button{
+  border: none;
+  height: 100px;
+  width: 100px;
+  border-radius: 35px;
+  background: $background;
+  box-shadow: 3px 3px 7px #b0b0b0, -1px -2px 5px #ffffff;
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active{
+    border: none;
+    box-shadow: $innerBoxShadow;
+  }
+}
