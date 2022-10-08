@@ -19,10 +19,17 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["components/*"]
-      
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@models/*": ["models/*"],
+      "@pages/*": ["pages/*"],
+      "@services/*": ["services/*"],
+      "@store/*": ["store/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": [
