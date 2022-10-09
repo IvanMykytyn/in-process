@@ -6,9 +6,9 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
 
-import css from "./Calendar.module.scss";
+import css from "./FirstCalendar.module.scss";
 
-const Calendar: FC = () => {
+const FirstCalendar: FC = () => {
     const [value, setValue] = useState<Dayjs | null>(
         dayjs('2022-10-05T21:11:54'),
     );
@@ -34,4 +34,4 @@ const Calendar: FC = () => {
     );
 };
 
-export {Calendar};
+export {FirstCalendar};

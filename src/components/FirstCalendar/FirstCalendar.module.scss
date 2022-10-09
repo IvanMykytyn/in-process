@@ -2,10 +2,10 @@
 
 .calendar {
 
-  //:global(.css-169iwlq-MuiCalendarPicker-root) {
-  //  color: red !important;
-  //  background-color: red !important;
-  //}
+}
+
+:global(.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root){
+  max-width: 250px;
 }
 
 :global(.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root) {
@@ -106,7 +106,7 @@
 :global(.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root) {
   background-color: #f6f6f7 !important;
   font-size: 16px !important;
-  color: $CalendarBntColor !important;
+  color: #656565 !important;
   border-radius: 8px !important;
   transition: color 0.5s, background-color 0.5s;
 
@@ -132,3 +132,8 @@
     opacity: 0.7;
   }
 }
+
+:global(.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root){
+  //transform: translate3d(454.56px, 115.24px, 0px) !important;
+}
+
