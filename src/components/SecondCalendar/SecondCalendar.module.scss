@@ -57,29 +57,56 @@
     padding: 8px;
     height: 25px;
     width: 25px;
-    //font-size: 0;
+    font-size: 0;
   }
 
-  //:global(.react-calendar__navigation__next-button),
-  //:global(.react-calendar__navigation__next2-button) {
-  //  position: relative;
-  //
-  //  &::after {
-  //    content: '>';
-  //    font-size: 15px;
-  //    position: absolute;
-  //    top: 50%;
-  //    transform: translateY(-50%);
-  //  }
-  //}
-  //
-  //:global(.react-calendar__navigation__prev-button),
-  //:global(.react-calendar__navigation__prev2-button) {
-  //  &::after {
-  //    content: "<";
-  //    font-size: 15px;
-  //  }
-  //}
+  :global(.react-calendar__navigation__next-button),
+  :global(.react-calendar__navigation__next2-button),
+  :global(.react-calendar__navigation__prev-button),
+  :global(.react-calendar__navigation__prev2-button) {
+    position: relative;
+
+    &::after {
+      content: '';
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  :global(.react-calendar__navigation__next-button) {
+    &::after {
+      background-image: url('../../assets/images/icons/arrow-right.svg');
+      width: 11px;
+      height: 15px;
+    }
+  }
+
+  :global(.react-calendar__navigation__next2-button) {
+    &::after {
+      background-image: url('../../assets/images/icons/double-arrows-right.svg');
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  :global(.react-calendar__navigation__prev-button) {
+    &::after {
+      background-image: url('../../assets/images/icons/arrow-left.svg');
+      width: 11px;
+      height: 15px;
+    }
+  }
+
+  :global(.react-calendar__navigation__prev2-button) {
+    &::after {
+      background-image: url('../../assets/images/icons/double-arrows-left.svg');
+      width: 15px;
+      height: 15px;
+    }
+  }
 
   :global(.react-calendar__viewContainer) {
     width: 100%;
