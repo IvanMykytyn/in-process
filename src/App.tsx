@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import css from '@App.module.scss'
-import {Input} from '@components/index'
+import css from './App.module.scss'
+import {Input} from './components'
 
 function App() {
   return (
