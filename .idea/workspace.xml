@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88c41773-255b-4b6b-879f-efc3ca77872b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/images/icons/file-up.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FileUploader/FileUploader.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FileUploader/FileUploader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/custom.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Input/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Input/Input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/_global.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/_global.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/icons/file-up.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/icons/file-up.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FileUploader/FileUploader.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FileUploader/FileUploader.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FileUploader/FileUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FileUploader/FileUploader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/_vars.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/_vars.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature/ui_calendar" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,7 +94,7 @@
       <workItem from="1665324850322" duration="10114000" />
       <workItem from="1665340538174" duration="71000" />
       <workItem from="1665480962429" duration="4034000" />
-      <workItem from="1665492888241" duration="5980000" />
+      <workItem from="1665492888241" duration="10981000" />
     </task>
     <servers />
   </component>

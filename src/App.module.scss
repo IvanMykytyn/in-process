@@ -6,9 +6,7 @@
 .wrapper {
   display: flex;
   gap: 45px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
 }
 
 .inputs-wrapper{
