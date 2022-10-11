@@ -1,2 +1,1 @@
-export * from "./FirstCalendar/FirstCalendar";
-export * from "./SecondCalendar/SecondCalendar";
+export * from './MainCalendar/MainCalendar';

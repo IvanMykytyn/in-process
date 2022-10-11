@@ -2,10 +2,10 @@ import {useState} from "react";
 
 import {Calendar} from 'react-calendar';
 
-import css from './SecondCalendar.module.scss';
+import css from './MainCalendar.module.scss';
 
 
-const SecondCalendar = () => {
+const MainCalendar = () => {
     const [value, onChange] = useState(new Date());
 
     console.log(value)
@@ -18,4 +18,4 @@ const SecondCalendar = () => {
 
 };
 
-export {SecondCalendar};
+export {MainCalendar};
