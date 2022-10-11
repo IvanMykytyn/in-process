@@ -2,43 +2,11 @@
 @import "./scss/vars.module";
 @import "./scss/global.module";
 
-
-header {
-  padding: 0 0 25px 0;
-  border-bottom: 1px solid #b0b0b0;
-  display: flex;
-  grid-gap: 25px;
-  justify-content: space-between;
-}
-
-.btn {
-  padding: 10px;
-  border-radius: 15px;
-  box-shadow: $outerBoxShadow;
-  color: #31344b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: none;
-  background-color: inherit;
-  transition: box-shadow 0.3s ease-in-out;
-  text-transform: uppercase;
-
-  &:hover,
-  &:focus,
-  &:active {
-    box-shadow: $innerBoxShadow;
-  }
-}
-
 .wrapper {
   display: flex;
-  //flex-direction: column;
+  flex-wrap: wrap;
   grid-gap: 25px;
   padding: 25px;
-  //justify-content: center;
-  //align-items: center;
   box-shadow: $outerBoxShadow;
   border-radius: 25px;
   min-height: 100vh;
