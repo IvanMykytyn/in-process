@@ -1,7 +1,7 @@
-import * as React from 'react'
+import {Person2, Person3Outlined } from '@mui/icons-material'
 
 import css from './App.module.scss'
-import { Input } from './components'
+import { Input, Badge } from './components'
 
 function App() {
   return (
@@ -21,6 +21,34 @@ function App() {
           />
         </div>
       </div>
+      <div className={css['badges-wrapper']}>
+        <Badge label={'Redux'} />
+        <Badge label={'Redux'} variant="outlined"/>
+
+        <Badge label={'React Native'} onDelete={()=> console.log()}/>
+        <Badge label={'React Native'} variant="outlined" onDelete={()=> console.log()}/>
+        
+        <Badge label={'NodeJS'} disabled onDelete={()=> console.log()}/>
+        <Badge label={'NodeJS'} disabled variant="outlined" onDelete={()=> console.log()}/>
+
+        <Badge label={'HTML5'} icon={<Person2 />} onDelete={()=> console.log()}/>
+        <Badge label={'HTML5'} icon={<Person2 />} variant="outlined" onDelete={()=> console.log()}/>
+
+        <Badge label={'Redux'} size="small"/>
+        <Badge label={'Redux'} variant="outlined" size="small"/>
+
+        <Badge label={'React Native'} size="small" onDelete={()=> console.log()}/>
+        <Badge label={'React Native'} size="small" variant="outlined" onDelete={()=> console.log()}/>
+        
+        <Badge label={'NodeJS'} disabled size="small" onDelete={()=> console.log()}/>
+        <Badge label={'NodeJS'} disabled size="small" variant="outlined" onDelete={()=> console.log()}/>
+      
+        <Badge label={'HTML5'} size="small" icon={<Person3Outlined />} onDelete={()=> console.log()}/>
+        <Badge label={'HTML5'} size="small" icon={<Person3Outlined />} variant="outlined" onDelete={()=> console.log()}/>
+
+      
+      </div>
+
     </div>
   )
 }

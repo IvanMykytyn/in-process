@@ -18,3 +18,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.badges-wrapper{
+  width: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin: 20px auto;
+}
