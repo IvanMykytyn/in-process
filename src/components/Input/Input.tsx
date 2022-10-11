@@ -5,14 +5,26 @@ import { TextField, TextFieldProps } from '@mui/material'
 import './input.styles.scss'
 import PasswordInput from './PasswordInput'
 
-const Input: FC<TextFieldProps> = ({ type, error, fullWidth, ...rest }) => {
+interface InputCustomProps {
+  icon?: any
+}
+const Input: FC<TextFieldProps & InputCustomProps> = ({
+  type,
+  icon: Icon,
+  error,
+  fullWidth,
+  ...rest
+}) => {
   return (
     <div
       className={cn('text-field', {
         'text-field__password': type === 'password',
         'text-field__error': error,
         'text-field__full-width': fullWidth,
+        'text-field__icon': Icon,
       })}>
+      {Icon && <div className="text-field__icon-wrapper">{Icon}</div>}
+
       {type === 'password' ? (
         <PasswordInput error={error} {...rest} fullWidth={fullWidth} />
       ) : (
