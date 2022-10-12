@@ -1,8 +1,9 @@
 import { FC } from 'react'
-import cn from 'classnames'
 import { TextField, TextFieldProps } from '@mui/material'
+import cn from 'classnames'
 
 import './input.styles.scss'
+
 import PasswordInput from './PasswordInput'
 
 const Input: FC<TextFieldProps> = ({ type, error, fullWidth, ...rest }) => {
@@ -22,4 +23,4 @@ const Input: FC<TextFieldProps> = ({ type, error, fullWidth, ...rest }) => {
   )
 }
 
-export default Input
+export {Input};

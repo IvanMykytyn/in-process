@@ -2,19 +2,16 @@
 @import "./scss/vars.module";
 @import "./scss/global.module";
 
-
 .wrapper {
   display: flex;
-  gap: 45px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  grid-gap: 25px;
+  padding: 25px;
+  box-shadow: $outerBoxShadow;
+  border-radius: 25px;
+  min-height: 100vh;
 }
 
-.inputs-wrapper{
-  display: flex;
-  gap: 45px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.checkboxes-wrapper{
+  flex-direction: row;
 }
