@@ -1,4 +1,4 @@
-import Input from "./Input/Input"
-import Checkbox from "./Checkbox/Checkbox"
+export * from './MainCalendar/MainCalendar';
+export * from './Input/Input';
+export * from './Checkbox/Checkbox';
 
-export {Input, Checkbox}

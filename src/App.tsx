@@ -1,8 +1,9 @@
 import * as React from 'react'
+import cn from 'classnames'
 
 import css from './App.module.scss'
+
 import { Input, Checkbox } from './components'
-import cn from 'classnames'
 
 function App() {
   return (
