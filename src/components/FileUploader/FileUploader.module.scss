@@ -1,0 +1,44 @@
+@import '../../App.module';
+
+.uploader {
+  font-size: 0;
+  position: relative;
+
+  &__item {
+    height: 50px;
+    width: 50px;
+    box-shadow: $outerBoxShadow;
+    border-radius: 10px;
+    transition: 0.5s fill;
+
+    &::-webkit-file-upload-button {
+      height: 50px;
+      width: 50px;
+      border: 0;
+      border-radius: 10px;
+      box-shadow: $outerBoxShadow;
+      background-color: $background;
+      cursor: pointer;
+
+      &:hover,
+      &:focus,
+      &:active {
+        box-shadow: $innerBoxShadow;
+      }
+    }
+
+    &:hover + .uploader__img{
+      fill: $primaryColor;
+      filter: drop-shadow(0px 0px 1px #568cc5);
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: fill 0.5s, filter 0.5s;
+  }
+}
