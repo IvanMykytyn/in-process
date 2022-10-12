@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import css from './App.module.scss'
-import { Input } from './components'
+import { Input,Toggle } from './components'
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
             helperText={'Invalid Value. Please, try again!'}
           />
         </div>
+        <Toggle/>
       </div>
     </div>
   )
