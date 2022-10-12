@@ -1,11 +1,10 @@
-@import "vars.module";
+@import './_vars.module.scss';
 
 body {
   background-color: $background;
   font-family: sans-serif;
   padding: 50px;
 }
-
 
 .container {
   max-width: 1230px;
