@@ -2,8 +2,7 @@ import * as React from 'react'
 import cn from 'classnames'
 
 import css from './App.module.scss'
-
-import {Input, Checkbox} from './components'
+import {Input, Checkbox,Toggle} from './components'
 
 function App() {
     return (
@@ -35,6 +34,9 @@ function App() {
                 <Checkbox circled disabled checked/>
             </div>
         </div>
-    )
+        <Toggle/>
+      </div>
+    </div>
+  )
 }
 export default App
