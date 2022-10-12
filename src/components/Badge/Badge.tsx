@@ -1,13 +1,14 @@
-import { FC } from 'react'
-import { Chip, ChipProps } from '@mui/material'
-import './badge.styles.scss'
+import {FC} from 'react';
+import {Chip, ChipProps} from '@mui/material';
 
-const Badge: FC<ChipProps> = ({ label, ...rest }) => {
-  return (
-    <div className="badge-wrapper">
-      <Chip label={label} {...rest} />
-    </div>
-  )
-}
+import './badge.styles.scss';
 
-export default Badge
+const Badge: FC<ChipProps> = ({label, ...rest}) => {
+    return (
+        <div className="badge-wrapper">
+            <Chip label={label} {...rest} />
+        </div>
+    );
+};
+
+export {Badge};

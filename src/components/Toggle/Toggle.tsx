@@ -2,8 +2,8 @@ import React, {FC, useState} from 'react';
 
 import "./toggle.styles.scss";
 
-interface ToggleProps{
-    toggled?: boolean
+interface ToggleProps {
+    toggled?: boolean;
 }
 
 const Toggle: FC<ToggleProps> = ({...arg}) => {
@@ -23,5 +23,6 @@ const Toggle: FC<ToggleProps> = ({...arg}) => {
             </label>
         </>
     );
-}
-export default Toggle;
+};
+
+export {Toggle};

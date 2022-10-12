@@ -4,6 +4,11 @@ $errorTextColor: rgb(249, 95, 95);
 
 .text-field {
   width: 300px;
+  transition: 0.5s opacity;
+
+  &:hover{
+    opacity: 0.7;
+  }
 
   .MuiFormControl-root {
     width: 100%;
