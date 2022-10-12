@@ -1,11 +1,14 @@
 import { FC } from 'react'
+
 import cn from 'classnames'
 import {
   TextField,
   TextFieldProps,
 } from '@mui/material'
 
+
 import './input.styles.scss'
+
 import PasswordInput from './PasswordInput'
 import { SvgIconComponent } from "@mui/icons-material"
 
@@ -39,4 +42,4 @@ const Input: FC<TextFieldProps & InputCustomProps> = ({
   )
 }
 
-export default Input
+export {Input};
