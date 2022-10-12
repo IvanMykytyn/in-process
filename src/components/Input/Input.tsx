@@ -22,4 +22,4 @@ const Input: FC<TextFieldProps> = ({ type, error, fullWidth, ...rest }) => {
   )
 }
 
-export default Input
+export {Input}

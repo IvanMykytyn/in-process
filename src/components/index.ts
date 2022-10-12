@@ -1,4 +1,3 @@
-import Input from "./Input/Input"
-import Checkbox from "./Checkbox/Checkbox"
-
-export {Input, Checkbox}
+export * from "./Modal/modal";
+export * from "./Input/Input";
+export * from "./Checkbox/Checkbox"
