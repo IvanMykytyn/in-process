@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import cn from 'classnames';
 
@@ -5,7 +6,7 @@ import css from './App.module.scss';
 
 import file from './assets/images/icons/file-up.svg';
 
-import {Input, Checkbox, MainCalendar, Button, FileUploader, Toggle, Badge} from './components';
+import {Input, Checkbox, MainCalendar, Button, FileUploader, Toggle, Badge,Modal} from './components';
 
 function App() {
     return (
@@ -49,6 +50,9 @@ function App() {
                         <Badge label={'Hello World!'}/>
                         <Badge label={'Go v Minecraft'}/>
                     </div>
+                </li>
+                <li>
+                      <Modal>{<div><img src={'https://media1.giphy.com/media/jUwpNzg9IcyrK/giphy.gif?cid=6c09b95281ec32f40a62eda8e0645d81f445296e4f2273ec&rid=giphy.gif&ct=g'}/></div>}</Modal>
                 </li>
             </ul>
         </div>
