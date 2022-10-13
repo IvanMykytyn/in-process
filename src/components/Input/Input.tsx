@@ -33,3 +33,4 @@ const Input: FC<TextFieldProps & InputCustomProps> = ({type, icon: Icon, error, 
         </div>
     );
 };
+export {Input};
