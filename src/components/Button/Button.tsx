@@ -4,14 +4,15 @@ import cn from 'classnames';
 import './Button.style.scss'
 
 interface Props {
-    children: React.ReactNode
+    children: React.ReactNode;
+    variant: boolean;
 }
 
-const Button: React.FC<Props> = ({children, ...arg}) => {
+const Button: React.FC<Props> = ({children, variant, ...arg}) => {
     return (
         <>
             <button type={'button'}
-                    className={"button"}
+                    className={variant?'active' : `button`}
                     {...arg}
             >
                 {children}

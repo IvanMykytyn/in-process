@@ -41,3 +41,16 @@
   margin-left: 10px;
   font-size: large;
 }
+
+.active{
+  border: none;
+  height: 45px;
+  width: 120px;
+  cursor: pointer;
+  border-radius: 15px;
+  color: $primaryColor;
+  background: $background;
+  box-shadow: $innerBoxShadow;
+  text-shadow: $primaryColor 1px 0 50px;
+  transition: color 0.5s, text-shadow 0.5s;
+}
