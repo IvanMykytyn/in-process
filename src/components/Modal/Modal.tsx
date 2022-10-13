@@ -2,6 +2,8 @@ import React, {FC, useState} from 'react';
 
 import './modal.styles.scss';
 
+import {Button} from '../index'
+
 interface ModalProps {
     children?: any
 }
@@ -11,7 +13,7 @@ const Modal: FC<ModalProps> = ({children}) => {
 
     return (
         <div>
-            <button onClick={() => setOpen(true)}>
+            <button className={'button'} onClick={() => setOpen(true)}>
                 Open Modal
             </button>
             <div className={`modal animated  ${open ? 'show' : ''}`}>

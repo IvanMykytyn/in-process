@@ -51,8 +51,11 @@ function App() {
                         <Badge label={'Go v Minecraft'}/>
                     </div>
                 </li>
-                <li>
-                      <Modal>{<div><img src={'https://media1.giphy.com/media/jUwpNzg9IcyrK/giphy.gif?cid=6c09b95281ec32f40a62eda8e0645d81f445296e4f2273ec&rid=giphy.gif&ct=g'}/></div>}</Modal>
+                <li className={css.wrapper__item}>
+                    <h2>Modal</h2>
+                    <div style={{display: 'flex', gridGap: '15px', justifyContent: 'center',flexWrap: 'wrap'}}>
+                      <Modal>{<div><img src={'https://miro.medium.com/max/800/0*rrLH9s9KUL994QBv'}/></div>}</Modal>
+                    </div>
                 </li>
             </ul>
         </div>
