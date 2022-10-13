@@ -4,8 +4,8 @@ import cn from 'classnames';
 import './Button.style.scss'
 
 interface Props {
-    children: React.ReactNode;
-    variant: boolean;
+    children?: React.ReactNode;
+    variant?: boolean;
 }
 
 const Button: React.FC<Props> = ({children, variant, ...arg}) => {
