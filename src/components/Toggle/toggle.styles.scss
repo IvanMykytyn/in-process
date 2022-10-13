@@ -1,0 +1,74 @@
+@import "../../App.module";
+
+.react-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.react-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  background: $background;
+  box-shadow: $innerBoxShadow;
+  border: 0px solid rgba(171, 171, 171, 0.23);
+  border-radius: 100px;
+  position: relative;
+  transition: background-color .2s;
+}
+
+.react-switch-label .react-switch-button {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  width: 35px;
+  height: 35px;
+  border-radius: 45px;
+  transition: 0.2s;
+  background: $background;
+  box-shadow: 3px 3px 7px #b0b0b0, -1px -1px 4px #ffffff;
+
+  &::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: rgba(226, 61, 40, 0.96);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff0000;
+  }
+}
+
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+  background: $background;
+  box-shadow: 3px 3px 7px #b0b0b0, -1px -1px 4px #ffffff;
+
+  &::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: $primaryColor;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #0066ff;
+
+  }
+}
+
+.react-switch-label:active .react-switch-button {
+  max-width: 40px;
+  width: 100%;
+}

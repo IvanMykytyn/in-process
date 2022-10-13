@@ -17,4 +17,5 @@ const Checkbox: FC<CheckboxProps & customCheckboxProps> = ({ circled, ...rest })
   )
 }
 
-export {Checkbox}
+export {Checkbox};
+

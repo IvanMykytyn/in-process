@@ -2,15 +2,29 @@
 @import "./scss/vars.module";
 @import "./scss/global.module";
 
-
 .wrapper {
-  display: flex;
-  gap: 45px;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 30%);
   justify-content: center;
-  align-items: center;
-}
+  grid-gap: 25px;
+  padding: 25px;
+  box-shadow: $outerBoxShadow;
+  border-radius: 25px;
+  color: #565656;
 
-.checkboxes-wrapper{
-  flex-direction: row;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 15px;
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: $outerBoxShadow;
+  }
+
+  h2{
+    border-bottom: 1px solid #b0b0b0;
+    padding: 10px 0;
+    width: 100%;
+  }
 }
