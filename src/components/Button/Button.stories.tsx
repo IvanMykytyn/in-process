@@ -7,10 +7,11 @@ export default {
     component: Button,
 };
 
-interface Props{
+interface Props {
+    label: string;
     children: string;
     variant: boolean;
-    label: string;
+    loading: boolean
 }
 
 const Template: Story<Props> = (args) => <Button {...args}/>;
@@ -18,13 +19,21 @@ const Template: Story<Props> = (args) => <Button {...args}/>;
 export const Default = Template.bind({});
 
 Default.args = {
-    children: 'Press me',
+    children: 'Default',
     variant: false,
 };
 
 export const Pressed = Template.bind({});
 
 Pressed.args = {
-    children: 'Press me',
+    children: 'Pressed',
+    variant: true,
+};
+
+export const Loading = Template.bind({});
+
+Loading.args = {
+    children: 'Loading',
+    loading: true,
     variant: true,
 };
