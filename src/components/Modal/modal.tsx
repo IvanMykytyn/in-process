@@ -2,24 +2,28 @@ import React, {FC, useState} from 'react';
 
 import './modal.styles.scss';
 
-interface ModalProps{
-    active?: boolean
-    setActive?: any
+interface ModalProps {
     children?: any
 }
-const Modal: FC<ModalProps> = ({active,setActive, children})=> {
+
+const Modal: FC<ModalProps> = ({children}) => {
+    const [open, setOpen] = useState(false)
 
     return (
         <div>
-        <div className={ active? "modal active" : "modal"}
-             onClick={()=> setActive(false)}
-        >
-            <div className={active? "modal__content active" : "modal"}
-                 onClick={e => e.stopPropagation()}
-            >
-                {children}
+            <button onClick={() => setOpen(true)}>
+                Open Modal
+            </button>
+            <div className={`modal animated  ${open ? 'show' : ''}`}>
+                <div className={'modal__content'}>
+                    <div className={'children_content'}>
+                        {children}
+                    </div>
+                    <button className={'button'}
+                            onClick={()=> setOpen(false)}>
+                        Close</button>
+                </div>
             </div>
-        </div>
         </div>
     );
 }
