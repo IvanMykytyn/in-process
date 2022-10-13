@@ -13,7 +13,6 @@ const MainCalendar = () => {
             <Calendar onChange={onChange} value={value}/>
         </div>
     );
-
 };
 
 export {MainCalendar};

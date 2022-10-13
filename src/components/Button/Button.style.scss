@@ -1,6 +1,7 @@
 @import "../../App.module";
 
-.button {
+.button,
+.active{
   border: none;
   height: 45px;
   width: 120px;
@@ -8,7 +9,9 @@
   background: $background;
   box-shadow: 3px 3px 7px #b0b0b0, -1px -2px 5px #ffffff;
   cursor: pointer;
-  transition: color 0.5s, text-shadow 0.5s;
+  transition: color 0.5s, text-shadow 0.5s, border 0.5s;
+  position: relative;
+
 
   &:hover,
   &:focus,
@@ -17,40 +20,81 @@
     color: $primaryColor;
     text-shadow: $primaryColor 1px 0 50px;
   }
-}
 
-.button_arrow {
-  margin: 5px;
-  border: none;
-  height: 45px;
-  width: 35px;
-  border-radius: 10px;
-  background: $background;
-  box-shadow: 3px 3px 7px #b0b0b0, -1px -2px 5px #ffffff;
-  cursor: pointer;
+  &::after {
+    content: '';
+    height: 45px;
+    width: 120px;
+    background-color: transparent;
+    border: 2px solid $lightBlue;
+    box-shadow: inset 0 0 6px $lightBlue, 0 0 3px $lightBlue;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+  }
 
-  &:hover,
-  &:focus,
-  &:active {
-    box-shadow: $innerBoxShadow;
+  &:hover {
+
+    &::after {
+      content: '';
+      height: 45px;
+      width: 120px;
+      background-color: transparent;
+      border: 2px solid $primaryColor;
+      box-shadow: inset 0 0 6px $primaryColor, 0 0 3px $primaryColor;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 15px;
+    }
+  }
+
+  &__loading::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 4px solid transparent;
+    border-top-color: $lightBlue;
+    border-radius: 50%;
+    animation: button-loading-spinner 1s ease infinite;
   }
 }
 
-.fa-solid {
-  color: #696969FF;
-  margin-left: 10px;
-  font-size: large;
+.active {
+  box-shadow: $innerBoxShadow;
+  color: $primaryColor;
+  text-shadow: $primaryColor 1px 0 50px;
+
+  &::after {
+    content: '';
+    height: 45px;
+    width: 120px;
+    background-color: transparent;
+    border: 2px solid $primaryColor;
+    box-shadow: inset 0 0 6px $primaryColor, 0 0 3px $primaryColor;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+  }
 }
 
-.active{
-  border: none;
-  height: 45px;
-  width: 120px;
-  cursor: pointer;
-  border-radius: 15px;
-  color: $primaryColor;
-  background: $background;
-  box-shadow: $innerBoxShadow;
-  text-shadow: $primaryColor 1px 0 50px;
-  transition: color 0.5s, text-shadow 0.5s;
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
 }

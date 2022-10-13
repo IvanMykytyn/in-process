@@ -1,23 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import cn from 'classnames';
 
 import './Button.style.scss'
 
 interface Props {
-    children?: React.ReactNode;
+    children: React.ReactNode;
     variant?: boolean;
+    loading?: boolean;
 }
 
-const Button: React.FC<Props> = ({children, variant, ...arg}) => {
+const Button: React.FC<Props> = ({children, variant, loading, ...arg}) => {
+
     return (
         <>
             <button type={'button'}
-                    className={variant?'active' : `button`}
+                    className={variant ? 'active' : `button`}
                     {...arg}
             >
-                {children}
+                <span style={loading ? {opacity: '0'} : {opacity: '1'}}>
+                    {children}
+                </span>
+                <i className={loading ? "button__loading" : ''}></i>
             </button>
         </>
     );
 }
+
+
 export {Button};

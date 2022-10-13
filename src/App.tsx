@@ -6,7 +6,7 @@ import css from './App.module.scss';
 
 import file from './assets/images/icons/file-up.svg';
 
-import {Input, Checkbox, MainCalendar, Button, FileUploader, ButtonLoading, Toggle, Badge,Modal} from './components';
+import {Input, Checkbox, MainCalendar, Button, FileUploader, Toggle, Badge,Modal} from './components';
 
 function App() {
     return (
@@ -26,8 +26,8 @@ function App() {
                 <li className={css.wrapper__item}>
                     <h2>Button</h2>
                     <div style={{display: 'flex', gridGap: '15px', justifyContent: 'center'}}>
-                        <Button>Button</Button>
-                        <ButtonLoading>Loading</ButtonLoading>
+                        <Button loading={false}>Button</Button>
+                        <Button loading={true}>Button</Button>
                     </div>
                     <h2>File Uploader</h2>
                     <FileUploader/>
