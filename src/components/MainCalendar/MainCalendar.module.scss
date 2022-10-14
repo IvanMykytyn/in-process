@@ -46,7 +46,7 @@
 
   :global(.react-calendar__navigation__label) {
     padding: 5px;
-    width: 135px;
+    width: 140px;
   }
 
   :global(.react-calendar__navigation__arrow) {
@@ -147,4 +147,27 @@
     grid-gap: 10px;
     justify-content: center;
   }
+
+
+  :global(.react-calendar__tile--range) {
+    box-shadow: $innerBoxShadow;
+    color: $primaryColor;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 30px;
+      height: 26px;
+      border-radius: 5px;
+      border: 2px solid $primaryColor;
+      background-color: transparent;
+      box-shadow: inset 0 0 3px $primaryColor, 0 0 3px $primaryColor;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
+
+

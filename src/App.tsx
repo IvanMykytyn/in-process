@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import cn from 'classnames';
 
@@ -6,7 +5,7 @@ import css from './App.module.scss';
 
 import file from './assets/images/icons/file-up.svg';
 
-import {Input, Checkbox, MainCalendar, Button, FileUploader, Toggle, Badge,Modal} from './components';
+import {Input, Checkbox, MainCalendar, Button, FileUploader, Toggle, Badge, Modal} from './components';
 
 function App() {
     return (
@@ -14,7 +13,7 @@ function App() {
             <ul className={css.wrapper}>
                 <li className={css.wrapper__item}>
                     <h2>Calendar</h2>
-                    <MainCalendar/>
+                    <MainCalendar range={true}/>
                 </li>
                 <li className={css.wrapper__item}>
                     <h2>Inputs</h2>
@@ -53,8 +52,8 @@ function App() {
                 </li>
                 <li className={css.wrapper__item}>
                     <h2>Modal</h2>
-                    <div style={{display: 'flex', gridGap: '15px', justifyContent: 'center',flexWrap: 'wrap'}}>
-                      <Modal>{<div><img src={'https://miro.medium.com/max/800/0*rrLH9s9KUL994QBv'}/></div>}</Modal>
+                    <div style={{display: 'flex', gridGap: '15px', justifyContent: 'center', flexWrap: 'wrap'}}>
+                        <Modal>{<div><img src={'https://miro.medium.com/max/800/0*rrLH9s9KUL994QBv'}/></div>}</Modal>
                     </div>
                 </li>
             </ul>
