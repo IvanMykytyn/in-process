@@ -5,7 +5,8 @@
   position: relative;
   width: 50px;
 
-  &__item {
+  &__item,
+  .active {
     height: 50px;
     width: 50px;
     box-shadow: $outerBoxShadow;
@@ -28,7 +29,7 @@
       }
     }
 
-    &:hover + .uploader__img{
+    &:hover + .uploader__img {
       fill: $primaryColor;
       filter: drop-shadow(0px 0px 1px #568cc5);
     }
@@ -42,4 +43,18 @@
     pointer-events: none;
     transition: fill 0.5s, filter 0.5s;
   }
+
+  .active {
+
+    &::-webkit-file-upload-button {
+      box-shadow: $innerBoxShadow;
+    }
+
+    & + .uploader__img {
+      fill: $primaryColor;
+      filter: drop-shadow(0px 0px 1px #568cc5);
+    }
+  }
 }
+
+

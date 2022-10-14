@@ -20,7 +20,7 @@ const Button: React.FC<Props> = ({children, variant, loading, ...arg}) => {
                 <span style={loading ? {opacity: '0'} : {opacity: '1'}}>
                     {children}
                 </span>
-                <i className={loading ? "button__loading" : ''}></i>
+                <i className={loading ? "loading" : ''}></i>
             </button>
         </>
     );

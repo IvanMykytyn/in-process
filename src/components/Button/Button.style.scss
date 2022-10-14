@@ -9,9 +9,8 @@
   background: $background;
   box-shadow: 3px 3px 7px #b0b0b0, -1px -2px 5px #ffffff;
   cursor: pointer;
-  transition: color 0.5s, text-shadow 0.5s, border 0.5s;
+  transition:  0.5s, text-shadow 0.5s, border 0.5s;
   position: relative;
-
 
   &:hover,
   &:focus,
@@ -51,22 +50,6 @@
       border-radius: 15px;
     }
   }
-
-  &__loading::after {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    border: 4px solid transparent;
-    border-top-color: $lightBlue;
-    border-radius: 50%;
-    animation: button-loading-spinner 1s ease infinite;
-  }
 }
 
 .active {
@@ -89,12 +72,3 @@
   }
 }
 
-@keyframes button-loading-spinner {
-  from {
-    transform: rotate(0turn);
-  }
-
-  to {
-    transform: rotate(1turn);
-  }
-}
