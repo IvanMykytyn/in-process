@@ -21,7 +21,7 @@
   transition: background-color .2s;
 }
 
-.react-switch-label .react-switch-button {
+.react-switch-label .react-switch-button{
   content: '';
   position: absolute;
   top: 3px;
@@ -44,10 +44,11 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     box-shadow: 0 0 10px #ff0000;
+
   }
 }
 
-.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button, .active {
   left: calc(100% - 2px);
   transform: translateX(-100%);
   background: $background;
@@ -68,7 +69,7 @@
   }
 }
 
-.react-switch-label:active .react-switch-button {
+.react-switch-label:active .react-switch-button, .active {
   max-width: 40px;
   width: 100%;
 }
