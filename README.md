@@ -19,3 +19,9 @@ npm i
 ```sh
 npm start
 ```
+
+### Run Story Book
+
+```sh
+npm run storybook
+```
