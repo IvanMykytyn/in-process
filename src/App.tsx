@@ -1,27 +1,53 @@
-import * as React from 'react'
 
+import * as React from 'react';
+import cn from 'classnames'
 import css from './App.module.scss'
-import {Input} from './components'
+
+import { Routes, Route } from 'react-router-dom'
+
+// toastify setup
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+
+import {
+  Login,
+  NotFound,
+  ProtectedRoute,
+  DashboardLayout,
+  Rooms,
+  Map,
+  Timeline,
+  Calendar,
+  Settings,
+} from './pages'
 
 function App() {
   return (
-    <div className={css.container}>
-      <div className={css.wrapper}>
-        <div className={css['inputs-wrapper']}>
-          <h1>Inputs</h1>
-          <Input type="text" label="Default" />
-          <Input type="text" label="Disabled" disabled fullWidth/>
-          <Input type="email" label="Input" helperText={'With Helper Text'} />
-          <Input type="password" label="type Password" fullWidth/>
-          <Input
-            type="text"
-            label="With Error"
-            error
-            helperText={'Invalid Value. Please, try again!'}
-          />
-        </div>
-      </div>
-    </div>
+    <>
+      <Routes>
+        <Route path="/">
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Rooms />} />
+            <Route path="map" element={<Map />} />
+            <Route path="timeline" element={<Timeline />} />
+            <Route path="calendar" element={<Calendar />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+      <ToastContainer />
+    </>
   )
 }
 

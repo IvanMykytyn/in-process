@@ -1,0 +1,12 @@
+@import '../../../scss/vars.module';
+
+.dashboard {
+  display: grid;
+
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+
+  min-height: 100vh;
+}
+.dashboard-page{
+    background-color: $gray;
+}
