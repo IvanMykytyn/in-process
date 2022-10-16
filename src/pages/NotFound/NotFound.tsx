@@ -1,13 +1,19 @@
 import React, {FC} from 'react'
-import {NavLink, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 // styles
 import css from './NotFound.module.scss'
 
 import {Button} from "./../../components/index";
 
+
 const NotFound: FC = () => {
     const navigate = useNavigate();
+
+    const getNavigate = () => {
+        navigate(-1);
+    };
+
 
     return (
         <div className={css.error}>
@@ -18,9 +24,7 @@ const NotFound: FC = () => {
                         Page Not Found :(
                     </span>
                 </h3>
-                <NavLink to={`${navigate(-1)}`}>
-                    <Button>Go Back</Button>
-                </NavLink>
+                <Button type={'button'} onClick={getNavigate}>click</Button>
             </div>
         </div>
     )
