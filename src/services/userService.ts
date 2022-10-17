@@ -1,23 +1,11 @@
-import { AxiosResponse } from 'axios'
+import { PromiseResponse, UserLoginProps, UserSignUpProps } from 'models'
 import { axiosService } from './axiosService'
+import { urls } from './constants'
 
-const signIn = (userData: userSignInProps): Promise<AxiosResponse<any, any>> => {
-  return axiosService.post('/auth/login', userData)
-}
+const loginRequest = (userData: UserLoginProps): PromiseResponse =>
+  axiosService.post(`${urls}/login`, userData)
 
-const signUp = (userData: userSignUpProps): Promise<AxiosResponse<any, any>> => {
-  return axiosService.post('/auth/signup', userData)
-}
+const signUpRequest = (userData: UserSignUpProps): PromiseResponse =>
+  axiosService.post(`${urls}/signup`, userData)
 
-export { signIn, signUp }
-
-
-interface userSignInProps {
-  email: string
-  password: string
-}
-
-interface userSignUpProps extends userSignInProps {
-  firstName: string
-  lastName: string
-}
+export { loginRequest, signUpRequest }

@@ -1,3 +1,7 @@
-const baseURL = "http://localhost:5000";
+const baseURL = 'http://localhost:5000'
 
-export {baseURL}
+const urls = {
+  auth: '/auth',
+}
+
+export { baseURL, urls }
