@@ -9,6 +9,8 @@ interface Props {
     loading?: boolean;
     type: "button" | "submit" | "reset" | undefined;
     onClick?: React.MouseEventHandler;
+    // or
+    // onClick?: () => void;
 }
 
 const Button: React.FC<Props> = ({children, type, variant, loading, onClick, ...arg}) => {
