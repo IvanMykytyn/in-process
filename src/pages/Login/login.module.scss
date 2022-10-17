@@ -1,1 +1,94 @@
-@import '../../scss/vars.module';
+@import '../../App.module';
+
+.login {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-gap: 10px;
+    padding: 70px 25px 25px 25px;
+    border-radius: 15px;
+    box-shadow: $outerBoxShadow;
+    position: relative;
+  }
+
+  &__wrapper {
+    width: 125px;
+    height: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: $outerBoxShadow;
+    background-color: $background;
+    position: absolute;
+    left: 50%;
+    top: -65px;
+    transform: translateX(-50%);
+  }
+
+  &__logo {
+    object-fit: cover;
+  }
+
+  &__title {
+    opacity: 0.4;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-gap: 25px;
+    position: relative;
+  }
+
+  &__forgot {
+    width: 100%;
+    font-size: 14px;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+    //position: relative;
+    //top: -15px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: 0.3;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    display: block;
+  }
+
+  &__errorFirst,
+  &__errorSecond {
+    position: absolute;
+    color: #E23D28F4;
+    font-size: 12px;
+    z-index: 10;
+    background-color: $background;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+    animation: 0.3s slidein;
+    transition: 0.5s translateX;
+    left: -2px;
+  }
+
+  &__errorFirst {
+    top: 45px;
+  }
+
+  &__errorSecond {
+    top: 112px;
+  }
+}
