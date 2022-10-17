@@ -1,12 +1,12 @@
 @import '../../App.module';
 @import '../../components/Button/Button.style';
 
-
 .error {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  @extend %montserrat-regular-400;
 
   &__wrapper {
     display: flex;

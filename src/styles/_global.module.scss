@@ -1,14 +1,17 @@
-@import './_vars.module.scss';
+@import './vars.module.scss';
+@import './fonts.module.scss';
 
 body {
-  background-color: $background;
+  color: #565656;
+  line-height: 1.2;
   font-family: sans-serif;
-  // padding: 50px;
-  color: #565656
+  background-color: $background;
+  @extend %montserrat-medium-500;
 }
 
 button {
-  color: #565656
+  color: #565656;
+  @extend %montserrat-medium-500;
 }
 
 .container {

@@ -28,5 +28,6 @@ const Modal: FC<ModalProps> = ({children}) => {
             </div>
         </div>
     );
-}
+};
+
 export {Modal};
