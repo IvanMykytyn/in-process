@@ -7,7 +7,7 @@ import {joiResolver} from '@hookform/resolvers/joi';
 import cn from 'classnames';
 import css from './login.module.scss';
 
-import logo from '../../assets/images/logo/incora_logo.png';
+import logo from '../../assets/images/logo/logo.png';
 
 import {Input, Button} from '../../components/index';
 import {loginValodator} from './login.validators';
@@ -37,7 +37,10 @@ const Login: FC = () => {
         <div className={css.container}>
             <div className={css.login}>
                 <div className={css.login__inner}>
-                    <span className={css.login__title}></span>
+                    <span className={css.login__wrapper}>
+                        <img className={css.login__logo} src={logo} alt="logo"/>
+                    </span>
+                    <h3 className={css.login__title}>Welcome to our team!</h3>
                     <form className={css.login__form}
                           onSubmit={handleSubmit(submit)}>
                         <Input className={css.login__input}
@@ -45,25 +48,26 @@ const Login: FC = () => {
                                label={'email'}
                                {...register("email")}
                                inputRef={register("email").ref}
+                               error={errors.email ? true : false}
                         />
-                        {errors.email && <span>{errors.email.message}</span>}
+                        {errors.email && <span className={css.login__errorFirst}>{errors.email.message}</span>}
 
                         <Input className={css.login__input}
                                type={'password'}
                                label={'password'}
                                {...register("password")}
                                inputRef={register("password").ref}
+                               error={errors.password ? true : false}
                         />
-                        {errors.password && <span>{errors.password.message}</span>}
+                        {errors.password && <span className={css.login__errorSecond}>{errors.password.message}</span>}
                         <label className={css.login__forgot}>
                             <Link className={css.login__link}
                                   to={''}>
                                 Forgot password?
                             </Link>
                         </label>
-
-                        <Button type={'submit'}>
-                            SingIn
+                        <Button type={'submit'} fullWidth={true}>
+                            Login
                         </Button>
                     </form>
                 </div>

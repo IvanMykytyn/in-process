@@ -5,6 +5,8 @@ $errorTextColor: rgb(249, 95, 95);
 .text-field {
   width: 300px;
   transition: 0.5s opacity;
+  overflow: hidden;
+
   .MuiFormControl-root {
     width: 100%;
   }
@@ -14,46 +16,52 @@ $errorTextColor: rgb(249, 95, 95);
   }
 
   .MuiOutlinedInput-root input {
-    box-shadow: $innerBoxShadow;
+    box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff;
     //border: 1px solid #b0b0b03a;
     border-radius: 12px;
-    height: 27px;
+    //height: 27px;
 
     padding: 8px 15px 8px;
     color: rgba(0, 0, 0, 0.5);
     font-size: 1.1rem;
   }
+
   .MuiOutlinedInput-root input[type='password'] {
     font: large Verdana, sans-serif;
     letter-spacing: 1px;
   }
 
   .MuiInputLabel-root {
-    top: -5px;
-    transition: 0.3s ease-in-out all;
     letter-spacing: 2.5px;
     text-transform: capitalize;
     padding: 0 5px;
-    color: #8b9eb0;
+    font-size: 14px;
+    opacity: 0.7;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    transition: color 0.3s, left 0.7s;
   }
 
   .MuiInputLabel-root[data-shrink='true'] {
-    top: -15px;
-    left: -5px;
+    left: 150%;
     color: $primaryColor;
-    font-size: 1.25rem;
+    font-size: 14px;
   }
 
   .MuiOutlinedInput-notchedOutline {
     border: 0;
   }
+
   .MuiFormHelperText-root {
     padding-top: 5px;
     text-transform: capitalize;
   }
+
   .Mui-disabled {
     opacity: 0.4;
   }
+
   .MuiInputAdornment-root {
     position: absolute;
     right: 5px;
@@ -68,23 +76,23 @@ $errorTextColor: rgb(249, 95, 95);
   &__error {
     &.text-field__icon {
       .MuiOutlinedInput-root input {
-        border: 1px solid #ff9696;
-        box-shadow: inset -3px 6px 4px -4px rgb(255, 143, 143),
-          inset -3px -3px 4px 0px #ffd7d7;
+        //border: 1px solid #ff9696;
+        box-shadow: inset -3px 6px 4px -4px #E23D28F4,
+        inset -3px -3px 4px 0px #E23D28F4;
         border-left: 0;
       }
 
       .text-field__icon-wrapper {
-        border: 1px solid #ff9696;
-        box-shadow: inset 2px 2px 4px 0px rgb(255, 143, 143),
-          inset -3px -7px 4px -4px #ffd7d7;
+        //border: 1px solid #ff9696;
+        box-shadow: inset 2px 2px 4px 0 rgb(255, 143, 143),
+        inset -3px -7px 4px -4px #ffd7d7;
         border-right: 0;
       }
     }
 
     .MuiOutlinedInput-root input {
-      border: 1px solid #ff9696;
-      box-shadow: inset 2px 2px 4px rgb(255, 143, 143), inset -3px -3px 7px #ffd7d7;
+      //border: 1px solid #ff9696;
+      box-shadow: inset 0 0 2px #e23d28f4, inset 0 0 4px #e23d28f4
     }
 
     .MuiInputLabel-root[data-shrink='true'] {
@@ -95,6 +103,7 @@ $errorTextColor: rgb(249, 95, 95);
       color: $errorTextColor;
     }
   }
+
   // when type=password
   &__password {
     .MuiOutlinedInput-root input {
@@ -111,6 +120,7 @@ $errorTextColor: rgb(249, 95, 95);
     .MuiOutlinedInput-root input {
       border-radius: 0 12px 12px 0;
     }
+
     .MuiInputLabel-root[data-shrink='true'] {
       left: -45px;
     }

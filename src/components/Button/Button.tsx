@@ -8,14 +8,16 @@ interface Props {
     variant?: boolean;
     loading?: boolean;
     type: "button" | "submit" | "reset" | undefined;
+    fullWidth?: boolean;
 }
 
-const Button: React.FC<Props> = ({children, variant, loading, type, ...arg}) => {
+const Button: React.FC<Props> = ({children, variant, loading, type, fullWidth, ...arg}) => {
 
     return (
         <>
             <button type={type || 'button'}
                     className={variant ? 'active' : `button`}
+                    style={fullWidth ? {width: '100%'} : {width: 'inherit'}}
                     {...arg}
             >
                 <span style={loading ? {opacity: '0'} : {opacity: '1'}}>

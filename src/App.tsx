@@ -25,29 +25,29 @@ import {
 function App() {
   return (
     <>
-      <Login/>
-      {/*<Routes>*/}
-      {/*  <Route path="/">*/}
-      {/*    <Route*/}
-      {/*      path="dashboard"*/}
-      {/*      element={*/}
-      {/*        <ProtectedRoute>*/}
-      {/*          <DashboardLayout />*/}
-      {/*        </ProtectedRoute>*/}
-      {/*      }*/}
-      {/*    >*/}
-      {/*      <Route index element={<Rooms />} />*/}
-      {/*      <Route path="map" element={<Map />} />*/}
-      {/*      <Route path="timeline" element={<Timeline />} />*/}
-      {/*      <Route path="calendar" element={<Calendar />} />*/}
-      {/*      <Route path="settings" element={<Settings />} />*/}
-      {/*    </Route>*/}
+      {/*<Login/>*/}
+      <Routes>
+        <Route path="/">
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Rooms />} />
+            <Route path="map" element={<Map />} />
+            <Route path="timeline" element={<Timeline />} />
+            <Route path="calendar" element={<Calendar />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
 
-      {/*    <Route path="login" element={<Login />} />*/}
-      {/*    <Route path="*" element={<NotFound />} />*/}
-      {/*  </Route>*/}
-      {/*</Routes>*/}
-      {/*<ToastContainer />*/}
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+      <ToastContainer />
     </>
   )
 }
