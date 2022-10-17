@@ -1,8 +1,8 @@
 import React, {FC} from 'react'
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 // styles
-import css from './NotFound.module.scss'
+import css from './NotFound.module.scss';
 
 import {Button} from "./../../components/index";
 
@@ -24,10 +24,10 @@ const NotFound: FC = () => {
                         Page Not Found :(
                     </span>
                 </h3>
-                <Button type={'button'} onClick={getNavigate}>click</Button>
+                <Button type={'button'} onClick={getNavigate}>Go Back</Button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export {NotFound}
+export {NotFound};

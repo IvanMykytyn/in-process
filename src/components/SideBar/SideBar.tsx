@@ -1,13 +1,15 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
 // styles
-import cn from 'classnames'
-import css from './login.module.scss'
+import cn from 'classnames';
+import css from './login.module.scss';
 
 const SideBar = () => {
   return (
-    <div>SideBar</div>
-  )
-}
+    <div>
+      SideBar
+    </div>
+  );
+};
 
-export {SideBar}
+export {SideBar};

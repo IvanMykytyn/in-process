@@ -1,12 +1,12 @@
 import * as React from 'react';
-import cn from 'classnames'
-import css from './App.module.scss'
+import cn from 'classnames';
+import css from './App.module.scss';
 
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom';
 
 // toastify setup
-import {ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import {
@@ -46,7 +46,7 @@ function App() {
             </Routes>
             <ToastContainer/>
         </>
-    )
-}
+    );
+};
 
-export default App
+export default App;

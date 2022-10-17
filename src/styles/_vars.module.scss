@@ -23,3 +23,23 @@ inset -3px -3px 7px #ffffff;
 //  --text-primary: #000000;
 //  --input: rgb(199, 199, 199);
 //}
+
+%montserrat-regular-400 {
+  font-family: 'Montserrat-Regular', sans-serif;
+  font-weight: 400;
+}
+
+%montserrat-medium-500 {
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+}
+
+%montserrat-semi-bold-600 {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+}
+
+%montserrat-bold-700 {
+  font-family: 'Montserrat-Bold', sans-serif;
+  font-weight: 700;
+}
