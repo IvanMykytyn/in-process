@@ -9,6 +9,7 @@ import PasswordInput from './PasswordInput'
 
 interface InputCustomProps {
     icon?: SvgIconComponent
+
 }
 
 const Input: FC<TextFieldProps & InputCustomProps> = ({type, icon: Icon, error, fullWidth, ...rest}) => {

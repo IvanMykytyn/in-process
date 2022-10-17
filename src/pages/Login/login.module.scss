@@ -1,1 +1,45 @@
-@import '../../scss/vars.module';
+@import '../../App.module';
+
+.login {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-gap: 10px;
+    padding: 100px 25px 25px 25px;
+    border-radius: 15px;
+    box-shadow: $outerBoxShadow;
+    position: relative;
+  }
+
+  &__title{
+    background-image: url("https://www.ukraineitnow.com/wp-content/uploads/2019/10/1_840x428_Preferred-color-logo-%E2%80%94-Digital-19-600x400.png");
+    opacity: 0.7;
+    width: 150px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &__form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-gap: 25px;
+  }
+
+  &__forgot{
+    width: 100%;
+    font-size: 14px;
+    opacity: 0.5;
+  }
+}
