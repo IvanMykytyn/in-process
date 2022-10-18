@@ -5,23 +5,21 @@ import {joiResolver} from '@hookform/resolvers/joi';
 
 // styles
 import cn from 'classnames';
-import css from './login.module.scss';
+import css from '../Login/login.module.scss';
 
-import login from '../../assets/images/icons/login.png';
+import registration from '../../assets/images/icons/registration.png';
 
 import {Input, Button} from '../../components/index';
-import {loginValidator} from './login.validators';
+import {signupValidator} from './signup.validators';
 
-const Login: FC = () => {
-
-    const [] = useState();
+const SignUp: FC = () => {
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm({
         defaultValues: {
             email: '',
             password: ''
         },
-        resolver: joiResolver(loginValidator),
+        resolver: joiResolver(signupValidator),
         mode: "onSubmit"
     });
 
@@ -37,9 +35,12 @@ const Login: FC = () => {
             <div className={css.login}>
                 <div className={css.login__inner}>
                     <span className={css.login__wrapper}>
-                        <img className={css.login__img} src={login} alt="login"/>
+                        <img className={css.login__img} src={registration} alt="registration"
+                             style={{transform: 'scale(1)'}}/>
                     </span>
-                    <h3 className={css.login__title}>Welcome to our team!</h3>
+                    <h3 className={css.login__title}>
+                        Join us! And be with us!
+                    </h3>
                     <form className={css.login__form}
                           onSubmit={handleSubmit(submit)}>
                         <Input className={css.login__input}
@@ -50,28 +51,13 @@ const Login: FC = () => {
                                error={errors.email ? true : false}
                         />
                         {errors.email && <span className={css.login__errorFirst}>{errors.email.message}</span>}
-
-                        <Input className={css.login__input}
-                               type={'password'}
-                               label={'password'}
-                               {...register("password")}
-                               inputRef={register("password").ref}
-                               error={errors.password ? true : false}
-                        />
-                        {errors.password && <span className={css.login__errorSecond}>{errors.password.message}</span>}
-                        <label className={css.login__forgot}>
-                            <Link className={css.login__link}
-                                  to={'/forgot-password'}>
-                                Forgot password?
-                            </Link>
-                        </label>
                         <Button type={'submit'} fullWidth={true}>
-                            Login
+                            Sign Up
                         </Button>
                         <div className={css.login__navigate}>
-                            Not yet registered?
-                            <Link to={'/register'}>
-                                Sign Up
+                            Already have an account?
+                            <Link to={'/login'}>
+                                Sing In
                             </Link>
                         </div>
                     </form>
@@ -81,4 +67,4 @@ const Login: FC = () => {
     );
 };
 
-export {Login};
+export {SignUp};

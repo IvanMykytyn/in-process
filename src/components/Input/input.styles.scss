@@ -1,4 +1,4 @@
-@import 'styles/vars.module';
+@import '../../styles/vars.module';
 
 $errorTextColor: rgb(249, 95, 95);
 
@@ -6,6 +6,7 @@ $errorTextColor: rgb(249, 95, 95);
   width: 300px;
   transition: 0.5s opacity;
   overflow: hidden;
+
 
   .MuiFormControl-root {
     width: 100%;
@@ -27,7 +28,6 @@ $errorTextColor: rgb(249, 95, 95);
   }
 
   .MuiOutlinedInput-root input[type='password'] {
-    font: large Verdana, sans-serif;
     letter-spacing: 1px;
   }
 
@@ -40,11 +40,11 @@ $errorTextColor: rgb(249, 95, 95);
     top: 50%;
     transform: translateY(-50%);
     left: 10px;
-    transition: color 0.3s, left 0.7s;
+    transition: color 0.3s, opacity 0.3s;
   }
 
   .MuiInputLabel-root[data-shrink='true'] {
-    left: 150%;
+    opacity: 0;
     color: $primaryColor;
     font-size: 14px;
   }
@@ -109,36 +109,36 @@ $errorTextColor: rgb(249, 95, 95);
     .MuiOutlinedInput-root input {
       padding-right: 50px;
     }
-  }
 
-  // with icon
-  &__icon {
-    position: relative;
-    display: flex;
-    height: 100%;
-
-    .MuiOutlinedInput-root input {
-      border-radius: 0 12px 12px 0;
-    }
-
-    .MuiInputLabel-root[data-shrink='true'] {
-      left: -45px;
-    }
-
-    &-wrapper {
-      background-color: rgba(230, 230, 237, 0.5);
-      width: 45px;
-      height: 45px;
-      border-radius: 12px 0 0 12px;
-
+    // with icon
+    &__icon {
+      position: relative;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 100%;
 
-      .MuiSvgIcon-root {
-        width: 20px;
-        height: 20px;
-        color: #44476a;
+      .MuiOutlinedInput-root input {
+        border-radius: 0 12px 12px 0;
+      }
+
+      .MuiInputLabel-root[data-shrink='true'] {
+        left: -45px;
+      }
+
+      &-wrapper {
+        background-color: rgba(230, 230, 237, 0.5);
+        width: 45px;
+        height: 45px;
+        border-radius: 12px 0 0 12px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .MuiSvgIcon-root {
+          width: 20px;
+          height: 20px;
+          color: #44476a;
+        }
       }
     }
   }

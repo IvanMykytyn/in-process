@@ -18,7 +18,7 @@ const Button: React.FC<Props> = ({children, type, variant, loading, onClick, ful
         <>
             <button type={type || 'button'}
                     className={variant ? 'active' : `button`}
-                    style={fullWidth ? {width: '100%'} : {width: 'inherit'}}
+                    style={fullWidth ? {width: '100%'} : {width: 'auto'}}
                     onClick={onClick}
                     {...arg}
             >
@@ -29,7 +29,7 @@ const Button: React.FC<Props> = ({children, type, variant, loading, onClick, ful
             </button>
         </>
     );
-}
+};
 
 
 export {Button};

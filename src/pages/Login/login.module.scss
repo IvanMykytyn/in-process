@@ -2,7 +2,8 @@
 
 .login {
   display: flex;
-  height: 100vh;
+  //height: 100vh;
+  padding: 75px;
   align-items: center;
   justify-content: center;
 
@@ -11,36 +12,52 @@
     align-items: center;
     flex-direction: column;
     grid-gap: 10px;
-    padding: 70px 25px 25px 25px;
+    padding: 50px 25px 25px 25px;
     border-radius: 15px;
     box-shadow: $outerBoxShadow;
     position: relative;
   }
 
   &__wrapper {
-    width: 125px;
-    height: 125px;
+    width: 80px;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     padding: 10px;
     box-shadow: $outerBoxShadow;
-    background-color: $background;
+    background-color: rgba(190, 212, 240, 0.5);
     position: absolute;
     left: 50%;
-    top: -65px;
+    top: -40px;
     transform: translateX(-50%);
+
+    &::after {
+      content: '';
+      animation: pulse 2s infinite;
+      border-radius: 50%;
+      background-color: rgba(176, 202, 233, 0.75);
+      width: 75%;
+      height: 75%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
-  &__logo {
+  &__img {
+    padding: 10px;
     object-fit: cover;
+    transform: scale(-1, -1);
+    z-index: 10;
   }
 
   &__title {
     opacity: 0.4;
     font-size: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   &__form {
@@ -65,6 +82,40 @@
       opacity: 0.3;
     }
   }
+
+  //
+  //&__btns {
+  //  width: 100%;
+  //  display: flex;
+  //  flex-direction: column;
+  //  justify-content: center;
+  //  align-items: center;
+  //  grid-gap: 10px;
+  //}
+
+  //&__between {
+  //  text-transform: uppercase;
+  //  position: relative;
+  //
+  //  &::after,
+  //  &::before {
+  //    content: '';
+  //    width: 130px;
+  //    height: 1px;
+  //    background-color: $gray;
+  //    position: absolute;
+  //    top: 50%;
+  //    transform: translateY(-50%);
+  //  }
+  //
+  //  &::before {
+  //    left: 30px;
+  //  }
+  //
+  //  &::after {
+  //    right: 30px;
+  //  }
+  //}
 
   &__btn {
     width: 100%;
@@ -91,4 +142,20 @@
   &__errorSecond {
     top: 112px;
   }
+
+  &__navigate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 5px;
+
+    a {
+      transition: 0.5s opacity, 0.5s color;
+
+      &:hover {
+        color: $primaryColor;
+      }
+    }
+  }
 }
+
