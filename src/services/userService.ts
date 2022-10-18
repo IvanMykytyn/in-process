@@ -1,11 +1,15 @@
-import { PromiseResponse, UserLoginProps, UserSignUpProps } from 'models'
-import { axiosService } from './axiosService'
-import { urls } from './constants'
+import type { PromiseResponse, User, UserLoginProps, UserSignUpProps } from 'models';
+import { axiosService } from './axiosService';
+import { urls } from './constants';
 
+// TODO ask about endpoints
 const loginRequest = (userData: UserLoginProps): PromiseResponse =>
-  axiosService.post(`${urls}/login`, userData)
+  axiosService.post(`${urls.auth}/login`, userData);
 
 const signUpRequest = (userData: UserSignUpProps): PromiseResponse =>
-  axiosService.post(`${urls}/signup`, userData)
+  axiosService.post(`${urls.auth}/signup`, userData);
 
-export { loginRequest, signUpRequest }
+const updateUserRequest = (userData: User): PromiseResponse =>
+  axiosService.put(`${urls.auth}/update-user`, userData);
+
+export { loginRequest, signUpRequest, updateUserRequest };
