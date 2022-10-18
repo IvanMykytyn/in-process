@@ -1,0 +1,43 @@
+@import '../../App.module';
+@import '../../components/Button/Button.style';
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  @extend %montserrat-regular-400;
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    grid-gap: 25px;
+    box-shadow: $outerBoxShadow;
+    padding: 35px;
+    max-width: 50vw;
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 120px;
+  }
+
+  &__description {
+    font-size: 32px;
+  }
+}

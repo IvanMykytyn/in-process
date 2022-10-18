@@ -14,7 +14,7 @@ interface Props {
     loading: boolean
 }
 
-const Template: Story<Props> = (args) => <Button {...args}/>;
+const Template: Story<Props> = (args) => <Button type={'button'} {...args}/>;
 
 export const Default = Template.bind({});
 

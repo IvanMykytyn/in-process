@@ -4,17 +4,22 @@ import cn from 'classnames';
 import './Button.style.scss'
 
 interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     variant?: boolean;
     loading?: boolean;
+    type: "button" | "submit" | "reset" | undefined;
+    onClick?: React.MouseEventHandler;
+    fullWidth?: boolean;
 }
 
-const Button: React.FC<Props> = ({children, variant, loading, ...arg}) => {
+const Button: React.FC<Props> = ({children, type, variant, loading, onClick, fullWidth, ...arg}) => {
 
     return (
         <>
-            <button type={'button'}
+            <button type={type || 'button'}
                     className={variant ? 'active' : `button`}
+                    style={fullWidth ? {width: '100%'} : {width: 'inherit'}}
+                    onClick={onClick}
                     {...arg}
             >
                 <span style={loading ? {opacity: '0'} : {opacity: '1'}}>
