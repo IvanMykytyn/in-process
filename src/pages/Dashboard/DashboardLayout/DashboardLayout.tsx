@@ -8,7 +8,7 @@ import css from './dashboard-layout.module.scss'
 import { Outlet } from 'react-router-dom'
 
 // components
-import { SideBar } from '../../../components'
+import { SideBar } from 'components'
 
 const DashboardLayout: FC = () => {
   return (
