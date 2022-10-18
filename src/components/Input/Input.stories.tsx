@@ -2,7 +2,7 @@ import { Input } from './Input'
 
 import { Story } from '@storybook/react'
 
-import { Mail } from '@mui/icons-material'
+// import { Mail } from '@mui/icons-material'
 
 export default {
   title: 'Input',
@@ -44,12 +44,12 @@ const Template: Story<Props> = (args) => <Input {...args} />
 
 export const Default = Template.bind({})
 export const Password = Template.bind({})
-export const Icon = Template.bind({})
+// export const Icon = Template.bind({})
 export const Error = Template.bind({})
 export const Disabled = Template.bind({})
-export const HelperText = Template.bind({})
+// export const HelperText = Template.bind({})
 export const FullWidth = Template.bind({})
-export const Total = Template.bind({})
+// export const Total = Template.bind({})
 
 Default.args = {
   type: 'text',
@@ -61,30 +61,28 @@ Password.args = {
   label: 'Password',
 }
 
-Icon.args = {
-  type: 'email',
-  label: 'email',
-  icon: Mail,
-}
+// Icon.args = {
+//   type: 'email',
+//   label: 'email',
+//   icon: Mail,
+// }
 
 Disabled.args = {
   type: 'email',
   label: 'email',
-  disabled: true,
-  icon: Mail,
+  disabled: true
 }
 
-HelperText.args = {
-  type: 'text',
-  label: 'Label labeL',
-  helperText: 'Important Information',
-}
+// HelperText.args = {
+//   type: 'text',
+//   label: 'Label labeL',
+//   helperText: 'Important Information',
+// }
 
 Error.args = {
   type: 'text',
   label: 'Some Value',
-  error: true,
-  helperText: 'Invalid Value',
+  error: true
 }
 
 FullWidth.args = {
@@ -92,15 +90,15 @@ FullWidth.args = {
   label: 'Full Width',
   fullWidth: true,
 }
-
-Total.args = {
-  type: 'email',
-  label: 'Email',
-  icon: Mail,
-  error: true,
-  fullWidth: true,
-  disabled: false,
-  helperText: 'At least 8 symbols',
-  value: 'Example@gmail.com',
-  onChange: () => {},
-}
+//
+// Total.args = {
+//   type: 'email',
+//   label: 'Email',
+//   icon: Mail,
+//   error: true,
+//   fullWidth: true,
+//   disabled: false,
+//   helperText: 'At least 8 symbols',
+//   value: 'Example@gmail.com',
+//   onChange: () => {},
+// }
