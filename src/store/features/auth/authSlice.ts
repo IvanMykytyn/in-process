@@ -5,7 +5,7 @@ import type { RootState } from 'store'
 import { toast } from 'react-toastify'
 
 // thunk
-import { loginUser, signUpUser } from './authThunk'
+import { loginUser, signUpUser, updateUser } from './authThunk'
 import { User } from 'models'
 
 interface AuthState {
@@ -63,6 +63,24 @@ export const authSlice = createSlice({
     builder.addCase(signUpUser.rejected, (state, { payload }) => {
       state.isLoading = false
 
+      state.error = payload?.error ?? 'Something went Wrong'
+      toast.error(state?.error)
+    })
+
+    // Update
+
+    builder.addCase(updateUser.pending, (state) => {
+      state.isLoading = true
+    })
+
+    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+      state.user = payload
+      toast.success(`User successfully updated`)
+    })
+
+    builder.addCase(updateUser.rejected, (state, { payload }) => {
+      state.isLoading = false
       state.error = payload?.error ?? 'Something went Wrong'
       toast.error(state?.error)
     })
