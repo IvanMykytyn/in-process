@@ -1,13 +1,9 @@
-import Joi from 'joi';
+import Joi from 'joi'
+import { validateEmail, validatePassword } from '../../utils'
 
-const loginValodator = Joi.object({
-    email: Joi.string().regex(/@incorainc.com\s*$/).required().messages({
-        'string.empty':'The email cannot be empty.',
-        'string.pattern.base':'The email can only end whith incorainc.com'
-    }),
-    password: Joi.string().required().messages({
-        'string.empty':'The password cannot be empty.'
-    })
+const loginValidator = Joi.object({
+  email: validateEmail,
+  password: validatePassword,
 })
 
-export {loginValodator}
+export { loginValidator }

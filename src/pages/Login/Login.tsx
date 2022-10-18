@@ -10,7 +10,7 @@ import css from './login.module.scss';
 import logo from '../../assets/images/logo/logo.png';
 
 import {Input, Button} from '../../components/index';
-import {loginValodator} from './login.validators';
+import {loginValidator} from './login.validators';
 
 const Login: FC = () => {
 
@@ -19,17 +19,14 @@ const Login: FC = () => {
             email: '',
             password: ''
         },
-        resolver: joiResolver(loginValodator),
+        resolver: joiResolver(loginValidator),
         mode: "onSubmit"
     });
 
     let submit = async (value: object) => {
         try {
             await console.log(value)
-            // You can set info to server on this function
-            // If you want to clean your form use reset()
         } catch (e) {
-
         }
     }
 
@@ -62,7 +59,7 @@ const Login: FC = () => {
                         {errors.password && <span className={css.login__errorSecond}>{errors.password.message}</span>}
                         <label className={css.login__forgot}>
                             <Link className={css.login__link}
-                                  to={''}>
+                                  to={'/forgot-password'}>
                                 Forgot password?
                             </Link>
                         </label>
