@@ -2,7 +2,7 @@ import {FC} from "react";
 
 import css from './FileUploader.module.scss';
 
-import fileUploader from './../../assets/images/icons/file-up.svg';
+import fileUploader from './assets/images/icons/file-up.svg';
 
 interface Props {
     multiple?: boolean;
