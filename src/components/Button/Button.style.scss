@@ -1,11 +1,13 @@
-@import "App.module";
+@import "./../../App.module.scss";
 
 .button,
 .active{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   height: 45px;
-  //width: 120px;
-  padding: 15px 50px;
+  padding: 15px 40px;
   border-radius: 15px;
   background: $background;
   box-shadow: 3px 3px 7px #b0b0b0, -1px -2px 5px #ffffff;
