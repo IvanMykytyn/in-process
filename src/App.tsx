@@ -27,26 +27,26 @@ import {Button} from 'components'
 function App() {
     return (
         <>
-            <div className={css.container}>
-                <header className={css.header}>
-                    <div className={css.header__menu}>
-                        <Link to={'/login'}>
-                            <Button type={'button'}>
-                                Login
-                            </Button>
-                        </Link>
-                        <Link to={'/register'}>
-                            <Button type={'button'}>Register</Button>
-                        </Link>
-                        <Link to={'/forgot-password'}>
-                            <Button type={'button'}>Forgot Password</Button>
-                        </Link>
-                        <Link to={'/reset-password/1/1'}>
-                            <Button type={'button'}>Reset Password</Button>
-                        </Link>
-                    </div>
-                </header>
-            </div>
+            {/*<div className={css.container}>*/}
+            {/*    <header className={css.header}>*/}
+            {/*        <div className={css.header__menu}>*/}
+            {/*            <Link to={'/login'}>*/}
+            {/*                <Button type={'button'}>*/}
+            {/*                    Login*/}
+            {/*                </Button>*/}
+            {/*            </Link>*/}
+            {/*            <Link to={'/register'}>*/}
+            {/*                <Button type={'button'}>Register</Button>*/}
+            {/*            </Link>*/}
+            {/*            <Link to={'/forgot-password'}>*/}
+            {/*                <Button type={'button'}>Forgot Password</Button>*/}
+            {/*            </Link>*/}
+            {/*            <Link to={'/reset-password/1/1'}>*/}
+            {/*                <Button type={'button'}>Reset Password</Button>*/}
+            {/*            </Link>*/}
+            {/*        </div>*/}
+            {/*    </header>*/}
+            {/*</div>*/}
             <Routes>
                 <Route path="/">
                     <Route

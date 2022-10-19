@@ -16,7 +16,9 @@ const DashboardLayout: FC = () => {
       <div className={cn(css['dashboard-page'])}>
         <Outlet />
       </div>
-      <SideBar />
+        <div className={cn(css.sidebar)}>
+            <SideBar />
+        </div>
     </main>
   )
 }
