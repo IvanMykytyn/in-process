@@ -39,6 +39,10 @@
   box-shadow: $innerBoxShadow;
   padding: 15px;
   border-radius: 15px;
+
+  &__settings{
+    animation: rot 1s infinite;
+  }
 }
 
 button {
