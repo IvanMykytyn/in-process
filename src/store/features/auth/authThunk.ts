@@ -6,11 +6,11 @@ import type {
   UserLoginProps,
   ErrorMessageObject,
   UserSignUpProps,
+  UserUpdateProps,
 } from 'models';
-import { loginRequest, signUpRequest, updateUserRequest } from 'services/userService';
+import { loginRequest, signUpRequest, updateUserRequest } from 'services';
 
 // TODO Local storage
-// TODO change return type to all functions
 
 export const loginUser = createAsyncThunk<
   User,
@@ -52,9 +52,10 @@ export const signUpUser = createAsyncThunk<
   }
 });
 
+// TODO change return type
 export const updateUser = createAsyncThunk<
   User,
-  User,
+  UserUpdateProps,
   {
     rejectValue: ErrorMessageObject;
   }
