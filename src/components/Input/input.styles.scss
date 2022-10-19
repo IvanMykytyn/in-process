@@ -27,6 +27,18 @@ $errorTextColor: rgb(249, 95, 95);
     font-size: 1.1rem;
   }
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff,
+    0 0 0 30px #dcdcdc inset !important;
+  }
+
+  input:-webkit-autofill {
+    -webkit-text-fill-color: rgba(0, 0, 0, 0.5) !important;
+  }
+
   .MuiOutlinedInput-root input[type='password'] {
     letter-spacing: 1px;
   }
