@@ -1,10 +1,6 @@
 @import './vars.module.scss';
 @import './fonts.module.scss';
 
-*{
-  @extend %montserrat-regular-400;
-}
-
 body {
   color: #565656;
   line-height: 1.2;
