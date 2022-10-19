@@ -1,6 +1,10 @@
 @import './vars.module.scss';
 @import './fonts.module.scss';
 
+*{
+  @extend %montserrat-regular-400;
+}
+
 body {
   color: #565656;
   line-height: 1.2;
@@ -15,7 +19,7 @@ button {
 }
 
 .container {
-  max-width: 1230px;
+  max-width: 1345px;
   padding: 0 15px;
   margin: 0 auto;
 }
