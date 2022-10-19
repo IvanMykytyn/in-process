@@ -32,7 +32,7 @@ $errorTextColor: rgb(249, 95, 95);
   }
 
   .MuiInputLabel-root {
-    letter-spacing: 2.5px;
+    letter-spacing: 1.2px;
     text-transform: capitalize;
     padding: 0 5px;
     font-size: 14px;
@@ -41,6 +41,7 @@ $errorTextColor: rgb(249, 95, 95);
     transform: translateY(-50%);
     left: 10px;
     transition: color 0.3s, opacity 0.3s;
+    @extend %montserrat-medium-500;
   }
 
   .MuiInputLabel-root[data-shrink='true'] {
