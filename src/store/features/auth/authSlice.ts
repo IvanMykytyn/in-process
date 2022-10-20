@@ -2,8 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from 'store';
 
 // thunk
-import { loginUser, signUpUser, updateUser } from './authThunk';
+import { loginUser, getAccessUser, signUpUser } from './authThunk';
 
+import {
+  addUserToLocalStorage,
+  getUserFromLocalStorage,
+  removeUserFromLocalStorage,
+} from 'utils/localStorage';
 import { NotifyService } from 'services';
 import { User } from 'models';
 
@@ -14,7 +19,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  user: null,
+  user: getUserFromLocalStorage(),
   isLoading: false,
   error: '',
 };
@@ -26,6 +31,7 @@ export const authSlice = createSlice({
     // PayloadAction<number>
     logout: (state) => {
       state.user = null;
+      removeUserFromLocalStorage();
       NotifyService.success('User log out');
     },
   },
@@ -38,6 +44,7 @@ export const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.user = payload;
+      addUserToLocalStorage(payload);
       NotifyService.success(`Welcome Back ${state.user?.firstName}`);
     });
 
@@ -56,6 +63,8 @@ export const authSlice = createSlice({
     builder.addCase(signUpUser.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.user = payload;
+      addUserToLocalStorage(payload);
+
       NotifyService.success(`Hello There ${state.user?.firstName}`);
     });
 
@@ -66,19 +75,18 @@ export const authSlice = createSlice({
       NotifyService.error(state?.error);
     });
 
-    // Update
-
-    builder.addCase(updateUser.pending, (state) => {
+    // get Access
+    builder.addCase(getAccessUser.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+    builder.addCase(getAccessUser.fulfilled, (state) => {
       state.isLoading = false;
-      state.user = payload;
-      NotifyService.success(`User successfully updated`);
+      // TODO change message text
+      NotifyService.success(`We will send sign up link to your email`);
     });
 
-    builder.addCase(updateUser.rejected, (state, { payload }) => {
+    builder.addCase(getAccessUser.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload?.error ?? 'Something went Wrong';
       NotifyService.error(state?.error);

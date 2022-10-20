@@ -1,23 +1,25 @@
 interface UserFields {
   firstName: string;
   lastName: string;
-  email: string;
 }
 interface UserPasswordField {
   password: string;
 }
+interface UserEmailField {
+  email: string;
+}
 
-type UserLoginProps = Pick<UserFields, 'email'> & UserPasswordField;
+type UserLoginProps = UserEmailField & UserPasswordField;
 type UserSignUpProps = UserFields & UserPasswordField;
-type UserUpdateProps = UserFields;
-type ForgotPasswordProps = Pick<UserFields, 'email'>;
+// type UserUpdateProps = UserFields;
+
 interface ResetPasswordProps {
   id: string;
   token: string;
   password: string;
 }
 
-interface User extends UserSignUpProps {
+interface User extends UserFields, UserEmailField {
   role: 'user' | 'admin';
   access_token: string;
 }
@@ -26,7 +28,7 @@ export type {
   User,
   UserLoginProps,
   UserSignUpProps,
-  ForgotPasswordProps,
+  UserEmailField,
   ResetPasswordProps,
-  UserUpdateProps,
+  // UserUpdateProps,
 };
