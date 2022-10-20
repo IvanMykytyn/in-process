@@ -6,9 +6,17 @@ import type {
   UserLoginProps,
   ErrorMessageObject,
   UserSignUpProps,
-  UserUpdateProps,
+  UserEmailField,
+  // UserUpdateProps,
 } from 'models';
-import { loginRequest, signUpRequest, updateUserRequest } from 'services';
+
+import {
+  loginRequest,
+  signUpRequest,
+  // updateUserRequest,
+  getAccessRequest,
+} from 'services';
+import { addUserToLocalStorage } from 'utils/localStorage';
 
 // TODO Local storage
 
@@ -52,16 +60,16 @@ export const signUpUser = createAsyncThunk<
   }
 });
 
-// TODO change return type
-export const updateUser = createAsyncThunk<
+// change return type
+export const getAccessUser = createAsyncThunk<
   User,
-  UserUpdateProps,
+  UserEmailField,
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/updateUser', async (userData, { rejectWithValue }) => {
+>('auth/getAccessUser', async ({ email }, { rejectWithValue }) => {
   try {
-    const response = await updateUserRequest(userData);
+    const response = await getAccessRequest({ email });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -72,3 +80,24 @@ export const updateUser = createAsyncThunk<
     return rejectWithValue(error.response.data);
   }
 });
+
+// // TODO change return type
+// export const updateUser = createAsyncThunk<
+//   User,
+//   UserUpdateProps,
+//   {
+//     rejectValue: ErrorMessageObject;
+//   }
+// >('auth/updateUser', async (userData, { rejectWithValue }) => {
+//   try {
+//     const response = await updateUserRequest(userData);
+//     return response.data;
+//   } catch (err) {
+//     const error = err as AxiosError<ErrorMessageObject>;
+
+//     if (!error.response) {
+//       throw err;
+//     }
+//     return rejectWithValue(error.response.data);
+//   }
+// });
