@@ -7,9 +7,12 @@ import {setting, search, user} from '../../assets/images/icons';
 
 import {Input} from '../index'
 import {Link} from 'react-router-dom';
+import { logout } from 'store/features';
+import { useAppDispatch } from 'store';
 
 
 const SideBar = () => {
+    const dispatch = useAppDispatch()
     return (
         <div className={cn(scss.inner)}>
             <ul className={cn(scss.bookmarks)}>
@@ -60,7 +63,7 @@ const SideBar = () => {
                             </button>
                         </li>
                         <li>
-                            <button className={cn(scss.info__userImg)}>
+                            <button className={cn(scss.info__userImg)} onClick={() => dispatch(logout())}>
                                 <img src={user} alt="user" height={30} width={30}/>
                             </button>
                         </li>

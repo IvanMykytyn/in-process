@@ -8,9 +8,13 @@ interface UserPasswordField {
 interface UserEmailField {
   email: string;
 }
+interface UserIdField {
+  id: string;
+}
+
 
 type UserLoginProps = UserEmailField & UserPasswordField;
-type UserSignUpProps = UserFields & UserPasswordField;
+type UserSignUpProps = UserFields & UserPasswordField & UserIdField;
 // type UserUpdateProps = UserFields;
 
 interface ResetPasswordProps {

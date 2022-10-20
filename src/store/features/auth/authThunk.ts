@@ -16,9 +16,6 @@ import {
   // updateUserRequest,
   getAccessRequest,
 } from 'services';
-import { addUserToLocalStorage } from 'utils/localStorage';
-
-// TODO Local storage
 
 export const loginUser = createAsyncThunk<
   User,

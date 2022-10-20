@@ -9,7 +9,7 @@ import type {
 import { axiosService } from './axiosService';
 import { urls } from 'utils/constants';
 
-// TODO ask about endpoints and methods
+
 const loginRequest = (userData: UserLoginProps): PromiseResponse =>
   axiosService.post(`${urls.auth}/login`, userData);
 

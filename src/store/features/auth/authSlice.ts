@@ -51,8 +51,8 @@ export const authSlice = createSlice({
     builder.addCase(loginUser.rejected, (state, { payload }) => {
       state.isLoading = false;
 
-      state.error = payload?.error ?? 'Something went Wrong';
-      NotifyService.error(state?.error);
+      state.error = payload?.message ?? 'Something went Wrong';
+      NotifyService.error(state.error);
     });
 
     // Sign Up
@@ -71,8 +71,8 @@ export const authSlice = createSlice({
     builder.addCase(signUpUser.rejected, (state, { payload }) => {
       state.isLoading = false;
 
-      state.error = payload?.error ?? 'Something went Wrong';
-      NotifyService.error(state?.error);
+      state.error = payload?.message ?? 'Something went Wrong';
+      NotifyService.error(state.error);
     });
 
     // get Access
@@ -88,8 +88,8 @@ export const authSlice = createSlice({
 
     builder.addCase(getAccessUser.rejected, (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload?.error ?? 'Something went Wrong';
-      NotifyService.error(state?.error);
+      state.error = payload?.message ?? 'Something went Wrong';
+      NotifyService.error(state.error);
     });
   },
 });

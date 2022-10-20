@@ -10,15 +10,17 @@ interface Props {
     type: "button" | "submit" | "reset" | undefined;
     onClick?: React.MouseEventHandler;
     fullWidth?: boolean;
+    disabled?: boolean;
 }
 
-const Button: React.FC<Props> = ({children, type, variant, loading, onClick, fullWidth, ...arg}) => {
+const Button: React.FC<Props> = ({children, type,disabled, variant, loading, onClick, fullWidth, ...arg}) => {
 
     return (
         <>
             <button type={type || 'button'}
                     className={variant ? 'active' : `button`}
                     style={fullWidth ? {width: '100%'} : {width: 'auto'}}
+                    disabled={disabled}
                     onClick={onClick}
                     {...arg}
             >
