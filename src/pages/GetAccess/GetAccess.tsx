@@ -5,17 +5,15 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 // styles
 import cn from 'classnames';
-import css from './login.module.scss';
+import css from '../Login/login.module.scss';
 
-import login from 'assets/images/icons/login.png';
+import registration from 'assets/images/icons/registration.png';
 
-import { Input, Button } from 'components';
-import { loginValidator } from './login.validators';
+import { Input, Button } from 'components/index';
+import { getAccessValidator } from './get-access.validators';
 import { FormLayout } from '../';
 
-const Login: FC = () => {
-  const [] = useState();
-
+const GetAccess: FC = () => {
   const {
     register,
     handleSubmit,
@@ -24,9 +22,8 @@ const Login: FC = () => {
   } = useForm({
     defaultValues: {
       email: '',
-      password: '',
     },
-    resolver: joiResolver(loginValidator),
+    resolver: joiResolver(getAccessValidator),
     mode: 'onSubmit',
   });
 
@@ -37,11 +34,7 @@ const Login: FC = () => {
   };
 
   return (
-    <FormLayout
-      header={'Welcome to our team!'}
-      icon={login}
-      iconStyles={{ transform: 'scale(-1, -1)' }}
-    >
+    <FormLayout header={'Get Access to In-Process'} icon={registration}>
       <form className={css['form-wrapper']} onSubmit={handleSubmit(submit)}>
         <Input
           type={'email'}
@@ -52,32 +45,17 @@ const Login: FC = () => {
           errorText={errors.email?.message}
         />
 
-        <Input
-          type={'password'}
-          label={'password'}
-          {...register('password')}
-          inputRef={register('password').ref}
-          error={!!errors.password}
-          errorText={errors.password?.message}
-        />
-
-        <label className={css.login__forgot}>
-          <Link className={css.login__link} to={'/forgot-password'}>
-            Forgot password?
-          </Link>
-        </label>
-
         <Button type={'submit'} fullWidth>
-          Login
+          Send Email
         </Button>
 
         <div className={css['navigate-form-wrapper']}>
-          Don't have access yet?
-          <Link to={'/get-access'}>Get Access</Link>
+          Already have an account?
+          <Link to={'/login'}>Login</Link>
         </div>
       </form>
     </FormLayout>
   );
 };
 
-export { Login };
+export { GetAccess };
