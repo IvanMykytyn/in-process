@@ -6,7 +6,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  @extend %montserrat-regular-400;
 
   &__wrapper {
     display: flex;
@@ -33,7 +32,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     font-size: 120px;
   }
 
