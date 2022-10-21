@@ -1,6 +1,7 @@
 @import "styles/reset.module";
 @import "styles/vars.module";
 @import "styles/global.module";
+@import 'styles/mixins.module';
 
 .wrapper {
   display: grid;

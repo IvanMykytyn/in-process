@@ -1,9 +1,10 @@
 @import './vars.module.scss';
 @import './fonts.module.scss';
+@import './mixins.module.scss';
 
-  * {
-    @extend %montserrat-regular-400;
-  }
+* {
+  @extend %montserrat-regular-400;
+}
 
 body {
   color: #565656;
@@ -11,6 +12,10 @@ body {
   font-family: sans-serif;
   background-color: $background;
   @extend %montserrat-medium-500;
+}
+
+:root {
+  --toastify-color-light: #dcdcdc;
 }
 
 button {
@@ -39,6 +44,28 @@ button {
     border-top-color: $lightBlue;
     border-radius: 50%;
     animation: button-loading-spinner 1s ease infinite;
+  }
+}
+.form-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  grid-gap: 15px;
+  padding-top: 10px;
+}
+.navigate-form-wrapper {
+  @include centerDiv;
+  grid-gap: 5px;
+  font-size: 0.95rem;
+
+  a {
+    transition: 0.5s opacity, 0.5s color;
+    color: #39597c;
+    font-size: 1rem;
+
+    &:hover {
+      color: $primaryColor;
+    }
   }
 }
 
