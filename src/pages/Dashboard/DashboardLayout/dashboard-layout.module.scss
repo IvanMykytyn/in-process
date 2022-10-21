@@ -1,12 +1,40 @@
-@import 'styles/vars.module';
+@import '../../../App.module.scss';
 
-.dashboard {
-  display: grid;
+//.dashboard {
+//  display: grid;
+//
+//  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+//
+//  min-height: 100vh;
+//}
 
-  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
-
-  min-height: 100vh;
+.dashboard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 30px;
+  padding: 30px;
 }
+
 .dashboard-page{
-    background-color: $gray;
+  background-color: $background;
+  height: 100vh;
+  min-height: 650px;
+  flex: 1;
+  border-radius: 25px;
+  box-shadow: $outerBoxShadow;
+  padding: 25px;
 }
+
+//.sidebar{
+//  justify-content: flex-end;
+//  width: 25vw;
+//  //max-height: 98vh;
+//  border-radius: 25px;
+//  //border-radius: 25px 0 0 25px;
+//  //background-color: antiquewhite;
+//  box-shadow: $outerBoxShadow;
+//  margin-right: 15px;
+//  padding: 10px;
+//  position: relative;
+//}

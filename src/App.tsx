@@ -5,7 +5,6 @@ import css from './App.module.scss'
 import {Routes, Route, Link} from 'react-router-dom'
 
 // toastify setup
-import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import {
@@ -23,12 +22,12 @@ import {
     GetAccess,
     SignUp
 } from './pages'
-import {Button} from 'components'
+import {Button, ToastifyContainer} from 'components'
 
 function App() {
     return (
         <>
-            <div className={css.container}>
+            {/*<div className={css.container}>
                 <header className={css.header}>
                     <div className={css.header__menu}>
                         <Link to={'/login'}>
@@ -48,7 +47,7 @@ function App() {
                         </Link>
                     </div>
                 </header>
-            </div>
+            </div>*/}
             <Routes>
                 <Route path="/">
                     <Route
@@ -73,7 +72,7 @@ function App() {
                     <Route path="*" element={<NotFound/>}/>
                 </Route>
             </Routes>
-            <ToastContainer/>
+            <ToastifyContainer />
         </>
     )
 }

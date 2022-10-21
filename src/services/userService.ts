@@ -2,9 +2,9 @@ import type {
   PromiseResponse,
   UserLoginProps,
   UserSignUpProps,
-  ForgotPasswordProps,
+  UserEmailField,
   ResetPasswordProps,
-  UserUpdateProps,
+  // UserUpdateProps,
 } from 'models';
 import { axiosService } from './axiosService';
 import { urls } from 'utils/constants';
@@ -16,10 +16,13 @@ const loginRequest = (userData: UserLoginProps): PromiseResponse =>
 const signUpRequest = (userData: UserSignUpProps): PromiseResponse =>
   axiosService.post(`${urls.auth}/signup`, userData);
 
-const updateUserRequest = (userData: UserUpdateProps): PromiseResponse =>
-  axiosService.put(`${urls.auth}/update-user`, userData);
+const getAccessRequest = ({ email }: UserEmailField): PromiseResponse =>
+  axiosService.post(`${urls.auth}/get-access`, { email });
 
-const forgotPasswordRequest = ({ email }: ForgotPasswordProps): PromiseResponse =>
+// const updateUserRequest = (userData: UserUpdateProps): PromiseResponse =>
+//   axiosService.put(`${urls.auth}/update-user`, userData);
+
+const forgotPasswordRequest = ({ email }: UserEmailField): PromiseResponse =>
   axiosService.post(`${urls.forgotPassword}`, { email });
 
 const resetPasswordRequest = ({
@@ -32,7 +35,8 @@ const resetPasswordRequest = ({
 export {
   loginRequest,
   signUpRequest,
-  updateUserRequest,
+  // updateUserRequest,
   forgotPasswordRequest,
   resetPasswordRequest,
+  getAccessRequest,
 };
