@@ -103,28 +103,27 @@ button {
   &::after,
   &::before {
     content: "";
-    height: 10px;
+    height: 1px;
     width: 100%;
-    box-shadow: 2px 2px 4px #b0b0b0, -2px -1px 4px #ffffff;
-    background-color: $background;
+    background-color: $gray;
     border-radius: 10px;
     position: absolute;
 
   }
 
   &::after {
-    top: -30px;
+    top: -25px;
   }
 
   &::before {
-    bottom: -35px;
+    bottom: -30px;
   }
 }
 
 
 .booked {
-  padding: 20px;
-  box-shadow: $innerBoxShadow;
+  padding: 10px;
+  //box-shadow: $innerBoxShadow;
   //box-shadow: $outerBoxShadow;
   width: 100%;
   border-radius: 15px;
