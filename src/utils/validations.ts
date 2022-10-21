@@ -1,22 +1,30 @@
 import Joi from 'joi';
 
-
 const validateEmail = Joi.string()
-  .required()
-  .regex(/@incorainc.com\s*$/)
-  .messages({
-    'string.empty': 'The email cannot be empty.',
-    'string.pattern.base': 'The email can only end with incorainc.com',
-  });
+    .required()
+    .regex(/@incorainc.com\s*$/)
+    .messages({
+        'string.empty': 'The email cannot be empty.',
+        'string.pattern.base': 'The email can only end with incorainc.com',
+    });
 
-// TODO change rules for password validation
-const validatePassword = Joi.string().required().messages({
-  'string.empty': 'The password cannot be empty.',
-});
+const validatePassword = Joi.string()
+    .required()
+    .min(8)
+    .max(255)
+    .regex(/^(?=.?[A-Z])(?=.?[a-z]).{8,255}$/)
+    .messages({
+        'string.empty': 'The password cannot be empty.',
+        'string.pattern.base': 'The password must be longer then eight characters.',
+    });
 
 const validateConfirmPassword = Joi.any().valid(Joi.ref('password')).messages({
-  'any.required': 'The Confirm password cannot be empty.',
-  'any.only': 'Password must match',
+    'any.required': 'The password must be the same.',
+    'any.only': 'The password must be the same.',
 });
 
-export { validateEmail, validatePassword, validateConfirmPassword };
+const validateName = Joi.string().min(1).max(255).messages({
+    'string.empty': 'The Name cannot be empty.',
+});
+
+export {validateEmail, validatePassword, validateConfirmPassword, validateName};
