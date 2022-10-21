@@ -13,6 +13,10 @@ body {
   @extend %montserrat-medium-500;
 }
 
+:root {
+  --toastify-color-light: #dcdcdc;
+}
+
 button {
   color: #565656;
   @extend %montserrat-medium-500;
