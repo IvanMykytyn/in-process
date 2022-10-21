@@ -1,4 +1,4 @@
-    import {FC} from 'react';
+import {FC} from 'react';
 import Joi from 'joi';
 import {joiResolver} from '@hookform/resolvers/joi';
 import {useForm} from 'react-hook-form';
