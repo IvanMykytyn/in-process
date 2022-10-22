@@ -7,6 +7,7 @@ import {setting, search, user} from '../../assets/images/icons';
 
 import {Input} from '../index'
 import {Link} from 'react-router-dom';
+
 import {Accordion} from '@mui/material';
 
 interface Data {

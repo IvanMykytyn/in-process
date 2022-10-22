@@ -8,9 +8,12 @@ interface UserPasswordField {
 interface UserEmailField {
   email: string;
 }
+interface UserIdField {
+  id: number;
+}
 
 type UserLoginProps = UserEmailField & UserPasswordField;
-type UserSignUpProps = UserFields & UserPasswordField;
+type UserSignUpProps = UserFields & UserPasswordField & UserIdField;
 // type UserUpdateProps = UserFields;
 
 interface ResetPasswordProps {
@@ -21,8 +24,9 @@ interface ResetPasswordProps {
 
 interface User extends UserFields, UserEmailField {
   role: 'user' | 'admin';
-  access_token: string;
 }
+
+type UserWithToken = User & { access_token: string };
 
 export type {
   User,
@@ -30,5 +34,6 @@ export type {
   UserSignUpProps,
   UserEmailField,
   ResetPasswordProps,
+  UserWithToken
   // UserUpdateProps,
 };

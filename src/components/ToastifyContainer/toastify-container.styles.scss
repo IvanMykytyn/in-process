@@ -2,4 +2,7 @@
 
 .Toastify__toast {
     box-shadow: $outerBoxShadow !important;
+    .Toastify__toast-body{
+        text-transform: capitalize;
+    }
 }

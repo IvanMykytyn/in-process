@@ -2,13 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from 'store';
 
 // thunk
-import { loginUser, getAccessUser, signUpUser } from './authThunk';
+import { loginUser, getAccessUser, signUpUser, logoutUser } from 'store/thunk';
 
-import {
-  addUserToLocalStorage,
-  getUserFromLocalStorage,
-  removeUserFromLocalStorage,
-} from 'utils/localStorage';
+import { addToLocalStorage, removeFromLocalStorage } from 'utils';
 import { NotifyService } from 'services';
 import { User } from 'models';
 
@@ -19,7 +15,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  user: getUserFromLocalStorage(),
+  user: null,
   isLoading: false,
   error: '',
 };
@@ -28,11 +24,9 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // PayloadAction<number>
-    logout: (state) => {
+    clearStore: (state) => {
       state.user = null;
-      removeUserFromLocalStorage();
-      NotifyService.success('User log out');
+      removeFromLocalStorage('token');
     },
   },
   extraReducers: (builder) => {
@@ -42,17 +36,18 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      state.user = payload;
-      addUserToLocalStorage(payload);
+      const { access_token, ...restUserData } = payload;
+      state.user = restUserData;
+      addToLocalStorage('token', payload.access_token);
       NotifyService.success(`Welcome Back ${state.user?.firstName}`);
+      state.isLoading = false;
     });
 
     builder.addCase(loginUser.rejected, (state, { payload }) => {
       state.isLoading = false;
 
-      state.error = payload?.error ?? 'Something went Wrong';
-      NotifyService.error(state?.error);
+      state.error = payload?.message ?? 'Something went Wrong';
+      NotifyService.error(state.error);
     });
 
     // Sign Up
@@ -61,18 +56,19 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(signUpUser.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      state.user = payload;
-      addUserToLocalStorage(payload);
+      const { access_token, ...restUserData } = payload;
+      state.user = restUserData;
+      addToLocalStorage('token', payload.access_token);
 
       NotifyService.success(`Hello There ${state.user?.firstName}`);
+      state.isLoading = false;
     });
 
     builder.addCase(signUpUser.rejected, (state, { payload }) => {
       state.isLoading = false;
 
-      state.error = payload?.error ?? 'Something went Wrong';
-      NotifyService.error(state?.error);
+      state.error = payload?.message ?? 'Something went Wrong';
+      NotifyService.error(state.error);
     });
 
     // get Access
@@ -88,13 +84,31 @@ export const authSlice = createSlice({
 
     builder.addCase(getAccessUser.rejected, (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload?.error ?? 'Something went Wrong';
-      NotifyService.error(state?.error);
+      state.error = payload?.message ?? 'Something went Wrong';
+      NotifyService.error(state.error);
+    });
+
+    // logout
+    builder.addCase(logoutUser.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(logoutUser.fulfilled, (state) => {
+      state.isLoading = false;
+
+      // TODO change message text
+      NotifyService.success(`Successfully log out`);
+    });
+
+    builder.addCase(logoutUser.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload ?? 'Something went Wrong';
+      NotifyService.error(state.error);
     });
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { clearStore } = authSlice.actions;
 export const selectUser = (state: RootState) => state.auth;
 
 export default authSlice.reducer;

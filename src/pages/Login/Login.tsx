@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 // styles
@@ -11,29 +11,44 @@ import login from 'assets/images/icons/login.png';
 
 import { Input, Button } from 'components';
 import { loginValidator } from './login.validators';
-import { FormLayout } from '../';
+import { FormLayout } from 'pages';
+import {  selectUser } from 'store';
+import { loginUser } from 'store/thunk';
+import { UserLoginProps } from 'models';
+import { useAppDispatch, useAppSelector } from 'store';
+
+const initialValues = {
+  email: '',
+  password: '',
+};
 
 const Login: FC = () => {
-  const [] = useState();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { user, isLoading } = useAppSelector(selectUser);
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues: initialValues,
     resolver: joiResolver(loginValidator),
     mode: 'onSubmit',
   });
 
-  let submit = async (value: object) => {
+  let submit = async ({ email, password }: UserLoginProps) => {
     try {
-      await console.log(value);
-    } catch (e) {}
+      await dispatch(loginUser({ email, password }));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -51,7 +66,6 @@ const Login: FC = () => {
           error={!!errors.email}
           errorText={errors.email?.message}
         />
-
         <Input
           type={'password'}
           label={'password'}

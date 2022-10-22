@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // styles
 import cn from 'classnames';
@@ -9,30 +9,52 @@ import css from '../Login/login.module.scss';
 
 import registration from 'assets/images/icons/registration.png';
 
+import { useAppDispatch, useAppSelector } from 'store';
+import { selectUser } from 'store';
+import { signUpUser } from 'store/thunk';
 import { Input, Button } from 'components/index';
 import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
+import { UserSignUpProps } from 'models';
+
+const initialValues = {
+  firstName: '',
+  lastName: '',
+  password: '',
+};
 
 const SignUp: FC = () => {
+  const params = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { user, isLoading } = useAppSelector(selectUser);
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      password: '',
-    },
+    defaultValues: initialValues,
     resolver: joiResolver(signUpValidator),
     mode: 'onSubmit',
   });
 
-  let submit = async (value: object) => {
+  let submit = async (values: Omit<UserSignUpProps, 'id'>) => {
     try {
-      await console.log(value);
-    } catch (e) {}
+      const userId = params.userId;
+      if (!userId || !parseInt(userId)) throw new Error('Bad Url');
+      await dispatch(signUpUser({ ...values, id: parseInt(userId) }));
+    } catch (err) {
+      console.log(err)
+
+      // NotifyService.error(err?.message);
+    }
   };
 
   return (
