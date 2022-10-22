@@ -1,14 +1,12 @@
-import { User } from 'models';
-
-export const addUserToLocalStorage = (userData: User): void => {
-  localStorage.setItem('user', JSON.stringify(userData));
+export const addToLocalStorage = (nameOfItem: string, item: unknown): void => {
+  localStorage.setItem(nameOfItem, JSON.stringify(item));
 };
 
-export const removeUserFromLocalStorage = (): void => {
-  localStorage.removeItem('user');
+export const getFromLocalStorage = (nameOfItem: string): any => {
+  const dataFromStorage = localStorage.getItem(nameOfItem)
+  return dataFromStorage ? JSON.parse(dataFromStorage) : null;
 };
 
-export const getUserFromLocalStorage = (): User => {
-  const userFromLocalStorage = localStorage.getItem('user');
-  return userFromLocalStorage ? JSON.parse(userFromLocalStorage) : null;
+export const removeFromLocalStorage = (nameOfItem: string): void => {
+  localStorage.removeItem(nameOfItem);
 };

@@ -5,7 +5,7 @@ $errorTextColor: #d32f2f;;
 .text-field {
   width: 300px;
   transition: 0.5s opacity;
-  overflow: hidden;
+  // overflow: hidden;
   position: relative;
   padding-bottom: 20px;
 
@@ -125,10 +125,10 @@ $errorTextColor: #d32f2f;;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
     animation: 0.3s slidein;
     transition: 0.5s translateX;
-
     position: absolute;
     left: 12px;
-    bottom: 0;
+    // bottom: 0;
+    top: 50px;
   }
 
   // when type=password

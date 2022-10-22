@@ -12,9 +12,9 @@ import login from 'assets/images/icons/login.png';
 import { Input, Button } from 'components';
 import { loginValidator } from './login.validators';
 import { FormLayout } from 'pages';
-import { loginUser, selectUser } from 'store/features';
+import {  selectUser } from 'store';
+import { loginUser } from 'store/thunk';
 import { UserLoginProps } from 'models';
-
 import { useAppDispatch, useAppSelector } from 'store';
 
 const initialValues = {
@@ -45,7 +45,6 @@ const Login: FC = () => {
 
   let submit = async ({ email, password }: UserLoginProps) => {
     try {
-      console.log({ email, password });
       await dispatch(loginUser({ email, password }));
     } catch (err) {
       console.log(err);

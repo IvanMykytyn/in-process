@@ -7,7 +7,7 @@ import {setting, search, user} from '../../assets/images/icons';
 
 import {Input} from '../index'
 import {Link} from 'react-router-dom';
-import { logout } from 'store/features';
+import { logoutUser } from 'store';
 import { useAppDispatch } from 'store';
 
 
@@ -63,7 +63,7 @@ const SideBar = () => {
                             </button>
                         </li>
                         <li>
-                            <button className={cn(scss.info__userImg)} onClick={() => dispatch(logout())}>
+                            <button className={cn(scss.info__userImg)} onClick={() => dispatch(logoutUser())}>
                                 <img src={user} alt="user" height={30} width={30}/>
                             </button>
                         </li>

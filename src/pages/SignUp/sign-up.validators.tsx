@@ -1,10 +1,10 @@
 import Joi from 'joi';
-import {validatePassword } from 'utils';
+import {validateName, validatePassword } from 'utils';
 
 // TODO : add validation
 const signUpValidator = Joi.object({
-  // firstName: validateName,
-  // lastName: validateName,
+  firstName: validateName,
+  lastName: validateName,
   password: validatePassword,
 });
 

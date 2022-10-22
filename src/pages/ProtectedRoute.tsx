@@ -1,13 +1,13 @@
 // React Router dom
 import { FC, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppSelector } from 'store';
-import { selectUser } from 'store/features';
+import { userService } from 'services';
+import { selectUser, useAppSelector } from 'store';
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
   const { user } = useAppSelector(selectUser);
 
-  if (!user) {
+  if (!userService.isLoggedIn() || !user) {
     return <Navigate to="/login" />;
   }
   return <>{children}</>;
