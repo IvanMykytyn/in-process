@@ -2,18 +2,18 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import type {
-  User,
   UserLoginProps,
   ErrorMessageObject,
   UserSignUpProps,
+  UserEmailField,
+  UserWithToken,
 } from 'models';
-import { loginRequest, signUpRequest, updateUserRequest } from 'services/userService';
-
-// TODO Local storage
-// TODO change return type to all functions
+import { userService, loginRequest } from 'services';
+import { clearStore } from 'store/features/authSlice';
+import { AppDispatch } from 'store';
 
 export const loginUser = createAsyncThunk<
-  User,
+  UserWithToken,
   UserLoginProps,
   {
     rejectValue: ErrorMessageObject;
@@ -33,14 +33,14 @@ export const loginUser = createAsyncThunk<
 });
 
 export const signUpUser = createAsyncThunk<
-  User,
+  UserWithToken,
   UserSignUpProps,
   {
     rejectValue: ErrorMessageObject;
   }
 >('auth/signUpUser', async (userData, { rejectWithValue }) => {
   try {
-    const response = await signUpRequest(userData);
+    const response = await userService.signUpRequest(userData);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -52,15 +52,16 @@ export const signUpUser = createAsyncThunk<
   }
 });
 
-export const updateUser = createAsyncThunk<
-  User,
-  User,
+// change return type
+export const getAccessUser = createAsyncThunk<
+  UserWithToken,
+  UserEmailField,
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/updateUser', async (userData, { rejectWithValue }) => {
+>('auth/getAccessUser', async ({ email }, { rejectWithValue }) => {
   try {
-    const response = await updateUserRequest(userData);
+    const response = await userService.getAccessRequest({ email });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -69,5 +70,25 @@ export const updateUser = createAsyncThunk<
       throw err;
     }
     return rejectWithValue(error.response.data);
+  }
+});
+
+export const logoutUser = createAsyncThunk<
+  undefined,
+  undefined,
+  {
+    rejectValue: string;
+    dispatch?: AppDispatch;
+  }
+>('auth/logoutUser', async (_, thunkAPI) => {
+  try {
+    thunkAPI.dispatch(clearStore());
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return thunkAPI.rejectWithValue('Logout failed');
   }
 });

@@ -1,12 +1,13 @@
 @import '../../styles/vars.module';
 
-$errorTextColor: rgb(249, 95, 95);
+$errorTextColor: #d32f2f;;
 
 .text-field {
   width: 300px;
   transition: 0.5s opacity;
-  overflow: hidden;
-
+  // overflow: hidden;
+  position: relative;
+  padding-bottom: 20px;
 
   .MuiFormControl-root {
     width: 100%;
@@ -18,13 +19,24 @@ $errorTextColor: rgb(249, 95, 95);
 
   .MuiOutlinedInput-root input {
     box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff;
-    //border: 1px solid #b0b0b03a;
     border-radius: 12px;
-    //height: 27px;
+    height: 30px;
 
     padding: 8px 15px 8px;
     color: rgba(0, 0, 0, 0.5);
     font-size: 1.1rem;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff,
+      0 0 0 30px #dcdcdc inset !important;
+  }
+
+  input:-webkit-autofill {
+    -webkit-text-fill-color: rgba(0, 0, 0, 0.5) !important;
   }
 
   .MuiOutlinedInput-root input[type='password'] {
@@ -32,7 +44,7 @@ $errorTextColor: rgb(249, 95, 95);
   }
 
   .MuiInputLabel-root {
-    letter-spacing: 2.5px;
+    letter-spacing: 1.2px;
     text-transform: capitalize;
     padding: 0 5px;
     font-size: 14px;
@@ -41,6 +53,7 @@ $errorTextColor: rgb(249, 95, 95);
     transform: translateY(-50%);
     left: 10px;
     transition: color 0.3s, opacity 0.3s;
+    @extend %montserrat-medium-500;
   }
 
   .MuiInputLabel-root[data-shrink='true'] {
@@ -77,31 +90,45 @@ $errorTextColor: rgb(249, 95, 95);
     &.text-field__icon {
       .MuiOutlinedInput-root input {
         //border: 1px solid #ff9696;
-        box-shadow: inset -3px 6px 4px -4px #E23D28F4,
-        inset -3px -3px 4px 0px #E23D28F4;
+        box-shadow: inset -3px 6px 4px -4px #e23d28f4,
+          inset -3px -3px 4px 0px #e23d28f4;
         border-left: 0;
       }
 
       .text-field__icon-wrapper {
         //border: 1px solid #ff9696;
         box-shadow: inset 2px 2px 4px 0 rgb(255, 143, 143),
-        inset -3px -7px 4px -4px #ffd7d7;
+          inset -3px -7px 4px -4px #ffd7d7;
         border-right: 0;
       }
     }
 
     .MuiOutlinedInput-root input {
       //border: 1px solid #ff9696;
-      box-shadow: inset 0 0 2px #e23d28f4, inset 0 0 4px #e23d28f4
+      box-shadow: inset 0 0 2px #e23d28f4, inset 0 0 4px #e23d28f4;
     }
 
-    .MuiInputLabel-root[data-shrink='true'] {
+    // [data-shrink='true']
+    .MuiInputLabel-root,
+    .Mui-error {
       color: $errorTextColor;
     }
 
     .MuiFormHelperText-root {
       color: $errorTextColor;
     }
+  }
+
+  &__errorText {
+    color: #e23d28f4;
+    font-size: 12px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+    animation: 0.3s slidein;
+    transition: 0.5s translateX;
+    position: absolute;
+    left: 12px;
+    // bottom: 0;
+    top: 50px;
   }
 
   // when type=password

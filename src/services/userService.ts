@@ -1,15 +1,44 @@
-import type { PromiseResponse, User, UserLoginProps, UserSignUpProps } from 'models';
+import type {
+  PromiseResponse,
+  UserLoginProps,
+  UserSignUpProps,
+  UserEmailField,
+  ResetPasswordProps,
+  UserWithToken,
+  // UserUpdateProps,
+} from 'models';
 import { axiosService } from './axiosService';
-import { urls } from './constants';
+import { getFromLocalStorage, urls } from 'utils';
 
-// TODO ask about endpoints
-const loginRequest = (userData: UserLoginProps): PromiseResponse =>
+const loginRequest = (userData: UserLoginProps): PromiseResponse<UserWithToken> =>
   axiosService.post(`${urls.auth}/login`, userData);
+const userService = {
 
-const signUpRequest = (userData: UserSignUpProps): PromiseResponse =>
-  axiosService.post(`${urls.auth}/signup`, userData);
+  signUpRequest: (userData: UserSignUpProps): PromiseResponse<UserWithToken> =>
+    axiosService.post(`${urls.auth}/signup`, userData),
 
-const updateUserRequest = (userData: User): PromiseResponse =>
-  axiosService.put(`${urls.auth}/update-user`, userData);
+  getAccessRequest: ({ email }: UserEmailField): PromiseResponse<UserWithToken> =>
+    axiosService.post(`${urls.auth}/get-access`, { email }),
 
-export { loginRequest, signUpRequest, updateUserRequest };
+  forgotPasswordRequest: ({
+    email,
+  }: UserEmailField): PromiseResponse<UserWithToken> =>
+    axiosService.post(`${urls.forgotPassword}`, { email }),
+
+  resetPasswordRequest: ({
+    id,
+    token,
+    password,
+  }: ResetPasswordProps): PromiseResponse<UserWithToken> =>
+    axiosService.put(`${urls.resetPassword}/${id}/${token}`, { password }),
+
+  isLoggedIn: (): boolean => {
+    const token: string = getFromLocalStorage('token');
+    return !!token;
+  },
+};
+
+// const updateUserRequest = (userData: UserUpdateProps): PromiseResponse =>
+//   axiosService.put(`${urls.auth}/update-user`, userData);
+
+export { userService,loginRequest };

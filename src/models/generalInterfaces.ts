@@ -1,8 +1,10 @@
 import { AxiosResponse } from 'axios'
 
-type PromiseResponse = Promise<AxiosResponse<any, any>>
+type PromiseResponse<T> = Promise<AxiosResponse<T>>
 
 interface ErrorMessageObject {
+  statusCode: number,
+  message: string
   error: string
 }
 

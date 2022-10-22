@@ -1,14 +1,16 @@
 // React Router dom
-import React, { FC, PropsWithChildren } from 'react'
-import { Navigate } from 'react-router-dom'
+import { FC, PropsWithChildren } from 'react';
+import { Navigate } from 'react-router-dom';
+import { userService } from 'services';
+import { selectUser, useAppSelector } from 'store';
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
-  const user = true
+  const { user } = useAppSelector(selectUser);
 
-  if (!user) {
-    return <Navigate to="/login" />
+  if (!userService.isLoggedIn() || !user) {
+    return <Navigate to="/login" />;
   }
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
-export { ProtectedRoute }
+export { ProtectedRoute };
