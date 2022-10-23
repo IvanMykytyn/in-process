@@ -12,8 +12,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  grid-gap: 25px;
-  padding: 20px;
+  grid-gap: 20px;
+  padding: 15px;
   overflow: hidden;
 }
 
@@ -43,11 +43,12 @@
     padding: 5px 35px;
     z-index: 10;
     transition: 0.5s color;
+    @extend %montserrat-regular-400;
+
 
     &:hover,
     &:focus,
     &:active {
-      //box-shadow: inset 0px -2px 5px #b0b0b0, inset 2px 1px 12px #FFFFFF;
       color: $primaryColor;
     }
   }

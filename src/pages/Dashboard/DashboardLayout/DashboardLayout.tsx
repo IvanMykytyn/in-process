@@ -59,6 +59,6 @@ const DashboardLayout: FC = () => {
             </div>
         </main>
     )
-}
+};
 
-export {DashboardLayout}
+export {DashboardLayout};

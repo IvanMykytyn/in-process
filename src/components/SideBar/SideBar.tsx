@@ -1,14 +1,15 @@
 import {FC, useState} from 'react';
+import moment from 'moment';
 
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
-import {setting, search, user} from '../../assets/images/icons';
-
-import {Input} from '../index'
-import {Link} from 'react-router-dom';
-
 import {Accordion} from '@mui/material';
+
+import {setting, search, user, clock, calendar} from '../../assets/images/icons';
+import {Input} from '../index'
+
+import {Link} from 'react-router-dom';
 
 interface Data {
     room: string;
@@ -24,8 +25,8 @@ const data: Data[] = [
     {
         room: 'room 1',
         answer: {
-            date: '21.12.2022',
-            time: '18:30',
+            date: '2022-10-25',
+            time: '18:30:00',
             room: '1',
             staff: 'board, TV, markers'
         }
@@ -33,8 +34,8 @@ const data: Data[] = [
     {
         room: 'room 2',
         answer: {
-            date: '28.10.2022',
-            time: '18:30',
+            date: '2022-10-25',
+            time: '18:30:00',
             room: '2',
             staff: 'board, TV, markers'
         }
@@ -42,47 +43,46 @@ const data: Data[] = [
     {
         room: 'room 3',
         answer: {
-            date: '21.10.2022',
-            time: '18:30',
+            date: '2022-10-25',
+            time: '18:30:00',
             room: '3',
             staff: 'board, TV, markers'
         }
     }, {
         room: 'room 3',
         answer: {
-            date: '21.10.2022',
-            time: '18:30',
+            date: '2022-10-25',
+            time: '18:30:00',
             room: '3',
             staff: 'board, TV, markers'
         }
     }, {
-        room: 'room 3',
+        room: 'room 4',
         answer: {
-            date: '21.10.2022',
-            time: '18:30',
+            date: '2022-10-25',
+            time: '18:30:00',
             room: '3',
             staff: 'board, TV, markers'
         }
     }, {
-        room: 'room 3',
+        room: 'room 5',
         answer: {
-            date: '21.10.2022',
-            time: '18:30',
+            date: '2022-10-25',
+            time: '18:30:00',
             room: '3',
             staff: 'board, TV, markers'
         }
     },
     {
-        room: 'room 4',
+        room: 'room 6',
         answer: {
-            date: '21.10.2022',
-            time: '18:30',
+            date: '2022-10-25',
+            time: '18:30:00',
             room: '4',
             staff: 'board, TV, markers'
         }
     }
 ];
-
 
 const SideBar = () => {
 
@@ -92,18 +92,12 @@ const SideBar = () => {
     const isOpened = () => {
         setIsOpenMenu(!isOpenMenu);
     };
-
-    const toggle = (i: number) => {
-        if (selected === i) {
-            return setSelected(null);
-        }
-        return setSelected(i);
-    };
+    //TO DO MOMENT.js
 
     return (
         <div className={isOpenMenu ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
             <div className={cn(scss.wrapper)}>
-                <button className={scss.burger} onClick={isOpened}>
+                <button className={cn(scss.burger)} onClick={isOpened}>
                     Burger
                 </button>
                 <ul className={isOpenMenu ? `${scss.info}` : `${scss.info} ${scss.hide}`}>
@@ -132,27 +126,23 @@ const SideBar = () => {
                     {
                         data && data.map((room, index) =>
                             <li className={cn(scss.booked__item)} key={index}>
-                                <li className={cn(scss.booked__wrapper)}>
-                                    {room.room}
-                                    <span className={selected === index ? cn(scss.active) : cn(scss.booked__arrow)}
-                                          onClick={() => toggle(index)}>
-                                        +
-                                    </span>
+                                <li className={cn(scss.booked__info)}>
+                                    <div>
+                                        Room {room.answer.room}
+                                    </div>
+                                    <div className={cn(scss.booked__time)}>
+                                        {moment('2022-10-25 18:30:00').fromNow()}
+                                    </div>
                                 </li>
-                                <ul className={selected === index ? `${scss.booked__list} ${scss.show}` : `${scss.booked__list}`}>
+                                <div className={cn(scss.booked__time)}>
                                     <li className={cn(scss.booked__info)}>
-                                        Date: {room.answer.date}
+                                        <img src={calendar} alt="Data" height={15} width={15}/>: {room.answer.date}
                                     </li>
                                     <li className={cn(scss.booked__info)}>
-                                        Time: {room.answer.time}
+                                        <img src={clock} alt="Time" height={15} width={15}/>: {room.answer.time}
                                     </li>
-                                    <li className={cn(scss.booked__info)}>
-                                        Room: {room.answer.room}
-                                    </li>
-                                    <li className={cn(scss.booked__info)}>
-                                        Staff: {room.answer.staff}
-                                    </li>
-                                </ul>
+                                </div>
+
                             </li>
                         )
                     }
