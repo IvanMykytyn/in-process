@@ -1,98 +1,126 @@
+import 'moment/locale/uk';
 import {FC, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Accordion} from '@mui/material';
 import moment from 'moment';
 
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
-import {Accordion} from '@mui/material';
 
-import {setting, search, user, clock, calendar} from '../../assets/images/icons';
+
 import {Input} from '../index'
+import {setting, search, user, clock} from '../../assets/images/icons';
+import {BookedRoom} from 'components/BookedRoom/BookedRoom';
 
-import {Link} from 'react-router-dom';
-
-interface Data {
-    room: string;
+export interface Data {
+    roomId: string;
     answer: {
         date: string;
-        time: string;
+        time: {
+            hours: number,
+            minuts: number
+        };
         room: string;
-        staff: string;
+        instruments: string[];
     };
 }
 
 const data: Data[] = [
     {
-        room: 'room 1',
+        roomId: 'room 1',
         answer: {
-            date: '2022-10-25',
-            time: '18:30:00',
+            date: '2022-10-30',
+            time: {
+                hours: 18,
+                minuts: 30
+            },
             room: '1',
-            staff: 'board, TV, markers'
+            instruments: ['0', '1', '2']
         }
     },
     {
-        room: 'room 2',
+        roomId: 'room 2',
         answer: {
-            date: '2022-10-25',
-            time: '18:30:00',
+            date: '2022-10-29',
+            time: {
+                hours: 18,
+                minuts: 30
+            },
             room: '2',
-            staff: 'board, TV, markers'
+            instruments: ['0', '1']
         }
     },
     {
-        room: 'room 3',
+        roomId: 'room 3',
         answer: {
-            date: '2022-10-25',
-            time: '18:30:00',
+            date: '2022-10-27',
+            time: {
+                hours: 18,
+                minuts: 30
+            },
             room: '3',
-            staff: 'board, TV, markers'
+            instruments: ['1']
         }
     }, {
-        room: 'room 3',
+        roomId: 'room 4',
         answer: {
-            date: '2022-10-25',
-            time: '18:30:00',
-            room: '3',
-            staff: 'board, TV, markers'
-        }
-    }, {
-        room: 'room 4',
-        answer: {
-            date: '2022-10-25',
-            time: '18:30:00',
-            room: '3',
-            staff: 'board, TV, markers'
-        }
-    }, {
-        room: 'room 5',
-        answer: {
-            date: '2022-10-25',
-            time: '18:30:00',
-            room: '3',
-            staff: 'board, TV, markers'
-        }
-    },
-    {
-        room: 'room 6',
-        answer: {
-            date: '2022-10-25',
-            time: '18:30:00',
+            date: '2022-10-29',
+            time: {
+                hours: 18,
+                minuts: 30
+            },
             room: '4',
-            staff: 'board, TV, markers'
+            instruments: ['0', '1', '2']
         }
-    }
+    },
+    {
+        roomId: 'room 5',
+        answer: {
+            date: '2022-10-25',
+            time: {
+                hours: 20,
+                minuts: 30
+            },
+            room: '5',
+            instruments: ['0', '2']
+        }
+    },
+    {
+        roomId: 'room 6',
+        answer: {
+            date: '2022-10-25',
+            time: {
+                hours: 20,
+                minuts: 30
+            },
+            room: '6',
+            instruments: ['0', '1']
+        }
+    },
+    {
+        roomId: 'room 7',
+        answer: {
+            date: '2022-10-31',
+            time: {
+                hours: 11,
+                minuts: 30
+            },
+            room: '7',
+            instruments: ['0', '2']
+        }
+    },
 ];
 
 const SideBar = () => {
-
-    const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
+    const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true);
     const [selected, setSelected] = useState<number | null>(null);
 
     const isOpened = () => {
         setIsOpenMenu(!isOpenMenu);
     };
     //TO DO MOMENT.js
+    const mainClock = moment().format('LT');
 
     return (
         <div className={isOpenMenu ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
@@ -120,34 +148,29 @@ const SideBar = () => {
                     </li>
                 </ul>
                 <div className={isOpenMenu ? `${scss.input}` : `${scss.input} ${scss.hide}`}>
+                    <span className={scss.line}>
+                        line
+                    </span>
                     <Input fullWidth={true} label={'Search...'}/>
+                    <span className={scss.line}>
+                        line
+                    </span>
                 </div>
-                <ul className={isOpenMenu ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
-                    {
-                        data && data.map((room, index) =>
-                            <li className={cn(scss.booked__item)} key={index}>
-                                <li className={cn(scss.booked__info)}>
-                                    <div>
-                                        Room {room.answer.room}
-                                    </div>
-                                    <div className={cn(scss.booked__time)}>
-                                        {moment('2022-10-25 18:30:00').fromNow()}
-                                    </div>
-                                </li>
-                                <div className={cn(scss.booked__time)}>
-                                    <li className={cn(scss.booked__info)}>
-                                        <img src={calendar} alt="Data" height={15} width={15}/>: {room.answer.date}
-                                    </li>
-                                    <li className={cn(scss.booked__info)}>
-                                        <img src={clock} alt="Time" height={15} width={15}/>: {room.answer.time}
-                                    </li>
-                                </div>
+                <div className={scss.inner}>
+                    <span className={scss.clock}>
+                        <img src={clock} alt="clock" width={15} height={15}/>
+                        {mainClock}
+                        <img src={clock} alt="clock" width={15} height={15}/>
+                    </span>
+                    <ul className={isOpenMenu ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
+                        {
+                            data && data.map((room, index) =>
+                                <BookedRoom key={index} room={room}/>
+                            )
+                        }
 
-                            </li>
-                        )
-                    }
-
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     );

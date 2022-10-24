@@ -35,8 +35,9 @@
   position: absolute;
   @extend %montserrat-regular-400;
   top: 75px;
-  left: -87px;
+  left: -90px;
   transition: 0.5s color;
+
 
   &:hover,
   &:focus,
@@ -93,27 +94,41 @@ button {
 
 .input {
   position: relative;
-  margin-bottom: 35px;
   width: 100%;
   transition: 0.5s opacity;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+}
 
-  &::after,
-  &::before {
-    content: "";
-    height: 1px;
-    width: 100%;
-    background-color: $gray;
-    border-radius: 10px;
-    position: absolute;
-  }
+.line {
+  height: 1px;
+  width: 100%;
+  background-color: $gray;
+  border-radius: 10px;
+  font-size: 0;
 
-  &::after {
-    top: -25px;
+  &:first-child {
+    margin-bottom: 15px;
   }
+}
 
-  &::before {
-    bottom: -25px;
-  }
+.inner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.clock{
+  box-shadow: $outerBoxShadow;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
 }
 
 .booked {
@@ -126,31 +141,12 @@ button {
   height: 400px;
   overflow: scroll;
   transition: 0.5s opacity;
+  box-shadow: inset 10px 10px 10px $background;
   @extend %montserrat-regular-400;
 
-  &__item {
-    box-shadow: $outerBoxShadow;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    grid-gap: 10px;
-  }
-
-  &__info {
-    padding: 0 0 5px 0;
-    display: flex;
-    grid-gap: 5px;
-    justify-content: space-between;
-
-  }
-
-  &__time {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    padding-right: 10px;
+  &::-webkit-scrollbar {
+    width: 0;
+    background-color: inherit;
   }
 }
 

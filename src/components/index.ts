@@ -9,3 +9,4 @@ export * from './Badge/Badge';
 export * from "./Modal/Modal";
 export * from "./SideBar/SideBar";
 export * from "./ToastifyContainer/ToastifyContainer";
+export * from "./BookedRoom/BookedRoom";
