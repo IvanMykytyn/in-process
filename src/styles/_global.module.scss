@@ -1,26 +1,6 @@
-@import './vars.module.scss';
-@import './fonts.module.scss';
-@import './mixins.module.scss';
-
-* {
-  @extend %montserrat-regular-400;
-}
-
-body {
-  color: #565656;
-  line-height: 1.2;
-  font-family: sans-serif;
-  background-color: $background;
-}
-
-:root {
-  --toastify-color-light: #dcdcdc;
-}
-
-button {
-  color: #565656;
-  @extend %montserrat-medium-500;
-}
+@import './vars.styles.scss';
+@import './fonts.styles.scss';
+@import './mixins.styles.scss';
 
 .container {
   max-width: 1345px;

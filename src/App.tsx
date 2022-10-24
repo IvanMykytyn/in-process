@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cn from 'classnames';
-import css from './App.module.scss';
+import './App.styles.scss';
 
 // toastify setup
 import 'react-toastify/dist/ReactToastify.css';

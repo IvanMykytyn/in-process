@@ -1,7 +1,25 @@
-@import "styles/reset.module";
-@import "styles/vars.module";
 @import "styles/global.module";
-@import 'styles/mixins.module';
+@import "styles/reset.styles";
+
+body {
+  color: #565656;
+  line-height: 1.2;
+  font-family: sans-serif;
+  background: $containerBackground;
+}
+
+:root {
+  --toastify-color-light: #dcdcdc !important;
+}
+
+* {
+  @extend %montserrat-regular-400;
+}
+
+button {
+  color: #565656;
+  @extend %montserrat-medium-500;
+}
 
 .wrapper {
   display: grid;

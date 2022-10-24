@@ -1,4 +1,4 @@
-@import '../../App.module.scss';
+@import "styles/global.module";
 
 .sidebar {
   max-width: 350px;
@@ -11,6 +11,7 @@
   position: sticky;
   top: 0;
   transition: width 0.7s;
+  background: $background;
 }
 
 .sidebar.hide {
@@ -50,11 +51,12 @@
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 55px;
   box-shadow: $outerBoxShadow;
   padding: 15px;
   border-radius: 15px;
   transition: opacity 0.5s;
+
 
 
   &__userName {
