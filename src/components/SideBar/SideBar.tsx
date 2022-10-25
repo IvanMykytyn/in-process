@@ -126,21 +126,21 @@ const SideBar = () => {
                     {
                         data && data.map((room, index) =>
                             <li className={cn(scss.booked__item)} key={index}>
-                                <li className={cn(scss.booked__info)}>
+                                <div className={cn(scss.booked__info)}>
                                     <div>
                                         Room {room.answer.room}
                                     </div>
                                     <div className={cn(scss.booked__time)}>
                                         {moment('2022-10-25 18:30:00').fromNow()}
                                     </div>
-                                </li>
+                                </div>
                                 <div className={cn(scss.booked__time)}>
-                                    <li className={cn(scss.booked__info)}>
+                                    <div className={cn(scss.booked__info)}>
                                         <img src={calendar} alt="Data" height={15} width={15}/>: {room.answer.date}
-                                    </li>
-                                    <li className={cn(scss.booked__info)}>
+                                    </div>
+                                    <div className={cn(scss.booked__info)}>
                                         <img src={clock} alt="Time" height={15} width={15}/>: {room.answer.time}
-                                    </li>
+                                    </div>
                                 </div>
 
                             </li>

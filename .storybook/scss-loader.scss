@@ -1,0 +1,14 @@
+@import 'styles/reset.styles';
+@import 'styles/vars.styles.scss';
+
+body {
+  color: #565656;
+  line-height: 1.2;
+  font-family: sans-serif;
+  background: $containerBackground;
+}
+
+button {
+  color: #565656;
+  
+}
