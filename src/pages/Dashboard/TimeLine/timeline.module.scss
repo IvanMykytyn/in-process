@@ -1,1 +1,128 @@
-@import "styles/global.module";
+
+@import "../../../styles/global.module";
+
+.timeline {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+
+  &__title{
+    padding: 5px 15px;
+    background: $background;
+    box-shadow: $outerBoxShadow;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    position: relative;
+    left: 5px;
+  }
+
+  &__items {
+    padding: 20px 0 20px;
+    position: relative;
+    width: 100%;
+
+    &::before {
+      content: '';
+      width: 10px;
+      background-color: $background;
+      box-shadow: $outerBoxShadow;
+      border-radius: 15px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+    }
+  }
+
+  &__item {
+    margin-bottom: 35px;
+    position: relative;
+    display: flex;
+
+    &::before{
+    //&::after{
+      content: '';
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      position: absolute;
+      top: 18px;
+      right: 50%;
+      margin-right: -18px;
+      background-color: $primaryColor;
+      box-shadow: 0 0 5px $primaryColor, 0 0 10px $primaryColor;
+      z-index: 10;
+    }
+
+
+    //&::after{
+    //  background-color: $background;
+    //  box-shadow: 1px 1px 3px #b0b0b0, -2px -1px 4px #ffffff;
+    //  z-index: 9;
+    //  width: 35px;
+    //  height: 35px;
+    //  top: 13px;
+    //  right: 50%;
+    //  margin-right: -23px;
+    //}
+
+    &:nth-child(even) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__items &__details {
+    width: 45%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    background-color: $background;
+    box-shadow: $outerBoxShadow;
+    padding: 15px;
+
+    &::after {
+      content: '';
+      height: 100%;
+      width: 100%;
+      background-color: transparent;
+      border: 2px solid $lightBlue;
+      box-shadow: inset 0 0 6px $lightBlue, 0 0 3px $lightBlue;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 15px;
+      pointer-events: none;
+    }
+  }
+
+  &__description {
+    padding: 0 20px 10px 20px;
+  }
+
+  &__items &__summary {
+    display: block;
+    user-select: none;
+    cursor: pointer;
+    outline: transparent;
+    padding: 10px;
+    margin-bottom: 0;
+    transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+    @extend %montserrat-semi-bold-600;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__items &__details[open] &__summary {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
