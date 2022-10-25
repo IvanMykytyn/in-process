@@ -10,7 +10,7 @@
 
 .dashboard {
   display: flex;
-  align-items: center;
+  //align-items: center;
   justify-content: space-between;
   grid-gap: 20px;
   padding: 15px;
@@ -18,8 +18,10 @@
 }
 
 .dashboard-page {
+  display: flex;
+  justify-content: center;
   background-color: $background;
-  height: 100vh;
+  //height: 100vh;
   min-height: 760px;
   flex: 1;
   border-radius: 25px;

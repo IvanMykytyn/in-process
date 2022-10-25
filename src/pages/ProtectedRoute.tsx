@@ -7,9 +7,9 @@ import { selectUser, useAppSelector } from 'store';
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
   const { user } = useAppSelector(selectUser);
 
-  if (!userService.isLoggedIn() || !user) {
-    return <Navigate to="/login" />;
-  }
+  // if (!userService.isLoggedIn() || !user) {
+  //   return <Navigate to="/login" />;
+  // }
   return <>{children}</>;
 };
 

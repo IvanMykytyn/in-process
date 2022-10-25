@@ -13,6 +13,11 @@ import {Input} from '../index'
 import {setting, search, user, clock} from '../../assets/images/icons';
 import {BookedRoom} from 'components/BookedRoom/BookedRoom';
 
+interface Instruments {
+    id: string,
+    name: string
+}
+
 export interface Data {
     roomId: string;
     answer: {
@@ -22,7 +27,7 @@ export interface Data {
             minuts: number
         };
         room: string;
-        instruments: string[];
+        instruments: Instruments[];
     };
 }
 
@@ -36,7 +41,20 @@ const data: Data[] = [
                 minuts: 30
             },
             room: '1',
-            instruments: ['0', '1', '2']
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
         }
     },
     {
@@ -48,7 +66,16 @@ const data: Data[] = [
                 minuts: 30
             },
             room: '2',
-            instruments: ['0', '1']
+            instruments: [
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
         }
     },
     {
@@ -60,7 +87,16 @@ const data: Data[] = [
                 minuts: 30
             },
             room: '3',
-            instruments: ['1']
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
         }
     }, {
         roomId: 'room 4',
@@ -71,7 +107,16 @@ const data: Data[] = [
                 minuts: 30
             },
             room: '4',
-            instruments: ['0', '1', '2']
+            instruments: [
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
         }
     },
     {
@@ -83,7 +128,16 @@ const data: Data[] = [
                 minuts: 30
             },
             room: '5',
-            instruments: ['0', '2']
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
         }
     },
     {
@@ -95,19 +149,37 @@ const data: Data[] = [
                 minuts: 30
             },
             room: '6',
-            instruments: ['0', '1']
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+            ]
         }
     },
     {
         roomId: 'room 7',
         answer: {
-            date: '2022-10-31',
+            date: '2022-10-25',
             time: {
-                hours: 11,
-                minuts: 30
+                hours: 12,
+                minuts: 10
             },
             room: '7',
-            instruments: ['0', '2']
+            instruments: [
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
         }
     },
 ];
@@ -120,7 +192,7 @@ const SideBar = () => {
         setIsOpenMenu(!isOpenMenu);
     };
     //TO DO MOMENT.js
-    const mainClock = moment().format('LT');
+    const mainClock = moment().format('LLL');
 
     return (
         <div className={isOpenMenu ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
@@ -148,27 +220,19 @@ const SideBar = () => {
                     </li>
                 </ul>
                 <div className={isOpenMenu ? `${scss.input}` : `${scss.input} ${scss.hide}`}>
-                    <span className={scss.line}>
-                        line
-                    </span>
                     <Input fullWidth={true} label={'Search...'}/>
-                    <span className={scss.line}>
-                        line
-                    </span>
                 </div>
                 <div className={scss.inner}>
-                    <span className={scss.clock}>
+                    <span className={isOpenMenu ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15}/>
                         {mainClock}
-                        <img src={clock} alt="clock" width={15} height={15}/>
                     </span>
                     <ul className={isOpenMenu ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                         {
-                            data && data.map((room, index) =>
-                                <BookedRoom key={index} room={room}/>
+                            data && data.map((value, index) =>
+                                <BookedRoom key={value.answer.room} room={value}/>
                             )
                         }
-
                     </ul>
                 </div>
             </div>

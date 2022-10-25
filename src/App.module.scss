@@ -3,31 +3,6 @@
 @import "styles/global.module";
 @import 'styles/mixins.module';
 
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 30%);
-  justify-content: center;
-  grid-gap: 25px;
-  padding: 25px;
-  border-radius: 25px;
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    grid-gap: 15px;
-    padding: 15px;
-    border-radius: 25px;
-    box-shadow: $outerBoxShadow;
-  }
-
-  h2 {
-    border-bottom: 1px solid #b0b0b0;
-    padding: 10px 0;
-    width: 100%;
-  }
-}
-
 .header {
   width: 100%;
   border-radius: 15px;

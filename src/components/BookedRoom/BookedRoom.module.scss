@@ -4,12 +4,41 @@
 
   &__item {
     box-shadow: $outerBoxShadow;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 10px 10px 10px 15px;
+    border-radius: 5px 10px 10px 5px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     grid-gap: 10px;
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 5px;
+      height: 100%;
+      border-radius: 5px 0 0 5px;
+      background-color: $primaryColor;
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-shadow: 0 0 7px $primaryColor;
+    }
+  }
+
+  &__item.red {
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 5px;
+      height: 100%;
+      border-radius: 5px 0 0 5px;
+      background-color: #e23d28f4;;
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-shadow: 0 0 7px #e23d28f4;;
+    }
   }
 
   &__info {
@@ -19,6 +48,10 @@
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
+
+    div {
+      @extend %montserrat-semi-bold-600;
+    }
   }
 
   &__time {

@@ -16,25 +16,25 @@ interface Props {
     room: Data;
 }
 
-const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instruments}}}) => {
+const tools: Tool[] = [
+    {
+        id: '0',
+        alt: 'board',
+        img: board
+    },
+    {
+        id: '1',
+        alt: 'tv',
+        img: tv
+    },
+    {
+        id: '2',
+        alt: 'marker',
+        img: marker
+    },
+];
 
-    const tools: Tool[] = [
-        {
-            id: '0',
-            alt: 'board',
-            img: board
-        },
-        {
-            id: '1',
-            alt: 'tv',
-            img: tv
-        },
-        {
-            id: '2',
-            alt: 'marker',
-            img: marker
-        },
-    ];
+const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instruments}}}) => {
 
     const getCurrentDateTime = moment();
     const getRoomDateTime = moment(`${date} ${time.hours}:${time.minuts}:00`);
@@ -44,8 +44,9 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
     const days = getRoomDateTime.diff(getCurrentDateTime, 'days');
     const months = getRoomDateTime.diff(getCurrentDateTime, 'months');
 
+
     return (
-        <ul className={css.booked__item}>
+        <ul className={minutes > 0 ? `${css.booked__item}` : `${css.booked__item} ${css.red}`}>
             <li className={css.booked__info}>
                 <div>
                     Room {room}
@@ -60,56 +61,61 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
                 </li>
                 <li className={css.booked__info}>
                     <img src={clock} alt="Time" height={15} width={15}/>
-                    {minutes <= 0 ?
-                        <span>
-                            It's already started
-                        </span>
-                        :
-                        ''
+                    {
+                        minutes <= 0 ?
+                            <span>
+                                It's already started
+                            </span>
+                            :
+                            ''
                     }
-                    {minutes < 60 && minutes > 0 ?
-                        <span>
+                    {
+                        minutes < 60 && minutes > 0 ?
+                            <span>
                                {minutes > 1 ?
                                    `In ${minutes} Minutes`
                                    :
                                    `In ${months} Month`
                                }
-                        </span>
-                        :
-                        ''
+                            </span>
+                            :
+                            ''
                     }
-                    {hours < 24 && hours > 0 ?
-                        <span>
+                    {
+                        hours < 24 && hours > 0 ?
+                            <span>
                              {hours > 1 ?
                                  `In ${hours} Hours`
                                  :
                                  `In ${hours} Hour`
                              }
-                        </span>
-                        :
-                        ''
+                            </span>
+                            :
+                            ''
                     }
-                    {days < 31 && days > 0 ?
-                        <span>
+                    {
+                        days < 31 && days > 0 ?
+                            <span>
                             {days > 1 ?
                                 `In ${days} Days`
                                 :
                                 `In ${days} Day`
                             }
-                        </span>
-                        :
-                        ''
+                            </span>
+                            :
+                            ''
                     }
-                    {months <= 12 && months > 0 ?
-                        <span>
+                    {
+                        months <= 12 && months > 0 ?
+                            <span>
                             {months > 1 ?
                                 `In ${months} Months`
                                 :
                                 `In ${months} Month`
                             }
-                        </span>
-                        :
-                        ''
+                            </span>
+                            :
+                            ''
                     }
                 </li>
             </ul>
@@ -117,22 +123,24 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
                 <img src={staffIcon} alt="staff" width={15} height={15}/>
                 <div className={css.booked__wrap}>
                 <span>
-                    Instruments:
+                    Tools:
                 </span>
                     <ul className={css.booked__icons}>
                         {
                             tools.map((tool, i) =>
-                                <li key={tool.id}>
-                                    {
-                                        tool.id === instruments[i] ?
-                                            <img src={tool.img}
-                                                 alt={tool.alt}
-                                                 width={15}
-                                                 height={15}/>
-                                            :
-                                            null
-                                    }
-                                </li>
+                                instruments.map(inst => inst.id === tool.id ?
+                                    <li key={tool.id}>
+                                        {
+                                            <img
+                                                src={tool.img}
+                                                alt={tool.alt}
+                                                width={15}
+                                                height={15}/>
+                                        }
+                                    </li>
+                                    :
+                                    ''
+                                )
                             )}
                     </ul>
                 </div>

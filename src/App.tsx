@@ -12,9 +12,8 @@ import { DashboardLayout } from 'pages/Dashboard/DashboardLayout/DashboardLayout
 function App() {
     return (
         <>
-            {/*<AppRoutes/>*/}
+            <AppRoutes/>
             <ToastifyContainer/>
-            <DashboardLayout/>
         </>
     );
 }
