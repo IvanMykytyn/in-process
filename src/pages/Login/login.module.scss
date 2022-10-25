@@ -1,0 +1,18 @@
+@import "styles/global.module";
+
+.login {
+  &__forgot {
+    width: 100%;
+    font-size: 14px;
+    opacity: 0.8;
+    transition: opacity 0.5s;
+    padding: 0 0 0 10px;
+
+  
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: 0.3;
+    }
+  }
+}

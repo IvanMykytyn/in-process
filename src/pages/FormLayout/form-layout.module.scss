@@ -1,0 +1,65 @@
+@import "styles/global.module";
+
+.form-layout {
+  padding: 75px;
+  @include centerDiv;
+  
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-gap: 10px;
+    padding: 70px 40px 40px;
+    border-radius: 15px;
+    box-shadow: $outerBoxShadow;
+    position: relative;
+  background: $background;
+
+  }
+
+  &__icon {
+    padding: 8px;
+    object-fit: cover;
+    z-index: 10;
+
+    &-wrapper {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      padding: 10px;
+      box-shadow: $outerBoxShadow;
+      background-color: rgba(190, 212, 240, 0.5);
+      position: absolute;
+      left: 50%;
+      top: -40px;
+      transform: translateX(-50%);
+
+      &::after {
+        content: '';
+        animation: pulse 2s infinite;
+        border-radius: 50%;
+        background-color: rgba(176, 202, 233, 0.75);
+        width: 75%;
+        height: 75%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__title {
+    @extend %montserrat-semi-bold-600;
+    font-size: 1.35rem;
+  }
+
+  &__description {
+
+    width: clamp(300px, 300px, 400px);
+    text-align: center;
+  }
+}

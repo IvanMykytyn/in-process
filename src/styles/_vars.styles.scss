@@ -1,0 +1,47 @@
+$default: #000000;
+$background: #dcdcdc;
+$containerBackground: #dcdcdc;
+$primaryColor: #568cc5;
+
+$white: #ffffff;
+$gray: #b0b0b0;
+$CalendarBntColor: $primaryColor;
+$lightBlue: #568cc580;
+//#656565
+
+$outerBoxShadow: 3px 3px 7px $gray,
+-3px -3px 7px #ffffff;
+$innerBoxShadow: inset 3px 3px 7px $gray,
+inset -3px -3px 7px #ffffff;
+
+//:root {
+//  --background: #1d1d1d;
+//  --text-primary: #ffffff;
+//  --input: rgb(58, 58, 58);
+//}
+//
+//[data-theme='light'] {
+//  --background: #dedede;
+//  --text-primary: #000000;
+//  --input: rgb(199, 199, 199);
+//}
+
+%montserrat-regular-400 {
+  font-family: 'Montserrat-Regular', sans-serif;
+  font-weight: 400;
+}
+
+%montserrat-medium-500 {
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+}
+
+%montserrat-semi-bold-600 {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+}
+
+%montserrat-bold-700 {
+  font-family: 'Montserrat-Bold', sans-serif;
+  font-weight: 700;
+}

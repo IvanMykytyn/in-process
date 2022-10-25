@@ -1,0 +1,172 @@
+@import "styles/global.module";
+
+$errorTextColor: #d32f2f;;
+
+.text-field {
+  width: 300px;
+  transition: 0.5s opacity;
+  // overflow: hidden;
+  position: relative;
+  padding-bottom: 20px;
+
+  .MuiFormControl-root {
+    width: 100%;
+  }
+
+  .MuiOutlinedInput-root {
+    padding-right: 0;
+  }
+
+  .MuiOutlinedInput-root input {
+    box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff;
+    border-radius: 12px;
+    height: 30px;
+
+    padding: 8px 15px 8px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.1rem;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff,
+      0 0 0 30px #dcdcdc inset !important;
+  }
+
+  input:-webkit-autofill {
+    -webkit-text-fill-color: rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .MuiOutlinedInput-root input[type='password'] {
+    letter-spacing: 1px;
+  }
+
+  .MuiInputLabel-root {
+    letter-spacing: 1.2px;
+    text-transform: capitalize;
+    padding: 0 5px;
+    font-size: 14px;
+    opacity: 0.7;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    transition: color 0.3s, opacity 0.3s;
+    @extend %montserrat-medium-500;
+  }
+
+  .MuiInputLabel-root[data-shrink='true'] {
+    opacity: 0;
+    color: $primaryColor;
+    font-size: 14px;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border: 0;
+  }
+
+  .MuiFormHelperText-root {
+    padding-top: 5px;
+    text-transform: capitalize;
+  }
+
+  .Mui-disabled {
+    opacity: 0.4;
+  }
+
+  .MuiInputAdornment-root {
+    position: absolute;
+    right: 5px;
+  }
+
+  // when full size of the div
+  &__full-width {
+    width: 100%;
+  }
+
+  // when error
+  &__error {
+    &.text-field__icon {
+      .MuiOutlinedInput-root input {
+        //border: 1px solid #ff9696;
+        box-shadow: inset -3px 6px 4px -4px #e23d28f4,
+          inset -3px -3px 4px 0px #e23d28f4;
+        border-left: 0;
+      }
+
+      .text-field__icon-wrapper {
+        //border: 1px solid #ff9696;
+        box-shadow: inset 2px 2px 4px 0 rgb(255, 143, 143),
+          inset -3px -7px 4px -4px #ffd7d7;
+        border-right: 0;
+      }
+    }
+
+    .MuiOutlinedInput-root input {
+      //border: 1px solid #ff9696;
+      box-shadow: inset 0 0 2px #e23d28f4, inset 0 0 4px #e23d28f4;
+    }
+
+    // [data-shrink='true']
+    .MuiInputLabel-root,
+    .Mui-error {
+      color: $errorTextColor;
+    }
+
+    .MuiFormHelperText-root {
+      color: $errorTextColor;
+    }
+  }
+
+  &__errorText {
+    color: #e23d28f4;
+    font-size: 12px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+    animation: 0.3s slidein;
+    transition: 0.5s translateX;
+    position: absolute;
+    left: 12px;
+    // bottom: 0;
+    top: 50px;
+  }
+
+  // when type=password
+  &__password {
+    .MuiOutlinedInput-root input {
+      padding-right: 50px;
+    }
+
+    // with icon
+    &__icon {
+      position: relative;
+      display: flex;
+      height: 100%;
+
+      .MuiOutlinedInput-root input {
+        border-radius: 0 12px 12px 0;
+      }
+
+      .MuiInputLabel-root[data-shrink='true'] {
+        left: -45px;
+      }
+
+      &-wrapper {
+        background-color: rgba(230, 230, 237, 0.5);
+        width: 45px;
+        height: 45px;
+        border-radius: 12px 0 0 12px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .MuiSvgIcon-root {
+          width: 20px;
+          height: 20px;
+          color: #44476a;
+        }
+      }
+    }
+  }
+}

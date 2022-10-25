@@ -1,0 +1,55 @@
+@import "styles/global.module";
+
+.inner {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  flex: 1 1;
+  min-height: 760px;
+}
+
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 20px;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.dashboard-page {
+  background-color: $background;
+  height: 100vh;
+  min-height: 760px;
+  flex: 1;
+  border-radius: 25px;
+  box-shadow: $outerBoxShadow;
+  padding: 25px;
+}
+
+.bookmarks {
+  display: flex;
+  grid-gap: 10px;
+  align-items: center;
+  transform: rotate(90deg);
+  width: 29px;
+  position: relative;
+  top: 180px;
+
+  &__btn {
+    background: $background;
+    border-radius: 15px 15px 0 0;
+    box-shadow: -1px -3px 3px rgba(176, 176, 176, 0.60);
+    padding: 5px 35px;
+    z-index: 10;
+    transition: 0.5s color;
+    @extend %montserrat-regular-400;
+
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $primaryColor;
+    }
+  }
+}
