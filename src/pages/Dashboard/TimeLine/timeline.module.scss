@@ -1,5 +1,5 @@
-@import '../../../App.module';
 
+@import "../../../styles/global.module";
 
 .timeline {
   width: 100%;
@@ -125,3 +125,4 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 }
+

@@ -1,9 +1,9 @@
-@import '../../App.module';
-@import 'styles/mixins.module';
+@import "styles/global.module";
+
 .form-layout {
   padding: 75px;
   @include centerDiv;
-
+  
   &__wrapper {
     display: flex;
     align-items: center;
@@ -13,6 +13,8 @@
     border-radius: 15px;
     box-shadow: $outerBoxShadow;
     position: relative;
+  background: $background;
+
   }
 
   &__icon {

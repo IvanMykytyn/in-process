@@ -62,7 +62,6 @@ const Login: FC = () => {
           type={'email'}
           label={'email'}
           {...register('email')}
-          inputRef={register('email').ref}
           error={!!errors.email}
           errorText={errors.email?.message}
         />
@@ -70,7 +69,6 @@ const Login: FC = () => {
           type={'password'}
           label={'password'}
           {...register('password')}
-          inputRef={register('password').ref}
           error={!!errors.password}
           errorText={errors.password?.message}
         />

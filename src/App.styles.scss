@@ -1,0 +1,38 @@
+@import "styles/global.module";
+@import "styles/reset.styles";
+
+body {
+  color: #565656;
+  line-height: 1.2;
+  font-family: sans-serif;
+  background: $containerBackground;
+}
+
+:root {
+  --toastify-color-light: #dcdcdc !important;
+}
+
+* {
+  @extend %montserrat-regular-400;
+}
+
+button {
+  color: #565656;
+  @extend %montserrat-medium-500;
+}
+
+.header {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: $outerBoxShadow;
+  padding: 25px;
+  margin-top: 25px;
+
+  &__menu {
+    display: flex;
+    grid-gap: 15px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
