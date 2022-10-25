@@ -1,10 +1,31 @@
 {
   "files": {
-    "main.js": "/in-process/static/js/main.a72f87c7.js",
+    "main.css": "/in-process/static/css/main.3c67d7d7.css",
+    "main.js": "/in-process/static/js/main.be1c8df4.js",
+    "static/media/Montserrat-Bold.woff2": "/in-process/static/media/Montserrat-Bold.98c999831363912acee0.woff2",
+    "static/media/Montserrat-Regular.woff2": "/in-process/static/media/Montserrat-Regular.ed96fe0f54409e80eb58.woff2",
+    "static/media/Montserrat-SemiBold.woff2": "/in-process/static/media/Montserrat-SemiBold.e76ca05e699f8f0b49a5.woff2",
+    "static/media/Montserrat-Medium.woff2": "/in-process/static/media/Montserrat-Medium.bfd72a4e3f4334a23777.woff2",
+    "static/media/Montserrat-Bold.woff": "/in-process/static/media/Montserrat-Bold.8aa40fcb7843142bd817.woff",
+    "static/media/Montserrat-SemiBold.woff": "/in-process/static/media/Montserrat-SemiBold.97ee82e415288fc529e6.woff",
+    "static/media/Montserrat-Medium.woff": "/in-process/static/media/Montserrat-Medium.cd9c8e032f3ff3e36229.woff",
+    "static/media/Montserrat-Regular.woff": "/in-process/static/media/Montserrat-Regular.41cbebef4278f0c4ec3a.woff",
+    "static/media/settings.svg": "/in-process/static/media/settings.92db923047f45ee5d295b3ddefdb766a.svg",
+    "static/media/calendar.svg": "/in-process/static/media/calendar.4d940ce280c7e538b685f18fb34d5fc4.svg",
     "index.html": "/in-process/index.html",
-    "main.a72f87c7.js.map": "/in-process/static/js/main.a72f87c7.js.map"
+    "static/media/user.svg": "/in-process/static/media/user.03619b0dc5506aea37f472bcba816181.svg",
+    "static/media/search.svg": "/in-process/static/media/search.eecbd54a72c8cfd1f8cfb4eeeaa06d05.svg",
+    "static/media/clock.svg": "/in-process/static/media/clock.78f3dcda44f833e420c564a281fa12b2.svg",
+    "static/media/double-arrows-right.svg": "/in-process/static/media/double-arrows-right.66a5b40120515f29486d.svg",
+    "static/media/arrow-left.svg": "/in-process/static/media/arrow-left.9568f4e2d3a6e531182fb28a322fd77b.svg",
+    "static/media/double-arrows-left.svg": "/in-process/static/media/double-arrows-left.fc4ce333d4274db0bf78.svg",
+    "static/media/key.svg": "/in-process/static/media/key.d0953716f1056ccb19c42ffc40096d82.svg",
+    "static/media/arrow-right.svg": "/in-process/static/media/arrow-right.714faa8545eff0f2ee56.svg",
+    "main.3c67d7d7.css.map": "/in-process/static/css/main.3c67d7d7.css.map",
+    "main.be1c8df4.js.map": "/in-process/static/js/main.be1c8df4.js.map"
   },
   "entrypoints": [
-    "static/js/main.a72f87c7.js"
+    "static/css/main.3c67d7d7.css",
+    "static/js/main.be1c8df4.js"
   ]
 }
