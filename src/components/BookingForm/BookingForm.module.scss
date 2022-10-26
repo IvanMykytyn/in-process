@@ -1,0 +1,104 @@
+@import '../../App.styles';
+
+.booking {
+  max-width: 750px;
+  width: 100%;
+  display: flex;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: $background;
+  box-shadow: $outerBoxShadow;
+
+
+  &__wrap {
+    max-width: 50%;
+  }
+
+  &__image {
+    position: relative;
+
+    &::after {
+      content: '  ';
+      width: 100%;
+      height: 5px;
+      background-color: $primaryColor;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      box-shadow: 0 0 7px $primaryColor;
+      z-index: 10;
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    padding: 15px;
+    border-right: 1px solid $gray;
+    height: 100%;
+  }
+
+  &__room-name {
+    @extend %montserrat-semi-bold-600;
+    font-size: 26px;
+    margin-bottom: 15px;
+  }
+
+  &__content {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  &__title {
+    @extend %montserrat-semi-bold-600;
+    padding: 15px 20px;
+    border-bottom: 1px solid $gray;
+  }
+
+  &__form {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 10px;
+  }
+
+  &__label {
+    width: 100%;
+    position: relative;
+
+    &::before{
+      content: 'Start Time';
+      position: absolute;
+      left: 5px;
+      top: -18px;
+      font-size: 12px;
+    }
+  }
+
+  &__label--meeting{
+    &::before{
+      content: 'Name of Meeting';
+    }
+  }
+
+  &__label--date{
+    &::before{
+      content: 'Select a date';
+    }
+  }
+
+  &__label--start-time {
+    &::before {
+      content: 'Start Time';
+    }
+  }
+
+  &__label--end-time {
+    &::before {
+      content: 'End Time';
+    }
+  }
+}
