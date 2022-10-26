@@ -11,4 +11,4 @@ export * from "./SideBar/SideBar";
 export * from "./ToastifyContainer/ToastifyContainer";
 export * from "./BookedRoom/BookedRoom";
 export * from "./MultipleSelectWithBadges/MultipleSelectWithBadges";
-
+export * from "./BookingForm/BookingForm";

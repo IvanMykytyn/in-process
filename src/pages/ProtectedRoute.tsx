@@ -9,9 +9,9 @@ const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
   const { user } = { user: true };
 
   // if (!userService.isLoggedIn() || !user) {
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+  // if (!user) {
+  //   return <Navigate to="/login" />;
+  // }
   return <>{children}</>;
 };
 
