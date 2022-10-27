@@ -1,0 +1,43 @@
+@import 'styles/global.module';
+
+.multi-select {
+  position: relative;
+  .badges-container {
+    max-height: 60px;
+    overflow: auto;
+    .MuiChip-root {
+      box-shadow: inset 0px 0px 6px #b8b9be, inset 0px 0px 13px #ffffff;
+      border: 0.5px solid #b8b9be95;
+      border-radius: 5px;
+    }
+  }
+
+  .MuiAutocomplete-root {
+    .MuiFormControl-root {
+      height: 100%;
+    }
+    .MuiInputBase-root {
+      padding: 4px 15px 4px;
+
+      box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff;
+      border: 0;
+      border-radius: 12px;
+
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 1.1rem;
+    }
+    .MuiOutlinedInput-notchedOutline {
+      border-width: 0;
+    }
+  }
+}
+.MuiAutocomplete-popper {
+  .MuiAutocomplete-listbox,
+  .MuiAutocomplete-noOptions {
+    overflow-x: hidden;
+    background: $lightGray;
+    box-shadow: $outerBoxShadow;
+    font-size: 0.9rem;
+    max-height: 200px;
+  }
+}
