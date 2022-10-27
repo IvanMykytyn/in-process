@@ -9,6 +9,8 @@ import staffIcon from './staff.svg';
 import board from './board.svg';
 import marker from './marker.svg';
 import tv from './tv.svg';
+import plug from './plug.svg';
+import users from './users.svg';
 
 
-export {keyIcon, arrowLeft, user, setting, search, clock, calendar, staffIcon, board, tv, marker}
+export {keyIcon, arrowLeft, user, setting, search, clock, calendar, staffIcon, board, tv, marker, users, plug}

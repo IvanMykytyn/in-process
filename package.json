@@ -32,7 +32,9 @@
     "react-router": "^6.4.2",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "react-toastify": "^9.0.8",
+    "slick-carousel": "^1.8.1",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -86,6 +88,7 @@
     "@storybook/react": "^6.5.12",
     "@storybook/testing-library": "^0.0.13",
     "@types/react-calendar": "^3.5.3",
+    "@types/react-slick": "^0.23.10",
     "babel-plugin-named-exports-order": "^0.0.2",
     "gh-pages": "^4.0.0",
     "prop-types": "^15.8.1",

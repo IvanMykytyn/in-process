@@ -1,11 +1,129 @@
-import { FC } from 'react'
+import {FC, useRef} from 'react'
+// import Slider from 'react-slick';
 
 // styles
 import cn from 'classnames'
 import css from './rooms.module.scss'
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
-const Rooms: FC = () => {
-  return <div>Rooms</div>
+import {Room} from '../../../components/index'
+
+
+interface InstrumentsProps {
+    id: string
+};
+
+export interface IRooms {
+    id: number;
+    name: string;
+    img: string;
+    description: string;
+    floor: number;
+    maxCapacity: number;
+    office: number;
+    equipment: InstrumentsProps[];
 }
 
-export { Rooms }
+export const rooms: IRooms[] = [
+    {
+        id: 1,
+        name: 'Room1',
+        img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
+        description: 'the room has PS and TV.That is all what you need',
+        floor: 1,
+        maxCapacity: 15,
+        office: 1,
+        equipment: [
+            {
+                id: '0'
+            }, {
+                id: '1'
+            }, {
+                id: '2'
+            }, {
+                id: '3'
+            }
+        ]
+    },
+    {
+        id: 2,
+        name: 'Room2',
+        img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
+        description: 'the room has PS and TV.That is all what you need',
+        floor: 1,
+        maxCapacity: 15,
+        office: 1,
+        equipment: [
+            {
+                id: '0'
+            }, {
+                id: '1'
+            }, {
+                id: '3'
+            }
+        ]
+    },
+    {
+        id: 3,
+        name: 'Room3',
+        img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
+        description: 'the room has PS and TV.That is all what you need',
+        floor: 1,
+        maxCapacity: 15,
+        office: 1,
+        equipment: [
+            {
+                id: '1'
+            }, {
+                id: '2'
+            }, {
+                id: '3'
+            }
+        ]
+    }
+]
+
+const Rooms: FC = () => {
+    // const settings = {
+    //     dots: true,
+    //     infinite: true,
+    //     speed: 500,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1
+    // };
+
+    return <div className={cn(css.wrapper)}>
+        <ul className={cn(css.room_container)}>
+            <div className={cn(css.floor)}>
+                <div className={cn(css.room_container__floor)}>
+                    1-st floor
+                </div>
+                {/*<Slider {...settings}>*/}
+                <div className={cn(css.room_container__rooms)}>
+                    {rooms.map(room =>
+                        <li key={room.id}>
+                            <Room room={room}/>
+                        </li>
+                    )}
+                </div>
+            </div>
+            <div className={cn(css.floor)}>
+                <div className={cn(css.room_container__floor)}>
+                    2-st floor
+                </div>
+                {/*<Slider {...settings}>*/}
+                <div className={cn(css.room_container__rooms)}>
+                    {rooms.map(room =>
+                        <li key={room.id}>
+                            <Room room={room}/>
+                        </li>
+                    )}
+                </div>
+            </div>
+            {/*</Slider>*/}
+        </ul>
+    </div>
+}
+
+export {Rooms}
