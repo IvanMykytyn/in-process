@@ -7,7 +7,7 @@ import './input.styles.scss';
 
 import PasswordInput from './PasswordInput';
 
-interface InputCustomProps {
+export interface InputCustomProps {
   icon?: SvgIconComponent;
   errorText?: string;
 }

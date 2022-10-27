@@ -23,7 +23,7 @@ const Modal: FC<ModalProps> = ({children, checked}) => {
                     <div className={'children_content'}>
                         {children}
                     </div>
-                    <button className={'button'}
+                    <button className={'modal__button'}
                             onClick={() => setOpen(false)}>
                         Close
                     </button>
