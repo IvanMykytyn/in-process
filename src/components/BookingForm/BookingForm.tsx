@@ -1,15 +1,34 @@
-import {Button, Input} from 'components';
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {useForm} from 'react-hook-form';
 
 import css from './BookingForm.module.scss';
 
+import {Badge, Button, Input, MultipleSelectWithBadges} from 'components';
+import {AutocompleteRenderInputParams, TextField} from '@mui/material';
+
+const names = [
+    'RomanGin20@incorainc.com',
+    'Van Henry',
+    'April Tucker',
+    'Ralph Hubbard',
+    'Omar Alexander',
+    'Carlos Abbott',
+    'Miriam Wagner',
+    'Bradley Wilkerson',
+    'Virginia Andrews',
+    'Kelly Snyder',
+];
+
 const BookingForm: FC = () => {
+
     const {register, handleSubmit, reset} = useForm();
 
-    const submit = async (e: any) => {
+    const [members, setMembers] = useState<Array<string>>([]);
+
+    const submit = async (event: any) => {
         try {
-            await console.log(e);
+            event = await {...event, members};
+            console.log(event);
             reset();
         } catch (err) {
             console.log(err);
@@ -73,6 +92,13 @@ const BookingForm: FC = () => {
                             fullWidth={true}
                         >
                         </Input>
+                    </label>
+                    <label className={`${css.booking__label} ${css['booking__label--select']}`}>
+                        <MultipleSelectWithBadges options={names} setSelectedOptions={setMembers}
+                                                  renderInput={(params: AutocompleteRenderInputParams) => (
+                                                      <TextField {...params} />
+                                                  )}
+                        />
                     </label>
                     <Button type={'submit'} fullWidth={true}>
                         Submit
