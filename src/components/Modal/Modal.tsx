@@ -18,7 +18,7 @@ const Modal: FC<ModalProps> = ({children, checked,fullWidth}) => {
             <button className={'button'}
                     style={fullWidth ? {width: '100%'} : {width: 'auto'}}
                     onClick={() => setOpen(true)}>
-                Open Modal
+                {label}
             </button>
             <div className={`modal animated  ${open || checked ? 'show' : ''}`}>
                 <div className={'modal__content'}>
