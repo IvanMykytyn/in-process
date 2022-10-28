@@ -5,7 +5,7 @@ import cn from 'classnames'
 import css from './room.module.scss'
 
 import {IRooms} from '../../pages/Dashboard/Rooms/Rooms'
-import {Modal} from '../index'
+import {Modal,BookingForm} from '../index'
 import {tools} from '../../utils/tools'
 import {users} from '../../assets/images/icons'
 
@@ -54,7 +54,10 @@ const Room: FC<RoomProps> = ({room}) => {
                         {/*<img src={users} alt="users" width={15} height={15}/>{room.maxCapacity}*/}
                     </li>
                 </ul>
-                <Modal fullWidth={true}/>
+                <Modal label={'Book'}
+                       fullWidth={true}>
+                    <BookingForm/>
+                </Modal>
             </li>
         </>
     );

@@ -28,15 +28,15 @@
     padding: 10px 50px 10px 10px;
     border-radius: 10px;
 
-    //::-webkit-scrollbar-track {
-    //  background: aqua;
-    //}
-    //
-    //::-webkit-scrollbar-thumb {
-    //  background-color: blue; /* цвет бегунка */
-    //  border-radius: 20px; /* округлось бегунка */
-    //  border: 3px solid orange; /* отступ вокруг бегунка */
-    //}
+    &::-webkit-scrollbar-track {
+      background: aqua;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: blue; /* цвет бегунка */
+      border-radius: 20px; /* округлось бегунка */
+      border: 3px solid orange; /* отступ вокруг бегунка */
+    }
   }
 }
 
