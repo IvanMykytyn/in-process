@@ -6,15 +6,17 @@ import {Button} from '../index'
 
 interface ModalProps {
     children?: any;
-    checked?: boolean
+    checked?: boolean;
+    fullWidth?: boolean
 }
 
-const Modal: FC<ModalProps> = ({children, checked}) => {
+const Modal: FC<ModalProps> = ({children, checked,fullWidth}) => {
     const [open, setOpen] = useState(false)
 
     return (
         <div>
             <button className={'button'}
+                    style={fullWidth ? {width: '100%'} : {width: 'auto'}}
                     onClick={() => setOpen(true)}>
                 Open Modal
             </button>
