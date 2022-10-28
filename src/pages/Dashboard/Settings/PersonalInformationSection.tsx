@@ -27,7 +27,7 @@ const PersonalInformationSection: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
   const { firstName, lastName, email } = user || ({} as User);
 
-  const fullName = firstName + lastName;
+  const fullName = `${firstName} ${lastName}`;
 
   const dispatch = useAppDispatch();
 
