@@ -8,7 +8,12 @@ import type {
   UserEmailField,
   UserWithToken,
 } from 'models';
-import { loginRequest, signUpRequest, getAccessRequest } from 'services';
+import {
+  loginRequest,
+  signUpRequest,
+  getAccessRequest,
+  addUsersRequest,
+} from 'services';
 import { clearStore } from 'store/features/authSlice';
 import { AppDispatch } from 'store';
 
@@ -84,11 +89,25 @@ export const logoutUser = createAsyncThunk<
   try {
     thunkAPI.dispatch(clearStore());
   } catch (err) {
+    return thunkAPI.rejectWithValue('Logout failed');
+  }
+});
+
+export const addUsers = createAsyncThunk<
+  void,
+  string[],
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>('auth/addUsers', async (users, { rejectWithValue }) => {
+  try {
+    await addUsersRequest(users);
+  } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
 
     if (!error.response) {
       throw err;
     }
-    return thunkAPI.rejectWithValue('Logout failed');
+    return rejectWithValue(error.response.data);
   }
 });

@@ -7,11 +7,13 @@
 
 .settings {
   width: 100%;
-  // overflow-y: auto;
+  // height: 100vh;
+  overflow-y: auto;
 
   &__header {
     text-align: left;
     padding: 0 10px 10px;
+    letter-spacing: 1.2px;
   }
   &__section {
     padding: 30px 0 15px;
@@ -98,6 +100,10 @@
 
       text-transform: capitalize;
     }
+
+    &__multiple{
+      width: 80%;
+    }
   }
 
   &__buttons {
@@ -124,4 +130,9 @@
       font-weight: 600;
     }
   }
+}
+.section-multiple-input{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: 15px
 }

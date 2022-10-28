@@ -1,10 +1,10 @@
-import { PromiseResponse as PR, UserEmailField, UserWithToken } from 'models';
+import { PromiseResponse as PR } from 'models';
 import { urls } from 'utils';
 import { axiosService } from './axiosService';
 
-const addUsers = (users: Array<UserEmailField>): PR<UserWithToken> =>
+const addUsersRequest = (users: Array<string>): PR<void> =>
   axiosService.post(`${urls.admin}/addUsers`, {
     usersEmails: users,
   });
 
-export { addUsers };
+export { addUsersRequest };

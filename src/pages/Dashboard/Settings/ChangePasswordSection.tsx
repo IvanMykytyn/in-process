@@ -32,6 +32,7 @@ const ChangePasswordSection: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    clearErrors
   } = useForm({
     defaultValues: initialValues,
     resolver: joiResolver(changePasswordValidator),
@@ -45,6 +46,11 @@ const ChangePasswordSection: FC = () => {
       console.log(err);
     }
   };
+
+  const handleCancel = () => {
+    clearErrors()
+  }
+
   return (
     <SectionLayout headerText={'Password Change'} onSubmit={handleSubmit(submit)}>
       <SectionInput
@@ -69,7 +75,7 @@ const ChangePasswordSection: FC = () => {
         error={!!errors.confirmPassword}
         errorText={errors.confirmPassword?.message}
       />
-      <SectionButtons isLoading={isLoading} />
+      <SectionButtons isLoading={isLoading} handleCancel={handleCancel}/>
     </SectionLayout>
   );
 };

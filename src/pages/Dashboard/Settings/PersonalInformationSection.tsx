@@ -35,6 +35,7 @@ const PersonalInformationSection: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    clearErrors
   } = useForm({
     defaultValues: { firstName, lastName },
     resolver: joiResolver(PersonalInfoValidator),
@@ -48,6 +49,10 @@ const PersonalInformationSection: FC = () => {
       console.log(err);
     }
   };
+  
+  const handleCancel = () => {
+    clearErrors()
+  }
 
   return (
     <SectionLayout
@@ -82,7 +87,7 @@ const PersonalInformationSection: FC = () => {
         errorText={errors.lastName?.message}
       />
 
-      <SectionButtons isLoading={isLoading} />
+      <SectionButtons isLoading={isLoading} handleCancel={handleCancel}/>
     </SectionLayout>
   );
 };
