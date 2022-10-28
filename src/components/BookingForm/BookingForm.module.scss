@@ -9,7 +9,6 @@
   background-color: $background;
   box-shadow: $outerBoxShadow;
 
-
   &__wrap {
     max-width: 50%;
   }
@@ -18,7 +17,7 @@
     position: relative;
 
     &::after {
-      content: '  ';
+      content: '';
       width: 100%;
       height: 5px;
       background-color: $primaryColor;
@@ -62,14 +61,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    grid-gap: 10px;
+    grid-gap: 5px;
   }
 
   &__label {
     width: 100%;
     position: relative;
 
-    &::before{
+    &::before {
       content: 'Start Time';
       position: absolute;
       left: 5px;
@@ -78,14 +77,14 @@
     }
   }
 
-  &__label--meeting{
-    &::before{
+  &__label--meeting {
+    &::before {
       content: 'Name of Meeting';
     }
   }
 
-  &__label--date{
-    &::before{
+  &__label--date {
+    &::before {
       content: 'Select a date';
     }
   }
@@ -99,6 +98,14 @@
   &__label--end-time {
     &::before {
       content: 'End Time';
+    }
+  }
+
+  &__label--select {
+    margin-bottom: 20px;
+
+    &::before {
+      content: 'Select Members';
     }
   }
 }

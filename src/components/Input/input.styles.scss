@@ -45,6 +45,11 @@ $errorTextColor: #d32f2f;
     -webkit-text-fill-color: rgba(0, 0, 0, 0.5) !important;
   }
 
+
+  input::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+
   .MuiOutlinedInput-root input[type='password'] {
     letter-spacing: 1px;
   }

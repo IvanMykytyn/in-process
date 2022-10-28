@@ -85,6 +85,7 @@
 .booked.hide,
 .clock.hide {
   opacity: 0;
+  font-size: 0;
   overflow: hidden;
 }
 
@@ -155,6 +156,7 @@ button {
   width: 100%;
   grid-gap: 10px;
   position: relative;
+  transition: opacity 0.5s, font-size 0.5s;
 
   &::after {
     content: '';
