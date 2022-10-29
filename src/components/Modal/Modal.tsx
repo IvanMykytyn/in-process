@@ -7,10 +7,11 @@ import {Button} from '../index'
 interface ModalProps {
     children?: any;
     checked?: boolean;
-    fullWidth?: boolean
+    fullWidth?: boolean;
+    label: string
 }
 
-const Modal: FC<ModalProps> = ({children, checked,fullWidth}) => {
+const Modal: FC<ModalProps> = ({children, checked,fullWidth,label}) => {
     const [open, setOpen] = useState(false)
 
     return (

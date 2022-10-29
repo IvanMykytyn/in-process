@@ -4,15 +4,12 @@ import { FC } from 'react'
 import cn from 'classnames'
 import css from './map.module.scss'
 
-import {BookingForm, Modal } from 'components'
+import {Rooms } from 'pages'
+
 
 const Map: FC = () => {
   return (
-    <div>
-      <Modal label={'Book'}>
-        <BookingForm/>
-      </Modal>
-    </div>
+        <Rooms/>
   )
 }
 
