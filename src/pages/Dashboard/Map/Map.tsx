@@ -4,9 +4,12 @@ import { FC } from 'react'
 import cn from 'classnames'
 import css from './map.module.scss'
 
+import {Rooms } from 'pages'
+
+
 const Map: FC = () => {
   return (
-    <div>Map</div>
+        <Rooms/>
   )
 }
 

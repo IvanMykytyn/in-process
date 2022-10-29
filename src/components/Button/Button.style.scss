@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  height: 45px;
+  max-height: 45px;
   padding: 15px 40px;
   border-radius: 15px;
   background: $background;
@@ -30,7 +30,7 @@
 
   &::after {
     content: '';
-    height: 45px;
+    height: 100%;
     width: 100%;
     background-color: transparent;
     border: 2px solid $lightBlue;
@@ -46,7 +46,7 @@
 
     &::after {
       content: '';
-      height: 45px;
+      height: 100%;
       width: 100%;
       background-color: transparent;
       border: 2px solid $primaryColor;

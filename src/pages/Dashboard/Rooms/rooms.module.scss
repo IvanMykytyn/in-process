@@ -1,1 +1,56 @@
-@import "styles/global.module";
+@import "../../../styles/global.module";
+
+.wrapper {
+  box-shadow: $innerBoxShadow;
+  border-radius: 15px;
+  height: 100%;
+  padding: 15px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.room_container {
+  padding: 20px;
+  display: grid;
+  grid-gap: 40px;
+
+  &__floor {
+    box-shadow: $outerBoxShadow;
+    border-radius: 5px;
+    padding: 5px 5px 5px 10px;
+    outline: none;
+  }
+
+  &__rooms {
+    display: flex;
+    grid-gap: 15px;
+    overflow: auto;
+    padding: 10px 50px 10px 10px;
+    border-radius: 10px;
+
+    &::-webkit-scrollbar-track {
+      background: aqua;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: blue; /* цвет бегунка */
+      border-radius: 20px; /* округлось бегунка */
+      border: 3px solid orange; /* отступ вокруг бегунка */
+    }
+  }
+}
+
+.floor {
+  display: grid;
+  grid-gap: 15px;
+}
+
+//::-webkit-scrollbar-track {
+//  background: aqua;
+//}
+//
+//::-webkit-scrollbar-thumb {
+//  background-color: blue; /* цвет бегунка */
+//  border-radius: 20px; /* округлось бегунка */
+//  border: 3px solid orange; /* отступ вокруг бегунка */
+//}

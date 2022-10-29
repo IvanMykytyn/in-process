@@ -5,34 +5,11 @@ import css from './BookedRoom.module.scss';
 import {clock, calendar, staffIcon, board, tv, marker} from '../../assets/images/icons';
 
 import {Data} from "components/SideBar/SideBar";
-
-interface Tool {
-    id: string;
-    alt: string;
-    img: string
-}
+import {tools} from '../../utils/tools'
 
 interface Props {
     room: Data;
 }
-
-const tools: Tool[] = [
-    {
-        id: '0',
-        alt: 'board',
-        img: board
-    },
-    {
-        id: '1',
-        alt: 'tv',
-        img: tv
-    },
-    {
-        id: '2',
-        alt: 'marker',
-        img: marker
-    },
-];
 
 const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instruments}}}) => {
 

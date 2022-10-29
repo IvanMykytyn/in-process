@@ -10,7 +10,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.5s
+  transition: 0.5s;
+  z-index: 100;
 }
 
 .modal.animated {
@@ -34,13 +35,15 @@
   display: flex;
   flex-direction: column;
   grid-template-columns: repeat(auto-fill, 30%);
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  padding: 25px;
+  padding: 15px;
   box-shadow: 3px 3px 7px #545454,
   -3px -3px 7px #afaeae;
   border-radius: 25px;
   color: #565656;
+  //height: 100%;
+  margin: 10px 0;
 }
 
 .children_content {

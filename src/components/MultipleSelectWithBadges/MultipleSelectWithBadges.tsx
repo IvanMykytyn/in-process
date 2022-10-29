@@ -39,6 +39,7 @@ const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
   customHandleChange,
   ...rest
 }) => {
+
   const handleChange = (e: React.SyntheticEvent, values: string[]) => {
     setSelectedOptions(values);
   };

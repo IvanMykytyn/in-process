@@ -219,9 +219,9 @@ const SideBar = () => {
                         </button>
                     </li>
                 </ul>
-                <div className={isOpenMenu ? `${scss.input}` : `${scss.input} ${scss.hide}`}>
-                    <Input fullWidth={true} label={'Search...'}/>
-                </div>
+                {/*<div className={isOpenMenu ? `${scss.input}` : `${scss.input} ${scss.hide}`}>*/}
+                {/*    <Input fullWidth={true} label={'Search...'}/>*/}
+                {/*</div>*/}
                 <div className={scss.inner}>
                     <span className={isOpenMenu ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15}/>
