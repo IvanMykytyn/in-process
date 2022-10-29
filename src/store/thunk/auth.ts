@@ -8,7 +8,12 @@ import type {
   UserEmailField,
   UserWithToken,
 } from 'models';
-import { userService, loginRequest } from 'services';
+import {
+  loginRequest,
+  signUpRequest,
+  getAccessRequest,
+  addUsersRequest,
+} from 'services';
 import { clearStore } from 'store/features/authSlice';
 import { AppDispatch } from 'store';
 
@@ -40,7 +45,7 @@ export const signUpUser = createAsyncThunk<
   }
 >('auth/signUpUser', async (userData, { rejectWithValue }) => {
   try {
-    const response = await userService.signUpRequest(userData);
+    const response = await signUpRequest(userData);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -61,7 +66,7 @@ export const getAccessUser = createAsyncThunk<
   }
 >('auth/getAccessUser', async ({ email }, { rejectWithValue }) => {
   try {
-    const response = await userService.getAccessRequest({ email });
+    const response = await getAccessRequest({ email });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -84,11 +89,25 @@ export const logoutUser = createAsyncThunk<
   try {
     thunkAPI.dispatch(clearStore());
   } catch (err) {
+    return thunkAPI.rejectWithValue('Logout failed');
+  }
+});
+
+export const addUsers = createAsyncThunk<
+  void,
+  string[],
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>('auth/addUsers', async (users, { rejectWithValue }) => {
+  try {
+    await addUsersRequest(users);
+  } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
 
     if (!error.response) {
       throw err;
     }
-    return thunkAPI.rejectWithValue('Logout failed');
+    return rejectWithValue(error.response.data);
   }
 });

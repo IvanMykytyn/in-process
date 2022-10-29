@@ -1,5 +1,5 @@
 import type {
-  PromiseResponse,
+  PromiseResponse as PR,
   UserLoginProps,
   UserSignUpProps,
   UserEmailField,
@@ -10,35 +10,34 @@ import type {
 import { axiosService } from './axiosService';
 import { getFromLocalStorage, urls } from 'utils';
 
-const loginRequest = (userData: UserLoginProps): PromiseResponse<UserWithToken> =>
+const loginRequest = (userData: UserLoginProps): PR<UserWithToken> =>
   axiosService.post(`${urls.auth}/login`, userData);
-const userService = {
 
-  signUpRequest: (userData: UserSignUpProps): PromiseResponse<UserWithToken> =>
-    axiosService.post(`${urls.auth}/signup`, userData),
+const signUpRequest = (userData: UserSignUpProps): PR<UserWithToken> =>
+  axiosService.post(`${urls.auth}/signup`, userData);
 
-  getAccessRequest: ({ email }: UserEmailField): PromiseResponse<UserWithToken> =>
-    axiosService.post(`${urls.auth}/get-access`, { email }),
+const getAccessRequest = ({ email }: UserEmailField): PR<UserWithToken> =>
+  axiosService.post(`${urls.auth}/get-access`, { email });
 
-  forgotPasswordRequest: ({
-    email,
-  }: UserEmailField): PromiseResponse<UserWithToken> =>
-    axiosService.post(`${urls.forgotPassword}`, { email }),
+const forgotPasswordRequest = ({ email }: UserEmailField): PR<UserWithToken> =>
+  axiosService.post(`${urls.forgotPassword}`, { email });
 
-  resetPasswordRequest: ({
-    id,
-    token,
-    password,
-  }: ResetPasswordProps): PromiseResponse<UserWithToken> =>
-    axiosService.put(`${urls.resetPassword}/${id}/${token}`, { password }),
+const resetPasswordRequest = ({ id, token, password }: ResetPasswordProps): PR<UserWithToken> =>
+  axiosService.put(`${urls.resetPassword}/${id}/${token}`, { password });
 
-  isLoggedIn: (): boolean => {
-    const token: string = getFromLocalStorage('token');
-    return !!token;
-  },
+const isLoggedIn = (): boolean => {
+  const token: string = getFromLocalStorage('token');
+  return !!token;
 };
 
 // const updateUserRequest = (userData: UserUpdateProps): PromiseResponse =>
 //   axiosService.put(`${urls.auth}/update-user`, userData);
 
-export { userService,loginRequest };
+export {
+  loginRequest,
+  signUpRequest,
+  getAccessRequest,
+  forgotPasswordRequest,
+  resetPasswordRequest,
+  isLoggedIn,
+};

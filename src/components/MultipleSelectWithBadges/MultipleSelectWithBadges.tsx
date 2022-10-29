@@ -1,36 +1,60 @@
 import React, { Dispatch, SetStateAction, FC } from 'react';
 import {
-    Autocomplete,
-    AutocompleteProps,
-    AutocompleteRenderInputParams,
-    Chip,
-    TextField,
+  Autocomplete,
+  AutocompleteProps,
+  AutocompleteRenderInputParams,
+  Chip,
+  TextField,
 } from '@mui/material';
 
 // styles
+import cn from 'classnames';
 import './multiple-select-with-badges.styles.scss';
 
 interface CustomProps {
-  options: Array<string>;
   setSelectedOptions: Dispatch<SetStateAction<Array<string>>>;
-  noOptionsText?: string;
+  options?: Array<string>;
+  expandSize?: boolean;
+  handleInputChange?: () => void;
+  inputError?: boolean;
+  inputTextError?: string;
+  customHandleChange?: (e: React.SyntheticEvent, values: string[]) => void;
 }
 
-const MultipleSelectWithBadges: FC<
-  CustomProps &
-    AutocompleteProps<string, true, undefined, undefined, React.ElementType<any>>
-> = ({ setSelectedOptions, noOptionsText, options, ...rest }) => {
+type AutocompleteSetup = AutocompleteProps<
+  string,
+  true,
+  undefined,
+  boolean | undefined,
+  React.ElementType<any>
+>;
+
+const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
+  setSelectedOptions,
+  handleInputChange,
+  options = [],
+  expandSize,
+  inputError,
+  inputTextError,
+  customHandleChange,
+  ...rest
+}) => {
+
   const handleChange = (e: React.SyntheticEvent, values: string[]) => {
     setSelectedOptions(values);
   };
 
   return (
-    <div className={'multi-select'}>
+    <div
+      className={cn('multi-select', {
+        'multi-select-large': !!expandSize,
+        'multi-select__error': inputError,
+      })}
+    >
       <Autocomplete
         multiple
         options={options}
-        noOptionsText={noOptionsText}
-        onChange={handleChange}
+        onChange={customHandleChange || handleChange}
         renderTags={(value: readonly string[], getTagProps) => (
           <div className="badges-container">
             {value.map((option: string, index: number) => (
@@ -45,7 +69,7 @@ const MultipleSelectWithBadges: FC<
         )}
         {...rest}
         renderInput={(params: AutocompleteRenderInputParams) => (
-          <TextField {...params} />
+          <TextField {...params} error={inputError} helperText={inputTextError} />
         )}
       />
     </div>

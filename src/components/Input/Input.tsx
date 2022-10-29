@@ -7,10 +7,11 @@ import './input.styles.scss';
 
 import PasswordInput from './PasswordInput';
 
-interface InputCustomProps {
-    icon?: SvgIconComponent;
-    errorText?: string;
-    className?: string;
+
+export interface InputCustomProps {
+  icon?: SvgIconComponent;
+  errorText?: string;
+  className?: string;
 }
 
 const Input: FC<TextFieldProps & InputCustomProps> = React.forwardRef(

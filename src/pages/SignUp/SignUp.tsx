@@ -88,7 +88,7 @@ const SignUp: FC = () => {
           errorText={errors.password?.message}
         />
 
-        <Button type={'submit'} fullWidth>
+        <Button type={'submit'} fullWidth disabled={isLoading} loading={isLoading}>
           Sign Up
         </Button>
 
