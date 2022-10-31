@@ -1,17 +1,36 @@
-import {FC} from 'react';
+import { FC, useState } from 'react';
 
 // styles
 import cn from 'classnames';
-import css from './calendar.module.scss';
+import scss from './calendar.module.scss';
 
 import { MainCalendar } from 'components';
 
+import { CalendarHeader } from './CalendarHeader';
+import { CalendarTable } from './CalendarTables';
+import moment, { Moment } from 'moment';
+
+export enum TimeRange {
+  Day = 'DAY',
+  Week = 'WEEK',
+  Month = 'MONTH',
+}
+
 const Calendar: FC = () => {
-    return (
-        <div>
-            <MainCalendar/>
-        </div>
-    );
+  const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.Day);
+  const [currentDate, setCurrentDate] = useState<Moment>(moment());
+
+  return (
+    <div className={scss['calendar-container']}>
+      <CalendarHeader
+        timeRange={timeRange}
+        setTimeRange={setTimeRange}
+        currentDate={currentDate}
+        setCurrentDate={setCurrentDate}
+      />
+      <CalendarTable timeRange={timeRange} />
+    </div>
+  );
 };
 
-export {Calendar};
+export { Calendar };

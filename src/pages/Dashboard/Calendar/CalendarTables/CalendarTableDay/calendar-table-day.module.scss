@@ -1,0 +1,73 @@
+@import 'styles/global.module';
+
+$roomWidth: 140px;
+$leftBarWidth: 55px;
+$calendarHeaderHeight: 35px;
+
+.calendar-table-day {
+  height: 90%;
+  width: 100%;
+  position: relative;
+}
+
+.calendar-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  overflow: auto;
+  border-radius: 5px;
+
+  .calendar {
+    &__header {
+      width: fit-content;
+      height: $calendarHeaderHeight;
+      padding-left: $leftBarWidth;
+      border-radius: 5px 5px 0 0;
+
+      background: $lightGray800;
+
+      display: flex;
+      align-items: center;
+
+      border: $border500;
+
+      position: sticky;
+      top: 0;
+      z-index: 8;
+      &-room {
+        min-width: $roomWidth;
+        max-width: $roomWidth;
+        font-size: 0.8rem;
+        font-weight: 600;
+
+        border-left: $border500;
+
+        @include centerDiv();
+      }
+    }
+
+    &-table {
+      height: 100%;
+
+      display: grid;
+      grid-template-columns: minmax(0, $leftBarWidth + 4px) minmax(0, auto);
+    }
+  }
+}
+
+.time-grid__container {
+  height: 100%;
+  width: 100%;
+  background: $lightGray700;
+
+  padding-top: 11.75px;
+
+  border-right: $border500;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+}

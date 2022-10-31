@@ -1,1 +1,62 @@
-@import "styles/global.module";
+@import 'styles/global.module';
+
+.calendar-container {
+  width: 100%;
+}
+.calendar-header__container {
+  width: 100%;
+  height: 60px;
+
+  padding-bottom: 60px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) minmax(0, 2fr);
+}
+
+.current-date__section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.current-date {
+  text-align: center;
+  cursor: pointer;
+
+  &__month-day {
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+
+  &__year {
+    font-weight: 600;
+    color: $textColor300;
+  }
+}
+
+.arrow-btn {
+  padding: 0 20px;
+  img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.button-group-time-range {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.mini-calendar {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 60px;
+  z-index: 10;
+  background: $background;
+  border-radius: 10px;
+}

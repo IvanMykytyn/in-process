@@ -217,7 +217,7 @@ export const rooms: IRooms[] = [
     },
     {
         id: 10,
-        name: 'Room1',
+        name: 'Room30',
         img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
         description: 'the room has PS and TV.That is all what you need',
         floor: 2,

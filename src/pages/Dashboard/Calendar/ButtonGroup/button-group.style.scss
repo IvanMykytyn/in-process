@@ -1,0 +1,43 @@
+@import 'styles/global.module';
+
+.button-group-container {
+  .MuiToggleButtonGroup-root {
+    height: 40px;
+    background: $lightBlue100;
+
+    .MuiToggleButton-root {
+      text-transform: capitalize;
+      border: none;
+      color: $primaryColor600;
+
+      font-weight: 500;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $lightBlue300;
+      }
+    }
+    .Mui-selected {
+      color: $textColor;
+      background-color: $primaryColor;
+      cursor: default;
+      margin: 5px !important;
+      border-radius: 5px !important;
+
+      // TODO change animation to be more smooth
+      transition: 0.5s ease-in;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $lightBlue300;
+        color: $textColor;
+        background-color: $primaryColor;
+        
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+  }
+}

@@ -1,16 +1,38 @@
 $default: #000000;
 $background: #dcdcdc;
 $containerBackground: #dcdcdc;
+
 $primaryColor: #568cc5;
+$primaryColor600: #3e6b9b;
 
 $white: #ffffff;
+
 $lightGray: #ededed;
+$lightGray100: #b0b0b02f;
+$lightGray200: #b0b0b045;
+$lightGray300: #b0b0b05d;
+$lightGray700: #edededae;
+$lightGray800: #E8E8E8;
 $gray: #b0b0b0;
+
 $CalendarBntColor: $primaryColor;
+
 $lightBlue: #568cc580;
+$lightBlue100: #8090a02d;
+$lightBlue300: #7a97b780;
 
 $textColor: #ededed;
+$textColor200: #a6a6a6;
+$textColor300: #a6a6a6;
+$textColor400: #b3b2b2;
+$textColor500: #878787;
+$textColor700: #565656;
 //#656565
+
+$border500: 2px solid $gray;
+$border400: 2px solid $lightGray300;
+$border300: 1.5px solid $lightGray200;
+$border200: 1px solid $lightGray100;
 
 $outerBoxShadow: 3px 3px 7px $gray,
 -3px -3px 7px #ffffff;
