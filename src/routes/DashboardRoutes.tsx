@@ -9,6 +9,7 @@ import {
     Rooms,
     Settings,
     Timeline,
+    BookingFormPage
 } from 'pages';
 
 const DashboardRoutes: FC = () => {
@@ -26,6 +27,8 @@ const DashboardRoutes: FC = () => {
                 <Route path="timeline" element={<Timeline/>}/>
                 <Route path="calendar" element={<Calendar/>}/>
                 <Route path="settings" element={<Settings/>}/>
+                <Route path="bookig_form_page" element={<BookingFormPage/>}/>
+
             </Route>
         </Routes>
     );

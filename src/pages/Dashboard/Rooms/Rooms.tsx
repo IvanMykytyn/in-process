@@ -1,14 +1,20 @@
-import {FC, useRef} from 'react'
-// import Slider from 'react-slick';
+import {FC, useRef, useEffect, useState} from 'react';
+import {Swiper, SwiperSlide} from 'swiper/react';
+// import { Navigation, Scrollbar } from 'swiper';
+import SwiperCore, {Scrollbar, Navigation} from 'swiper';
 
 // styles
-import cn from 'classnames'
-import css from './rooms.module.scss'
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import cn from 'classnames';
+import css from './rooms.module.scss';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
+import "swiper/css/scrollbar";
+
 
 import {Room} from '../../../components/index'
 
+SwiperCore.use([Scrollbar]);
 
 interface InstrumentsProps {
     id: string
@@ -43,6 +49,11 @@ export const rooms: IRooms[] = [
                 id: '2'
             }, {
                 id: '3'
+            }, {
+                id: '4'
+            },
+            {
+                id: '5'
             }
         ]
     },
@@ -61,6 +72,11 @@ export const rooms: IRooms[] = [
                 id: '1'
             }, {
                 id: '3'
+            }, {
+                id: '4'
+            },
+            {
+                id: '5'
             }
         ]
     },
@@ -79,6 +95,11 @@ export const rooms: IRooms[] = [
                 id: '2'
             }, {
                 id: '3'
+            }, {
+                id: '4'
+            },
+            {
+                id: '5'
             }
         ]
     },
@@ -97,6 +118,8 @@ export const rooms: IRooms[] = [
                 id: '2'
             }, {
                 id: '3'
+            }, {
+                id: '5'
             }
         ]
     },
@@ -175,7 +198,7 @@ export const rooms: IRooms[] = [
                 id: '3'
             }
         ]
-    },{
+    }, {
         id: 8,
         name: 'Room1',
         img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
@@ -238,44 +261,92 @@ export const rooms: IRooms[] = [
 ]
 
 const Rooms: FC = () => {
-    // const settings = {
-    //     dots: true,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1
-    // };
 
+    // const swiperNavPrevRef = useRef(null)
+    // const swiperNavNextRef = useRef(null)
+
+    function getWindowDimensions() {
+        const {innerWidth: width, innerHeight: height} = window;
+        return {
+            width,
+            height,
+        };
+    }
+
+    function useWindowDimensions() {
+        const [windowDimensions, setWindowDimensions] = useState(
+            getWindowDimensions()
+        );
+
+        useEffect(() => {
+            function handleResize() {
+                setWindowDimensions(getWindowDimensions());
+            }
+
+            window.addEventListener("resize", handleResize);
+            return () => window.removeEventListener("resize", handleResize);
+        }, []);
+
+        return windowDimensions;
+    }
+
+    const {width} = useWindowDimensions();
     return <div className={cn(css.wrapper)}>
+
         <ul className={cn(css.room_container)}>
             <li className={cn(css.floor)}>
                 <div className={cn(css.room_container__floor)}>
                     1-st floor
                 </div>
-                {/*<Slider {...settings}>*/}
-                <ul className={cn(css.room_container__rooms)}>
-                    {rooms.filter(room => room.floor === 1).map(room =>
-                        <li key={room.id}>
-                            <Room room={room}/>
-                        </li>
-                    )}
-                </ul>
+                <Swiper
+                    className={cn(css.my_swiper)}
+                    loop={true}
+                    navigation={true}
+                    slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
+                    modules={[Navigation]}
+                    spaceBetween={25}
+                    scrollbar={{draggable: true}}
+                >
+                    <ul className={cn(css.room_container__rooms)}>
+                        {rooms.filter(room => room.floor === 1).map(room =>
+                            <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                         key={room.id}
+                                         virtualIndex={room.id}
+                            >
+                                <Room room={room} key={room.id}/>
+
+                            </SwiperSlide>
+                        )}
+                    </ul>
+                </Swiper>
             </li>
 
-            <div className={cn(css.floor)}>
+            <li className={cn(css.floor)}>
                 <div className={cn(css.room_container__floor)}>
                     2-nd floor
                 </div>
-                {/*<Slider {...settings}>*/}
-                <div className={cn(css.room_container__rooms)}>
-                    {rooms.filter(room => room.floor === 2).map(room =>
-                        <li key={room.id}>
-                            <Room room={room}/>
-                        </li>
-                    )}
-                </div>
-            </div>
-            {/*</Slider>*/}
+                <Swiper
+                    className={cn(css.my_swiper)}
+                    loop={true}
+                    navigation={true}
+                    slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
+                    modules={[Navigation]}
+                    spaceBetween={25}
+                    scrollbar={{draggable: true}}
+                >
+                    <ul className={cn(css.room_container__rooms)}>
+                        {rooms.filter(room => room.floor === 2).map(room =>
+                            <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                         key={room.id}
+                                         virtualIndex={room.id}
+                            >
+                                <Room room={room} key={room.id}/>
+
+                            </SwiperSlide>
+                        )}
+                    </ul>
+                </Swiper>
+            </li>
         </ul>
     </div>
 }

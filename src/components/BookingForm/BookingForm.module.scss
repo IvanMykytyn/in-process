@@ -1,7 +1,7 @@
 @import '../../App.styles';
 
 .booking {
-  max-width: 750px;
+  //max-width: 750px;
   width: 100%;
   display: flex;
   border-radius: 15px;
@@ -108,4 +108,12 @@
       content: 'Select Members';
     }
   }
+}
+
+.btn{
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr;
+  padding: 5px;
+  grid-gap: 15px;
+  width: 100%;
 }

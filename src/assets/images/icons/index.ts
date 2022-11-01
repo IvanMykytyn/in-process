@@ -11,6 +11,8 @@ import marker from './marker.svg';
 import tv from './tv.svg';
 import plug from './plug.svg';
 import users from './users.svg';
+import window from './window.svg';
+import conditioner from './conditioner.svg';
 
 
-export {keyIcon, arrowLeft, user, setting, search, clock, calendar, staffIcon, board, tv, marker, users, plug}
+export {keyIcon, arrowLeft, user, setting, search, clock, calendar, staffIcon, board, tv, marker, users, plug, window, conditioner}
