@@ -1,7 +1,6 @@
 import 'moment/locale/uk';
 import {FC, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Accordion} from '@mui/material';
 import moment from 'moment';
 
 // styles
@@ -9,8 +8,7 @@ import cn from 'classnames';
 import scss from './sidebar.module.scss';
 
 
-import {Input} from '../index'
-import {setting, search, user, clock} from '../../assets/images/icons';
+import {setting, user, clock} from '../../assets/images/icons';
 import {BookedRoom} from 'components/BookedRoom/BookedRoom';
 
 interface Instruments {
@@ -35,7 +33,7 @@ const data: Data[] = [
     {
         roomId: 'room 1',
         answer: {
-            date: '2022-10-30',
+            date: '2022-11-13',
             time: {
                 hours: 18,
                 minuts: 30
@@ -60,7 +58,7 @@ const data: Data[] = [
     {
         roomId: 'room 2',
         answer: {
-            date: '2022-10-29',
+            date: '2022-11-11',
             time: {
                 hours: 18,
                 minuts: 30
@@ -81,7 +79,7 @@ const data: Data[] = [
     {
         roomId: 'room 3',
         answer: {
-            date: '2022-10-27',
+            date: '2022-11-14',
             time: {
                 hours: 18,
                 minuts: 30
@@ -101,7 +99,7 @@ const data: Data[] = [
     }, {
         roomId: 'room 4',
         answer: {
-            date: '2022-10-29',
+            date: '2022-11-04',
             time: {
                 hours: 18,
                 minuts: 30
@@ -122,7 +120,7 @@ const data: Data[] = [
     {
         roomId: 'room 5',
         answer: {
-            date: '2022-10-25',
+            date: '2022-11-06',
             time: {
                 hours: 20,
                 minuts: 30
@@ -143,7 +141,7 @@ const data: Data[] = [
     {
         roomId: 'room 6',
         answer: {
-            date: '2022-10-25',
+            date: '2022-11-01',
             time: {
                 hours: 20,
                 minuts: 30
@@ -164,7 +162,7 @@ const data: Data[] = [
     {
         roomId: 'room 7',
         answer: {
-            date: '2022-10-25',
+            date: '2022-11-03',
             time: {
                 hours: 12,
                 minuts: 10
@@ -184,7 +182,7 @@ const data: Data[] = [
     },
 ];
 
-const SideBar = () => {
+const SideBar:FC = () => {
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true);
     const [selected, setSelected] = useState<number | null>(null);
 
@@ -193,6 +191,12 @@ const SideBar = () => {
     };
     //TO DO MOMENT.js
     const mainClock = moment().format('LLL');
+
+    const roomsTimeSort = data && data.sort((a, b) =>
+        Number(moment(`${a.answer.date} ${a.answer.time.hours}:${a.answer.time.minuts}:00`))
+        -
+        Number(moment(`${b.answer.date} ${b.answer.time.hours}:${b.answer.time.minuts}:00`))
+    );
 
     return (
         <div className={isOpenMenu ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
@@ -219,9 +223,6 @@ const SideBar = () => {
                         </button>
                     </li>
                 </ul>
-                {/*<div className={isOpenMenu ? `${scss.input}` : `${scss.input} ${scss.hide}`}>*/}
-                {/*    <Input fullWidth={true} label={'Search...'}/>*/}
-                {/*</div>*/}
                 <div className={scss.inner}>
                     <span className={isOpenMenu ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15}/>
@@ -229,7 +230,7 @@ const SideBar = () => {
                     </span>
                     <ul className={isOpenMenu ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                         {
-                            data && data.map((value, index) =>
+                            roomsTimeSort.map((value) =>
                                 <BookedRoom key={value.answer.room} room={value}/>
                             )
                         }
