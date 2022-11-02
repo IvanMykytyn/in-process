@@ -33,6 +33,7 @@ $errorTextColor: #d32f2f;
       border-radius: 5px;
     }
   }
+
   .MuiAutocomplete-root {
     .MuiFormControl-root {
       height: 100%;
@@ -105,8 +106,9 @@ $errorTextColor: #d32f2f;
     // bottom: 0;
     top: -25px;
   }
-.MuiOutlinedInput-root .MuiAutocomplete-endAdornment {
-  right: 15px !important;
 
+  .MuiOutlinedInput-root .MuiAutocomplete-endAdornment {
+    right: 15px !important;
+
+  }
 }
-
