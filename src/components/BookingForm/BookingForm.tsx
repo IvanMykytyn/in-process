@@ -123,7 +123,6 @@ const BookingForm: FC = () => {
             </div>
         </div>
     )
-        ;
 };
 
 export {BookingForm};

@@ -1,8 +1,6 @@
 import {FC, useRef, useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
-// import { Navigation, Scrollbar } from 'swiper';
-import SwiperCore, {Scrollbar, Navigation,Keyboard,Mousewheel} from 'swiper';
-
+import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel} from 'swiper';
 
 
 // styles
@@ -10,11 +8,11 @@ import cn from 'classnames';
 import css from './rooms.module.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
 import "swiper/css/scrollbar";
 
 
 import {Room} from '../../../components/index'
+import {useWindowDimensions} from '../../../hooks/index'
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
@@ -265,34 +263,6 @@ export const rooms: IRooms[] = [
 
 const Rooms: FC = () => {
 
-    // const swiperNavPrevRef = useRef(null)
-    // const swiperNavNextRef = useRef(null)
-
-    function getWindowDimensions() {
-        const {innerWidth: width, innerHeight: height} = window;
-        return {
-            width,
-            height,
-        };
-    }
-
-    function useWindowDimensions() {
-        const [windowDimensions, setWindowDimensions] = useState(
-            getWindowDimensions()
-        );
-
-        useEffect(() => {
-            function handleResize() {
-                setWindowDimensions(getWindowDimensions());
-            }
-
-            window.addEventListener("resize", handleResize);
-            return () => window.removeEventListener("resize", handleResize);
-        }, []);
-
-        return windowDimensions;
-    }
-
     const {width} = useWindowDimensions();
     return <div className={cn(css.wrapper)}>
 
@@ -344,7 +314,6 @@ const Rooms: FC = () => {
                                          virtualIndex={room.id}
                             >
                                 <Room room={room} key={room.id}/>
-
                             </SwiperSlide>
                         )}
                     </ul>

@@ -27,14 +27,6 @@
     overflow: auto;
     padding: 10px 50px 10px 10px;
     border-radius: 10px;
-
-    //&::before,
-    //&::after{
-    //  content: '';
-    //  width: 1px;
-    //  height: 100%;
-    //  background-color: black;
-    //}
   }
 }
 
@@ -73,31 +65,3 @@
     box-shadow: -10px 0 30px 10px rgba(176, 176, 176, 0.4);
   }
 }
-
-//.swiper_next,
-//.swiper-prev{
-//  top: 50%;
-//  position: absolute;
-//  transform: translateY(-50%);
-//  width: 30px;
-//  height: 30px;
-//  z-index: 1;
-//  cursor: pointer;
-//  background-repeat: no-repeat;
-//  background-size: contain;
-//  background-position: center;
-//}
-//
-//.swiper-prev{
-//  left: 0;
-//  background-image: url('../../../assets/images/icons/arrow-left.svg');
-//}
-//.swiper_next{
-//  right: 0;
-//  background-image: url('../../../assets/images/icons/arrow-right.svg');
-//}
-
-//.swiper-button-next,
-//.swiper-button-prev{
-//  color: aqua !important;
-//}

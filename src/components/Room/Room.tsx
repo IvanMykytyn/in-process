@@ -53,7 +53,7 @@ const Room: FC<RoomProps> = ({room}) => {
                         )}
                 </ul>
                 <div className={cn(css.pre_btn)}>
-                    <Link to={'/dashboard/bookig_form_page'} >
+                    <Link to={'/dashboard/bookig-form'} >
                         <button className={cn(css.pre_btn__btn)}>Book</button>
                     </Link>
                 </div>
