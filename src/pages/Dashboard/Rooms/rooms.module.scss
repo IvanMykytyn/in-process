@@ -55,7 +55,7 @@
     height: 90%;
     position: absolute;
     left: -5px;
-    box-shadow: 10px 0 30px 10px #b0b0b0;
+    box-shadow: 10px 0 30px 10px rgba(176, 176, 176, 0.5);
   }
 
   &__swiperslide {
@@ -70,7 +70,7 @@
     position: absolute;
     right: -5px;
     bottom: 0;
-    box-shadow: -10px 0 30px 10px #b0b0b0;
+    box-shadow: -10px 0 30px 10px rgba(176, 176, 176, 0.4);
   }
 }
 

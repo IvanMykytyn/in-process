@@ -1,7 +1,9 @@
 import {FC, useRef, useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 // import { Navigation, Scrollbar } from 'swiper';
-import SwiperCore, {Scrollbar, Navigation} from 'swiper';
+import SwiperCore, {Scrollbar, Navigation,Keyboard,Mousewheel} from 'swiper';
+
+
 
 // styles
 import cn from 'classnames';
@@ -15,6 +17,7 @@ import "swiper/css/scrollbar";
 import {Room} from '../../../components/index'
 
 SwiperCore.use([Scrollbar]);
+SwiperCore.use([Keyboard, Mousewheel]);
 
 interface InstrumentsProps {
     id: string
@@ -300,12 +303,12 @@ const Rooms: FC = () => {
                 </div>
                 <Swiper
                     className={cn(css.my_swiper)}
-                    loop={true}
                     navigation={true}
                     slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
                     modules={[Navigation]}
                     spaceBetween={25}
                     scrollbar={{draggable: true}}
+                    mousewheel={true}
                 >
                     <ul className={cn(css.room_container__rooms)}>
                         {rooms.filter(room => room.floor === 1).map(room =>
@@ -327,12 +330,12 @@ const Rooms: FC = () => {
                 </div>
                 <Swiper
                     className={cn(css.my_swiper)}
-                    loop={true}
                     navigation={true}
                     slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
                     modules={[Navigation]}
                     spaceBetween={25}
                     scrollbar={{draggable: true}}
+                    mousewheel={true}
                 >
                     <ul className={cn(css.room_container__rooms)}>
                         {rooms.filter(room => room.floor === 2).map(room =>
