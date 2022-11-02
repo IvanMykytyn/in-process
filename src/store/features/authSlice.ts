@@ -2,7 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from 'store';
 
 // thunk
-import { loginUser, getAccessUser, signUpUser, logoutUser } from 'store/thunk';
+import {
+  loginUser,
+  getAccessUser,
+  signUpUser,
+  logoutUser,
+  addUsers,
+} from 'store/thunk';
 
 import { addToLocalStorage, removeFromLocalStorage } from 'utils';
 import { NotifyService } from 'services';
@@ -85,6 +91,22 @@ export const authSlice = createSlice({
     builder.addCase(getAccessUser.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload?.message ?? 'Something went Wrong';
+      NotifyService.error(state.error);
+    });
+
+    // add Users Admin
+    builder.addCase(addUsers.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(addUsers.fulfilled, (state) => {
+      state.isLoading = false;
+      NotifyService.success(`Users Successfully added`);
+    });
+
+    builder.addCase(addUsers.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload?.message ?? 'Add Users Failed.';
       NotifyService.error(state.error);
     });
 

@@ -90,7 +90,9 @@ $errorTextColor: #d32f2f;
     position: absolute;
     right: 5px;
   }
-
+  .MuiFormLabel-filled{
+    display: none;
+  }
   // when full size of the div
   &__full-width {
     width: 100%;

@@ -10,8 +10,9 @@ export default {
 interface Props {
     label: string;
     children: string;
-    variant: boolean;
+    isPressed: boolean;
     loading: boolean
+    variant: string
 }
 
 const Template: Story<Props> = (args) => <Button type={'button'} {...args}/>;
@@ -20,14 +21,14 @@ export const Default = Template.bind({});
 
 Default.args = {
     children: 'Default',
-    variant: false,
+    isPressed: false,
 };
 
 export const Pressed = Template.bind({});
 
 Pressed.args = {
     children: 'Pressed',
-    variant: true,
+    isPressed: true,
 };
 
 export const Loading = Template.bind({});
@@ -35,5 +36,13 @@ export const Loading = Template.bind({});
 Loading.args = {
     children: 'Loading',
     loading: true,
-    variant: true,
+    isPressed: true,
+};
+
+export const Contained = Template.bind({});
+
+Contained.args = {
+    children: 'Contained',
+    isPressed: false,
+    variant: 'contained'
 };

@@ -12,7 +12,7 @@ import login from 'assets/images/icons/login.png';
 import { Input, Button } from 'components';
 import { loginValidator } from './login.validators';
 import { FormLayout } from 'pages';
-import {  selectUser } from 'store';
+import { selectUser } from 'store';
 import { loginUser } from 'store/thunk';
 import { UserLoginProps } from 'models';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -79,7 +79,7 @@ const Login: FC = () => {
           </Link>
         </label>
 
-        <Button type={'submit'} fullWidth>
+        <Button type={'submit'} fullWidth disabled={isLoading} loading={isLoading}>
           Login
         </Button>
 

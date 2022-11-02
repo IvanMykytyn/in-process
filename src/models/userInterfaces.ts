@@ -16,6 +16,11 @@ type UserLoginProps = UserEmailField & UserPasswordField;
 type UserSignUpProps = UserFields & UserPasswordField & UserIdField;
 // type UserUpdateProps = UserFields;
 
+interface changePasswordProps {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
 interface ResetPasswordProps {
   id: string;
   token: string;
@@ -30,10 +35,12 @@ type UserWithToken = User & { access_token: string };
 
 export type {
   User,
+  UserFields,
   UserLoginProps,
   UserSignUpProps,
   UserEmailField,
   ResetPasswordProps,
-  UserWithToken
+  UserWithToken,
+  changePasswordProps,
   // UserUpdateProps,
 };
