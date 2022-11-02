@@ -27,16 +27,6 @@
     overflow: auto;
     padding: 10px 50px 10px 10px;
     border-radius: 10px;
-
-    &::-webkit-scrollbar-track {
-      background: aqua;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: blue; /* цвет бегунка */
-      border-radius: 20px; /* округлось бегунка */
-      border: 3px solid orange; /* отступ вокруг бегунка */
-    }
   }
 }
 
@@ -45,12 +35,33 @@
   grid-gap: 15px;
 }
 
-//::-webkit-scrollbar-track {
-//  background: aqua;
-//}
-//
-//::-webkit-scrollbar-thumb {
-//  background-color: blue; /* цвет бегунка */
-//  border-radius: 20px; /* округлось бегунка */
-//  border: 3px solid orange; /* отступ вокруг бегунка */
-//}
+.my_swiper {
+  width: 100%;
+  padding: 5px;
+  position: relative;
+  border-radius: 10px;
+
+  &::before{
+    content: '';
+    width: 1px;
+    height: 90%;
+    position: absolute;
+    left: -5px;
+    box-shadow: 10px 0 30px 10px rgba(176, 176, 176, 0.5);
+  }
+
+  &__swiperslide {
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
+    --webkit-transform: translateZ(0);
+  }
+  &::after{
+    content: '';
+    width: 1px;
+    height: 90%;
+    position: absolute;
+    right: -5px;
+    bottom: 0;
+    box-shadow: -10px 0 30px 10px rgba(176, 176, 176, 0.4);
+  }
+}
