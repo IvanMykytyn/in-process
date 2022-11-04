@@ -29,6 +29,7 @@ $calendarHeaderHeight: 35px;
 
       background: $lightGray800;
 
+      position: relative;
       display: flex;
       align-items: center;
 
@@ -58,16 +59,29 @@ $calendarHeaderHeight: 35px;
   }
 }
 
+.angle-blank {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: $leftBarWidth + 4px;
+  height: $calendarHeaderHeight;
+  border-radius: 5px 0 0 0;
+  border: $border500;
+  background: $lightGray800;
+
+  z-index: 7;
+}
+
 .time-grid__container {
   height: 100%;
   width: 100%;
   background: $lightGray700;
 
-  padding-top: 11.75px;
+  // (24 - 2) / 2 
+  padding-top: 11px;
 
   border-right: $border500;
   display: flex;
   flex-direction: column;
   position: relative;
-
 }

@@ -19,3 +19,12 @@ export const getPreviousDay = (currentDate: Moment) => {
 export const getNextDay = (currentDate: Moment) => {
   return currentDate.add(1, 'days');
 };
+
+export const getDiffInMinutes = (startDate: Moment, endDate: Moment): number => {
+  return endDate.diff(startDate, 'minutes');
+};
+
+export const getTimeFromDate = (currentDate: Moment): string => {
+  const format = 'HH:mm';
+  return currentDate.format(format);
+};

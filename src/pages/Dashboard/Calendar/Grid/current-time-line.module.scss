@@ -1,0 +1,29 @@
+@import 'styles/global.module';
+
+
+$lineColor:  $lightBlue500;
+
+.current-time-line {
+  position: absolute;
+  right:-2px;
+  left: 5px;
+  z-index: 6;
+  
+  height: 3px;
+  background: $lineColor;
+
+  &::before{
+    content: '';
+    position: absolute;
+    z-index: 6;
+    left: -12.5px;
+    top: -5px;
+
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+    background: $lineColor;
+  }
+  
+}

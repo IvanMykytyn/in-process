@@ -1,0 +1,170 @@
+@import 'styles/global.module';
+
+$leftBarWidth: 55px;
+$calendarHeaderHeight: 35px;
+$roomWidth: 140px;
+
+.grid-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  &__events {
+    z-index: 5;
+    top: 11px;
+  }
+
+  &__columns {
+    z-index: 5;
+    display: flex;
+    .grid-column {
+      width: $roomWidth;
+      border-right: $border300;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
+
+$eventBorderRadius: 5px;
+
+.event__container {
+  position: absolute;
+
+  background: $background;
+  width: $roomWidth;
+
+  border-radius: $eventBorderRadius;
+  //TODO Design: try to make shadow less bright
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+
+    z-index: -1;
+    border-radius: $eventBorderRadius;
+    box-shadow: $outerBoxShadow;
+  }
+}
+
+.event {
+  position: relative;
+  overflow: hidden;
+
+  height: 100%;
+  padding: 5px 10px;
+
+  border-radius: $eventBorderRadius;
+  // z-index: 8;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+
+    z-index: -1;
+    // background: rgba(255, 0, 0, 0.495);
+    border-radius: $eventBorderRadius;
+    // box-shadow: $outerBoxShadow;
+    filter: drop-shadow($outerBoxShadow);
+  }
+
+  &__colored-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    border-radius: $eventBorderRadius 0 0 $eventBorderRadius;
+  }
+
+  &__header {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  &__description {
+    font-size: 0.7rem;
+    font-weight: 400;
+    padding-top: 5px;
+
+    @include threeDotsOnOverflow(2);
+  }
+}
+
+.event {
+  overflow: hidden;
+  div[data-size='small'] {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+
+    .event__header {
+      @include threeDotsOnOverflow(1);
+    }
+  }
+
+  div[data-size='medium'] {
+    .event__header {
+      @include threeDotsOnOverflow(2);
+    }
+  }
+  div[data-size='large'] {
+    .event__header {
+      font-size: 0.85rem;
+      @include threeDotsOnOverflow(3);
+    }
+  }
+
+  div[data-size='ultra-large'] {
+    .event__header {
+      font-size: 0.85rem;
+      @include threeDotsOnOverflow(4);
+    }
+    .event__description {
+      font-size: 0.8rem;
+      @include threeDotsOnOverflow(6);
+    }
+  }
+}
+
+.clock {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  opacity: 0.8;
+
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 0;
+  img {
+    width: 12px;
+    height: 12px;
+  }
+  p {
+    padding-top: 1px;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: $textColor700;
+  }
+}
+
+.event-popover {
+  width: 350px;
+  height: 200px;
+  font-size: 2rem;
+}

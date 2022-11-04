@@ -24,8 +24,8 @@ $calendarHeaderHeight: 35px;
 
 .time-number {
   width: 100%;
-  height: 25px;
-  max-height: 25px;
+  height: 24px;
+  max-height: 24px;
   @include centerDiv();
 
   &.hour {
@@ -92,7 +92,7 @@ $calendarHeaderHeight: 35px;
 // Time Grid
 
 .time-cell-row {
-  height: 25px;
+  height: 24px;
 
   width: 100%;
 
