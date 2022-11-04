@@ -226,7 +226,7 @@ const SideBar: FC = () => {
                 <div className={scss.inner}>
                     <span className={isOpenMenu ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15}/>
-                        <Moment locale={'uk'} format={'LLL'} interval={1000}/>
+                        <Moment locale={'uk'} local={true} format={`LLL`} interval={30000}/>
                     </span>
                     <ul className={isOpenMenu ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                         {

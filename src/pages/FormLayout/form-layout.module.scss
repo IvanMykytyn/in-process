@@ -3,7 +3,8 @@
 .form-layout {
   padding: 75px;
   @include centerDiv;
-  
+  height: 100vh;
+
   &__wrapper {
     display: flex;
     align-items: center;
@@ -13,7 +14,7 @@
     border-radius: 15px;
     box-shadow: $outerBoxShadow;
     position: relative;
-  background: $background;
+    background: $background;
 
   }
 

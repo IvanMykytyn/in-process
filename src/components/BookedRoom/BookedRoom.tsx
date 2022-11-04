@@ -38,10 +38,12 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
                     </span>
                 </li>
                 <li className={css.booked__info}>
-                    <img src={clock} alt="Time" height={15} width={15}/>
+                    <img src={clock} alt={"Time"} height={15} width={15}/>
                     {
                         milliseconds >= 0 ?
-                            <Moment fromNow ago interval={1000}>{getRoomDateTime}</Moment>
+                            <Moment fromNow ago interval={15000}>
+                                {getRoomDateTime}
+                            </Moment>
                             :
                             "It's on now"
                     }

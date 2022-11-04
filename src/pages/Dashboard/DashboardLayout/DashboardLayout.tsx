@@ -21,28 +21,28 @@ const DashboardLayout: FC = () => {
                         </div>
                         <ul className={cn(css.bookmarks)}>
                             <li className={cn(css.bookmarks__item)}>
-                                <button className={cn(css.bookmarks__btn)}
-                                        type={'button'}>
-                                    <Link to={'/dashboard/calendar'}>
+                                <Link to={'/dashboard/calendar'}>
+                                    <button className={cn(css.bookmarks__btn)}
+                                            type={'button'}>
                                         Calendar
-                                    </Link>
-                                </button>
+                                    </button>
+                                </Link>
                             </li>
                             <li className={cn(css.bookmarks__item)}>
-                                <button className={cn(css.bookmarks__btn)}
-                                        type={'button'}>
-                                    <Link to={'/dashboard/timeline'}>
+                                <Link to={'/dashboard/timeline'}>
+                                    <button className={cn(css.bookmarks__btn)}
+                                            type={'button'}>
                                         Timeline
-                                    </Link>
-                                </button>
+                                    </button>
+                                </Link>
                             </li>
                             <li className={cn(css.bookmarks__item)}>
-                                <button className={cn(css.bookmarks__btn)}
-                                        type={'button'}>
-                                    <Link to={'/dashboard/map'}>
+                                <Link to={'/dashboard/map'}>
+                                    <button className={cn(css.bookmarks__btn)}
+                                            type={'button'}>
                                         Map
-                                    </Link>
-                                </button>
+                                    </button>
+                                </Link>
                             </li>
                         </ul>
                     </div>
