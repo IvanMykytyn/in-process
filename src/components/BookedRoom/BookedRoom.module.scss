@@ -33,11 +33,27 @@
       width: 5px;
       height: 100%;
       border-radius: 5px 0 0 5px;
-      background-color: #e23d28f4;;
+      background-color: #e23d28f4;
       position: absolute;
       left: 0;
       top: 0;
-      box-shadow: 0 0 7px #e23d28f4;;
+      box-shadow: 0 0 7px #e23d28f4;
+    }
+  }
+
+  &__item.glowing {
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 5px;
+      height: 100%;
+      border-radius: 5px 0 0 5px;
+      position: absolute;
+      background-color: inherit;
+      left: 0;
+      top: 0;
+      animation: glowing 1300ms infinite;
     }
   }
 
@@ -81,5 +97,20 @@
     display: flex;
     align-items: center;
     grid-gap: 10px;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-color: $primaryColor;
+    box-shadow: 0 0 5px $primaryColor;
+  }
+  50% {
+    background-color: $lightBlue;
+    box-shadow: 0 0 15px $lightBlue;
+  }
+  100% {
+    background-color: $primaryColor;
+    box-shadow: 0 0 5px $primaryColor;
   }
 }

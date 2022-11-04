@@ -6,6 +6,7 @@ import {clock, calendar, staffIcon, board, tv, marker} from '../../assets/images
 
 import {Data} from "components/SideBar/SideBar";
 import {tools} from '../../utils/tools'
+import Moment from "react-moment";
 
 interface Props {
     room: Data;
@@ -16,14 +17,14 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
     const getCurrentDateTime = moment();
     const getRoomDateTime = moment(`${date} ${time.hours}:${time.minuts}:00`);
 
-    const minutes = getRoomDateTime.diff(getCurrentDateTime, 'minutes');
-    const hours = getRoomDateTime.diff(getCurrentDateTime, 'hours');
-    const days = getRoomDateTime.diff(getCurrentDateTime, 'days');
-    const months = getRoomDateTime.diff(getCurrentDateTime, 'months');
-
+    const milliseconds = getRoomDateTime.diff(getCurrentDateTime, 'millisecond');
 
     return (
-        <ul className={minutes > 0 ? `${css.booked__item}` : `${css.booked__item} ${css.red}`}>
+        <ul className={milliseconds > 0 ?
+            `${css.booked__item}`
+            :
+            `${css.booked__item} ${css.glowing}`
+        }>
             <li className={css.booked__info}>
                 <div>
                     Room {room}
@@ -37,62 +38,14 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
                     </span>
                 </li>
                 <li className={css.booked__info}>
-                    <img src={clock} alt="Time" height={15} width={15}/>
+                    <img src={clock} alt={"Time"} height={15} width={15}/>
                     {
-                        minutes <= 0 ?
-                            <span>
-                                It's already started
-                            </span>
+                        milliseconds >= 0 ?
+                            <Moment fromNow ago interval={15000}>
+                                {getRoomDateTime}
+                            </Moment>
                             :
-                            ''
-                    }
-                    {
-                        minutes < 60 && minutes > 0 ?
-                            <span>
-                               {minutes > 1 ?
-                                   `In ${minutes} Minutes`
-                                   :
-                                   `In ${months} Month`
-                               }
-                            </span>
-                            :
-                            ''
-                    }
-                    {
-                        hours < 24 && hours > 0 ?
-                            <span>
-                             {hours > 1 ?
-                                 `In ${hours} Hours`
-                                 :
-                                 `In ${hours} Hour`
-                             }
-                            </span>
-                            :
-                            ''
-                    }
-                    {
-                        days < 31 && days > 0 ?
-                            <span>
-                            {days > 1 ?
-                                `In ${days} Days`
-                                :
-                                `In ${days} Day`
-                            }
-                            </span>
-                            :
-                            ''
-                    }
-                    {
-                        months <= 12 && months > 0 ?
-                            <span>
-                            {months > 1 ?
-                                `In ${months} Months`
-                                :
-                                `In ${months} Month`
-                            }
-                            </span>
-                            :
-                            ''
+                            "It's on now"
                     }
                 </li>
             </ul>

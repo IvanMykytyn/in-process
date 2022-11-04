@@ -10,6 +10,7 @@ import scss from './sidebar.module.scss';
 
 import {setting, user, clock} from '../../assets/images/icons';
 import {BookedRoom} from 'components/BookedRoom/BookedRoom';
+import Moment from 'react-moment';
 
 interface Instruments {
     id: string,
@@ -99,9 +100,9 @@ const data: Data[] = [
     }, {
         roomId: 'room 4',
         answer: {
-            date: '2022-11-04',
+            date: '2022-11-03',
             time: {
-                hours: 18,
+                hours: 14,
                 minuts: 30
             },
             room: '4',
@@ -141,10 +142,10 @@ const data: Data[] = [
     {
         roomId: 'room 6',
         answer: {
-            date: '2022-11-01',
+            date: '2022-11-03',
             time: {
-                hours: 20,
-                minuts: 30
+                hours: 16,
+                minuts: 20
             },
             room: '6',
             instruments: [
@@ -164,8 +165,8 @@ const data: Data[] = [
         answer: {
             date: '2022-11-03',
             time: {
-                hours: 12,
-                minuts: 10
+                hours: 17,
+                minuts: 0
             },
             room: '7',
             instruments: [
@@ -182,7 +183,7 @@ const data: Data[] = [
     },
 ];
 
-const SideBar:FC = () => {
+const SideBar: FC = () => {
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true);
     const [selected, setSelected] = useState<number | null>(null);
 
@@ -190,7 +191,6 @@ const SideBar:FC = () => {
         setIsOpenMenu(!isOpenMenu);
     };
     //TO DO MOMENT.js
-    const mainClock = moment().format('LLL');
 
     const roomsTimeSort = data && data.sort((a, b) =>
         Number(moment(`${a.answer.date} ${a.answer.time.hours}:${a.answer.time.minuts}:00`))
@@ -226,7 +226,7 @@ const SideBar:FC = () => {
                 <div className={scss.inner}>
                     <span className={isOpenMenu ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15}/>
-                        {mainClock}
+                        <Moment locale={'uk'} local={true} format={`LLL`} interval={30000}/>
                     </span>
                     <ul className={isOpenMenu ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                         {
