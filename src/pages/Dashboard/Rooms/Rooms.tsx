@@ -1,6 +1,7 @@
 import {FC, useRef, useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel} from 'swiper';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 
 // styles
@@ -11,8 +12,9 @@ import 'swiper/css/navigation';
 import "swiper/css/scrollbar";
 
 
-import {Room} from '../../../components/index'
-import {useWindowDimensions} from '../../../hooks/index'
+import {Room, Dropdown} from '../../../components'
+import {useWindowDimensions} from '../../../hooks'
+import {DropdownMultiSelect} from "../../../components/Dropdown/DropdownMultiSelect";
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
@@ -30,6 +32,11 @@ export interface IRooms {
     maxCapacity: number;
     office: number;
     equipment: InstrumentsProps[];
+}
+
+export interface IFilters {
+    id: number,
+    name: string
 }
 
 export const rooms: IRooms[] = [
@@ -261,7 +268,66 @@ export const rooms: IRooms[] = [
     },
 ]
 
+// export const capacity: IFilters[] = [
+//     {
+//     id: 1,
+//     name: '5-10'
+//     },
+//     {
+//         id: 2,
+//         name: '10-20'
+//     },
+//     {
+//         id: 3,
+//         name: '20-30'
+//     }
+//     ]
+export const filterItems: IFilters[]=[
+    {
+        id: 0,
+        name: '5-10 capacity'
+    },
+    {
+        id: 1,
+        name: '10-20 capacity'
+    },
+    {
+        id: 2,
+        name: '20-30 capacity'
+    },
+    {
+        id: 3,
+        name: 'board'
+    },
+    {
+        id: 4,
+        name: 'tv'
+    },
+    {
+        id: 5,
+        name: 'marker'
+    },
+    {
+        id: 6,
+        name: 'sockets'
+    },
+    {
+        id: 7,
+        name: 'window'
+    },
+    {
+        id: 8,
+        name: 'conditioner'
+    }
+]
+
 const Rooms: FC = () => {
+
+    const [selected, setSelected] = useState('')
+    const [items,setItems]=useState([])
+    useEffect(()=>{
+        // setItems(rooms)
+    },[])
 
     const {width} = useWindowDimensions();
     return <div className={cn(css.wrapper)}>
@@ -269,7 +335,28 @@ const Rooms: FC = () => {
         <ul className={cn(css.room_container)}>
             <li className={cn(css.floor)}>
                 <div className={cn(css.room_container__floor)}>
-                    1-st floor
+                    <span className={cn(css.room_container__span)}>1-st floor</span>
+                    <div className={cn(css.filter)}>
+                        <StyledEngineProvider injectFirst>
+                            <DropdownMultiSelect arr={filterItems} value={'Filter'}/>
+                        </StyledEngineProvider>
+                        {/*<StyledEngineProvider injectFirst>*/}
+                        {/*    <DropdownMultiSelect arr={eguipment} value={'Equipment'}/>*/}
+                        {/*</StyledEngineProvider>*/}
+
+                        {/*Filter by :*/}
+                        {/*<Dropdown selected={selected}*/}
+                        {/*          setSelected={setSelected}*/}
+                        {/*          arr={capacity}*/}
+                        {/*          value={'Capaсity'}*/}
+                        {/*/>*/}
+                        {/*<Dropdown selected={selected}*/}
+                        {/*          setSelected={setSelected}*/}
+                        {/*          arr={eguipment}*/}
+                        {/*          value={'Equipment'}*/}
+                        {/*/>*/}
+                    </div>
+
                 </div>
                 <Swiper
                     className={cn(css.my_swiper)}
@@ -296,7 +383,28 @@ const Rooms: FC = () => {
 
             <li className={cn(css.floor)}>
                 <div className={cn(css.room_container__floor)}>
-                    2-nd floor
+                    <span className={cn(css.room_container__span)}>2-nd floor</span>
+                    <div className={cn(css.filter)}>
+                        <StyledEngineProvider injectFirst>
+                            <DropdownMultiSelect arr={filterItems} value={'Filter'}/>
+                        </StyledEngineProvider>
+                        {/*<StyledEngineProvider injectFirst>*/}
+                        {/*    <DropdownMultiSelect arr={eguipment} value={'Equipment'}/>*/}
+                        {/*</StyledEngineProvider>*/}
+
+                        {/*Filter by :*/}
+                        {/*<Dropdown selected={selected}*/}
+                        {/*          setSelected={setSelected}*/}
+                        {/*          arr={capacity}*/}
+                        {/*          value={'Capaсity'}*/}
+                        {/*/>*/}
+                        {/*<Dropdown selected={selected}*/}
+                        {/*          setSelected={setSelected}*/}
+                        {/*          arr={eguipment}*/}
+                        {/*          value={'Equipment'}*/}
+                        {/*/>*/}
+                    </div>
+
                 </div>
                 <Swiper
                     className={cn(css.my_swiper)}
@@ -314,6 +422,7 @@ const Rooms: FC = () => {
                                          virtualIndex={room.id}
                             >
                                 <Room room={room} key={room.id}/>
+
                             </SwiperSlide>
                         )}
                     </ul>

@@ -1,0 +1,58 @@
+@import "../../styles/global.module";
+
+.css-2m9kme-MuiFormControl-root{
+  width: 300px;
+  margin: 0;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus{
+  border-radius: 10px;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+  font-family: "Montserrat-Regular", sans-serif;
+}
+
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root{
+  display: none;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+  border: none;
+}
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
+  top: 125px!important;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+  background-color: $containerBackground;
+  box-shadow: $outerBoxShadow;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+  font-family: "Montserrat-Regular", sans-serif;
+  top: -5px;
+  left: 0;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list{
+  background-color: $containerBackground;
+  box-shadow: $innerBoxShadow;
+  border-radius: 15px;
+}
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
+  background-color: $containerBackground;
+  box-shadow: none;
+  border-radius: 15px;
+}
+
+.css-10hburv-MuiTypography-root{
+  font-family: "Montserrat-Regular", sans-serif;
+}
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover {
+  border-radius: 10px!important;
+}
