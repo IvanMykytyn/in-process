@@ -385,9 +385,9 @@ const Rooms: FC = () => {
                 <div className={cn(css.room_container__floor)}>
                     <span className={cn(css.room_container__span)}>2-nd floor</span>
                     <div className={cn(css.filter)}>
-                        <StyledEngineProvider injectFirst>
-                            <DropdownMultiSelect arr={filterItems} value={'Filter'}/>
-                        </StyledEngineProvider>
+                        {/*<StyledEngineProvider injectFirst>*/}
+                        {/*    <DropdownMultiSelect arr={filterItems} value={'Filter'}/>*/}
+                        {/*</StyledEngineProvider>*/}
                         {/*<StyledEngineProvider injectFirst>*/}
                         {/*    <DropdownMultiSelect arr={eguipment} value={'Equipment'}/>*/}
                         {/*</StyledEngineProvider>*/}
