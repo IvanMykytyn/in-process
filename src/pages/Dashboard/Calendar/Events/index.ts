@@ -1,3 +1,3 @@
 export * from './Event';
-export * from './EventPopover';
-export * from './Events';
+export * from './PopoverWrapper';
+export * from './EventsGrid';

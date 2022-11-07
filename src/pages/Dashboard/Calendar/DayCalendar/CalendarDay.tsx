@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 // styles
 import scss from './calendar-day.module.scss';
 
@@ -7,15 +7,9 @@ import { EventRenderRange } from '@fullcalendar/react';
 import { CalendarTableProps, getIsCurrentDate } from '../utils';
 import { dayCalendarWidth } from '../constants';
 
-import {
-  TimeGridLeftBar,
-  TimeGrid,
-  GridColumns,
-  CurrentTimeLine,
-} from '../Grid';
-import { Events } from '../Events';
+import { TimeGridLeftBar, TimeGrid, GridColumns, CurrentTimeLine } from '../Grid';
+import { EventsGrid } from '../Events';
 import { CalendarDayHeader } from './CalendarDayHeader';
-
 
 const CalendarDay: FC<CalendarTableProps & { events: EventRenderRange[] }> = ({
   events,
@@ -23,9 +17,14 @@ const CalendarDay: FC<CalendarTableProps & { events: EventRenderRange[] }> = ({
 }) => {
   const isCurrentDate = getIsCurrentDate(currentDate);
 
+  const calendarContainerRef = useRef<null | HTMLDivElement>(null);
+  useEffect(() => {
+    calendarContainerRef?.current?.scrollTo({ left: 0 });
+  }, []);
+
   return (
     <div className={scss['calendar-table-day']}>
-      <div className={scss['calendar-container']}>
+      <div ref={calendarContainerRef} className={scss['calendar-container']}>
         <CalendarDayHeader />
 
         <div className={scss['calendar-table']} style={{ width: dayCalendarWidth }}>
@@ -33,7 +32,7 @@ const CalendarDay: FC<CalendarTableProps & { events: EventRenderRange[] }> = ({
           <div className={scss['time-grid__container']}>
             <TimeGrid />
             <GridColumns />
-            <Events events={events} />
+            <EventsGrid events={events} />
 
             {isCurrentDate && <CurrentTimeLine />}
           </div>

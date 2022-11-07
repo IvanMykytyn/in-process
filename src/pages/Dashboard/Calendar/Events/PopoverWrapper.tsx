@@ -1,21 +1,19 @@
 import { Popover } from '@mui/material';
 import { SetStateType } from 'models';
-import React, { FC, useState } from 'react';
-import { Event } from 'utils';
+import { FC } from 'react';
 import { EventProps } from '../constants';
-import scss from './events.module.scss';
-import { PopoverContent } from './PopoverContent';
+import { PopoverEvent } from './PopoverEvent';
 
-type EventPopoverProps = {
+type PopoverWrapperProps = {
   id: 'simple-popover' | undefined;
   open: boolean;
   anchorEl: HTMLButtonElement | null;
   setAnchorEl: SetStateType<HTMLButtonElement | null>;
-  event: Event | EventProps;
+  event: EventProps;
   // handleClose: () => void;
 };
 
-const EventPopover: FC<EventPopoverProps> = ({
+const PopoverWrapper: FC<PopoverWrapperProps> = ({
   id,
   open,
   anchorEl,
@@ -40,9 +38,9 @@ const EventPopover: FC<EventPopoverProps> = ({
         horizontal: 'right',
       }}
     >
-      <PopoverContent handleClose={handleClose} event={event} />
+      <PopoverEvent handleClose={handleClose} event={event} />
     </Popover>
   );
 };
 
-export { EventPopover };
+export { PopoverWrapper };

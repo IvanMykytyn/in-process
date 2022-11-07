@@ -18,6 +18,8 @@ import trash from './trash.svg';
 import details from './details.svg';
 import people from './people.svg';
 import creator from './creator.svg';
+import location from './location.svg';
+import room from './room.svg';
 
 export {
   keyIcon,
@@ -40,4 +42,6 @@ export {
   details,
   people,
   creator,
+  location,
+  room,
 };

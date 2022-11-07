@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import { Event, rooms } from 'utils';
+import { rooms } from 'utils';
+import { Booking } from 'models';
 
 const roomWidth = 140;
 const blankAngleWidth = 60;
@@ -25,9 +26,10 @@ const totalCells = Array.from(
 const totalColumns = Array.from({ length: countOfRooms }, (_, i) => uuidv4());
 const clockHours = Array.from({ length: countOfHoursInADay }, (_, i) => i);
 
-interface EventProps extends Omit<Event, 'startDate' | 'endDate'> {
-  startDate: Moment;
-  endDate: Moment;
+interface EventProps extends Omit<Booking, 'start' | 'end'> {
+  start: Moment;
+  end: Moment;
+  color: string;
 }
 
 export {

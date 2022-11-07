@@ -1,2 +1,3 @@
-export * from './generalInterfaces'
-export * from './userInterfaces'
+export * from './general';
+export * from './user';
+export * from './booking';

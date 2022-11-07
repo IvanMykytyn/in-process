@@ -1,6 +1,6 @@
 import moment, { Moment } from 'moment';
 import 'moment/min/locales';
-moment.locale();
+moment.locale('en-gb');
 
 export const getDate = (date: Moment) => {
   const year = date.year();
@@ -27,4 +27,8 @@ export const getDiffInMinutes = (startDate: Moment, endDate: Moment): number => 
 export const getTimeFromDate = (currentDate: Moment): string => {
   const format = 'HH:mm';
   return currentDate.format(format);
+};
+
+export const getFullDateRange = (start: Moment, end: Moment) => {
+  return `${start.format('LLLL')} - ${getTimeFromDate(end)}`;
 };

@@ -1,20 +1,24 @@
 import { FC, useState } from 'react';
 
+import cn from 'classnames';
 import scss from './events.module.scss';
+import '../FullCalendarComponents/build-event.styles.scss';
 
-import { getTimeFromDate, stringToColor, rooms } from 'utils';
+import { getTimeFromDate, rooms } from 'utils';
 import { clock } from 'assets/images/icons';
 
 import { EventProps } from '../constants';
 import { getEventPosition } from '../utils';
-import { EventPopover } from './EventPopover';
+import { PopoverWrapper } from './PopoverWrapper';
 
-const Event: FC<EventProps> = (eventData) => {
-  const { name } = eventData;
+export interface ExtendedEventProps extends EventProps {
+  viewType: 'day' | 'week' | 'month';
+}
 
-  const lineColor = stringToColor(name ?? '');
+const Event: FC<ExtendedEventProps> = (eventData) => {
+  const { color, viewType } = eventData;
+
   const { styles, currentEventHeight } = getEventPosition(rooms, eventData);
-
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: any) => {
@@ -24,18 +28,24 @@ const Event: FC<EventProps> = (eventData) => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  const isDayViewType = viewType === 'day';
   return (
     <>
-      <div className={scss['event__container']} role={'button'} style={styles} onClick={handleClick}>
+      <div
+        className={cn(scss['event__container'], scss[`${viewType}`])}
+        role={'button'}
+        style={isDayViewType ? styles : {}}
+        onClick={handleClick}
+      >
         <div className={scss['event']}>
           <div
             className={scss['event__colored-line']}
-            style={{ background: lineColor }}
+            style={{ background: color }}
           />
           {eventData && buildEventContentDay(currentEventHeight, eventData)}
         </div>
       </div>
-      <EventPopover
+      <PopoverWrapper
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
         open={open}
@@ -50,12 +60,27 @@ export { Event };
 
 const buildEventContentDay = (
   eventHeight: number,
-  eventData: EventProps
+  eventData: ExtendedEventProps
 ): JSX.Element => {
-  const { name, description, startDate, endDate } = eventData;
+  const { name, description, start, end, viewType } = eventData;
 
-  const startTime = getTimeFromDate(startDate);
-  const endTime = getTimeFromDate(endDate);
+  const startTime = getTimeFromDate(start);
+  const endTime = getTimeFromDate(end);
+
+  const isDayViewType = viewType === 'day';
+  const isMonthViewType = viewType === 'month';
+
+  console.log(eventHeight);
+
+  if (isMonthViewType) {
+    const clockContent = getClockContent(getTimeFromDate(start));
+    return (
+      <div className={scss['event-calendar-content']}>
+        <h3 className={scss['event__month-title']}>{name}</h3>
+        {clockContent}
+      </div>
+    );
+  }
 
   if (eventHeight <= 32) {
     return (
@@ -69,7 +94,7 @@ const buildEventContentDay = (
     return (
       <div data-size={'medium'}>
         <h3 className={scss['event__header']}>{name}</h3>
-        {getClockContent(startTime, endTime)}
+        {isDayViewType && getClockContent(startTime, endTime)}
       </div>
     );
   }
@@ -79,7 +104,7 @@ const buildEventContentDay = (
       <div data-size={'large'}>
         <h3 className={scss['event__header']}>{name}</h3>
         <p className={scss['event__description']}>{description}</p>
-        {getClockContent(startTime, endTime)}
+        {isDayViewType && getClockContent(startTime, endTime)}
       </div>
     );
 
@@ -87,17 +112,18 @@ const buildEventContentDay = (
     <div data-size={'ultra-large'}>
       <h3 className={scss['event__header']}>{name}</h3>
       <p className={scss['event__description']}>{description}</p>
-      {getClockContent(startTime, endTime)}
+      {isDayViewType && getClockContent(startTime, endTime)}
     </div>
   );
 };
 
-const getClockContent = (startTime: string, endTime: string): JSX.Element => {
+const getClockContent = (startTime: string, endTime?: string): JSX.Element => {
   return (
     <div className={scss['clock']}>
       <img src={clock} alt={'clock'} />
       <p>
-        {startTime} - {endTime}
+        {startTime}
+        {endTime && ` - ${endTime}`}
       </p>
     </div>
   );

@@ -1,6 +1,7 @@
 import { SetStateType } from 'models';
+import { Room } from 'models/room';
 import moment, { Moment } from 'moment';
-import { getDate, getDiffInMinutes, Room } from 'utils';
+import { getDate, getDiffInMinutes } from 'utils';
 import { cellHeight, EventProps, roomWidth, TimeSegments } from './constants';
 
 export const getTimeSegments = (index: number): TimeSegments => {
@@ -25,15 +26,15 @@ export const getCurrentEventRoomsPosition = (rooms: Room[], id: string) =>
   rooms.findIndex((item) => item.id === id);
 
 export const getEventPosition = (rooms: Room[], eventData: EventProps) => {
-  const { startDate, endDate } = eventData;
+  const { start, end } = eventData;
 
-  const durationInMinutes = getDiffInMinutes(startDate, endDate);
-  const { hour: startHours, minutes: startMinutes } = getDate(startDate);
+  const durationInMinutes = getDiffInMinutes(start, end);
+  const { hour: startHours, minutes: startMinutes } = getDate(start);
 
   const currentEventPosition = getCurrentEventRoomsPosition(rooms, eventData.roomId);
 
   const currentEventTimePosition = getPixelsFromTop(startMinutes, startHours);
-  const currentEventHeight = getPixelsFromTop(durationInMinutes);
+  const currentEventHeight = Math.abs(getPixelsFromTop(durationInMinutes));
 
   return {
     styles: {

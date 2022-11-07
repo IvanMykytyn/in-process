@@ -13,9 +13,10 @@ const CurrentTimeLine = () => {
   const timeLineRef = useRef<null | HTMLDivElement>(null);
 
   // TODO Scroll to NOW
-  // useEffect(() => {
-  //   timeLineRef?.current?.scrollIntoView({ block: 'center'});
-  // }, []);
+  useEffect(() => {
+    timeLineRef?.current?.scrollIntoView({ block: 'center' });
+    
+  }, []);
 
   // 11px from top
   const styles = {

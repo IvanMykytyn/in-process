@@ -7,11 +7,11 @@ import scss from './events.module.scss';
 
 import { Event } from './Event';
 
-interface EventsProps {
+interface EventsGridProps {
   events: EventRenderRange[];
 }
 
-const Events: FC<EventsProps> = ({ events }) => {
+const EventsGrid: FC<EventsGridProps> = ({ events }) => {
   return (
     <div className={cn(scss['grid-container'], scss['grid-container__events'])}>
       {events.map((event) => {
@@ -19,17 +19,21 @@ const Events: FC<EventsProps> = ({ events }) => {
           def: { publicId, title, extendedProps },
           range: { start, end },
         } = event;
-        const { description, roomId } = extendedProps;
+
+        const { description, roomId, color, users } = extendedProps;
 
         return (
           <Event
             key={publicId}
-            id={publicId}
+            id={parseInt(publicId)}
             name={title}
             description={description}
             roomId={roomId}
-            startDate={moment(start)}
-            endDate={moment(end)}
+            color={color}
+            users={users}
+            start={moment(start)}
+            end={moment(end)}
+            viewType={'day'}
           />
         );
       })}
@@ -37,4 +41,4 @@ const Events: FC<EventsProps> = ({ events }) => {
   );
 };
 
-export { Events };
+export { EventsGrid };
