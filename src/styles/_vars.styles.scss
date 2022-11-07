@@ -1,21 +1,34 @@
-$default: #000000;
-$background: #dcdcdc;
-$containerBackground: #dcdcdc;
-$primaryColor: #568cc5;
 
-$white: #ffffff;
-$lightGray: #ededed;
-$gray: #b0b0b0;
-$CalendarBntColor: $primaryColor;
-$lightBlue: #568cc580;
+:root {
+  --background: #dcdcdc;
+  --primary-color: #568cc5;
+  --text-color: #b0b0b0;
+  --accent-text-color: #000000A6;
+  --light-blue: #568cc580;
+  --gray: #b0b0b0;
+  --white: #ffffff;
+  --light-gray: #ededed;
+  --container-background: #dcdcdc;
+  --box-shadow-sidebar-btn-color: #B0B0B099;
+  --login-circle: #B0CAE9BF;
+}
 
-$textColor: #ededed;
-//#656565
+[data-theme='dark'] {
+  --background: #333333;
+  --primary-color: #568cc5;
+  --text-color: #878787;
+  --light-blue: #568cc580;
+  --gray: #1E1E1E;
+  --white: #3E3E3E;
+  --light-gray: #ededed;
+  --box-shadow-sidebar-btn-color: rgba(30, 30, 30, 0.7);
+  --accent-text-color: #878787;
+}
 
-$outerBoxShadow: 3px 3px 7px $gray,
--3px -3px 7px #ffffff;
-$innerBoxShadow: inset 3px 3px 7px $gray,
-inset -3px -3px 7px #ffffff;
+$outerBoxShadow: 3px 3px 7px var(--gray),
+-3px -3px 7px var(--white);
+$innerBoxShadow: inset 3px 3px 7px var(--gray),
+inset -3px -3px 7px var(--white);
 
 //:root {
 //  --background: #1d1d1d;

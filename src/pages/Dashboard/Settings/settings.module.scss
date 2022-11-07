@@ -15,8 +15,10 @@
     padding: 0 10px 10px;
     letter-spacing: 1.2px;
   }
+
   &__section {
     padding: 30px 0 15px;
+
     &-body {
       display: flex;
       flex-direction: column;
@@ -29,9 +31,10 @@
 
       hr {
         border: 0;
-        border-bottom: 2.5px solid $gray;
+        border-bottom: 2.5px solid var(--gray);
         border-radius: 5px;
       }
+
       h2 {
         position: absolute;
         top: 5px;
@@ -43,7 +46,7 @@
 
         padding: 0 10px;
 
-        background: $background;
+        background: var(--background);
       }
     }
   }
@@ -54,6 +57,7 @@
     @include gridSeparateContent;
     gap: 20px;
     padding: 5px 0 25px;
+
     &__wrapper {
       display: flex;
       justify-content: flex-end;
@@ -65,9 +69,9 @@
       height: 75px;
       border-radius: 50%;
       padding: 6px;
-      border: 4px solid $lightBlue;
-      box-shadow: 2px 2px 4px $gray, -2px -2px 4px #ffffff, inset 1px 1px 2px $gray,
-        inset -1px -1px 2px #ffffff;
+      border: 4px solid var(--light-blue);
+      box-shadow: 2px 2px 4px var(--gray), -2px -2px 4px var(--white), inset 1px 1px 2px var(--gray),
+      inset -1px -1px 2px var(--white);
     }
   }
 
@@ -82,6 +86,7 @@
       font-size: 1.4rem;
       font-weight: 600;
     }
+
     p {
       font-weight: 600;
       color: #a1a1a1;
@@ -91,6 +96,7 @@
   &-input {
     @include gridSeparateContent;
     gap: 15px;
+
     &__label {
       display: flex;
       justify-content: flex-end;
@@ -101,7 +107,7 @@
       text-transform: capitalize;
     }
 
-    &__multiple{
+    &__multiple {
       width: 80%;
     }
   }
@@ -111,6 +117,7 @@
     @include gridSeparateContent;
 
     padding: 20px 0 0;
+
     div {
       display: flex;
       justify-content: flex-start;
@@ -121,17 +128,20 @@
     }
   }
 }
+
 .section__buttons {
   button {
-    opacity: 0.95;
+    //opacity: 0.95;
     font-size: 1rem;
     min-width: 150px;
+
     span {
       font-weight: 600;
     }
   }
 }
-.section-multiple-input{
+
+.section-multiple-input {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
   gap: 15px

@@ -42,7 +42,7 @@
     position: absolute;
     right: 10px;
     bottom: 10px;
-    background-color: $background;
+    background-color: var(--background);
     opacity: 0.9;
     border-radius: 5px;
     padding: 5px;
@@ -64,8 +64,9 @@
     max-width: 250px;
     padding: 10px 25px;
     border-radius: 15px;
-    background: $background;
-    box-shadow: 3px 3px 7px #b0b0b0, -1px -2px 5px #ffffff;
+    background: var(--background);
+    box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white);
+    color: var(--accent-text-color);
     cursor: pointer;
     transition: 0.5s, text-shadow 0.5s, border 0.5s;
     position: relative;
@@ -74,8 +75,8 @@
     &:focus,
     &:active {
       box-shadow: $innerBoxShadow;
-      color: $primaryColor;
-      text-shadow: $primaryColor 1px 0 50px;
+      color: var(--primary-color);
+      text-shadow: var(--primary-color) 1px 0 50px;
     }
 
     &::after {
@@ -83,8 +84,8 @@
       height: 100%;
       width: 100%;
       background-color: transparent;
-      border: 2px solid $lightBlue;
-      box-shadow: inset 0 0 6px $lightBlue, 0 0 3px $lightBlue;
+      border: 2px solid var(--light-blue);
+      box-shadow: inset 0 0 6px var(--light-blue), 0 0 3px var(--light-blue);
       position: absolute;
       left: 50%;
       top: 50%;
@@ -93,14 +94,13 @@
     }
 
     &:hover {
-
       &::after {
         content: '';
         height: 100%;
         width: 100%;
         background-color: transparent;
-        border: 2px solid $primaryColor;
-        box-shadow: inset 0 0 6px $primaryColor, 0 0 3px $primaryColor;
+        border: 2px solid var(--primary-color);
+        box-shadow: inset 0 0 6px var(--primary-color), 0 0 3px var(--primary-color);
         position: absolute;
         left: 50%;
         top: 50%;

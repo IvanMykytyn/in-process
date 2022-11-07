@@ -31,7 +31,7 @@
 }
 
 .modal__content {
-  background-color: $background;
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
   grid-template-columns: repeat(auto-fill, 30%);
@@ -52,7 +52,7 @@
 }
 
 .bi {
-  color: $primaryColor;
+  color: var(--primary-color);
   height: 25px;
   width: 25px;
 }
@@ -62,8 +62,8 @@
   height: 45px;
   width: 120px;
   border-radius: 15px;
-  background: $background;
-  box-shadow: 3px 3px 7px #b0b0b0, -1px -2px 5px #ffffff;
+  background: var(--background);
+  box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white);
   cursor: pointer;
   transition: color 0.5s, text-shadow 0.5s;
 
@@ -71,7 +71,7 @@
   &:focus,
   &:active {
     box-shadow: $innerBoxShadow;
-    color: $primaryColor;
-    text-shadow: $primaryColor 1px 0 50px;
+    color: var(--primary-color);
+    text-shadow: var(--primary-color) 1px 0 50px;
   }
 }

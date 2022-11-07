@@ -17,11 +17,11 @@
       width: 5px;
       height: 100%;
       border-radius: 5px 0 0 5px;
-      background-color: $primaryColor;
+      background-color: var(--primary-color);
       position: absolute;
       left: 0;
       top: 0;
-      box-shadow: 0 0 7px $primaryColor;
+      box-shadow: 0 0 7px var(--primary-color);
     }
   }
 
@@ -64,6 +64,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
+    color: var(--accent-text-color);
 
     div {
       @extend %montserrat-semi-bold-600;
@@ -74,7 +75,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid var(--gray);
     padding: 0 0 5px 0;
   }
 
@@ -83,7 +84,7 @@
     display: flex;
     align-items: center;
     grid-gap: 5px;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid var(--gray);
     padding: 0 0 5px 0;
   }
 
@@ -102,15 +103,15 @@
 
 @keyframes glowing {
   0% {
-    background-color: $primaryColor;
-    box-shadow: 0 0 5px $primaryColor;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
   }
   50% {
-    background-color: $lightBlue;
-    box-shadow: 0 0 15px $lightBlue;
+    background-color: var(--light-blue);
+    box-shadow: 0 0 15px var(--light-blue);
   }
   100% {
-    background-color: $primaryColor;
-    box-shadow: 0 0 5px $primaryColor;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
   }
 }

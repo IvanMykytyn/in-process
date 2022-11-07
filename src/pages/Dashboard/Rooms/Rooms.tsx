@@ -274,7 +274,7 @@ const Rooms: FC = () => {
                 <Swiper
                     className={cn(css.my_swiper)}
                     navigation={true}
-                    slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
+                    slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
                     modules={[Navigation]}
                     spaceBetween={25}
                     scrollbar={{draggable: true}}
