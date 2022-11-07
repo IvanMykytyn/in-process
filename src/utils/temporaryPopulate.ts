@@ -81,7 +81,7 @@ interface Event {
   name: string;
   description: string;
   roomId: string;
-  startDate: string;
+  startDate: string; 
   endDate: string;
 }
 

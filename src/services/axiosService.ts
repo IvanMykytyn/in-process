@@ -5,7 +5,6 @@ import { baseURL } from 'utils/constants';
 
 const axiosService = axios.create({ baseURL });
 
-
 axiosService.interceptors.request.use(
   (config) => {
     const token = getFromLocalStorage('token');

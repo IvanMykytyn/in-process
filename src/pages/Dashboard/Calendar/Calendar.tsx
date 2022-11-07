@@ -12,7 +12,13 @@ import scssOfEvent from './Events/events.module.scss';
 import scss from './Events/events.module.scss';
 
 import { TimeSlot } from './Grid';
-import { events, getDiffInMinutes, getTimeFromDate, stringToColor } from 'utils';
+import {
+  Event,
+  events,
+  getDiffInMinutes,
+  getTimeFromDate,
+  stringToColor,
+} from 'utils';
 import moment from 'moment';
 import { getPixelsFromTop } from './utils';
 import { clock } from 'assets/images/icons';
@@ -100,9 +106,18 @@ const buildEventContent = (props: EventContentArg) => {
   const durationInMinutes = getDiffInMinutes(start, end);
   const currentEventHeight = getPixelsFromTop(durationInMinutes);
 
+  const event = {
+    id: publicId,
+    name: title,
+    description,
+    roomId,
+    startDate: start,
+    endDate: end,
+  };
+
   if (props.view.type === 'timeGridWeek') {
     return (
-      <EventWrapper id={publicId} title={title}>
+      <EventWrapper event={event}>
         {buildLargeEventBody(currentEventHeight, {
           name: title,
           description: description,
@@ -112,7 +127,7 @@ const buildEventContent = (props: EventContentArg) => {
   }
 
   return (
-    <EventWrapper id={publicId} title={title}>
+    <EventWrapper event={event}>
       {buildSmallEventBody({
         title,
         start,
@@ -122,29 +137,20 @@ const buildEventContent = (props: EventContentArg) => {
 };
 
 interface EventWrapperProps extends PropsWithChildren {
-  id: string;
-  title: string;
+  event: any;
 }
 
-const EventWrapper: FC<EventWrapperProps> = ({ title, id, children }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const lineColor = stringToColor(title ?? '');
+const EventWrapper: FC<EventWrapperProps> = ({ event, children }) => {
+  const { name } = event;
+  const lineColor = stringToColor(name ?? '');
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl((prev) => null);
-    console.log('here');
-    console.log(anchorEl);
-  };
 
   const open = Boolean(anchorEl);
-  console.log(open);
-  const idd = open ? 'simple-popover' : undefined;
-  console.log(idd);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <>
@@ -157,22 +163,13 @@ const EventWrapper: FC<EventWrapperProps> = ({ title, id, children }) => {
         <div className={'event__colored-line'} style={{ background: lineColor }} />
         <>{children}</>
       </div>
-      <Popover
-        id={idd}
-        open={open}
-        onClose={handleClose}
+      <EventPopover
         anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-      >
-        <div className={scss['event-popover']}>The content of the Popover.</div>
-      </Popover>
+        setAnchorEl={setAnchorEl}
+        open={open}
+        id={id}
+        event={event}
+      />
     </>
   );
 };

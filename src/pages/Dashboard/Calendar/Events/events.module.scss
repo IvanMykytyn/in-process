@@ -157,14 +157,98 @@ $eventBorderRadius: 5px;
   }
   p {
     padding-top: 1px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 400;
     color: $textColor700;
   }
 }
 
 .event-popover {
-  width: 350px;
-  height: 200px;
-  font-size: 2rem;
+  width: 400px;
+  min-height: 250px;
+
+  max-height: 400px;
+
+  padding: 10px;
+}
+
+.tools-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.tools-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.edit-icon {
+  cursor: pointer;
+  width: 17px;
+  height: 17px;
+}
+
+.trash-icon {
+  cursor: pointer;
+  height: 22px;
+  width: 22px;
+}
+.exit-icon {
+  cursor: pointer;
+  height: 26px;
+  width: 26px;
+}
+
+.popover-body {
+  padding: 10px 15px;
+  
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.2rem;
+
+  padding-left: 5px;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.date-information {
+  font-size: 0.9rem;
+  padding: 5px 5px 25px;
+}
+
+.content-with-icon {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 7fr);
+}
+.content-icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 3px;
+
+  opacity: 0.7;
+}
+.content-text {
+  font-size: 0.9rem;
+}
+.events-popover-body {
+  position: relative;
+  .event__colored-line {
+    width: 5px;
+    bottom: 0;
+  }
+}
+
+.creator {
+  align-items: center;
+
+  .content-text {
+    padding-top: 4px;
+  }
 }

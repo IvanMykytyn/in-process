@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import scss from './events.module.scss';
 
@@ -7,6 +7,7 @@ import { clock } from 'assets/images/icons';
 
 import { EventProps } from '../constants';
 import { getEventPosition } from '../utils';
+import { EventPopover } from './EventPopover';
 
 const Event: FC<EventProps> = (eventData) => {
   const { name } = eventData;
@@ -14,16 +15,34 @@ const Event: FC<EventProps> = (eventData) => {
   const lineColor = stringToColor(name ?? '');
   const { styles, currentEventHeight } = getEventPosition(rooms, eventData);
 
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
   return (
-    <div className={scss['event__container']} style={styles}>
-      <div className={scss['event']}>
-        <div
-          className={scss['event__colored-line']}
-          style={{ background: lineColor }}
-        />
-        {eventData && buildEventContentDay(currentEventHeight, eventData)}
+    <>
+      <div className={scss['event__container']} role={'button'} style={styles} onClick={handleClick}>
+        <div className={scss['event']}>
+          <div
+            className={scss['event__colored-line']}
+            style={{ background: lineColor }}
+          />
+          {eventData && buildEventContentDay(currentEventHeight, eventData)}
+        </div>
       </div>
-    </div>
+      <EventPopover
+        anchorEl={anchorEl}
+        setAnchorEl={setAnchorEl}
+        open={open}
+        id={id}
+        event={eventData}
+      />
+    </>
   );
 };
 

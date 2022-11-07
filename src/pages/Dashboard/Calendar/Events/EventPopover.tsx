@@ -1,31 +1,36 @@
 import { Popover } from '@mui/material';
 import { SetStateType } from 'models';
 import React, { FC, useState } from 'react';
+import { Event } from 'utils';
+import { EventProps } from '../constants';
 import scss from './events.module.scss';
+import { PopoverContent } from './PopoverContent';
 
 type EventPopoverProps = {
   id: 'simple-popover' | undefined;
   open: boolean;
-  isOpen: HTMLButtonElement | null;
-  setIsOpen: SetStateType<HTMLButtonElement | null>;
-  handleClose: () => void;
+  anchorEl: HTMLButtonElement | null;
+  setAnchorEl: SetStateType<HTMLButtonElement | null>;
+  event: Event | EventProps;
+  // handleClose: () => void;
 };
 
 const EventPopover: FC<EventPopoverProps> = ({
   id,
   open,
-  isOpen,
-  setIsOpen,
-  handleClose,
+  anchorEl,
+  setAnchorEl,
+  event,
 }) => {
-  console.log(open);
-  
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Popover
       id={id}
       open={open}
       onClose={handleClose}
-      anchorEl={isOpen}
+      anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'left',
@@ -35,7 +40,7 @@ const EventPopover: FC<EventPopoverProps> = ({
         horizontal: 'right',
       }}
     >
-      <div className={scss['event-popover']}>The content of the Popover.</div>
+      <PopoverContent handleClose={handleClose} event={event} />
     </Popover>
   );
 };

@@ -12,6 +12,12 @@ import marker from './marker.svg';
 import tv from './tv.svg';
 import plug from './plug.svg';
 import users from './users.svg';
+import edit from './edit.svg';
+import exit from './exit.svg';
+import trash from './trash.svg';
+import details from './details.svg';
+import people from './people.svg';
+import creator from './creator.svg';
 
 export {
   keyIcon,
@@ -28,4 +34,10 @@ export {
   marker,
   users,
   plug,
+  edit,
+  exit,
+  trash,
+  details,
+  people,
+  creator,
 };
