@@ -2,13 +2,13 @@ import React, {FC} from 'react';
 import {Link} from 'react-router-dom';
 
 // styles
-import cn from 'classnames'
-import css from './room.module.scss'
+import cn from 'classnames';
+import css from './room.module.scss';
 
-import {IRooms} from '../../pages/Dashboard/Rooms/Rooms'
-import {Modal, BookingForm} from '../index'
-import {tools} from '../../utils/tools'
-import {users} from '../../assets/images/icons'
+import {IRooms} from '../../models';
+import {Modal, BookingForm} from '../index';
+import {tools} from '../../utils/tools';
+import {users} from '../../assets/images/icons';
 
 interface RoomProps {
     room: IRooms
