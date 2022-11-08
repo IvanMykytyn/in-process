@@ -27,7 +27,7 @@ $calendarHeaderHeight: 35px;
       padding-left: $leftBarWidth;
       border-radius: 5px 5px 0 0;
 
-      background: $lightGray800;
+      background: $lightGray940;
 
       position: relative;
       display: flex;
@@ -67,7 +67,7 @@ $calendarHeaderHeight: 35px;
   height: $calendarHeaderHeight;
   border-radius: 5px 0 0 0;
   border: $border500;
-  background: $lightGray800;
+  background: $lightGray940;
 
   z-index: 7;
 }
@@ -75,7 +75,7 @@ $calendarHeaderHeight: 35px;
 .time-grid__container {
   height: 100%;
   width: 100%;
-  background: $lightGray700;
+  background: $gridBackground;
 
   // (24 - 2) / 2 
   padding-top: 11px;

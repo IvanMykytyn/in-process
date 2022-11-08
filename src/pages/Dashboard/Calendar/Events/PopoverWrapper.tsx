@@ -1,7 +1,7 @@
 import { Popover } from '@mui/material';
 import { SetStateType } from 'models';
 import { FC } from 'react';
-import { EventProps } from '../constants';
+import { ExtendedEventProps } from './Event';
 import { PopoverEvent } from './PopoverEvent';
 
 type PopoverWrapperProps = {
@@ -9,8 +9,7 @@ type PopoverWrapperProps = {
   open: boolean;
   anchorEl: HTMLButtonElement | null;
   setAnchorEl: SetStateType<HTMLButtonElement | null>;
-  event: EventProps;
-  // handleClose: () => void;
+  event: ExtendedEventProps;
 };
 
 const PopoverWrapper: FC<PopoverWrapperProps> = ({

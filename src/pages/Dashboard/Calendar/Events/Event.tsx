@@ -2,7 +2,6 @@ import { FC, useState } from 'react';
 
 import cn from 'classnames';
 import scss from './events.module.scss';
-import '../FullCalendarComponents/build-event.styles.scss';
 
 import { getTimeFromDate, rooms } from 'utils';
 import { clock } from 'assets/images/icons';
@@ -13,6 +12,7 @@ import { PopoverWrapper } from './PopoverWrapper';
 
 export interface ExtendedEventProps extends EventProps {
   viewType: 'day' | 'week' | 'month';
+  remove?: any,
 }
 
 const Event: FC<ExtendedEventProps> = (eventData) => {
@@ -69,8 +69,6 @@ const buildEventContentDay = (
 
   const isDayViewType = viewType === 'day';
   const isMonthViewType = viewType === 'month';
-
-  console.log(eventHeight);
 
   if (isMonthViewType) {
     const clockContent = getClockContent(getTimeFromDate(start));

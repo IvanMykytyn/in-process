@@ -19,6 +19,7 @@ const EventsGrid: FC<EventsGridProps> = ({ events }) => {
           def: { publicId, title, extendedProps },
           range: { start, end },
         } = event;
+        console.log(event);
 
         const { description, roomId, color, users } = extendedProps;
 

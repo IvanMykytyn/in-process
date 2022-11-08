@@ -1,52 +1,46 @@
 $default: #000000;
 $background: #dcdcdc;
 $containerBackground: #dcdcdc;
+$gridBackground: #edededae;
 
-$primaryColor: #568cc5;
-$primaryColor600: #3e6b9b;
+$primaryColor: hsl(211, 49%, 55%);
+$primaryColor400: hsl(211, 43%, 43%);
 
 $white: #ffffff;
 
-$lightGray: #ededed;
-$lightGray100: #b0b0b02f;
-$lightGray200: #b0b0b045;
-$lightGray300: #b0b0b05d;
-// $lightGray100: #b0b0b013;
-// $lightGray200: #b0b0b026;
-// $lightGray300: #b0b0b034;
-$lightGray700: #edededae;
-$lightGray800: #E8E8E8;
-$lightGray900: #d2d2d28a;
+$lightGray: hsl(0, 0%, 93%);
+$lightGray910: hsl(0, 0%, 91%);
+$lightGray940: hsl(0, 0%, 94%);
+
+// p = percent
+$lightGray180p: hsla(0, 0%, 69%, 0.18);
+$lightGray280p: hsla(0, 0%, 69%, 0.28);
+$lightGray370p: hsla(0, 0%, 69%, 0.37);
+
 $gray: #b0b0b0;
 
 $CalendarBntColor: $primaryColor;
 
-$lightBlue: #568cc580;
-$lightBlue100: #8090a02d;
-$lightBlue200: #8090a041;
-$lightBlue300: #7a98b7ae;
-$lightBlue500: #568cc5a1;
-$lightBlue700: #558eca39;
+$lightBlue: hsla(211, 49%, 55%, 0.502);
+$btnBackground: hsla(210, 14%, 56%, 0.255);
+$activeBtnBackground: hsla(210, 30%, 60%, 0.682);
+$nowIndicatorColor: hsla(211, 49%, 55%, 0.631);
 
-$textColor: #ededed;
-$textColor200: #a6a6a6;
-$textColor300: #a6a6a6;
-$textColor400: #b3b2b2;
-$textColor500: #878787;
-$textColor700: #565656;
-//#656565
+$textColor: hsl(0, 0%, 93%);
+$textColor700: hsl(0, 1%, 70%);
+$textColor650: hsl(0, 0%, 65%);
+$textColor300: hsl(0, 0%, 30%);
+
 
 $cardHoverBackground: #d1d1d1;
 
 $border500: 2px solid $gray;
-$border400: 2px solid $lightGray300;
-$border300: 1.5px solid $lightGray200;
-$border200: 1px solid $lightGray100;
+$border400: 2px solid $lightGray370p;
+$border300: 1.5px solid $lightGray280p;
+$border200: 1px solid $lightGray180p;
 
-$outerBoxShadow: 3px 3px 7px $gray,
--3px -3px 7px #ffffff;
-$innerBoxShadow: inset 3px 3px 7px $gray,
-inset -3px -3px 7px #ffffff;
+$outerBoxShadow: 3px 3px 7px $gray, -3px -3px 7px #ffffff;
+$innerBoxShadow: inset 3px 3px 7px $gray, inset -3px -3px 7px #ffffff;
 
 //:root {
 //  --background: #1d1d1d;

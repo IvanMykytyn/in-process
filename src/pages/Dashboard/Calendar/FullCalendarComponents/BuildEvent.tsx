@@ -1,13 +1,13 @@
 import { EventContentArg } from '@fullcalendar/react';
 import moment from 'moment';
 
-import './build-event.styles.scss';
 import { Event } from '../Events';
 
 export const buildEvents = (props: EventContentArg) => {
   const {
     _def: { title, extendedProps, publicId },
     _instance,
+    remove,
   } = props.event;
 
   const start = moment(_instance!.range.end);
@@ -27,6 +27,7 @@ export const buildEvents = (props: EventContentArg) => {
       start={moment(start)}
       end={moment(end)}
       viewType={currentViewType}
+      remove={remove}
     />
   );
 };

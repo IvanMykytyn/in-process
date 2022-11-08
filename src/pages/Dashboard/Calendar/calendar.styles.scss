@@ -1,7 +1,7 @@
 @import 'styles/global.module';
 
 $roomWidth: 140px;
-$lineColor: $lightBlue500;
+$lineColor: $nowIndicatorColor;
 
 .full-calendar {
   width: 100%;
@@ -50,7 +50,7 @@ $lineColor: $lightBlue500;
 }
 
 .fc-scrollgrid {
-  background: $lightGray800;
+  background: $lightGray910;
   border: $border500 !important;
   border-radius: 5px;
 }
@@ -58,28 +58,34 @@ $lineColor: $lightBlue500;
 .fc-today-button {
   text-transform: capitalize;
   border: 0 !important ;
-  color: $primaryColor600 !important;
-  background: $lightBlue200 !important;
+  color: $primaryColor400 !important;
+  background: $btnBackground !important;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-weight: 600 !important;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+  font-weight: 500 !important;
   text-transform: capitalize !important;
-  font-size: 0.875rem;
+  font-size: 0.875rem !important;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $lightBlue300 !important;
-    color: $primaryColor600 !important;
+    background-color: $activeBtnBackground !important;
+    color: $primaryColor400 !important;
+  }
+
+  &:disabled {
+    color: white !important;
+    background: $primaryColor !important;
+    opacity: 0.85 !important;
   }
 }
 .fc-button-group {
   height: 40px;
-  background: $lightBlue200;
+  background: $btnBackground;
   font-family: 'Montserrat-Regular', sans-serif;
   font-weight: 400;
 
@@ -88,13 +94,15 @@ $lineColor: $lightBlue500;
   .fc-today-button,
   .fc-timeGridWeek-button,
   .fc-dayGridMonth-button,
+  .fc-listWeek-button,
   .fc-day-button {
     text-transform: capitalize;
     border: none;
-    color: $primaryColor600;
+    color: $primaryColor400;
     background: transparent;
 
     font-weight: 500;
+    // width: 50px;
 
     display: inline-flex;
     align-items: center;
@@ -105,9 +113,10 @@ $lineColor: $lightBlue500;
     &:hover,
     &:focus,
     &:active {
-      background-color: $lightBlue300 !important;
-      color: $primaryColor600 !important;
+      background-color: $activeBtnBackground !important;
+      color: $primaryColor400 !important;
     }
+    transition: 0.5s ease-in;
   }
 
   .fc-button-active {
@@ -117,13 +126,10 @@ $lineColor: $lightBlue500;
     margin: 5px !important;
     border-radius: 5px !important;
 
-    // TODO change animation to be more smooth
-    transition: 0.5s ease-in;
 
     &:hover,
     &:focus,
     &:active {
-      background-color: $lightBlue300;
       color: $textColor !important;
       background-color: $primaryColor !important;
 
@@ -131,6 +137,26 @@ $lineColor: $lightBlue500;
       cursor: default;
       border: none;
     }
+  }
+}
+.fc-addBooking-button {
+  text-transform: capitalize;
+  border: none !important;
+  color: $primaryColor400 !important;
+  background: $btnBackground !important;
+  font-weight: 500 !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+  font-size: 0.875rem !important;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $activeBtnBackground !important;
+    color: $primaryColor400 !important;
   }
 }
 
@@ -169,7 +195,7 @@ $lineColor: $lightBlue500;
   padding-left: 65px !important;
 }
 .fc-icon {
-  color: $textColor700;
+  color: $textColor300;
 }
 
 .fc-timegrid-slot-label-frame {
@@ -192,6 +218,9 @@ $lineColor: $lightBlue500;
 .fc-scrollgrid-section-body {
   padding: 11px 0 0 0 !important;
 }
+.fc-scrollgrid-section-header {
+  background: $lightGray940 !important;
+}
 
 .fc-timegrid-slot-label {
   position: relative;
@@ -208,9 +237,9 @@ $lineColor: $lightBlue500;
 }
 .fc-timegrid-slot-label-frame {
   height: 96px;
+  
 }
 
-// TODO change z-index of 0 time
 .fc-timegrid-slot-label-cushion {
   position: absolute;
   z-index: 10;
@@ -219,7 +248,12 @@ $lineColor: $lightBlue500;
   right: 0;
   bottom: 0;
   height: 96px;
+  background: $lightGray940 !important;
 }
+.fc-timegrid-axis-frame{
+  background: $lightGray940 !important;
+}
+
 .fc-timegrid-now-indicator-arrow {
   color: $lineColor;
   border-color: $lineColor !important;
@@ -265,7 +299,7 @@ $lineColor: $lightBlue500;
 }
 
 .fc-day-today {
-  background: $lightGray300 !important;
+  background: $lightGray370p !important;
   border: none !important;
 }
 
@@ -275,8 +309,7 @@ $lineColor: $lightBlue500;
 }
 .fc-timegrid-event.fc-timegrid-dot-event,
 .fc-daygrid-event.fc-daygrid-dot-event {
-    background: transparent !important;
-    // background: $lightGray900;
+  background: transparent !important;
   &:hover {
     background: transparent !important;
     transition: 0.5s ease-in-out all;
@@ -288,7 +321,7 @@ $lineColor: $lightBlue500;
   gap: 3px;
 }
 .fc-popover {
-  z-index: 90 !important;
+  // z-index: 90 !important;
   background: $lightGray !important;
 }
 
@@ -296,11 +329,12 @@ $lineColor: $lightBlue500;
 .fc-daygrid-event {
   background: $background;
 
-  &:hover{
+  &:hover {
     background: $cardHoverBackground !important;
     transition: 0.5s ease-in-out all;
   }
 }
-.fc-event-selected:after, .fc-event:focus:after{
+.fc-event-selected:after,
+.fc-event:focus:after {
   background: transparent;
 }

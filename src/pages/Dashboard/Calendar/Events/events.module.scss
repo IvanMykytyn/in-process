@@ -30,7 +30,6 @@ $roomWidth: 140px;
   }
 }
 
-
 $eventBorderRadius: 5px;
 
 .event__container {
@@ -89,10 +88,10 @@ $eventBorderRadius: 5px;
       width: 3px;
     }
     &__header {
-      color: $textColor700 !important;
+      color: $textColor300 !important;
     }
     &__description {
-      color: $textColor700 !important;
+      color: $textColor300 !important;
     }
   }
 }
@@ -196,7 +195,7 @@ $eventBorderRadius: 5px;
     padding-top: 1px;
     font-size: 0.7rem;
     font-weight: 400;
-    color: $textColor700;
+    color: $textColor300;
   }
 }
 

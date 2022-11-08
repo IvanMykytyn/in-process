@@ -5,17 +5,14 @@ import { getDate } from 'utils';
 import { getPixelsFromTop } from '../utils';
 import scss from './current-time-line.module.scss';
 
-// TODO implement scroll to now on open
 // TODO update position every minute
 
 const CurrentTimeLine = () => {
   const { hour, minutes } = getDate(moment());
   const timeLineRef = useRef<null | HTMLDivElement>(null);
 
-  // TODO Scroll to NOW
   useEffect(() => {
     timeLineRef?.current?.scrollIntoView({ block: 'center' });
-    
   }, []);
 
   // 11px from top

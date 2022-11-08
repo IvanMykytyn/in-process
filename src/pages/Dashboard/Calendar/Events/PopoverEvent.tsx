@@ -14,7 +14,8 @@ import { getFullDateRange } from 'utils';
 import cn from 'classnames';
 import scss from './events.module.scss';
 import { EventProps } from '../constants';
-import { selectUser, useAppSelector } from 'store';
+import { selectUser, useAppDispatch, useAppSelector } from 'store';
+import { removeBooking } from 'store/features/bookingSlice';
 
 type PopoverEventProps = {
   handleClose: () => void;
@@ -23,10 +24,12 @@ type PopoverEventProps = {
 
 const PopoverEvent: FC<PopoverEventProps> = ({ handleClose, event }) => {
   const { user } = useAppSelector(selectUser);
-  const { name, description, start, end, color, users } = event;
+  const { name, description, start, end, color, users, id } = event;
+
+  const dispatch = useAppDispatch();
 
   const handleEdit = () => {};
-  const handleDelete = (props: any) => console.log(props);
+  const handleDelete = (id: number) => dispatch(removeBooking(id));
 
   const showControlIcons: boolean =
     user?.role === 'admin' || users.some((item) => item.email === user?.email);
@@ -48,7 +51,7 @@ const PopoverEvent: FC<PopoverEventProps> = ({ handleClose, event }) => {
               src={trash}
               alt="trash"
               className={scss['trash-icon']}
-              onClick={handleDelete}
+              onClick={() => handleDelete(id)}
             />
           </div>
         )}
