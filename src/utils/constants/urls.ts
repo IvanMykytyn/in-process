@@ -4,7 +4,8 @@ const urls = {
   auth: '/auth',
   admin: 'admin',
   forgotPassword: '/forgot-password',
-  resetPassword: '/reset-password'
+  resetPassword: '/reset-password',
+  rooms: '/rooms'
 }
 
 export { baseURL, urls }

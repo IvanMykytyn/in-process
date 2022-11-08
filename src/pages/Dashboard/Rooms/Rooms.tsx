@@ -11,26 +11,13 @@ import 'swiper/css/navigation';
 import "swiper/css/scrollbar";
 
 
-import {Room} from '../../../components/index'
-import {useWindowDimensions} from '../../../hooks/index'
+import {Room} from '../../../components'
+import {useWindowDimensions} from '../../../hooks'
+import {roomsService} from 'services/rooms.service';
+import {IRooms} from '../../../models'
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
-
-interface InstrumentsProps {
-    id: string
-};
-
-export interface IRooms {
-    id: number;
-    name: string;
-    img: string;
-    description: string;
-    floor: number;
-    maxCapacity: number;
-    office: number;
-    equipment: InstrumentsProps[];
-}
 
 export const rooms: IRooms[] = [
     {
@@ -262,6 +249,13 @@ export const rooms: IRooms[] = [
 ]
 
 const Rooms: FC = () => {
+    const [roomsFilter, SetRoomsFilter] = useState([])
+    const[rooms,setRooms]= useState<IRooms[]>([])
+
+    useEffect(()=>{
+        roomsService.getAll().then(({data})=> setRooms(data))
+    },[])
+
 
     const {width} = useWindowDimensions();
     return <div className={cn(css.wrapper)}>
