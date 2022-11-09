@@ -1,11 +1,9 @@
-import axios, {AxiosResponse} from 'axios';
+import axios from 'axios';
 // import { logoutUser, store, useAppDispatch } from 'store';
 import { getFromLocalStorage } from 'utils';
 import { baseURL } from 'utils/constants/urls';
 
 const axiosService = axios.create({ baseURL });
-
-export type AxiosRes<T>= Promise<AxiosResponse<T>>
 
 axiosService.interceptors.request.use(
   (config) => {

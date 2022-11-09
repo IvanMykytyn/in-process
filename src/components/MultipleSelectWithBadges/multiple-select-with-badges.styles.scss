@@ -39,7 +39,6 @@ $errorTextColor: #d32f2f;
       height: 100%;
     }
 
-
     .MuiInputBase-root {
       padding: 4px 15px 4px;
       box-shadow: inset 1px 1px 3px var(--gray), inset -1px -1px 3px var(--white);
@@ -106,6 +105,7 @@ $errorTextColor: #d32f2f;
     // bottom: 0;
     top: -25px;
   }
+
 
   .MuiOutlinedInput-root .MuiAutocomplete-endAdornment {
     right: 15px !important;

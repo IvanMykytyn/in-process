@@ -12,3 +12,9 @@ export interface IRooms{
     office:  number,
     equipment: InstrumentsProps[]
 }
+
+export interface Room {
+    id: string;
+    name: string;
+    description: string;
+}

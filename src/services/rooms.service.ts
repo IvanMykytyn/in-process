@@ -1,6 +1,6 @@
 import { axiosService } from './axiosService';
 import { urls } from 'utils';
-import {AxiosRes} from '../services'
+import {AxiosRes} from 'models'
 import {IRooms} from "../models";
 
  export const roomsService={

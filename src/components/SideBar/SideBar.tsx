@@ -1,33 +1,36 @@
 import 'moment/locale/uk';
-import {FC, useState} from 'react';
-import {Link} from 'react-router-dom';
+import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Accordion } from '@mui/material';
 import moment from 'moment';
 
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
 
-
-import {setting, user, clock} from '../../assets/images/icons';
-import {BookedRoom} from 'components/BookedRoom/BookedRoom';
+import { Input } from '../index';
+import { setting, search, user, clock } from '../../assets/images/icons';
+import { BookedRoom } from 'components/BookedRoom/BookedRoom';
+import { useAppDispatch, useAppSelector } from 'store';
+import { selectBooking, toggleSideBar } from 'store/features/bookingSlice';
 import Moment from 'react-moment';
 
 interface Instruments {
-    id: string,
-    name: string
+  id: string;
+  name: string;
 }
 
 export interface Data {
-    roomId: string;
-    answer: {
-        date: string;
-        time: {
-            hours: number,
-            minuts: number
-        };
-        room: string;
-        instruments: Instruments[];
+  roomId: string;
+  answer: {
+    date: string;
+    time: {
+      hours: number;
+      minuts: number;
     };
+    room: string;
+    instruments: Instruments[];
+  };
 }
 
 const data: Data[] = [
@@ -181,16 +184,37 @@ const data: Data[] = [
             ]
         }
     },
+  {
+    roomId: 'room 7',
+    answer: {
+      date: '2022-10-25',
+      time: {
+        hours: 12,
+        minuts: 10,
+      },
+      room: '7',
+      instruments: [
+        {
+          id: '1',
+          name: 'tv',
+        },
+        {
+          id: '2',
+          name: 'markers',
+        },
+      ],
+    },
+  },
 ];
 
-const SideBar: FC = () => {
-    const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true);
-    const [selected, setSelected] = useState<number | null>(null);
 
-    const isOpened = () => {
-        setIsOpenMenu(!isOpenMenu);
+const SideBar: FC = () => {
+    const { isSideBarOpen } = useAppSelector(selectBooking);
+    const dispatch = useAppDispatch();
+
+    const handleClick = () => {
+      dispatch(toggleSideBar());
     };
-    //TO DO MOMENT.js
 
     const roomsTimeSort = data && data.sort((a, b) =>
         Number(moment(`${a.answer.date} ${a.answer.time.hours}:${a.answer.time.minuts}:00`))
@@ -199,12 +223,12 @@ const SideBar: FC = () => {
     );
 
     return (
-        <div className={isOpenMenu ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
+        <div className={isSideBarOpen ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
             <div className={cn(scss.wrapper)}>
-                <button className={cn(scss.burger)} onClick={isOpened}>
+                <button className={cn(scss.burger)} onClick={handleClick}>
                     Menu
                 </button>
-                <ul className={isOpenMenu ? `${scss.info}` : `${scss.info} ${scss.hide}`}>
+                <ul className={isSideBarOpen ? `${scss.info}` : `${scss.info} ${scss.hide}`}>
                     <li>
                         <button className={cn(scss.info__settings)}>
                             <Link to={'/dashboard/settings'}>
@@ -255,11 +279,11 @@ const SideBar: FC = () => {
                     </li>
                 </ul>
                 <div className={scss.inner}>
-                    <span className={isOpenMenu ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
+                    <span className={isSideBarOpen ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15} color={'red'}/>
                         <Moment locale={'uk'} local={true} format={`LLL`} interval={30000}/>
                     </span>
-                    <ul className={isOpenMenu ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
+                    <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                         {
                             roomsTimeSort.map((value) =>
                                 <BookedRoom key={value.answer.room} room={value}/>
@@ -273,4 +297,4 @@ const SideBar: FC = () => {
         ;
 };
 
-export {SideBar};
+export { SideBar };
