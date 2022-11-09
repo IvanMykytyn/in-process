@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC,useState,useEffect} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel} from 'swiper';
 import {StyledEngineProvider} from '@mui/material/styles';
@@ -15,12 +15,17 @@ import "swiper/css/scrollbar";
 
 import {Room,DropdownMultiSelect} from '../../../components';
 import {useWindowDimensions} from '../../../hooks';
-import {useWindowDimensions} from '../../../hooks'
 import {roomsService} from 'services/rooms.service';
 import {IRooms} from '../../../models'
 
+
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
+
+ export interface IFilters{
+    id: number,
+    name: string
+}
 
 export const rooms: IRooms[] = [
     {
@@ -294,12 +299,12 @@ export const filterItems: IFilters[] = [
 
 
 const Rooms: FC = () => {
-    const [roomsFilter, SetRoomsFilter] = useState([])
-    const[rooms,setRooms]= useState<IRooms[]>([])
+    // const [roomsFilter, SetRoomsFilter] = useState([])
+    // const[rooms,setRooms]= useState<IRooms[]>([])
 
-    useEffect(()=>{
-        roomsService.getAll().then(({data})=> setRooms(data))
-    },[])
+    // useEffect(()=>{
+    //     roomsService.getAll().then(({data})=> setRooms(data))
+    // },[])
 
 
     const {width} = useWindowDimensions();
