@@ -1,5 +1,5 @@
 import type {
-  PromiseResponse as PR,
+  AxiosRes as PR,
   UserLoginProps,
   UserSignUpProps,
   UserEmailField,
@@ -30,7 +30,7 @@ const isLoggedIn = (): boolean => {
   return !!token;
 };
 
-// const updateUserRequest = (userData: UserUpdateProps): PromiseResponse =>
+// const updateUserRequest = (userData: UserUpdateProps): AxiosRes =>
 //   axiosService.put(`${urls.auth}/update-user`, userData);
 
 export {

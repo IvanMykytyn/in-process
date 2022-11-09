@@ -1,11 +1,11 @@
-@import '../../App.styles';
+@import "styles/global.module";
 
 .booking {
   width: 100%;
   display: flex;
   border-radius: 15px;
   overflow: hidden;
-  background-color: $background;
+  background-color: var(--background);
   box-shadow: $outerBoxShadow;
 
   &__wrap {
@@ -19,11 +19,11 @@
       content: '';
       width: 100%;
       height: 5px;
-      background-color: $primaryColor;
+      background-color: var(--primary-color);
       position: absolute;
       left: 0;
       bottom: 0;
-      box-shadow: 0 0 7px $primaryColor;
+      box-shadow: 0 0 7px var(--primary-color);
       z-index: 10;
     }
 
@@ -34,7 +34,7 @@
 
   &__info {
     padding: 15px;
-    border-right: 1px solid $gray;
+    border-right: 1px solid var(--gray);
     height: 100%;
   }
 
@@ -52,7 +52,7 @@
   &__title {
     @extend %montserrat-semi-bold-600;
     padding: 15px 20px;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid var(--gray);
   }
 
   &__form {

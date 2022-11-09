@@ -4,12 +4,13 @@ import "./toggle.styles.scss";
 
 interface ToggleProps {
     toggled?: boolean;
-    checked?: boolean
-    label?: string
+    checked?: boolean;
+    label?: string;
 }
 
 const Toggle: FC<ToggleProps> = ({checked,label,...arg}) => {
-    const [toggled, setToggled] = useState(false)
+    const [toggled, setToggled] = useState(false);
+
     return (
         <>
             <input {...arg}

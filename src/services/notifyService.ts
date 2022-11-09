@@ -1,4 +1,4 @@
-import { PromiseResponse } from 'models';
+import { AxiosRes } from 'models';
 import { Id, toast, TypeOptions } from 'react-toastify';
 
 const NotifyService = {
@@ -7,7 +7,7 @@ const NotifyService = {
   warn: (notifyText: string) => toast.warn(notifyText),
   error: (notifyText: string) => toast.error(notifyText),
   default: (notifyText: string) => toast(notifyText),
-  promise: (promise: PromiseResponse<any>) =>
+  promise: (promise: AxiosRes<any>) =>
     toast.promise(promise, promiseStatuses),
   loading: (notifyText?: string): Id =>
     toast.loading(notifyText ?? 'Please wait...'),

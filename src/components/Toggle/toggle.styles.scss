@@ -13,7 +13,7 @@
   cursor: pointer;
   width: 80px;
   height: 40px;
-  background: $background;
+  background: var(--background);
   box-shadow: $innerBoxShadow;
   border: 0px solid rgba(171, 171, 171, 0.23);
   border-radius: 100px;
@@ -30,8 +30,8 @@
   height: 35px;
   border-radius: 45px;
   transition: 0.2s;
-  background: $background;
-  box-shadow: 3px 3px 7px #b0b0b0, -1px -1px 4px #ffffff;
+  background: var(--background);
+  box-shadow: 3px 3px 7px var(--gray), -1px -1px 4px var(--white);
 
   &::after {
     content: '';
@@ -51,14 +51,14 @@
 .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
   left: calc(100% - 2px);
   transform: translateX(-100%);
-  background: $background;
-  box-shadow: 3px 3px 7px #b0b0b0, -1px -1px 4px #ffffff;
+  background: var(--background);
+  box-shadow: 3px 3px 7px var(--gray), -1px -1px 4px var(--white);
 
   &::after {
     content: '';
     width: 10px;
     height: 10px;
-    background-color: $primaryColor;
+    background-color: var(--primary-color);
     position: absolute;
     left: 50%;
     top: 50%;

@@ -20,11 +20,12 @@
     bottom: 0;
     margin: auto;
     border: 4px solid transparent;
-    border-top-color: $lightBlue;
+    border-top-color: var(--light-blue);
     border-radius: 50%;
     animation: button-loading-spinner 1s ease infinite;
   }
 }
+
 .form-wrapper {
   display: flex;
   align-items: center;
@@ -32,6 +33,7 @@
   grid-gap: 15px;
   padding-top: 10px;
 }
+
 .navigate-form-wrapper {
   @include centerDiv;
   grid-gap: 5px;
@@ -39,18 +41,18 @@
 
   a {
     transition: 0.5s opacity, 0.5s color;
-    color: #39597c;
+    color: var(--text-color);
     font-size: 1rem;
 
     &:hover {
-      color: $primaryColor;
+      color: var(--primary-color);
     }
   }
 }
 
 .swiper-button-next,
-.swiper-button-prev{
-  color: $lightBlue !important;
+.swiper-button-prev {
+  color: var(--light-blue) !important;
   display: none !important;
 }
 
@@ -106,6 +108,7 @@
     transform: rotate(360deg);
   }
 }
+
 @-webkit-keyframes rot {
   0% {
     transform: rotate(0deg);

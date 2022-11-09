@@ -1,0 +1,108 @@
+@import 'styles/global.module';
+
+$roomWidth: 140px;
+$leftBarWidth: 55px;
+$calendarHeaderHeight: 35px;
+
+.left-bar__container {
+  height: 100%;
+  background: $lightGray940;
+  border: $border500;
+  padding-bottom: 5px;
+  border-top: none;
+
+  position: sticky;
+  left: 0;
+  z-index: 7;
+}
+
+.left-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-number {
+  width: 100%;
+  height: 24px;
+  max-height: 24px;
+  @include centerDiv();
+
+  &.hour {
+    font-weight: 600;
+    font-size: 1.2rem;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -2px;
+      width: 30%;
+      height: 2px;
+      border-radius: 0 5px 5px 0;
+      background-color: $lightGray370p;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      width: 30%;
+      height: 2px;
+      border-radius: 5px 0 0 5px;
+      background-color: $lightGray370p;
+    }
+  }
+  &.half-hour {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: hsl(0, 0%, 50%);
+    position: relative;
+    padding-left: 10px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      width: 20%;
+      height: 2px;
+      border-radius: 5px 0 0 5px;
+      background-color: $lightGray280p;
+    }
+  }
+  &.plus-15 {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: $textColor700;
+    position: relative;
+    padding-left: 15px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      width: 10%;
+      height: 2px;
+      border-radius: 5px 0 0 5px;
+      background-color: $lightGray180p;
+    }
+  }
+}
+
+// Time Grid
+
+.time-cell-row {
+  height: 24px;
+
+  width: 100%;
+
+  &[data-time='hour'] {
+    border-top: $border400;
+  }
+  &[data-time='min30'] {
+    border-top: $border300;
+  }
+  &[data-time='min15'] {
+    border-top: $border200;
+  }
+}

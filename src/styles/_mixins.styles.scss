@@ -3,3 +3,10 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin threeDotsOnOverflow($countOfRows) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $countOfRows;
+  -webkit-box-orient: vertical;
+}

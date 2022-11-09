@@ -12,31 +12,15 @@ import 'swiper/css/navigation';
 import "swiper/css/scrollbar";
 
 
+
 import {Room,DropdownMultiSelect} from '../../../components';
 import {useWindowDimensions} from '../../../hooks';
+import {useWindowDimensions} from '../../../hooks'
+import {roomsService} from 'services/rooms.service';
+import {IRooms} from '../../../models'
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
-
-interface InstrumentsProps {
-    id: string
-};
-
-export interface IRooms {
-    id: number;
-    name: string;
-    img: string;
-    description: string;
-    floor: number;
-    maxCapacity: number;
-    office: number;
-    equipment: InstrumentsProps[];
-}
-
-export interface IFilters {
-    id: number,
-    name: string
-}
 
 export const rooms: IRooms[] = [
     {
@@ -111,7 +95,7 @@ export const rooms: IRooms[] = [
         ]
     },
     {
-        id: 3,
+        id: 100,
         name: 'Room9',
         img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
         description: 'the room has PS and TV.That is all what you need',
@@ -247,7 +231,7 @@ export const rooms: IRooms[] = [
     },
     {
         id: 10,
-        name: 'Room1',
+        name: 'Room30',
         img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
         description: 'the room has PS and TV.That is all what you need',
         floor: 2,
@@ -310,6 +294,13 @@ export const filterItems: IFilters[] = [
 
 
 const Rooms: FC = () => {
+    const [roomsFilter, SetRoomsFilter] = useState([])
+    const[rooms,setRooms]= useState<IRooms[]>([])
+
+    useEffect(()=>{
+        roomsService.getAll().then(({data})=> setRooms(data))
+    },[])
+
 
     const {width} = useWindowDimensions();
     return (
