@@ -13,4 +13,4 @@ export * from "./BookedRoom/BookedRoom";
 export * from "./Room/Room"
 export * from "./MultipleSelectWithBadges/MultipleSelectWithBadges";
 export * from "./BookingForm/BookingForm";
-export * from "./Dropdown/Dropdown"
+export * from "./Dropdown/DropdownMultiSelect"

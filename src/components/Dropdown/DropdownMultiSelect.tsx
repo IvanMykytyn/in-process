@@ -1,4 +1,4 @@
-import * as React from 'react';
+import react,{FC,useState} from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,7 +8,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 
 import {IFilters} from "../../pages"
-import {FC} from "react";
 
 import cn from 'classnames';
 import css from './DropdownMultiSelect.style.scss';
@@ -16,19 +15,19 @@ import css from './DropdownMultiSelect.style.scss';
 interface FilterProps{
     selected?: string,
     setSelected?: any,
-    arr: IFilters[],
+    filterItems: IFilters[],
+    filterCapacity: IFilters[],
     value?: string
 }
 
-const DropdownMultiSelect: FC<FilterProps> = ({arr,value}) =>{
-    const [personName, setPersonName] = React.useState<string[]>([]);
+const DropdownMultiSelect: FC<FilterProps> = ({filterItems,filterCapacity,value}) =>{
+    const [personName, setPersonName] = useState<string[]>([]);
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
         const {
             target: { value },
         } = event;
         setPersonName(
-            // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
     };
@@ -46,7 +45,21 @@ const DropdownMultiSelect: FC<FilterProps> = ({arr,value}) =>{
                     input={<OutlinedInput label={value} />}
                     renderValue={(selected) => selected.join(', ')}
                 >
-                    {arr.map((name) => (
+                   <div className={'filter_text'}>
+                       Filter by capacity
+                   </div>
+                    {filterCapacity.map((name) => (
+                        <MenuItem  className={cn(css.menuItem)}
+                                   key={name.id}
+                                   value={name.name}>
+                            <Checkbox checked={personName.indexOf(name.name) > -1} />
+                            <ListItemText primary={name.name} />
+                        </MenuItem>
+                    ))}
+                    <div className={'filter_text'}>
+                        Filter by items
+                    </div>
+                    {filterItems.map((name) => (
                         <MenuItem  className={cn(css.menuItem)}
                                    key={name.id}
                                    value={name.name}>

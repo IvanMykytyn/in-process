@@ -17,13 +17,22 @@
   display: none;
 }
 
+.filter_text{
+  padding: 10px 10px 10px 20px;
+  font-family: "Montserrat-SemiBold", sans-serif;
+  font-weight: 300;
+  color: #565656;
+}
+
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
   border: none;
 }
+
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
   top: 125px!important;
 }
+
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
   background-color: $containerBackground;
   box-shadow: $outerBoxShadow;
