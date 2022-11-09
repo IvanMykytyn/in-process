@@ -14,7 +14,7 @@
     border-radius: 15px;
     box-shadow: $outerBoxShadow;
     position: relative;
-    background: $background;
+    background: var(--background);
 
   }
 
@@ -42,7 +42,7 @@
         content: '';
         animation: pulse 2s infinite;
         border-radius: 50%;
-        background-color: rgba(176, 202, 233, 0.75);
+        background-color: var(--login-circle);
         width: 75%;
         height: 75%;
         position: absolute;

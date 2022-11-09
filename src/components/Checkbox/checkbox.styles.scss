@@ -22,9 +22,9 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $primaryColor;
+        background-color: var(--primary-color);
         animation: zooming 0.5s forwards 1;
-        box-shadow: 0 0 10px $primaryColor;
+        box-shadow: 0 0 10px var(--primary-color);
       }
 
       &:after {
@@ -43,7 +43,7 @@
       width: 18px;
       border-radius: 5px;
       border: none;
-      background-color: $background !important;
+      background-color: var(--background) !important;
       box-shadow: inset 1px 2px 3px #b8b9be, inset -1px -1px 4px #ffffff;
     }
 
@@ -61,7 +61,7 @@
     &:after {
       border-radius: 50%;
       border: none;
-      background-color: $background !important;
+      background-color: var(--background) !important;
       box-shadow: inset 1px 2px 3px #b8b9be, inset -1px -1px 4px #ffffff;
     }
   }

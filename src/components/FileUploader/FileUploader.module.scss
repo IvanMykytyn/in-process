@@ -19,7 +19,7 @@
       border: 0;
       border-radius: 10px;
       box-shadow: $outerBoxShadow;
-      background-color: $background;
+      background-color: var(--background);
       cursor: pointer;
 
       &:hover,
@@ -30,7 +30,7 @@
     }
 
     &:hover + .uploader__img {
-      fill: $primaryColor;
+      fill: var(--primary-color);
       filter: drop-shadow(0px 0px 1px #568cc5);
     }
   }
@@ -51,7 +51,7 @@
     }
 
     & + .uploader__img {
-      fill: $primaryColor;
+      fill: var(--primary-color);
       filter: drop-shadow(0px 0px 1px #568cc5);
     }
   }

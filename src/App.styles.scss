@@ -2,14 +2,20 @@
 @import "styles/reset.styles";
 
 body {
-  color: #565656;
+  color: var(--text-color);
   line-height: 1.2;
   font-family: sans-serif;
-  background: $containerBackground;
+  background: var(--container-background);
 }
 
 :root {
   --toastify-color-light: #dcdcdc !important;
+}
+
+.app {
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: all .5s;
 }
 
 * {
