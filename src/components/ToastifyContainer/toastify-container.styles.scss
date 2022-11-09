@@ -1,8 +1,9 @@
 @import "styles/global.module";
 
 .Toastify__toast {
-    box-shadow: $outerBoxShadow !important;
-    .Toastify__toast-body{
-        text-transform: capitalize;
-    }
+  box-shadow: $outerBoxShadow !important;
+
+  .Toastify__toast-body {
+    text-transform: capitalize;
+  }
 }

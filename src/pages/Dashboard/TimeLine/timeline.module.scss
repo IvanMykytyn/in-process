@@ -1,4 +1,3 @@
-
 @import "../../../styles/global.module";
 
 .timeline {
@@ -9,15 +8,15 @@
   flex-direction: column;
   align-items: center;
 
-
-  &__title{
+  &__title {
     padding: 5px 15px;
-    background: $background;
+    background: var(--background);
     box-shadow: $outerBoxShadow;
     border-radius: 10px;
     margin-bottom: 25px;
     position: relative;
     left: 5px;
+    color: var(--primary-color);
   }
 
   &__items {
@@ -28,7 +27,7 @@
     &::before {
       content: '';
       width: 10px;
-      background-color: $background;
+      background-color: var(--background);
       box-shadow: $outerBoxShadow;
       border-radius: 15px;
       position: absolute;
@@ -43,8 +42,8 @@
     position: relative;
     display: flex;
 
-    &::before{
-    //&::after{
+    &::before {
+      //&::after{
       content: '';
       width: 25px;
       height: 25px;
@@ -53,26 +52,10 @@
       top: 18px;
       right: 50%;
       margin-right: -18px;
-      background-color: $primaryColor;
-      box-shadow: 0 0 5px $primaryColor, 0 0 10px $primaryColor;
+      background-color: var(--primary-color);
+      box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
       z-index: 10;
     }
-
-
-    //&::after{
-    //  background-color: $background;
-    //  box-shadow: 1px 1px 3px #b0b0b0, -2px -1px 4px #ffffff;
-    //  z-index: 9;
-    //  width: 35px;
-    //  height: 35px;
-    //  top: 13px;
-    //  right: 50%;
-    //  margin-right: -23px;
-    //}
-
-    //&:nth-child(even) {
-    //  justify-content: flex-end;
-    //}
   }
 
   &__items &__details {
@@ -80,7 +63,7 @@
     border-radius: 15px;
     overflow: hidden;
     position: relative;
-    background-color: $background;
+    background-color: var(--background);
     box-shadow: $outerBoxShadow;
     padding: 15px;
 
@@ -89,8 +72,8 @@
       height: 100%;
       width: 100%;
       background-color: transparent;
-      border: 2px solid $lightBlue;
-      box-shadow: inset 0 0 6px $lightBlue, 0 0 3px $lightBlue;
+      border: 2px solid var(--light-blue);
+      box-shadow: inset 0 0 6px var(--light-blue), 0 0 3px var(--light-blue);
       position: absolute;
       left: 50%;
       top: 50%;
@@ -122,7 +105,7 @@
   &__items &__details[open] &__summary {
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--text-color);
   }
 }
 

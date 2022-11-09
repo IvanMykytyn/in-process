@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import { logoutUser, store, useAppDispatch } from 'store';
 import { getFromLocalStorage } from 'utils';
-import { baseURL } from 'utils/constants';
+import { baseURL } from 'utils/constants/urls';
 
 const axiosService = axios.create({ baseURL });
 

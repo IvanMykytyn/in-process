@@ -21,7 +21,9 @@
 .dashboard-page {
   display: flex;
   justify-content: center;
-  background-color: $background;
+
+  background-color: var(--background);
+  //height: 100vh;
   min-height: 760px;
   flex: 1;
   border-radius: 25px;
@@ -39,9 +41,10 @@
   top: 180px;
 
   &__btn {
-    background: $background;
+    background: var(--background);
     border-radius: 15px 15px 0 0;
-    box-shadow: -1px -3px 3px rgba(176, 176, 176, 0.60);
+    box-shadow: -1px -3px 3px var(--box-shadow-sidebar-btn-color);
+    color: var(--accent-text-color);
     padding: 5px 35px;
     z-index: 10;
     transition: 0.5s color;
@@ -51,7 +54,7 @@
     &:hover,
     &:focus,
     &:active {
-      color: $primaryColor;
+      color: var(--primary-color);
     }
   }
 }

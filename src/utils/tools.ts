@@ -1,5 +1,5 @@
 
-import {board, tv, marker, plug} from '../assets/images/icons';
+import {board, tv, marker, plug, window, conditioner} from '../assets/images/icons';
 
 export  interface Tool {
     id: string;
@@ -27,5 +27,16 @@ export  interface Tool {
         id: '3',
         alt: 'sockets',
         img: plug
-    }
+    },
+     {
+        id: '4',
+        alt: 'window',
+        img: window
+    },
+     {
+        id: '5',
+        alt: 'conditioner',
+        img: conditioner
+    },
+
 ];

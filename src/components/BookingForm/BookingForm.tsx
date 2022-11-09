@@ -1,5 +1,6 @@
 import {FC, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import {useNavigate} from 'react-router-dom';
 
 import css from './BookingForm.module.scss';
 
@@ -20,6 +21,12 @@ const names = [
 ];
 
 const BookingForm: FC = () => {
+
+    const navigate = useNavigate();
+
+    const getNavigate = () => {
+        navigate(-1);
+    };
 
     const {register, handleSubmit, reset} = useForm();
 
@@ -100,14 +107,22 @@ const BookingForm: FC = () => {
                                                   )}
                         />
                     </label>
-                    <Button type={'submit'} fullWidth={true}>
-                        Submit
-                    </Button>
+                    <div className={css.btn}>
+                        <Button type={'button'}
+                                fullWidth={true}
+                                onClick={getNavigate}
+                        >
+                            Back
+                        </Button>
+                        <Button type={'submit'}
+                                fullWidth={true}>
+                            Submit
+                        </Button>
+                    </div>
                 </form>
             </div>
         </div>
     )
-        ;
 };
 
 export {BookingForm};

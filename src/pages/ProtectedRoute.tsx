@@ -7,9 +7,8 @@ const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
   const { user } = useAppSelector(selectUser);
 
   // if (!isLoggedIn() || !user) {
-  if(false){
-    return <Navigate to="/login" />;
-  }
+  //   return <Navigate to="/login" />;
+  // }
 
   return <>{children}</>;
 };

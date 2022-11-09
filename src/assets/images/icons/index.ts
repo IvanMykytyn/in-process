@@ -20,6 +20,8 @@ import people from './people.svg';
 import creator from './creator.svg';
 import location from './location.svg';
 import room from './room.svg';
+import window from './window.svg';
+import conditioner from './conditioner.svg';
 
 export {
   keyIcon,
@@ -44,4 +46,6 @@ export {
   creator,
   location,
   room,
+  conditioner,
+  window
 };

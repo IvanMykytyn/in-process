@@ -1,4 +1,4 @@
-import { PromiseResponse as PR } from 'models';
+import { AxiosRes as PR } from 'models';
 import { urls } from 'utils';
 import { axiosService } from './axiosService';
 

@@ -1,5 +1,5 @@
 import { SetStateType } from 'models';
-import { Room } from 'models/room';
+import { Room } from 'models';
 import moment, { Moment } from 'moment';
 import { getDate, getDiffInMinutes } from 'utils';
 import { cellHeight, EventProps, roomWidth, TimeSegments } from './constants';

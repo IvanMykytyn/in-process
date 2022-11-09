@@ -1,7 +1,7 @@
 import React from 'react'
 import { AxiosResponse } from 'axios'
 
-type PromiseResponse<T> = Promise<AxiosResponse<T>>
+type AxiosRes<T> = Promise<AxiosResponse<T>>
 type SetStateType<T> =  React.Dispatch<React.SetStateAction<T>>
 
 interface ErrorMessageObject {
@@ -11,4 +11,4 @@ interface ErrorMessageObject {
 }
 
 
-export type { PromiseResponse, ErrorMessageObject, SetStateType }
+export type { AxiosRes, ErrorMessageObject, SetStateType }

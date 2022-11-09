@@ -1,5 +1,5 @@
 import { Booking } from 'models';
-import { Room } from 'models/room';
+import { Room } from 'models';
 import moment, { Moment } from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 

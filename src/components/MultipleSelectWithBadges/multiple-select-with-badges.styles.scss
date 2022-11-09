@@ -13,26 +13,27 @@ $errorTextColor: #d32f2f;
     //flex-wrap: wrap-reverse;
 
     &::-webkit-scrollbar {
-      width: 5px; /* ширина всей полосы прокрутки */
+      width: 5px;
     }
 
     &::-webkit-scrollbar-track {
-      background: $background; /* цвет зоны отслеживания */
+      background: var(--background);
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: $gray; /* цвет бегунка */
-      border-radius: 10px; /* округлось бегунка */
+      background-color: var(--gray);
+      border-radius: 10px;
     }
 
     .MuiChip-root {
-      // box-shadow: inset 0 1px 2px #b0b0b0, inset -1px -1px 3px #ffffff;
+      // box-shadow: inset 0 1px 2px var(--gray), inset -1px -1px 3px var(--white);
       //border: none;
-      box-shadow: inset 0px 0px 6px #b8b9be, inset 0px 0px 13px #ffffff;
-      border: 0.5px solid #b8b9be95;
+      box-shadow: inset 0px 0px 6px var(--gray), inset 0px 0px 13px var(--white);
+      border: 0.5px solid var(--gray);
       border-radius: 5px;
     }
   }
+
   .MuiAutocomplete-root {
     .MuiFormControl-root {
       height: 100%;
@@ -40,7 +41,7 @@ $errorTextColor: #d32f2f;
 
     .MuiInputBase-root {
       padding: 4px 15px 4px;
-      box-shadow: inset 1px 1px 3px #b0b0b0, inset -1px -1px 3px #ffffff;
+      box-shadow: inset 1px 1px 3px var(--gray), inset -1px -1px 3px var(--white);
       border: 0;
       border-radius: 12px;
       color: rgba(0, 0, 0, 0.5);
@@ -67,7 +68,7 @@ $errorTextColor: #d32f2f;
   .MuiAutocomplete-listbox,
   .MuiAutocomplete-noOptions {
     overflow-x: hidden;
-    background: $lightGray;
+    background: var(--light-gray);
     box-shadow: $outerBoxShadow;
     font-size: 0.9rem;
     max-height: 200px;
@@ -104,7 +105,14 @@ $errorTextColor: #d32f2f;
     // bottom: 0;
     top: -25px;
   }
+
+
   .MuiOutlinedInput-root .MuiAutocomplete-endAdornment {
     right: 15px !important;
+
   }
+}
+
+.MuiChip-label {
+  color: var(--accent-text-color);
 }

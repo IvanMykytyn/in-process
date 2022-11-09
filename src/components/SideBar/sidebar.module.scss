@@ -10,7 +10,7 @@
   position: sticky;
   top: 0;
   transition: width 0.7s;
-  background: $background;
+  background: var(--background);
 }
 
 .sidebar.hide {
@@ -27,23 +27,24 @@
 }
 
 .burger {
-  background: $background;
+  background: var(--background);
   border-radius: 15px 15px 0 0;
-  box-shadow: 2px -2px 4px #ffffff, 0px -3px 6px #b0b0b0;
+  box-shadow: 2px -2px 4px var(--white), 0px -3px 6px var(--gray);
+  color: var(--accent-text-color);
   padding: 5px 35px;
   z-index: 10;
   transform: rotate(-90deg);
   position: absolute;
   @extend %montserrat-regular-400;
   top: 75px;
-  left: -90px;
+  left: -88px;
   transition: 0.5s color;
 
 
   &:hover,
   &:focus,
   &:active {
-    color: $primaryColor;
+    color: var(--primary-color);
   }
 }
 
@@ -60,11 +61,11 @@
 
   &__userName {
     transition: color 0.5s;
+    color: var(--text-color);
     @extend %montserrat-semi-bold-600;
-    color: $gray;
 
     &:hover {
-      color: $primaryColor;
+      color: var(--primary-color);
     }
   }
 
@@ -73,9 +74,28 @@
     padding: 10px;
     border-radius: 50%;
 
-    &:hover {
-      box-shadow: inset 0 1px 6px #b0b0b0, inset -3px 1px 4px #ffffff;
+    svg {
+      fill: var(--text-color);
+      transition: 0.5s fill;
+
+      &:hover,
+      &:focus,
+      &:active {
+        fill: var(--primary-color);
+      }
     }
+
+
+    &:hover,
+    &:focus,
+    &:active {
+      box-shadow: inset 0 1px 6px var(--gray), inset -3px 1px 4px var(--white);
+    }
+  }
+
+  &__svg {
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -95,39 +115,10 @@ button {
   cursor: pointer;
 }
 
-//.input {
-//  position: relative;
-//  width: 100%;
-//  transition: 0.5s opacity;
-//  display: flex;
-//  flex-direction: column;
-//  grid-gap: 20px;
-//  padding: 0;
-
-//&::after,
-//&::before {
-//  content: '';
-//  width: 100%;
-//  height: 10px;
-//  background-color: $background;
-//  position: absolute;
-//  border-radius: 15px;
-//  box-shadow: 1px 3px 4px #b0b0b0, -2px -1px 3px #ffffff;
-//}
-//
-//&::after {
-//  top: -45%;
-//}
-//
-//&::before {
-//  bottom: -10%;
-//}
-//}
-
 .line {
   height: 1px;
   width: 100%;
-  background-color: $gray;
+  background-color: var(--gray);
   border-radius: 10px;
   font-size: 0;
 
@@ -156,14 +147,15 @@ button {
   grid-gap: 10px;
   position: relative;
   transition: opacity 0.5s, font-size 0.5s;
+  color: var(--accent-text-color);
 
   &::after {
     content: '';
     height: 100%;
     width: 100%;
     background-color: transparent;
-    border: 2px solid $lightBlue;
-    box-shadow: inset 0 0 6px $lightBlue, 0 0 3px $lightBlue;
+    border: 2px solid var(--light-blue);
+    box-shadow: inset 0 0 6px var(--light-blue), 0 0 3px var(--light-blue);
     position: absolute;
     left: 50%;
     top: 50%;
@@ -182,7 +174,7 @@ button {
   height: 540px;
   overflow: scroll;
   transition: 0.5s opacity;
-  box-shadow: inset 10px 10px 10px $background;
+  box-shadow: inset 10px 10px 10px var(--background);
   @extend %montserrat-regular-400;
 
   &::-webkit-scrollbar {
