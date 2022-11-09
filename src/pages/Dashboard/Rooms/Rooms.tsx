@@ -1,6 +1,7 @@
-import {FC, useRef, useEffect, useState} from 'react';
+import {FC} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel} from 'swiper';
+import {StyledEngineProvider} from '@mui/material/styles';
 
 
 // styles
@@ -11,7 +12,9 @@ import 'swiper/css/navigation';
 import "swiper/css/scrollbar";
 
 
-import {Room} from '../../../components'
+
+import {Room,DropdownMultiSelect} from '../../../components';
+import {useWindowDimensions} from '../../../hooks';
 import {useWindowDimensions} from '../../../hooks'
 import {roomsService} from 'services/rooms.service';
 import {IRooms} from '../../../models'
@@ -247,6 +250,48 @@ export const rooms: IRooms[] = [
         ]
     },
 ]
+export const filterCapacity: IFilters[] = [
+    {
+        id: 0,
+        name: '5-10 capacity'
+    },
+    {
+        id: 1,
+        name: '10-20 capacity'
+    },
+    {
+        id: 2,
+        name: '20-30 capacity'
+    }
+]
+export const filterItems: IFilters[] = [
+
+    {
+        id: 3,
+        name: 'board'
+    },
+    {
+        id: 4,
+        name: 'tv'
+    },
+    {
+        id: 5,
+        name: 'marker'
+    },
+    {
+        id: 6,
+        name: 'sockets'
+    },
+    {
+        id: 7,
+        name: 'window'
+    },
+    {
+        id: 8,
+        name: 'conditioner'
+    }
+]
+
 
 const Rooms: FC = () => {
     const [roomsFilter, SetRoomsFilter] = useState([])
@@ -258,63 +303,72 @@ const Rooms: FC = () => {
 
 
     const {width} = useWindowDimensions();
-    return <div className={cn(css.wrapper)}>
+    return (
+        <div className={cn(css.wrapper)}>
+            <ul className={cn(css.room_container)}>
+                <li className={cn(css.floor)}>
+                    <div className={cn(css.room_container__floor)}>
+                        <span className={cn(css.room_container__span)}>1-st floor</span>
+                        <div className={cn(css.filter)}>
+                            <StyledEngineProvider injectFirst>
+                                <DropdownMultiSelect filterItems={filterItems} filterCapacity={filterCapacity}
+                                                     value={'Filter'}/>
+                            </StyledEngineProvider>
+                        </div>
 
-        <ul className={cn(css.room_container)}>
-            <li className={cn(css.floor)}>
-                <div className={cn(css.room_container__floor)}>
-                    1-st floor
-                </div>
-                <Swiper
-                    className={cn(css.my_swiper)}
-                    navigation={true}
-                    slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
-                    modules={[Navigation]}
-                    spaceBetween={25}
-                    scrollbar={{draggable: true}}
-                    mousewheel={true}
-                >
-                    <ul className={cn(css.room_container__rooms)}>
-                        {rooms.filter(room => room.floor === 1).map(room =>
-                            <SwiperSlide className={cn(css.my_swiper__swiperslide)}
-                                         key={room.id}
-                                         virtualIndex={room.id}
-                            >
-                                <Room room={room} key={room.id}/>
+                    </div>
+                    <Swiper
+                        className={cn(css.my_swiper)}
+                        navigation={true}
+                        slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
+                        modules={[Navigation]}
+                        spaceBetween={25}
+                        scrollbar={{draggable: true}}
+                        mousewheel={true}
+                    >
+                        <ul className={cn(css.room_container__rooms)}>
+                            {rooms.filter(room => room.floor === 1).map(room =>
+                                <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                             key={room.id}
+                                             virtualIndex={room.id}
+                                >
+                                    <Room room={room} key={room.id}/>
 
-                            </SwiperSlide>
-                        )}
-                    </ul>
-                </Swiper>
-            </li>
+                                </SwiperSlide>
+                            )}
+                        </ul>
+                    </Swiper>
+                </li>
 
-            <li className={cn(css.floor)}>
-                <div className={cn(css.room_container__floor)}>
-                    2-nd floor
-                </div>
-                <Swiper
-                    className={cn(css.my_swiper)}
-                    navigation={true}
-                    slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
-                    modules={[Navigation]}
-                    spaceBetween={25}
-                    scrollbar={{draggable: true}}
-                    mousewheel={true}
-                >
-                    <ul className={cn(css.room_container__rooms)}>
-                        {rooms.filter(room => room.floor === 2).map(room =>
-                            <SwiperSlide className={cn(css.my_swiper__swiperslide)}
-                                         key={room.id}
-                                         virtualIndex={room.id}
-                            >
-                                <Room room={room} key={room.id}/>
-                            </SwiperSlide>
-                        )}
-                    </ul>
-                </Swiper>
-            </li>
-        </ul>
-    </div>
-}
+                <li className={cn(css.floor)}>
+                    <div className={cn(css.room_container__floor)}>
+                        <span className={cn(css.room_container__span)}>2-nd floor</span>
+                    </div>
+                    <Swiper
+                        className={cn(css.my_swiper)}
+                        navigation={true}
+                        slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
+                        modules={[Navigation]}
+                        spaceBetween={25}
+                        scrollbar={{draggable: true}}
+                        mousewheel={true}
+                    >
+                        <ul className={cn(css.room_container__rooms)}>
+                            {rooms.filter(room => room.floor === 2).map(room =>
+                                <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                             key={room.id}
+                                             virtualIndex={room.id}
+                                >
+                                    <Room room={room} key={room.id}/>
 
-export {Rooms}
+                                </SwiperSlide>
+                            )}
+                        </ul>
+                    </Swiper>
+                </li>
+            </ul>
+        </div>
+    );
+};
+
+export {Rooms};
