@@ -12,7 +12,7 @@ import { PopoverWrapper } from './PopoverWrapper';
 
 export interface ExtendedEventProps extends EventProps {
   viewType: 'day' | 'week' | 'month';
-  remove?: any,
+  remove?: any;
 }
 
 const Event: FC<ExtendedEventProps> = (eventData) => {
@@ -23,6 +23,7 @@ const Event: FC<ExtendedEventProps> = (eventData) => {
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
+    event.stopPropagation();
   };
 
   const open = Boolean(anchorEl);

@@ -6,7 +6,7 @@ $calendarHeaderHeight: 35px;
 
 .left-bar__container {
   height: 100%;
-  background: $lightGray940;
+  background: var(--light-gray-940);
   border: $border500;
   padding-bottom: 5px;
   border-top: none;
@@ -33,6 +33,7 @@ $calendarHeaderHeight: 35px;
     font-size: 1.2rem;
     position: relative;
 
+    color: var(--text-color-400);
     &::before {
       content: '';
       position: absolute;
@@ -40,7 +41,7 @@ $calendarHeaderHeight: 35px;
       width: 30%;
       height: 2px;
       border-radius: 0 5px 5px 0;
-      background-color: $lightGray370p;
+      background-color: var(--light-gray-370p);
     }
 
     &::after {
@@ -50,7 +51,7 @@ $calendarHeaderHeight: 35px;
       width: 30%;
       height: 2px;
       border-radius: 5px 0 0 5px;
-      background-color: $lightGray370p;
+      background-color: var(--light-gray-370p);
     }
   }
   &.half-hour {
@@ -67,13 +68,13 @@ $calendarHeaderHeight: 35px;
       width: 20%;
       height: 2px;
       border-radius: 5px 0 0 5px;
-      background-color: $lightGray280p;
+      background-color: var(--light-gray-280p);
     }
   }
   &.plus-15 {
     font-size: 0.6rem;
     font-weight: 600;
-    color: $textColor700;
+    color: var(--text-color-700);
     position: relative;
     padding-left: 15px;
 
@@ -84,7 +85,7 @@ $calendarHeaderHeight: 35px;
       width: 10%;
       height: 2px;
       border-radius: 5px 0 0 5px;
-      background-color: $lightGray180p;
+      background-color: var(--light-gray-180p);
     }
   }
 }

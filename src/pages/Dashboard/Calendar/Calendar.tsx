@@ -52,6 +52,7 @@ const Calendar: FC = () => {
 
   return (
     <div className="full-calendar">
+      
       <FullCalendar
         plugins={[
           dayGridPlugin,

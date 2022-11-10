@@ -36,6 +36,7 @@ const PopoverWrapper: FC<PopoverWrapperProps> = ({
         vertical: 'bottom',
         horizontal: 'right',
       }}
+      data-theme={'dark'}
     >
       <PopoverEvent handleClose={handleClose} event={event} />
     </Popover>
