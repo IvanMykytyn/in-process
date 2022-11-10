@@ -1,4 +1,4 @@
-@import "../../styles/global.module";
+@import '../../styles/global.module';
 
 .sidebar {
   max-width: 350px;
@@ -40,12 +40,18 @@
   left: -88px;
   transition: 0.5s color;
 
-
   &:hover,
   &:focus,
   &:active {
     color: var(--primary-color);
   }
+}
+.user-information {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 90%;
+  overflow-x: hidden;
 }
 
 .info {
@@ -54,19 +60,27 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
+  
   box-shadow: $outerBoxShadow;
   padding: 10px;
   border-radius: 15px;
   transition: opacity 0.5s;
+  gap: 10px;
 
   &__userName {
+    font-size: 1.2rem;
     transition: color 0.5s;
-    color: var(--text-color);
+    color: var(--text-color-400);
     @extend %montserrat-semi-bold-600;
 
     &:hover {
       color: var(--primary-color);
     }
+  }
+  &__email {
+    font-size: 0.8rem;
+    color: var(--text-color-500);
+
   }
 
   &__settings,
@@ -74,31 +88,58 @@
     padding: 10px;
     border-radius: 50%;
 
-    svg {
-      fill: var(--text-color);
-      transition: 0.5s fill;
+    // text-color filter
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%)
+      contrast(83%);
+    transition: 0.5s ease-in-out;
 
-      &:hover,
-      &:focus,
-      &:active {
-        fill: var(--primary-color);
-      }
-    }
-
-
+    cursor: pointer;
     &:hover,
     &:focus,
     &:active {
-      box-shadow: inset 0 1px 6px var(--gray), inset -3px 1px 4px var(--white);
+      // primary-color filter
+      filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg)
+        brightness(91%) contrast(94%);
     }
   }
 
-  &__svg {
-    width: 30px;
-    height: 30px;
+  &__settings {
+    img {
+      width: 20px;
+      width: 20px;
+    }
+  }
+
+  &__userImg {
+    img {
+      width: 30px;
+      width: 30px;
+    }
+  }
+}
+.logout-btn {
+  img {
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%)
+      contrast(83%);
+    transition: 0.5s ease-in-out;
+    width: 20px;
+    width: 20px;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    // primary-color filter
+    filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%)
+      contrast(94%);
   }
 }
 
+.icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .info.hide,
 .input.hide,
 .booked.hide,
@@ -183,4 +224,31 @@ button {
   }
 }
 
+.initials-avatar {
+  opacity: 0.5;
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
 
+  background: var(--gray);
+  border: 1.5px solid black;
+  
+  margin: 2px;
+  padding: 4px;
+  box-shadow: 1px 1px 2px rgb(172, 172, 172), -1px -1px 2px var(--white);
+
+  div {
+    color: #5a5a5a;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+}

@@ -22,6 +22,7 @@ import location from './location.svg';
 import room from './room.svg';
 import window from './window.svg';
 import conditioner from './conditioner.svg';
+import logout from './logout.svg';
 
 export {
   keyIcon,
@@ -47,5 +48,6 @@ export {
   location,
   room,
   conditioner,
-  window
+  window,
+  logout
 };

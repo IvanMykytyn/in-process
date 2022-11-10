@@ -19,6 +19,7 @@ $roomWidth: 140px;
   &__columns {
     z-index: 5;
     display: flex;
+
     .grid-column {
       width: $roomWidth;
       border-right: $border300;
@@ -35,7 +36,7 @@ $eventBorderRadius: 5px;
 .event__container {
   overflow: hidden;
   height: 100%;
-  background: $background;
+  background: var(--background);
   width: $roomWidth;
 
   border-radius: $eventBorderRadius;
@@ -45,7 +46,7 @@ $eventBorderRadius: 5px;
   //TODO Design: try to make shadow less bright
 
   &:hover {
-    background: $cardHoverBackground;
+    background: var(--card-hover-background);
     transition: 0.5s ease-in-out all;
   }
 }
@@ -88,10 +89,10 @@ $eventBorderRadius: 5px;
       width: 3px;
     }
     &__header {
-      color: $textColor300 !important;
+      color: var(--text-color-300) !important;
     }
     &__description {
-      color: $textColor300 !important;
+      color: var(--text-color-300) !important;
     }
   }
 }
@@ -132,12 +133,14 @@ $eventBorderRadius: 5px;
   &__header {
     font-size: 0.8rem;
     font-weight: 600;
+    color: var(--text-color-400);
   }
 
   &__description {
     font-size: 0.7rem;
     font-weight: 400;
     padding-top: 5px;
+    color: var(--text-color-500);
 
     @include threeDotsOnOverflow(2);
   }
@@ -195,7 +198,7 @@ $eventBorderRadius: 5px;
     padding-top: 1px;
     font-size: 0.7rem;
     font-weight: 400;
-    color: $textColor300;
+    color: var(--text-color-300);
   }
 }
 
@@ -206,6 +209,8 @@ $eventBorderRadius: 5px;
   padding: 10px;
   overflow: hidden;
   position: relative;
+
+  background: var(--light-gray-910);
 }
 
 .tools-bar {
@@ -256,28 +261,32 @@ $eventBorderRadius: 5px;
   font-size: 1.5rem;
 
   padding-left: 5px;
+  color: var(--text-color-400);
 }
 
 .content-wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: var(--text-color-500);
 }
 .date-information {
   font-size: 0.9rem;
   padding: 5px 5px 25px;
+  color: var(--text-color-400);
 }
 
 .content-with-icon {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 7fr);
 }
+
 .content-icon {
   width: 22px;
   height: 22px;
   margin-top: 3px;
-
   opacity: 0.7;
+  filter: var(--icon-filter);
 }
 .content-text {
   font-size: 0.9rem;
@@ -310,6 +319,7 @@ $eventBorderRadius: 5px;
   h3 {
     overflow: hidden;
     max-width: 45%;
+    color: var(--text-color-400);
   }
 }
 .event__month-title {

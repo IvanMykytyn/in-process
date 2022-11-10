@@ -88,6 +88,7 @@ export const logoutUser = createAsyncThunk<
 >('auth/logoutUser', async (_, thunkAPI) => {
   try {
     thunkAPI.dispatch(clearStore());
+
   } catch (err) {
     return thunkAPI.rejectWithValue('Logout failed');
   }

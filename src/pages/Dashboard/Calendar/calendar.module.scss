@@ -20,22 +20,6 @@
   gap: 30px;
 }
 
-.current-date {
-  text-align: center;
-  cursor: pointer;
-
-  &__month-day {
-    font-weight: 600;
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-  }
-
-  &__year {
-    font-weight: 600;
-    color: $textColor200;
-  }
-}
-
 .arrow-btn {
   padding: 0 20px;
   img {
@@ -49,14 +33,4 @@
   justify-content: flex-end;
   align-items: center;
   padding-right: 10px;
-}
-
-.mini-calendar {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 60px;
-  z-index: 10;
-  background: $background;
-  border-radius: 10px;
 }

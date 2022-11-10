@@ -1,23 +1,14 @@
 $default: #000000;
 $background: #dcdcdc;
 $containerBackground: #dcdcdc;
-$gridBackground: #edededae;
 
 $primaryColor: hsl(211, 49%, 55%);
 $primaryColor400: hsl(211, 43%, 43%);
 
 $white: #ffffff;
 
-$lightGray: hsl(0, 0%, 93%);
 $lightGray910: hsl(0, 0%, 91%);
 $lightGray940: hsl(0, 0%, 94%);
-
-// p = percent
-$lightGray180p: hsla(0, 0%, 69%, 0.18);
-$lightGray280p: hsla(0, 0%, 69%, 0.28);
-$lightGray370p: hsla(0, 0%, 69%, 0.37);
-
-$gray: #b0b0b0;
 
 $CalendarBntColor: $primaryColor;
 
@@ -27,16 +18,9 @@ $activeBtnBackground: hsla(210, 30%, 60%, 0.682);
 $nowIndicatorColor: hsla(211, 49%, 55%, 0.631);
 
 $textColor: hsl(0, 0%, 93%);
-$textColor700: hsl(0, 1%, 70%);
-$textColor650: hsl(0, 0%, 65%);
-$textColor300: hsl(0, 0%, 30%);
 
-$cardHoverBackground: #d1d1d1;
 
-$border500: 2px solid $gray;
-$border400: 2px solid $lightGray370p;
-$border300: 1.5px solid $lightGray280p;
-$border200: 1px solid $lightGray180p;
+
 
 :root {
   --background: #dcdcdc;
@@ -46,10 +30,33 @@ $border200: 1px solid $lightGray180p;
   --light-blue: #568cc580;
   --gray: #b0b0b0;
   --white: #ffffff;
-  --light-gray: #ededed;
   --container-background: #dcdcdc;
   --box-shadow-sidebar-btn-color: #B0B0B099;
   --login-circle: #B0CAE9BF;
+
+  --card-hover-background: #d1d1d1;
+
+  --grid-background:#edededae; 
+
+  --light-gray:hsl(0, 0%, 93%);
+  // p = percent
+  --light-gray-180p: hsla(0, 0%, 69%, 0.18);
+  --light-gray-280p: hsla(0, 0%, 69%, 0.28);
+  --light-gray-370p: hsla(0, 0%, 69%, 0.37);
+
+  --light-gray-910:hsl(0, 0%, 91%);
+  --light-gray-940:hsl(0, 0%, 94%);
+
+  --text-color-930:hsl(0, 0%, 93%);
+
+  --text-color-700: hsl(0, 1%, 70%);
+  --text-color-650: hsl(0, 0%, 65%);
+  --text-color-500: hsl(0, 0%, 50%);
+  --text-color-400: hsl(0, 0%, 40%);
+  --text-color-300: hsl(0, 0%, 30%);
+  --text-color-200: hsl(0, 0%, 20%);
+
+  --icon-filter: none;
 }
 
 [data-theme='dark'] {
@@ -62,12 +69,40 @@ $border200: 1px solid $lightGray180p;
   --light-gray: #ededed;
   --box-shadow-sidebar-btn-color: rgba(30, 30, 30, 0.7);
   --accent-text-color: #878787;
+
+  --card-hover-background: hsl(0, 0%, 18%);
+  
+  // p = percent
+  --light-gray-180p: hsla(0, 0%, 31%, 0.18);
+  --light-gray-280p: hsla(0, 0%, 31%, 0.28);
+  --light-gray-370p: hsla(0, 0%, 31%, 0.37);
+
+  --light-gray-910:hsl(0, 0%, 9%);
+  --light-gray-940: #212121;
+
+  --text-color-930:hsl(0, 0%, 7%);
+
+  --text-color-700: hsl(0, 1%, 30%);
+  --text-color-650: hsl(0, 0%, 35%);
+  --text-color-500: hsl(0, 0%, 50%);
+  --text-color-400: hsl(0, 0%, 60%);
+  --text-color-300: hsl(0, 0%, 70%);
+  --text-color-200: hsl(0, 0%, 80%);
+  
+  --grid-background: hsl(0, 0%, 9%);
+
+  --icon-filter: invert(45%) sepia(0%) saturate(3099%) hue-rotate(191deg) brightness(91%) contrast(105%);
 }
 
 $outerBoxShadow: 3px 3px 7px var(--gray),
 -3px -3px 7px var(--white);
 $innerBoxShadow: inset 3px 3px 7px var(--gray),
 inset -3px -3px 7px var(--white);
+
+$border500: 2px solid var(--gray);
+$border400: 2px solid var(--light-gray-370p);
+$border300: 1.5px solid var(--light-gray-280p);
+$border200: 1px solid var(--light-gray-180p);
 
 
 %montserrat-regular-400 {
