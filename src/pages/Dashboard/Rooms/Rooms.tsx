@@ -1,8 +1,7 @@
-import {FC,useState,useEffect} from 'react';
+import {FC, useEffect} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel} from 'swiper';
 import {StyledEngineProvider} from '@mui/material/styles';
-
 
 // styles
 import cn from 'classnames';
@@ -11,18 +10,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import "swiper/css/scrollbar";
 
-
-
-import {Room,DropdownMultiSelect} from '../../../components';
-import {useWindowDimensions} from '../../../hooks';
-import {roomsService} from 'services/rooms.service';
+import {Room, DropdownMultiSelect} from '../../../components';
+import {useAppDispatch, useWindowDimensionsHook} from '../../../hooks';
 import {IRooms} from '../../../models'
-
+import {roomActions} from "../../../store";
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
 
- export interface IFilters{
+export interface IFilters {
     id: number,
     name: string
 }
@@ -299,24 +295,27 @@ export const filterItems: IFilters[] = [
 
 
 const Rooms: FC = () => {
-    // const [roomsFilter, SetRoomsFilter] = useState([])
-    // const[rooms,setRooms]= useState<IRooms[]>([])
 
-    // useEffect(()=>{
-    //     roomsService.getAll().then(({data})=> setRooms(data))
-    // },[])
+    // const {rooms} = useAppSelector(state => state.rooms);
+    const dispatch = useAppDispatch();
 
+    useEffect(()=>{
+       dispatch(roomActions.getAll())
+    },[dispatch]);
 
-    const {width} = useWindowDimensions();
+    const {width} = useWindowDimensionsHook();
     return (
         <div className={cn(css.wrapper)}>
             <ul className={cn(css.room_container)}>
                 <li className={cn(css.floor)}>
                     <div className={cn(css.room_container__floor)}>
-                        <span className={cn(css.room_container__span)}>1-st floor</span>
+                        <span className={cn(css.room_container__span)}>
+                            1-st floor
+                        </span>
                         <div className={cn(css.filter)}>
                             <StyledEngineProvider injectFirst>
-                                <DropdownMultiSelect filterItems={filterItems} filterCapacity={filterCapacity}
+                                <DropdownMultiSelect filterItems={filterItems}
+                                                     filterCapacity={filterCapacity}
                                                      value={'Filter'}/>
                             </StyledEngineProvider>
                         </div>
@@ -347,7 +346,9 @@ const Rooms: FC = () => {
 
                 <li className={cn(css.floor)}>
                     <div className={cn(css.room_container__floor)}>
-                        <span className={cn(css.room_container__span)}>2-nd floor</span>
+                        <span className={cn(css.room_container__span)}>
+                            2-nd floor
+                        </span>
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}

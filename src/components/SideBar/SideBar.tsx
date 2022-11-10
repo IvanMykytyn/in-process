@@ -12,7 +12,7 @@ import { Input } from '../index';
 import { setting, search, user, clock } from '../../assets/images/icons';
 import { BookedRoom } from 'components/BookedRoom/BookedRoom';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectBooking, toggleSideBar } from 'store/features/bookingSlice';
+import { selectBooking, toggleSideBar } from 'store/slices/bookingSlice';
 import Moment from 'react-moment';
 
 interface Instruments {

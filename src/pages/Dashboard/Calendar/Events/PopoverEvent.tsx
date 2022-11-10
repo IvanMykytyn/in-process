@@ -15,7 +15,7 @@ import cn from 'classnames';
 import scss from './events.module.scss';
 import { EventProps } from '../constants';
 import { selectUser, useAppDispatch, useAppSelector } from 'store';
-import { removeBooking } from 'store/features/bookingSlice';
+import { removeBooking } from 'store/slices/bookingSlice';
 
 type PopoverEventProps = {
   handleClose: () => void;
