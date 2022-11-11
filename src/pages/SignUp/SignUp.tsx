@@ -16,6 +16,7 @@ import { Input, Button } from 'components/index';
 import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
 import { UserSignUpProps } from 'models';
+import { isLoggedIn } from 'services';
 
 const initialValues = {
   firstName: '',
@@ -30,7 +31,7 @@ const SignUp: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
 
   useEffect(() => {
-    if (user) {
+    if (isLoggedIn()) {
       navigate('/dashboard');
     }
   }, [user, navigate]);
@@ -51,7 +52,7 @@ const SignUp: FC = () => {
       if (!userId || !parseInt(userId)) throw new Error('Bad Url');
       await dispatch(signUpUser({ ...values, id: parseInt(userId) }));
     } catch (err) {
-      console.log(err)
+      console.log(err);
 
       // NotifyService.error(err?.message);
     }
