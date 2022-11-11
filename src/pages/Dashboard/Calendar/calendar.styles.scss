@@ -8,6 +8,7 @@ $lineColor: $nowIndicatorColor;
   height: 90%;
 
   padding: 10px;
+  position: relative;
 }
 
 .fc {
@@ -326,11 +327,17 @@ $lineColor: $nowIndicatorColor;
   flex-direction: column;
   gap: 3px;
 }
+
 .fc-popover {
-  // z-index: 90 !important;
-  background: var(--light-gray) !important;
+  z-index: 90 !important;
+  background: var(--more-card-background) !important;
+
+  border: 1px solid var(--text-color-930) !important;
 }
 
+.fc-theme-standard td, .fc-theme-standard th{
+  border: 1px solid var(--text-color-930); 
+}
 .fc-v-event,
 .fc-daygrid-event {
   background: var(--background);

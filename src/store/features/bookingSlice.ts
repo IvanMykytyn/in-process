@@ -1,18 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Booking } from 'models';
+import { EventProps } from 'pages/Dashboard/Calendar/constants';
 import type { RootState } from 'store';
 import { bookings } from 'utils';
 
 interface BookingState {
   isLoading: boolean;
-  bookings: Array<Booking>;
   isSideBarOpen: boolean;
+  isPopoverOpen: boolean;
+
+  bookings: Array<Booking>;
+  currentBooking: EventProps | null;
 }
 
 const initialState: BookingState = {
-  isSideBarOpen: true,
   isLoading: false,
+  isSideBarOpen: true,
+  isPopoverOpen: false,
+
   bookings: bookings,
+  currentBooking: null,
 };
 
 export const bookingSlice = createSlice({
@@ -25,10 +32,17 @@ export const bookingSlice = createSlice({
     removeBooking: (state, { payload }: PayloadAction<number>) => {
       state.bookings = state.bookings.filter((booking) => booking.id !== payload);
     },
+    togglePopover: (state) => {
+      state.isPopoverOpen = !state.isPopoverOpen;
+    },
+    setCurrentBooking: (state, { payload }: PayloadAction<EventProps>) => {
+      state.currentBooking = payload;
+    },
   },
 });
 
-export const { toggleSideBar, removeBooking } = bookingSlice.actions;
+export const { toggleSideBar, removeBooking, togglePopover, setCurrentBooking } =
+  bookingSlice.actions;
 export const selectBooking = (state: RootState) => state.booking;
 
 export default bookingSlice.reducer;
