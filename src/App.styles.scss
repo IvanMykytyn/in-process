@@ -1,13 +1,6 @@
 @import "styles/global.module";
 @import "styles/reset.styles";
 
-body {
-  color: var(--text-color);
-  line-height: 1.2;
-  font-family: sans-serif;
-  background: var(--container-background);
-}
-
 :root {
   --toastify-color-light: #dcdcdc !important;
 }
@@ -16,10 +9,6 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   transition: all .5s;
-}
-
-* {
-  @extend %montserrat-regular-400;
 }
 
 button {

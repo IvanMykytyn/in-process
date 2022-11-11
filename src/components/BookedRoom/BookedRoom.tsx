@@ -49,32 +49,6 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
                     }
                 </li>
             </ul>
-            <li className={css.booked__staff}>
-                <img src={staffIcon} alt="staff" width={15} height={15}/>
-                <div className={css.booked__wrap}>
-                <span>
-                    Tools:
-                </span>
-                    <ul className={css.booked__icons}>
-                        {
-                            tools.map((tool, i) =>
-                                instruments.map(inst => inst.id === tool.id ?
-                                    <li key={tool.id}>
-                                        {
-                                            <img
-                                                src={tool.img}
-                                                alt={tool.alt}
-                                                width={15}
-                                                height={15}/>
-                                        }
-                                    </li>
-                                    :
-                                    ''
-                                )
-                            )}
-                    </ul>
-                </div>
-            </li>
         </ul>
     );
 };

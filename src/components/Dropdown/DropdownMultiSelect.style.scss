@@ -1,67 +1,76 @@
 @import "../../styles/global.module";
 
-.css-2m9kme-MuiFormControl-root{
+.css-2m9kme-MuiFormControl-root {
   width: 300px;
   margin: 0;
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus{
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus {
   border-radius: 10px;
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   font-family: "Montserrat-Regular", sans-serif;
+  color: var(--accent-text-color) !important;
 }
 
-.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root{
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
   display: none;
 }
 
-.filter_text{
+.filter_text {
   padding: 10px 10px 10px 20px;
   font-family: "Montserrat-SemiBold", sans-serif;
   font-weight: 300;
-  color: #565656;
+  color: var(--accent-text-color) !important;
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border: none;
 }
 
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
-  top: 125px!important;
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  top: 125px !important;
+  background: var(--background) !important;
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
-  background-color: $containerBackground;
-  box-shadow: $outerBoxShadow;
-  border-radius: 10px;
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 10px 10px;
+  border-radius: 10px;
+  box-shadow: $outerBoxShadow;
+  background-color: var(--background);
+
 }
 
-.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
   font-family: "Montserrat-Regular", sans-serif;
   top: -5px;
   left: 0;
+  color: var(--accent-text-color);
 }
 
-.css-6hp17o-MuiList-root-MuiMenu-list{
-  background-color: $containerBackground;
-  box-shadow: $innerBoxShadow;
+.css-6hp17o-MuiList-root-MuiMenu-list {
   border-radius: 15px;
+  box-shadow: $innerBoxShadow;
+  background-color: var(--background) !important;
 }
 
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
-  background-color: $containerBackground;
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
   box-shadow: none;
   border-radius: 15px;
+  background: var(--background) !important;
 }
 
-.css-10hburv-MuiTypography-root{
+.css-10hburv-MuiTypography-root {
   font-family: "Montserrat-Regular", sans-serif;
 }
 
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover {
-  border-radius: 10px!important;
+  border-radius: 15px !important;
+  background: var(--background) !important;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  background-color: var(--background) !important;
 }
