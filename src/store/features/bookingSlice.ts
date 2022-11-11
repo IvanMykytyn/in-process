@@ -6,18 +6,21 @@ import { bookings } from 'utils';
 
 interface BookingState {
   isLoading: boolean;
-  bookings: Array<Booking>;
   isSideBarOpen: boolean;
   isPopoverOpen: boolean;
-  anchorEl: HTMLButtonElement | null;
+
+  bookings: Array<Booking>;
+  currentBooking: EventProps | null;
 }
 
 const initialState: BookingState = {
+  isLoading: false,
   isSideBarOpen: true,
   isPopoverOpen: false,
-  isLoading: false,
+
   bookings: bookings,
-  anchorEl: null,
+  currentBooking: null,
+
 };
 
 export const bookingSlice = createSlice({
@@ -30,16 +33,18 @@ export const bookingSlice = createSlice({
     removeBooking: (state, { payload }: PayloadAction<number>) => {
       state.bookings = state.bookings.filter((booking) => booking.id !== payload);
     },
-    openPopover: (state) => {
+    togglePopover: (state) => {
       state.isPopoverOpen = !state.isPopoverOpen;
     },
-    setAnchor: (state, { payload }: PayloadAction<HTMLButtonElement>) => {
-      // if (!state.anchorEl) state.anchorEl = payload;
+    setCurrentBooking: (state, { payload }: PayloadAction<EventProps>) => {
+      state.currentBooking = payload;
+
     },
   },
 });
 
-export const { toggleSideBar, removeBooking, openPopover, setAnchor } =
+export const { toggleSideBar, removeBooking, togglePopover, setCurrentBooking } =
+
   bookingSlice.actions;
 export const selectBooking = (state: RootState) => state.booking;
 
