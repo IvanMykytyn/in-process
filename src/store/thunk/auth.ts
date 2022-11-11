@@ -7,12 +7,16 @@ import type {
   UserSignUpProps,
   UserEmailField,
   UserWithToken,
+  ResetPasswordProps,
 } from 'models';
 import {
   loginRequest,
   signUpRequest,
   getAccessRequest,
   addUsersRequest,
+  changePasswordRequest,
+  forgotPasswordRequest,
+  resetPasswordRequest,
 } from 'services';
 import { clearStore } from 'store/features/authSlice';
 import { AppDispatch } from 'store';
@@ -59,7 +63,7 @@ export const signUpUser = createAsyncThunk<
 
 // change return type
 export const getAccessUser = createAsyncThunk<
-  UserWithToken,
+  void,
   UserEmailField,
   {
     rejectValue: ErrorMessageObject;
@@ -77,18 +81,21 @@ export const getAccessUser = createAsyncThunk<
     return rejectWithValue(error.response.data);
   }
 });
+export interface logoutUserNotifyProps {
+  notify: boolean;
+}
 
 export const logoutUser = createAsyncThunk<
-  undefined,
-  undefined,
+  logoutUserNotifyProps,
+  boolean | undefined,
   {
     rejectValue: string;
     dispatch?: AppDispatch;
   }
->('auth/logoutUser', async (_, thunkAPI) => {
+>('auth/logoutUser', async (notify = true, thunkAPI) => {
   try {
     thunkAPI.dispatch(clearStore());
-
+    return { notify };
   } catch (err) {
     return thunkAPI.rejectWithValue('Logout failed');
   }
@@ -103,6 +110,70 @@ export const addUsers = createAsyncThunk<
 >('auth/addUsers', async (users, { rejectWithValue }) => {
   try {
     await addUsersRequest(users);
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export interface ChangePasswordProps {
+  newPassword: string;
+}
+
+export const changePassword = createAsyncThunk<
+  void,
+  ChangePasswordProps,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>('auth/changePassword', async ({ newPassword }, { rejectWithValue }) => {
+  try {
+    const response = await changePasswordRequest({ newPassword });
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const forgotPassword = createAsyncThunk<
+  void,
+  UserEmailField,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>('auth/forgotPassword', async ({ email }, { rejectWithValue }) => {
+  try {
+    const response = await forgotPasswordRequest({ email });
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const resetPassword = createAsyncThunk<
+  void,
+  ResetPasswordProps,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>('auth/resetPassword', async ({ id, newPassword }, { rejectWithValue }) => {
+  try {
+    const response = await resetPasswordRequest({ id, newPassword });
+    return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
 

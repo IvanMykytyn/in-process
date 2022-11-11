@@ -87,7 +87,7 @@ const PersonalInformationSection: FC = () => {
         errorText={errors.lastName?.message}
       />
 
-      <SectionButtons isLoading={isLoading} handleCancel={handleCancel}/>
+      <SectionButtons handleCancel={handleCancel}/>
     </SectionLayout>
   );
 };

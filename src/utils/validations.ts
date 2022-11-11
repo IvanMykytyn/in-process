@@ -18,7 +18,7 @@ const validatePassword = Joi.string()
     'string.pattern.base': 'The password must be longer then eight characters.',
   });
 
-const validateConfirmPassword = Joi.any().valid(Joi.ref('password')).messages({
+const validateConfirmPassword = Joi.any().valid(Joi.ref('newPassword')).messages({
   'any.required': 'The password must be the same.',
   'any.only': 'The password must be the same.',
 });

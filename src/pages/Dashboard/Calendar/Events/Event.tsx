@@ -18,8 +18,8 @@ export interface ExtendedEventProps extends EventProps {
 
 const Event: FC<ExtendedEventProps> = (eventData) => {
   const dispatch = useAppDispatch();
-
   const { color, viewType } = eventData;
+
   const { styles, currentEventHeight } = getEventPosition(rooms, eventData);
 
   const isDayViewType = viewType === 'day';
