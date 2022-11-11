@@ -1,7 +1,8 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useCallback, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel} from 'swiper';
 import {StyledEngineProvider} from '@mui/material/styles';
+import {useNavigate} from "react-router-dom";
 
 // styles
 import cn from 'classnames';
@@ -172,7 +173,7 @@ export const rooms: IRooms[] = [
         ]
     },
     {
-        id: 7,
+        id: 30,
         name: 'Room1',
         img: 'https://t4.ftcdn.net/jpg/03/84/55/29/360_F_384552930_zPoe9zgmCF7qgt8fqSedcyJ6C6Ye3dFs.jpg',
         description: 'the room has PS and TV.That is all what you need',
@@ -293,7 +294,6 @@ export const filterItems: IFilters[] = [
     }
 ]
 
-
 const Rooms: FC = () => {
 
     // const {rooms} = useAppSelector(state => state.rooms);
@@ -316,7 +316,8 @@ const Rooms: FC = () => {
                             <StyledEngineProvider injectFirst>
                                 <DropdownMultiSelect filterItems={filterItems}
                                                      filterCapacity={filterCapacity}
-                                                     value={'Filter'}/>
+                                                     name={'Filter'}
+                                />
                             </StyledEngineProvider>
                         </div>
 
