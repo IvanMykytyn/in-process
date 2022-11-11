@@ -70,7 +70,7 @@ $calendarHeaderHeight: 35px;
   height: $calendarHeaderHeight;
   border-radius: 5px 0 0 0;
   border: $border500;
-  background: var(light-gray-940);
+  background: var(--light-gray-940);
 
   z-index: 7;
 }

@@ -4,7 +4,6 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { useForm } from 'react-hook-form';
 
 // styles
-import cn from 'classnames';
 import css from './forgot-password.module.scss';
 
 // components
@@ -16,14 +15,20 @@ import { FormLayout } from 'pages/FormLayout/FormLayout';
 
 // icons
 import { keyIcon, arrowLeft } from 'assets/images/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { resetPassword, useAppDispatch } from 'store';
+import { ResetPasswordProps } from 'models';
 
 const ResetPasswordValidation = Joi.object({
-  password: validatePassword,
+  newPassword: validatePassword,
   confirmPassword: validateConfirmPassword,
 });
 
 const ResetPassword: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { id = '' } = useParams();
+
   const {
     register,
     handleSubmit,
@@ -31,20 +36,22 @@ const ResetPassword: FC = () => {
     reset,
   } = useForm({
     defaultValues: {
-      password: '',
+      newPassword: '',
       confirmPassword: '',
     },
     resolver: joiResolver(ResetPasswordValidation),
     mode: 'onSubmit',
   });
 
-  // TODO create service and thunk
-  const SubmitResetPasswordForm = async (value: object) => {
+  const SubmitResetPasswordForm = async ({
+    newPassword,
+  }: Omit<ResetPasswordProps, 'id'>) => {
     try {
-      await console.log(value);
-
-      // reset()
-    } catch (e) {}
+      await dispatch(resetPassword({ id, newPassword }));
+      navigate('/login');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -57,15 +64,14 @@ const ResetPassword: FC = () => {
         className={css['forgot-password__form']}
         onSubmit={handleSubmit(SubmitResetPasswordForm)}
       >
-        {/* TODO move error message to Input Component */}
         <Input
           className={css['forgot-password__form-input']}
           type={'password'}
           label={'password'}
-          {...register('password')}
-          inputRef={register('password').ref}
-          error={!!errors.password}
-          errorText={errors.password?.message}
+          {...register('newPassword')}
+          inputRef={register('newPassword').ref}
+          error={!!errors.newPassword}
+          errorText={errors.newPassword?.message}
         />
 
         <Input

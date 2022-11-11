@@ -8,6 +8,8 @@ import { clock } from 'assets/images/icons';
 
 import { EventProps } from '../constants';
 import { getEventPosition } from '../utils';
+import { useAppDispatch } from 'store';
+import { openPopover } from 'store/features/bookingSlice';
 import { PopoverWrapper } from './PopoverWrapper';
 
 export interface ExtendedEventProps extends EventProps {
@@ -17,13 +19,13 @@ export interface ExtendedEventProps extends EventProps {
 
 const Event: FC<ExtendedEventProps> = (eventData) => {
   const { color, viewType } = eventData;
-
+  const dispatch = useAppDispatch();
   const { styles, currentEventHeight } = getEventPosition(rooms, eventData);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
-    event.stopPropagation();
+    // dispatch(openPopover());
   };
 
   const open = Boolean(anchorEl);
