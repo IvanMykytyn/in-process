@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const validateEmail = Joi.string()
   .required()
-  .regex(/@incorainc.com\s*$/)
+  // .regex(/@incorainc.com\s*$/)
   .messages({
     'string.empty': 'The email cannot be empty.',
     'string.pattern.base': 'The email can only end with incorainc.com',
@@ -28,10 +28,10 @@ const validateName = Joi.string().min(1).max(255).messages({
 });
 
 const validateAddUserEmail = Joi.string()
-  .regex(/@incorainc.com\s*$/)
+  // .regex(/@incorainc.com\s*$/)
   .messages({
     'string.empty': 'The email cannot be empty.',
-    'string.pattern.base': 'The email can only end with incorainc.com',
+    // 'string.pattern.base': 'The email can only end with incorainc.com',
   });
 
 const validateArrayOfEmails = Joi.array()

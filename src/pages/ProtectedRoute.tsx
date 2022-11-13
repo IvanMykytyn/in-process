@@ -1,20 +1,20 @@
 import { FC, PropsWithChildren, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { isLoggedIn, NotifyService } from 'services';
-import { selectUser, useAppSelector } from 'store';
+import { getMe, selectUser, useAppDispatch, useAppSelector } from 'store';
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
   const { user } = useAppSelector(selectUser);
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!isLoggedIn()) {
-      navigate('/login');
-      NotifyService.error('Please login again');
+    if (isLoggedIn() && !user) {
+      dispatch(getMe());
     }
-  }, [navigate, user]);
+  }, [dispatch]);
 
   if (!isLoggedIn()) {
+    // NotifyService.error('Please login');
     return <Navigate to="/login" />;
   }
 

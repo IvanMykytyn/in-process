@@ -81,7 +81,6 @@
   &__email {
     font-size: 0.8rem;
     color: var(--text-color-500);
-
   }
 
   &__settings,
@@ -90,7 +89,8 @@
     border-radius: 50%;
 
     // text-color filter
-    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%)
+      contrast(83%);
     transition: 0.5s ease-in-out;
 
     cursor: pointer;
@@ -99,7 +99,8 @@
     &:focus,
     &:active {
       // primary-color filter
-      filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%) contrast(94%);
+      filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg)
+        brightness(91%) contrast(94%);
     }
   }
 
@@ -120,7 +121,8 @@
 
 .logout-btn {
   img {
-    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%)
+      contrast(83%);
     transition: 0.5s ease-in-out;
     width: 20px;
     width: 20px;
@@ -130,7 +132,8 @@
   &:focus,
   &:active {
     // primary-color filter
-    filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%) contrast(94%);
+    filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%)
+      contrast(94%);
   }
 }
 
@@ -227,8 +230,11 @@ button {
 
 .initials-avatar {
   opacity: 0.5;
-  width: 50px;
-  height: 47px;
+  min-width: 48px;
+  width: 48px;
+  min-height: 48px;
+  height: 48px;
+  
   cursor: pointer;
   border-radius: 50%;
   display: inline-block;

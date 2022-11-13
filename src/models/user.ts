@@ -9,7 +9,7 @@ interface UserEmailField {
   email: string;
 }
 interface UserIdField {
-  id: number;
+  id: string;
 }
 
 type UserLoginProps = UserEmailField & UserPasswordField;
