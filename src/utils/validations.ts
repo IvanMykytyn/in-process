@@ -12,10 +12,10 @@ const validatePassword = Joi.string()
   .required()
   .min(8)
   .max(255)
-  .regex(/^(?=.?[A-Z])(?=.?[a-z]).{8,255}$/)
+  .regex(/^(?=.*[A-Z])(?=.*[a-z]).{8,255}$/)
   .messages({
     'string.empty': 'The password cannot be empty.',
-    'string.pattern.base': 'The password must be longer then eight characters.',
+    'string.pattern.base': 'The password must be longer than 8 characters and contain at least one capital letter.',
   });
 
 const validateConfirmPassword = Joi.any().valid(Joi.ref('newPassword')).messages({
