@@ -5,6 +5,7 @@ import type {
   UserEmailField,
   ResetPasswordProps,
   UserWithToken,
+  User,
   // UserUpdateProps,
 } from 'models';
 import { axiosService } from './axiosService';
@@ -29,6 +30,8 @@ const resetPasswordRequest = ({ id, newPassword }: ResetPasswordProps): PR<void>
 const changePasswordRequest = ({ newPassword }: ChangePasswordProps): PR<void> =>
   axiosService.put(`${urls.users}/changePassword`, { newPassword });
 
+const getMeRequest = (): PR<User> => axiosService.get(`${urls.users}/me`);
+
 const isLoggedIn = (): boolean => {
   const token: string | null = getFromLocalStorage('token');
   return !!token;
@@ -45,4 +48,5 @@ export {
   resetPasswordRequest,
   changePasswordRequest,
   isLoggedIn,
+  getMeRequest,
 };

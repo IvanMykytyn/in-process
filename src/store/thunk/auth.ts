@@ -8,6 +8,7 @@ import type {
   UserEmailField,
   UserWithToken,
   ResetPasswordProps,
+  User,
 } from 'models';
 import {
   loginRequest,
@@ -17,6 +18,7 @@ import {
   changePasswordRequest,
   forgotPasswordRequest,
   resetPasswordRequest,
+  getMeRequest,
 } from 'services';
 import { clearStore } from 'store/features/authSlice';
 import { AppDispatch } from 'store';
@@ -173,6 +175,26 @@ export const resetPassword = createAsyncThunk<
 >('auth/resetPassword', async ({ id, newPassword }, { rejectWithValue }) => {
   try {
     const response = await resetPasswordRequest({ id, newPassword });
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const getMe = createAsyncThunk<
+  User,
+  void,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>('auth/getMe', async (_, { rejectWithValue }) => {
+  try {
+    const response = await getMeRequest();
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
