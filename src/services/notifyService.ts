@@ -17,7 +17,7 @@ const NotifyService = {
   loading: (notifyText: string = defaultLoadingText): Id =>
     toast.loading(notifyText),
   update: (id: Id, message: string, type: TypeOptions) =>
-    toast.update(id, { render: message, type, isLoading: false, autoClose: 3000 }),
+    toast.update(id, { render: message, type, isLoading: false, autoClose: 5000 }),
 
   promise: (
     promise: AxiosRes<any>,

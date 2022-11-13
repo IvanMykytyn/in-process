@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const validateEmail = Joi.string()
   .required()
-  .regex(/@incorainc.com\s*$/)
+  // .regex(/@incorainc.com\s*$/)
   .messages({
     'string.empty': 'The email cannot be empty.',
     'string.pattern.base': 'The email can only end with incorainc.com',

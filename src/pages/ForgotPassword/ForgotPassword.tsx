@@ -23,7 +23,7 @@ const ForgotPasswordValidation = Joi.object({
 
 const ForgotPassword: FC = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     register,
@@ -41,7 +41,7 @@ const ForgotPassword: FC = () => {
   const SubmitForgotPasswordForm = async ({ email }: UserEmailField) => {
     try {
       await dispatch(forgotPassword({ email }));
-      navigate('/login');
+      // navigate('/login');
     } catch (err) {
       console.log(err);
     }
