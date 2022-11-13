@@ -32,6 +32,8 @@ const changePasswordRequest = ({ newPassword }: ChangePasswordProps): PR<void> =
 
 const getMeRequest = (): PR<User> => axiosService.get(`${urls.users}/me`);
 
+const getUsersRequest = (): PR<User[]> => axiosService.get(`${urls.users}`);
+
 const isLoggedIn = (): boolean => {
   const token: string | null = getFromLocalStorage('token');
   return !!token;
@@ -49,4 +51,5 @@ export {
   changePasswordRequest,
   isLoggedIn,
   getMeRequest,
+  getUsersRequest,
 };

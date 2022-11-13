@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect, useCallback} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 
@@ -6,23 +6,24 @@ import css from './BookingForm.module.scss';
 
 import {Badge, Button, Input, MultipleSelectWithBadges} from 'components';
 import {AutocompleteRenderInputParams, TextField} from '@mui/material';
-
-const names = [
-    'RomanGin20@incorainc.com',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
+import { getUsersRequest } from 'services';
 
 const BookingForm: FC = () => {
-
     const navigate = useNavigate();
+
+    const [users, setUsers] = useState<string[]>([]);
+
+    const getUsers = useCallback(
+      async () => {
+        const response = await getUsersRequest();
+        const usersData = response.data.map((user) => user.email);
+        setUsers(usersData)
+      }, [setUsers])
+  
+    useEffect(() => {
+      getUsers();
+    }, [getUsers]);
+  
 
     const getNavigate = () => {
         navigate(-1);
@@ -101,7 +102,7 @@ const BookingForm: FC = () => {
                         </Input>
                     </label>
                     <label className={`${css.booking__label} ${css['booking__label--select']}`}>
-                        <MultipleSelectWithBadges options={names} setSelectedOptions={setMembers}
+                        <MultipleSelectWithBadges options={users} setSelectedOptions={setMembers}
                                                   renderInput={(params: AutocompleteRenderInputParams) => (
                                                       <TextField {...params} />
                                                   )}
