@@ -316,7 +316,8 @@ const Rooms: FC = () => {
                         <span className={cn(css.room_container__span)}>1-st floor</span>
                         <div className={cn(css.filter)}>
                             <StyledEngineProvider injectFirst>
-                                <DropdownMultiSelect filterItems={filterItems} filterCapacity={filterCapacity}
+                                <DropdownMultiSelect filterItems={filterItems}
+                                                     filterCapacity={filterCapacity}
                                                      value={'Filter'}/>
                             </StyledEngineProvider>
                         </div>

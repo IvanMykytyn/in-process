@@ -1,4 +1,4 @@
-import react,{FC,useState} from 'react';
+import {FC,useState} from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
