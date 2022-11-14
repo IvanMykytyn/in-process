@@ -298,7 +298,7 @@ const Rooms: FC = () => {
 
     // const {rooms} = useAppSelector(state => state.rooms);
     const dispatch = useAppDispatch();
-
+    
     useEffect(()=>{
        dispatch(roomActions.getAll())
     },[dispatch]);
