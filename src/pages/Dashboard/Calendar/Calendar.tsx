@@ -16,7 +16,7 @@ import { buildEvents } from './FullCalendarComponents/BuildEvent';
 import { colorFromString } from 'utils';
 import moment from 'moment';
 import { useAppSelector } from 'store';
-import { selectBooking } from 'store/features/bookingSlice';
+import { selectBooking } from 'store/slices/bookingSlice';
 import { PopoverWrapper } from './Events';
 
 const Calendar: FC = () => {
