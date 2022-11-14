@@ -16,6 +16,7 @@ import { Input, Button } from 'components/index';
 import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
 import { UserSignUpProps } from 'models';
+import { isLoggedIn, NotifyService } from 'services';
 
 const initialValues = {
   firstName: '',
@@ -30,7 +31,7 @@ const SignUp: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
 
   useEffect(() => {
-    if (user) {
+    if (isLoggedIn()) {
       navigate('/dashboard');
     }
   }, [user, navigate]);
@@ -48,12 +49,14 @@ const SignUp: FC = () => {
   let submit = async (values: Omit<UserSignUpProps, 'id'>) => {
     try {
       const userId = params.userId;
-      if (!userId || !parseInt(userId)) throw new Error('Bad Url');
-      await dispatch(signUpUser({ ...values, id: parseInt(userId) }));
+      if (userId) {
+        await dispatch(signUpUser({ ...values, id: userId }));
+      } else {
+        NotifyService.error('Invalid Link');
+        navigate('/login');
+      }
     } catch (err) {
-      console.log(err)
-
-      // NotifyService.error(err?.message);
+      console.log(err);
     }
   };
 

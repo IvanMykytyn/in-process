@@ -8,6 +8,7 @@ $lineColor: $nowIndicatorColor;
   height: 90%;
 
   padding: 10px;
+  position: relative;
 }
 
 .fc {
@@ -39,7 +40,7 @@ $lineColor: $nowIndicatorColor;
         margin: 10px 0;
         @include centerDiv;
         border-right: $border500;
-
+        color: var(--text-color-400);
         a {
           font-size: 0.8rem;
           font-weight: 600;
@@ -50,9 +51,16 @@ $lineColor: $nowIndicatorColor;
 }
 
 .fc-scrollgrid {
-  background: $lightGray910;
+  background: var(--light-gray-910);
   border: $border500 !important;
   border-radius: 5px;
+}
+
+.fc-daygrid-day-top,
+.fc-popover-title,
+.fc-timegrid-axis-frame,
+.fc-daygrid-day-bottom {
+  color: var(--text-color-500);
 }
 
 .fc-today-button {
@@ -120,17 +128,16 @@ $lineColor: $nowIndicatorColor;
   }
 
   .fc-button-active {
-    color: $textColor !important;
+    color: var(--text-color-930) !important;
     background-color: $primaryColor !important;
     cursor: default;
     margin: 5px !important;
     border-radius: 5px !important;
 
-
     &:hover,
     &:focus,
     &:active {
-      color: $textColor !important;
+      color: var(--text-color-930) !important;
       background-color: $primaryColor !important;
 
       pointer-events: none;
@@ -171,6 +178,7 @@ $lineColor: $nowIndicatorColor;
   font-size: 1.15rem !important;
   letter-spacing: 1px;
   text-align: center;
+  color: var(--text-color-300);
 }
 .fc-prev-button,
 .fc-next-button {
@@ -195,7 +203,7 @@ $lineColor: $nowIndicatorColor;
   padding-left: 65px !important;
 }
 .fc-icon {
-  color: $textColor300;
+  color: var(--text-color-300);
 }
 
 .fc-timegrid-slot-label-frame {
@@ -219,7 +227,7 @@ $lineColor: $nowIndicatorColor;
   padding: 11px 0 0 0 !important;
 }
 .fc-scrollgrid-section-header {
-  background: $lightGray940 !important;
+  background: var(--light-gray-940) !important;
 }
 
 .fc-timegrid-slot-label {
@@ -237,7 +245,6 @@ $lineColor: $nowIndicatorColor;
 }
 .fc-timegrid-slot-label-frame {
   height: 96px;
-  
 }
 
 .fc-timegrid-slot-label-cushion {
@@ -248,10 +255,10 @@ $lineColor: $nowIndicatorColor;
   right: 0;
   bottom: 0;
   height: 96px;
-  background: $lightGray940 !important;
+  background: var(--light-gray-940) !important;
 }
-.fc-timegrid-axis-frame{
-  background: $lightGray940 !important;
+.fc-timegrid-axis-frame {
+  background: var(--light-gray-940) !important;
 }
 
 .fc-timegrid-now-indicator-arrow {
@@ -292,14 +299,14 @@ $lineColor: $nowIndicatorColor;
   }
 
   &:hover {
-    background: $lightGray !important;
+    background: var(--light-gray) !important;
 
     transition: 0.5s ease-in-out all;
   }
 }
 
 .fc-day-today {
-  background: $lightGray370p !important;
+  background: var(--light-gray-370p) !important;
   border: none !important;
 }
 
@@ -320,17 +327,23 @@ $lineColor: $nowIndicatorColor;
   flex-direction: column;
   gap: 3px;
 }
+
 .fc-popover {
-  // z-index: 90 !important;
-  background: $lightGray !important;
+  z-index: 90 !important;
+  background: var(--more-card-background) !important;
+
+  border: 1px solid var(--text-color-930) !important;
 }
 
+.fc-theme-standard td, .fc-theme-standard th{
+  border: 1px solid var(--text-color-930); 
+}
 .fc-v-event,
 .fc-daygrid-event {
-  background: $background;
+  background: var(--background);
 
   &:hover {
-    background: $cardHoverBackground !important;
+    background: var(--card-hover-background) !important;
     transition: 0.5s ease-in-out all;
   }
 }

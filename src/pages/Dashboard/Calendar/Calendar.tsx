@@ -13,14 +13,16 @@ import './calendar.styles.scss';
 
 import { TimeSlot } from './Grid';
 import { buildEvents } from './FullCalendarComponents/BuildEvent';
-import { bookings, colorFromString } from 'utils';
+import { colorFromString } from 'utils';
 import moment from 'moment';
 import { useAppSelector } from 'store';
-import { selectBooking } from 'store/slices/bookingSlice';
+import { selectBooking } from 'store/features/bookingSlice';
+import { PopoverWrapper } from './Events';
 
 const Calendar: FC = () => {
   const calendarRef = useRef<null | any>(null);
-  const { isSideBarOpen, bookings } = useAppSelector(selectBooking);
+  const { isSideBarOpen, bookings, isPopoverOpen, currentBooking } =
+    useAppSelector(selectBooking);
 
   const fullCalendarBookings = bookings.map((book) => {
     const { name, start, end, description, roomId, id, users } = book;
@@ -40,13 +42,14 @@ const Calendar: FC = () => {
   });
 
   useEffect(() => {
-    calendarRef?.current?.getApi?.().updateSize();
+    setTimeout(() => {
+      calendarRef?.current?.getApi?.().updateSize();
+    }, 500);
   }, [isSideBarOpen]);
 
-  useEffect(() => {
-    calendarRef?.current?.getApi?.().rerenderEvents();
-  }, [bookings]);
-
+  // useEffect(() => {
+  //   calendarRef?.current?.getApi?.().refetchEvents();
+  // }, [bookings]);
 
   const scrollTo = moment().format('HH') + ':00:00';
 
@@ -60,7 +63,7 @@ const Calendar: FC = () => {
           dayViewPlugin,
           listPlugin,
         ]}
-        windowResizeDelay={200}
+        ref={calendarRef}
         timeZone={'local'}
         initialView={'day'}
         locale={'en-GB'}
@@ -82,12 +85,6 @@ const Calendar: FC = () => {
           center: 'prev,title,next',
           right: 'day,timeGridWeek,dayGridMonth,listWeek',
         }}
-        // headerToolbar={{
-        //   left: 'addBooking',
-        //   center: 'prev,title,next',
-        //   right: 'today day,timeGridWeek,dayGridMonth,listWeek',
-        // }}
-        // editable={true}
         selectable={false}
         selectMirror={false}
         dayMaxEvents={true}
@@ -100,12 +97,12 @@ const Calendar: FC = () => {
         customButtons={{
           addBooking: {
             text: 'Add',
-            click: function () {
-              alert('clicked the custom button!');
-            },
+            click: function () {},
           },
         }}
       />
+
+      {isPopoverOpen && currentBooking && <PopoverWrapper event={currentBooking} />}
     </div>
   );
 };

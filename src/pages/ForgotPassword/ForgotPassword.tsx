@@ -4,7 +4,6 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { useForm } from 'react-hook-form';
 
 // styles
-import cn from 'classnames';
 import css from './forgot-password.module.scss';
 
 // components
@@ -14,13 +13,18 @@ import { Button, Input } from 'components';
 import { validateEmail } from '../../utils';
 import { FormLayout } from 'pages/FormLayout/FormLayout';
 import { arrowLeft, keyIcon } from 'assets/images/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { forgotPassword, useAppDispatch } from 'store';
+import { UserEmailField } from 'models';
 
 const ForgotPasswordValidation = Joi.object({
   email: validateEmail,
 });
 
 const ForgotPassword: FC = () => {
+  const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -34,13 +38,12 @@ const ForgotPassword: FC = () => {
     mode: 'onSubmit',
   });
 
-  // TODO create service and thunk
-  const SubmitForgotPasswordForm = async (value: object) => {
+  const SubmitForgotPasswordForm = async ({ email }: UserEmailField) => {
     try {
-      await console.log(value);
-      reset();
-    } catch (e) {
-      alert('error :(');
+      await dispatch(forgotPassword({ email }));
+      // navigate('/login');
+    } catch (err) {
+      console.log(err);
     }
   };
 

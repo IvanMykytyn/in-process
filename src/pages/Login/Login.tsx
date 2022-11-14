@@ -16,6 +16,7 @@ import { selectUser } from 'store';
 import { loginUser } from 'store/thunk';
 import { UserLoginProps } from 'models';
 import { useAppDispatch, useAppSelector } from 'store';
+import { isLoggedIn } from 'services';
 
 const initialValues = {
   email: '',
@@ -28,10 +29,10 @@ const Login: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
 
   useEffect(() => {
-    if (user) {
+    if (isLoggedIn()) {
       navigate('/dashboard');
     }
-  }, [user, navigate]);
+  }, [user]);
 
   const {
     register,

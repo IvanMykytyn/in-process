@@ -15,21 +15,29 @@ import cn from 'classnames';
 import scss from './events.module.scss';
 import { EventProps } from '../constants';
 import { selectUser, useAppDispatch, useAppSelector } from 'store';
+<<<<<<< HEAD
 import { removeBooking } from 'store/slices/bookingSlice';
+=======
+import { removeBooking, togglePopover } from 'store/features/bookingSlice';
+>>>>>>> develop
 
 type PopoverEventProps = {
-  handleClose: () => void;
   event: EventProps;
 };
 
-const PopoverEvent: FC<PopoverEventProps> = ({ handleClose, event }) => {
+const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUser);
   const { name, description, start, end, color, users, id } = event;
 
-  const dispatch = useAppDispatch();
-
   const handleEdit = () => {};
-  const handleDelete = (id: number) => dispatch(removeBooking(id));
+  const handleClose = () => {
+    dispatch(togglePopover());
+  };
+  const handleDelete = (id: number) => {
+    dispatch(removeBooking(id));
+    handleClose();
+  };
 
   const showControlIcons: boolean =
     user?.role === 'admin' || users.some((item) => item.email === user?.email);

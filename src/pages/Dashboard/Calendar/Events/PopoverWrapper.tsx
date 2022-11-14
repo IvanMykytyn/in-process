@@ -1,44 +1,29 @@
-import { Popover } from '@mui/material';
-import { SetStateType } from 'models';
+import { ClickAwayListener } from '@mui/material';
 import { FC } from 'react';
-import { ExtendedEventProps } from './Event';
+import { EventProps } from '../constants';
 import { PopoverEvent } from './PopoverEvent';
 
+import scss from './events.module.scss';
+import { useAppDispatch } from 'store';
+import { togglePopover } from 'store/features/bookingSlice';
+
 type PopoverWrapperProps = {
-  id: 'simple-popover' | undefined;
-  open: boolean;
-  anchorEl: HTMLButtonElement | null;
-  setAnchorEl: SetStateType<HTMLButtonElement | null>;
-  event: ExtendedEventProps;
+  event: EventProps;
 };
 
-const PopoverWrapper: FC<PopoverWrapperProps> = ({
-  id,
-  open,
-  anchorEl,
-  setAnchorEl,
-  event,
-}) => {
-  const handleClose = () => {
-    setAnchorEl(null);
+const PopoverWrapper: FC<PopoverWrapperProps> = ({ event }) => {
+  const dispatch = useAppDispatch();
+
+  const handleClickAway = () => {
+    dispatch(togglePopover());
   };
+
   return (
-    <Popover
-      id={id}
-      open={open}
-      onClose={handleClose}
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      transformOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-    >
-      <PopoverEvent handleClose={handleClose} event={event} />
-    </Popover>
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <div className={scss['event-popover']}>
+        <PopoverEvent event={event} />;
+      </div>
+    </ClickAwayListener>
   );
 };
 

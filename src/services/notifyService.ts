@@ -1,5 +1,12 @@
 import { AxiosRes } from 'models';
 import { Id, toast, TypeOptions } from 'react-toastify';
+interface PromiseStatuses {
+  pending: string;
+  success: string;
+  error: string;
+}
+
+const defaultLoadingText = 'Please wait...';
 
 const NotifyService = {
   success: (notifyText: string) => toast.success(notifyText),
@@ -7,23 +14,21 @@ const NotifyService = {
   warn: (notifyText: string) => toast.warn(notifyText),
   error: (notifyText: string) => toast.error(notifyText),
   default: (notifyText: string) => toast(notifyText),
-  promise: (promise: AxiosRes<any>) =>
-    toast.promise(promise, promiseStatuses),
-  loading: (notifyText?: string): Id =>
-    toast.loading(notifyText ?? 'Please wait...'),
+  loading: (notifyText: string = defaultLoadingText): Id =>
+    toast.loading(notifyText),
   update: (id: Id, message: string, type: TypeOptions) =>
-    toast.update(id, { render: message, type, isLoading: false }),
+    toast.update(id, { render: message, type, isLoading: false, autoClose: 5000 }),
+
+  promise: (
+    promise: AxiosRes<any>,
+    promiseStatuses: PromiseStatuses = defaultStatuses
+  ) => toast.promise(promise, promiseStatuses),
 };
 
-// TODO find out where store all messages
-// toast.promise(promise, {
-//   pending: `${promise.then((res) => res.data.firstName)}`,
-// }),
-
-const promiseStatuses = {
-  pending: 'Promise is pending',
-  success: 'Promise resolved 👌',
-  error: 'Promise rejected 🤯',
+const defaultStatuses = {
+  pending: 'Wait...',
+  success: 'All Done',
+  error: 'Error! Try Again Later',
 };
 
 export { NotifyService };

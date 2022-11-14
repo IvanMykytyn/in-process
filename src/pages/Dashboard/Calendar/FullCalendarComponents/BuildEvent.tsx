@@ -9,7 +9,7 @@ export const buildEvents = (props: EventContentArg) => {
     _instance,
     remove,
   } = props.event;
-
+  
   const start = moment(_instance!.range.end);
   const end = moment(_instance!.range.start);
   const { description, roomId, users, color } = extendedProps;

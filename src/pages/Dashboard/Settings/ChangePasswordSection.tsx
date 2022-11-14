@@ -8,18 +8,16 @@ import { SectionLayout } from './SectionLayout';
 import { SectionInput } from './SectionInput';
 import { SectionButtons } from './SectionButtons';
 
-import { selectUser, useAppDispatch, useAppSelector } from 'store';
+import { changePassword, selectUser, useAppDispatch, useAppSelector } from 'store';
 import { validatePassword, validateConfirmPassword } from 'utils';
 import { changePasswordProps } from 'models';
 
 const initialValues: changePasswordProps = {
-  oldPassword: '',
   newPassword: '',
   confirmPassword: '',
 };
 
 const changePasswordValidator = Joi.object({
-  oldPassword: validatePassword,
   newPassword: validatePassword,
   confirmPassword: validateConfirmPassword,
 });
@@ -32,34 +30,29 @@ const ChangePasswordSection: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors
+    clearErrors,
+    reset,
   } = useForm({
     defaultValues: initialValues,
     resolver: joiResolver(changePasswordValidator),
     mode: 'onSubmit',
   });
 
-  const submit = async ({ oldPassword, newPassword }: changePasswordProps) => {
+  const submit = async ({ newPassword }: changePasswordProps) => {
     try {
-      //   await dispatch();
+      await dispatch(changePassword({ newPassword }));
+      reset();
     } catch (err) {
       console.log(err);
     }
   };
 
   const handleCancel = () => {
-    clearErrors()
-  }
+    clearErrors();
+  };
 
   return (
     <SectionLayout headerText={'Password Change'} onSubmit={handleSubmit(submit)}>
-      <SectionInput
-        type={'password'}
-        text={'Old Password'}
-        {...register('oldPassword')}
-        error={!!errors.oldPassword}
-        errorText={errors.oldPassword?.message}
-      />
       <SectionInput
         type={'password'}
         text={'New Password'}
@@ -70,12 +63,12 @@ const ChangePasswordSection: FC = () => {
 
       <SectionInput
         type={'password'}
-        text={'Repeat Password'}
+        text={'Confirm Password'}
         {...register('confirmPassword')}
         error={!!errors.confirmPassword}
         errorText={errors.confirmPassword?.message}
       />
-      <SectionButtons isLoading={isLoading} handleCancel={handleCancel}/>
+      <SectionButtons handleCancel={handleCancel} />
     </SectionLayout>
   );
 };
