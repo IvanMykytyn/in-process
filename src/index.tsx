@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
+import css from './App.styles.scss';
 
 import { store } from './store/store';
 import { Provider } from 'react-redux';
@@ -12,10 +13,12 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
+    <div className={css.app}>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>
+    </div>
   // </React.StrictMode>
 );
