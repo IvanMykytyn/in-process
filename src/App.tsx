@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ToastifyContainer, Toggle} from 'components';
 import {AppRoutes} from 'routes';
 
+
 function App() {
     const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light', 'theme');
 
@@ -18,10 +19,11 @@ function App() {
         setTheme(newTheme);
     };
 
+
     return (
         <div className={'app'} data-theme={theme}>
             <button type={'button'} onClick={toggleTheme}>
-                {theme === 'light'? 'dark' : 'light'}
+                {theme === 'light' ? 'dark' : 'light'}
             </button>
             <AppRoutes/>
             <ToastifyContainer/>

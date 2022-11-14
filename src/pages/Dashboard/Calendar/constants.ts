@@ -16,7 +16,7 @@ enum TimeSegments {
   min15 = 'min15',
   min30 = 'min30',
   min45 = 'min15',
-}
+};
 
 const totalCells = Array.from(
   { length: cellHeight * numberOfCellsPerHour },
