@@ -306,7 +306,6 @@ const Rooms: FC = () => {
     //     roomsService.getAll().then(({data})=> setRooms(data))
     // },[])
 
-
     const {width} = useWindowDimensions();
     return (
         <div className={cn(css.wrapper)}>
