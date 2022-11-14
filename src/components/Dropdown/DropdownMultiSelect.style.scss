@@ -35,7 +35,6 @@
   border-radius: 10px;
   box-shadow: $outerBoxShadow;
   background-color: var(--background);
-
 }
 
 .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
@@ -53,7 +52,7 @@
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
   box-shadow: none;
   border-radius: 15px;
-  padding-top: 10px;
+  margin-top: 10px;
   background: none !important;
   top: 140px !important;
 }

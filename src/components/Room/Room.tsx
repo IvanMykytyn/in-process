@@ -17,7 +17,7 @@ interface RoomProps {
 const Room: FC<RoomProps> = ({room}) => {
 
     return (
-        <>
+        <ul>
             <li className={cn(css.container)}>
                 <div className={cn(css.photo)}>
                     <img src={room.img}
@@ -58,7 +58,7 @@ const Room: FC<RoomProps> = ({room}) => {
                     </Link>
                 </div>
             </li>
-        </>
+        </ul>
     );
 }
 
