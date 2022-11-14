@@ -43,7 +43,6 @@ $eventBorderRadius: 5px;
 
   overflow: hidden;
   cursor: pointer;
-  //TODO Design: try to make shadow less bright
 
   &:hover {
     background: var(--card-hover-background);
@@ -324,4 +323,15 @@ $eventBorderRadius: 5px;
 }
 .event__month-title {
   font-size: 0.8rem;
+}
+
+.event-popover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 100;
+
+  box-shadow: $outerBoxShadow;
 }

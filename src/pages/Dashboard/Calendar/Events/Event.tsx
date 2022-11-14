@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import cn from 'classnames';
 import scss from './events.module.scss';
@@ -8,7 +8,8 @@ import { clock } from 'assets/images/icons';
 
 import { EventProps } from '../constants';
 import { getEventPosition } from '../utils';
-import { PopoverWrapper } from './PopoverWrapper';
+import { useAppDispatch } from 'store';
+import { setCurrentBooking, togglePopover } from 'store/features/bookingSlice';
 
 export interface ExtendedEventProps extends EventProps {
   viewType: 'day' | 'week' | 'month';
@@ -16,20 +17,18 @@ export interface ExtendedEventProps extends EventProps {
 }
 
 const Event: FC<ExtendedEventProps> = (eventData) => {
+  const dispatch = useAppDispatch();
   const { color, viewType } = eventData;
 
   const { styles, currentEventHeight } = getEventPosition(rooms, eventData);
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget);
-    event.stopPropagation();
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
 
   const isDayViewType = viewType === 'day';
+
+  const handleClick = () => {
+    dispatch(setCurrentBooking(eventData));
+    dispatch(togglePopover());
+  };
+
   return (
     <>
       <div
@@ -46,13 +45,6 @@ const Event: FC<ExtendedEventProps> = (eventData) => {
           {eventData && buildEventContentDay(currentEventHeight, eventData)}
         </div>
       </div>
-      <PopoverWrapper
-        anchorEl={anchorEl}
-        setAnchorEl={setAnchorEl}
-        open={open}
-        id={id}
-        event={eventData}
-      />
     </>
   );
 };

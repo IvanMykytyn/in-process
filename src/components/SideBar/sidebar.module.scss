@@ -37,7 +37,7 @@
   position: absolute;
   @extend %montserrat-regular-400;
   top: 75px;
-  left: -88px;
+  left: -87px;
   transition: 0.5s color;
 
   &:hover,
@@ -46,6 +46,7 @@
     color: var(--primary-color);
   }
 }
+
 .user-information {
   display: flex;
   align-items: center;
@@ -60,7 +61,6 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
-  
   box-shadow: $outerBoxShadow;
   padding: 10px;
   border-radius: 15px;
@@ -68,19 +68,19 @@
   gap: 10px;
 
   &__userName {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: color 0.5s;
-    color: var(--text-color-400);
+    color: var(--text-color);
     @extend %montserrat-semi-bold-600;
 
     &:hover {
       color: var(--primary-color);
     }
   }
+
   &__email {
     font-size: 0.8rem;
     color: var(--text-color-500);
-
   }
 
   &__settings,
@@ -94,6 +94,7 @@
     transition: 0.5s ease-in-out;
 
     cursor: pointer;
+
     &:hover,
     &:focus,
     &:active {
@@ -117,6 +118,7 @@
     }
   }
 }
+
 .logout-btn {
   img {
     filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%)
@@ -125,6 +127,7 @@
     width: 20px;
     width: 20px;
   }
+
   &:hover,
   &:focus,
   &:active {
@@ -140,6 +143,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .info.hide,
 .input.hide,
 .booked.hide,
@@ -226,8 +230,11 @@ button {
 
 .initials-avatar {
   opacity: 0.5;
-  width: 52px;
-  height: 52px;
+  min-width: 48px;
+  width: 48px;
+  min-height: 48px;
+  height: 48px;
+  
   cursor: pointer;
   border-radius: 50%;
   display: inline-block;
@@ -235,10 +242,10 @@ button {
 
   background: var(--gray);
   border: 1.5px solid black;
-  
+
   margin: 2px;
   padding: 4px;
-  box-shadow: 1px 1px 2px rgb(172, 172, 172), -1px -1px 2px var(--white);
+  box-shadow: 1px 1px 2px var(--gray), -1px -1px 2px var(--white);
 
   div {
     color: #5a5a5a;
@@ -247,7 +254,6 @@ button {
     align-items: center;
     justify-content: center;
     font-style: inherit;
-    font-weight: inherit;
     font-size: 1.4rem;
     font-weight: 600;
   }

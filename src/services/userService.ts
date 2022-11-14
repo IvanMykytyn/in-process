@@ -5,10 +5,12 @@ import type {
   UserEmailField,
   ResetPasswordProps,
   UserWithToken,
+  User,
   // UserUpdateProps,
 } from 'models';
 import { axiosService } from './axiosService';
 import { getFromLocalStorage, urls } from 'utils';
+import { ChangePasswordProps } from 'store';
 
 const loginRequest = (userData: UserLoginProps): PR<UserWithToken> =>
   axiosService.post(`${urls.auth}/login`, userData);
@@ -16,17 +18,24 @@ const loginRequest = (userData: UserLoginProps): PR<UserWithToken> =>
 const signUpRequest = (userData: UserSignUpProps): PR<UserWithToken> =>
   axiosService.post(`${urls.auth}/signup`, userData);
 
-const getAccessRequest = ({ email }: UserEmailField): PR<UserWithToken> =>
+const getAccessRequest = ({ email }: UserEmailField): PR<void> =>
   axiosService.post(`${urls.auth}/get-access`, { email });
 
-const forgotPasswordRequest = ({ email }: UserEmailField): PR<UserWithToken> =>
-  axiosService.post(`${urls.forgotPassword}`, { email });
+const forgotPasswordRequest = ({ email }: UserEmailField): PR<void> =>
+  axiosService.put(`${urls.users}/forgotPassword`, { email });
 
-const resetPasswordRequest = ({ id, token, password }: ResetPasswordProps): PR<UserWithToken> =>
-  axiosService.put(`${urls.resetPassword}/${id}/${token}`, { password });
+const resetPasswordRequest = ({ id, newPassword }: ResetPasswordProps): PR<void> =>
+  axiosService.put(`${urls.users}/resetPassword`, { newPassword, id });
+
+const changePasswordRequest = ({ newPassword }: ChangePasswordProps): PR<void> =>
+  axiosService.put(`${urls.users}/changePassword`, { newPassword });
+
+const getMeRequest = (): PR<User> => axiosService.get(`${urls.users}/me`);
+
+const getUsersRequest = (): PR<User[]> => axiosService.get(`${urls.users}`);
 
 const isLoggedIn = (): boolean => {
-  const token: string = getFromLocalStorage('token');
+  const token: string | null = getFromLocalStorage('token');
   return !!token;
 };
 
@@ -39,5 +48,8 @@ export {
   getAccessRequest,
   forgotPasswordRequest,
   resetPasswordRequest,
+  changePasswordRequest,
   isLoggedIn,
+  getMeRequest,
+  getUsersRequest,
 };
