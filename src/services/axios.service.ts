@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { logoutUser, store } from 'store';
+// import { logoutUser, store } from 'store';
 import { getFromLocalStorage } from 'utils';
 import { baseURL } from 'utils/constants/urls';
 
@@ -20,16 +20,16 @@ axiosService.interceptors.request.use(
   }
 );
 
-axiosService.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    if (error.response.status === 401) {
-      await store.dispatch(logoutUser());
-    }
-    return Promise.reject(error);
-  }
-);
+// axiosService.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   async (error) => {
+//     if (error.response.status === 401) {
+//       await store.dispatch(logoutUser());
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export { axiosService };
