@@ -7,7 +7,7 @@ import css from './room.module.scss';
 
 import {IRooms} from '../../models';
 import {Modal, BookingForm} from '../index';
-import {tools} from '../../utils/tools';
+import {staff} from '../../utils/tools/staff';
 import {users} from '../../assets/images/icons';
 
 interface RoomProps {
@@ -36,7 +36,7 @@ const Room: FC<RoomProps> = ({room}) => {
                 </p>
                 <ul className={cn(css.container__equipment)}>
                     {
-                        tools.map((tool) =>
+                        staff.map((tool) =>
                             room.equipment.map(inst => inst.id === tool.id ?
                                 <li key={tool.id}>
                                     {

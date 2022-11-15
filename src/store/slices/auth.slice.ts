@@ -16,11 +16,11 @@ import {
 
 import { addToLocalStorage, removeFromLocalStorage } from 'utils';
 import { NotifyService } from 'services';
-import { User } from 'models';
+import { UserInterface } from 'models';
 import { Id } from 'react-toastify';
 
 interface AuthState {
-  user: User | null;
+  user: UserInterface | null;
   isLoading: boolean;
   error: string;
   notifyId: Id;

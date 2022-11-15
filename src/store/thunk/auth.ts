@@ -8,7 +8,7 @@ import type {
   UserEmailField,
   UserWithToken,
   ResetPasswordProps,
-  User,
+  UserInterface,
 } from 'models';
 import {
   loginRequest,
@@ -20,7 +20,7 @@ import {
   resetPasswordRequest,
   getMeRequest,
 } from 'services';
-import { clearStore } from 'store/slices/authSlice';
+import { clearStore } from 'store/slices/auth.slice';
 import { AppDispatch } from 'store';
 
 export const loginUser = createAsyncThunk<
@@ -187,7 +187,7 @@ export const resetPassword = createAsyncThunk<
 });
 
 export const getMe = createAsyncThunk<
-  User,
+  UserInterface,
   void,
   {
     rejectValue: ErrorMessageObject;

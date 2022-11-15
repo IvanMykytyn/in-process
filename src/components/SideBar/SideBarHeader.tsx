@@ -3,11 +3,12 @@ import React, { FC } from 'react';
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
-import { logoutUser, selectUser, useAppDispatch, useAppSelector } from 'store';
-import { selectBooking } from 'store/features/bookingSlice';
+import { logoutUser, selectUser} from 'store';
+import {useAppDispatch, useAppSelector } from '../../hooks';
+import { selectBooking } from 'store/slices/booking.slice';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout, setting } from 'assets/images/icons';
-import { User } from 'models';
+import { UserInterface } from 'models';
 import { getInitials } from 'utils';
 
 interface SideBarHeaderProps {}
@@ -19,7 +20,7 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { firstName, lastName, email } = user || ({} as User);
+  const { firstName, lastName, email } = user || ({} as UserInterface);
   const fullName = `${firstName} ${lastName}`;
 
   const handleLogout = () => {

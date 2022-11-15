@@ -5,7 +5,7 @@ import css from './BookedRoom.module.scss';
 import {clock, calendar, staffIcon, board, tv, marker} from '../../assets/images/icons';
 
 import {Data} from "components/SideBar/SideBar";
-import {tools} from '../../utils/tools'
+import {staff} from '../../utils/tools/staff'
 import Moment from "react-moment";
 
 interface Props {

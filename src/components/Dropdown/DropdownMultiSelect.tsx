@@ -20,7 +20,7 @@ interface FilterProps{
     name?: string
 }
 
-const DropdownMultiSelect: FC<FilterProps> = react.memo(({filterItems,filterCapacity,name}) =>{
+const DropdownMultiSelect: FC<FilterProps> = (({filterItems,filterCapacity,name}) =>{
     const [personName, setPersonName] = useState<string[]>([]);
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
