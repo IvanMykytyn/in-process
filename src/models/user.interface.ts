@@ -25,14 +25,14 @@ interface ResetPasswordProps {
   newPassword: string;
 }
 
-interface User extends UserFields, UserEmailField {
+interface UserInterface extends UserFields, UserEmailField {
   role: 'user' | 'admin';
 }
 
-type UserWithToken = User & { access_token: string };
+type UserWithToken = UserInterface & { access_token: string };
 
 export type {
-  User,
+  UserInterface,
   UserFields,
   UserLoginProps,
   UserSignUpProps,

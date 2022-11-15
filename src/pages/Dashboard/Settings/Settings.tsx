@@ -3,8 +3,9 @@ import { FC } from 'react';
 import { PersonalInformationSection } from './PersonalInformationSection';
 import { ChangePasswordSection } from './ChangePasswordSection';
 
-import { selectUser, useAppSelector } from 'store';
-import { User } from 'models';
+import { selectUser } from 'store';
+import {useAppSelector} from '../../../hooks';
+import { UserInterface } from 'models';
 
 // styles
 import scss from './settings.module.scss';
@@ -12,7 +13,7 @@ import { UsersManagementSection } from './UsersManagementSection';
 
 const Settings: FC = () => {
   const { user } = useAppSelector(selectUser);
-  const { role } = user || ({} as User);
+  const { role } = user || ({} as UserInterface);
 
   return (
     <div className={scss.settings}>

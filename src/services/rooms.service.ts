@@ -1,4 +1,4 @@
-import { axiosService } from './axiosService';
+import { axiosService } from './axios.service';
 import { urls } from 'utils';
 import {AxiosRes} from 'models';
 import {IRooms} from "../models";

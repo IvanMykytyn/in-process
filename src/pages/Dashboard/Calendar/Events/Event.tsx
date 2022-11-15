@@ -8,8 +8,8 @@ import { clock } from 'assets/images/icons';
 
 import { EventProps } from '../constants';
 import { getEventPosition } from '../utils';
-import { useAppDispatch } from 'store';
-import { setCurrentBooking, togglePopover } from 'store/features/bookingSlice';
+import { useAppDispatch } from '../../../../hooks';
+import { setCurrentBooking, togglePopover } from 'store/slices/booking.slice';
 
 export interface ExtendedEventProps extends EventProps {
   viewType: 'day' | 'week' | 'month';

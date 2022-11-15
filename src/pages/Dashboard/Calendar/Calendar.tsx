@@ -15,8 +15,8 @@ import { TimeSlot } from './Grid';
 import { buildEvents } from './FullCalendarComponents/BuildEvent';
 import { colorFromString } from 'utils';
 import moment from 'moment';
-import { useAppSelector } from 'store';
-import { selectBooking } from 'store/slices/bookingSlice';
+import { useAppSelector } from '../../../hooks';
+import { selectBooking } from 'store/slices/booking.slice';
 import { PopoverWrapper } from './Events';
 
 const Calendar: FC = () => {

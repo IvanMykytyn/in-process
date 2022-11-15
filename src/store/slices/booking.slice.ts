@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Booking } from 'models';
+import { BookingInterface } from 'models';
 import { EventProps } from 'pages/Dashboard/Calendar/constants';
 import type { RootState } from 'store';
 import { bookings } from 'utils';
@@ -9,7 +9,7 @@ interface BookingState {
   isSideBarOpen: boolean;
   isPopoverOpen: boolean;
 
-  bookings: Array<Booking>;
+  bookings: Array<BookingInterface>;
   currentBooking: EventProps | null;
 }
 

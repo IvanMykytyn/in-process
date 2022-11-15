@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { selectUser, useAppDispatch, useAppSelector } from 'store';
+import { selectUser } from 'store';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
 
 import cn from 'classnames';
 import scss from './events.module.scss';
@@ -16,7 +17,7 @@ import {
 } from 'assets/images/icons';
 import { getFullDateRange } from 'utils';
 import { EventProps } from '../constants';
-import { removeBooking, togglePopover } from 'store/slices/bookingSlice';
+import { removeBooking, togglePopover } from 'store/slices/booking.slice';
 
 type PopoverEventProps = {
   event: EventProps;
@@ -43,9 +44,9 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
 
   return (
     <div className={scss['event-popover']}>
-      <header className={scss['tools-bar']}>
+      <header className={scss['staff-bar']}>
         {showControlIcons && (
-          <div className={scss['tools-wrapper']}>
+          <div className={scss['staff-wrapper']}>
             <img
               src={edit}
               alt="edit"

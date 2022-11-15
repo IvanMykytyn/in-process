@@ -6,7 +6,8 @@ import { Input, MultipleSelectWithBadges } from 'components';
 import { SectionLayout } from './SectionLayout';
 import { SectionButtons } from './SectionButtons';
 
-import { addUsers, selectUser, useAppDispatch, useAppSelector } from 'store';
+import { addUsers, selectUser} from 'store';
+import {useAppDispatch, useAppSelector } from '../../../hooks';
 import { validateAddUserEmail, validateArrayOfEmails } from 'utils';
 
 // styles

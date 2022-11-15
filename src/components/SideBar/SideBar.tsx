@@ -9,8 +9,8 @@ import scss from './sidebar.module.scss';
 import { Input } from '../index';
 import { clock } from '../../assets/images/icons';
 import { BookedRoom } from 'components/BookedRoom/BookedRoom';
-import { useAppDispatch, useAppSelector } from 'store';
-import { selectBooking, toggleSideBar } from 'store/slices/bookingSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { selectBooking, toggleSideBar } from 'store/slices/booking.slice';
 import Moment from 'react-moment';
 import { SideBarHeader } from './SideBarHeader';
 
