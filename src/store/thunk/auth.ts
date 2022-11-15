@@ -20,7 +20,7 @@ import {
   resetPasswordRequest,
   getMeRequest,
 } from 'services';
-import { clearStore } from 'store/features/authSlice';
+import { clearStore } from 'store/slices/authSlice';
 import { AppDispatch } from 'store';
 
 export const loginUser = createAsyncThunk<

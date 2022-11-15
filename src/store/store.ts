@@ -1,14 +1,29 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
-import authSlice from './features/authSlice';
-import bookingSlice from './features/bookingSlice';
+import authSlice from './slices/authSlice';
+import bookingSlice from './slices/bookingSlice';
+import {roomReducer} from "./slices";
 
-export const store = configureStore({
-  reducer: {
+const rootReducer = combineReducers({
     auth: authSlice,
     booking: bookingSlice,
-  },
+    rooms: roomReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+const setupStore = () => configureStore({
+    reducer: rootReducer
+});
+
+type RootState = ReturnType<typeof rootReducer>;
+type AppStore = ReturnType<typeof setupStore>;
+type AppDispatch = AppStore['dispatch'];
+
+export type{
+    RootState,
+    AppStore,
+    AppDispatch
+};
+
+export {
+    setupStore
+};

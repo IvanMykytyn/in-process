@@ -10,7 +10,7 @@ import { Input } from '../index';
 import { clock } from '../../assets/images/icons';
 import { BookedRoom } from 'components/BookedRoom/BookedRoom';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectBooking, toggleSideBar } from 'store/features/bookingSlice';
+import { selectBooking, toggleSideBar } from 'store/slices/bookingSlice';
 import Moment from 'react-moment';
 import { SideBarHeader } from './SideBarHeader';
 
