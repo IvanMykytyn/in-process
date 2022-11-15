@@ -11,7 +11,7 @@ import login from 'assets/images/icons/login.png';
 
 import { Input, Button } from 'components';
 import { loginValidator } from './login.validators';
-import { FormLayout } from 'pages';
+import { FormLayout } from '../FormLayout/FormLayout';
 import { selectUser } from 'store';
 import { loginUser } from 'store/thunk';
 import { UserLoginProps } from 'models';
@@ -27,12 +27,12 @@ const Login: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { user, isLoading } = useAppSelector(selectUser);
-
+  
   useEffect(() => {
     if (isLoggedIn()) {
       navigate('/dashboard');
     }
-  }, [user]);
+  }, [navigate, user]);
 
   const {
     register,
@@ -57,8 +57,9 @@ const Login: FC = () => {
       header={'Welcome to our team!'}
       icon={login}
       iconStyles={{ transform: 'scale(-1, -1)' }}
+      dataTestid={'login-page'}
     >
-      <form className={css['form-wrapper']} onSubmit={handleSubmit(submit)}>
+      <form data-testid='login-form' className={css['form-wrapper']} onSubmit={handleSubmit(submit)}>
         <Input
           type={'email'}
           label={'email'}
@@ -75,12 +76,12 @@ const Login: FC = () => {
         />
 
         <label className={css.login__forgot}>
-          <Link className={css.login__link} to={'/forgot-password'}>
+          <Link data-testid='forgot-password-link' className={css.login__link} to={'/forgot-password'}>
             Forgot password?
           </Link>
         </label>
 
-        <Button type={'submit'} fullWidth disabled={isLoading} loading={isLoading}>
+        <Button data-testid='submit-button' type={'submit'} fullWidth disabled={isLoading} loading={isLoading}>
           Login
         </Button>
 

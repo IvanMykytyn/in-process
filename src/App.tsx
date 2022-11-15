@@ -1,7 +1,5 @@
-import * as React from 'react';
 import {useState} from 'react';
 import useLocalStorage from 'use-local-storage';
-
 import './App.styles.scss';
 
 // toastify setup
@@ -19,7 +17,7 @@ function App() {
     };
 
     return (
-        <div className={'app'} data-theme={theme}>
+        <div role={'application'} className={'app'} data-theme={theme}>
             <button type={'button'} onClick={toggleTheme}>
                 {theme === 'light'? 'dark' : 'light'}
             </button>

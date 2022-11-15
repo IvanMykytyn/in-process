@@ -59,6 +59,7 @@ const ResetPassword: FC = () => {
       header={'Set new password'}
       description={'Your new password must be different to previously used password'}
       icon={keyIcon}
+      dataTestid={'reset-password-page'}
     >
       <form
         className={css['forgot-password__form']}

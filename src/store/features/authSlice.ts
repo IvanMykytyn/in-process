@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from 'store';
 
 // thunk
@@ -14,7 +14,7 @@ import {
   getMe,
 } from 'store/thunk';
 
-import { addToLocalStorage, removeFromLocalStorage } from 'utils';
+import { setToLocalStorage, removeFromLocalStorage } from 'utils';
 import { NotifyService } from 'services';
 import { User } from 'models';
 import { Id } from 'react-toastify';
@@ -32,12 +32,13 @@ const initialState: AuthState = {
   notifyId: '',
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    clearStore: (state) => {
+    clearUser: (state) => {
       state.user = null;
+      state.error = ''
       removeFromLocalStorage('token');
     },
   },
@@ -52,7 +53,7 @@ export const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
       const { access_token, ...restUserData } = payload;
       state.user = restUserData;
-      addToLocalStorage('token', payload.access_token);
+      setToLocalStorage('token', payload.access_token);
 
       state.isLoading = false;
       NotifyService.update(
@@ -79,7 +80,7 @@ export const authSlice = createSlice({
     builder.addCase(signUpUser.fulfilled, (state, { payload }) => {
       const { access_token, ...restUserData } = payload;
       state.user = restUserData;
-      addToLocalStorage('token', payload.access_token);
+      setToLocalStorage('token', payload.access_token);
 
       state.isLoading = false;
       NotifyService.update(
@@ -244,7 +245,12 @@ export const authSlice = createSlice({
   },
 });
 
-export const { clearStore } = authSlice.actions;
+export const { clearUser } = authSlice.actions;
 export const selectUser = (state: RootState) => state.auth;
 
+export { initialState };
+export type { AuthState };
+
 export default authSlice.reducer;
+
+

@@ -52,6 +52,7 @@ const ForgotPassword: FC = () => {
       header={'Forgot Password'}
       description={' Send a link to your mail to reset your password'}
       icon={keyIcon}
+      dataTestid={'forgot-password-page'}
     >
       <form
         className={css['forgot-password__form']}

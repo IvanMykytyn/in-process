@@ -62,8 +62,8 @@ const SignUp: FC = () => {
 
   return (
     // TODO change header text
-    <FormLayout header={'Lorem ipsum dolor sit.'} icon={registration}>
-      <form className={css['form-wrapper']} onSubmit={handleSubmit(submit)}>
+    <FormLayout dataTestid='signUp-page' header={'Lorem ipsum dolor sit.'} icon={registration}>
+      <form data-testid='signUp-form' className={css['form-wrapper']} onSubmit={handleSubmit(submit)}>
         <Input
           type={'text'}
           label={'First Name'}
@@ -91,13 +91,13 @@ const SignUp: FC = () => {
           errorText={errors.password?.message}
         />
 
-        <Button type={'submit'} fullWidth disabled={isLoading} loading={isLoading}>
+        <Button data-testid='submit-button' type={'submit'} fullWidth disabled={isLoading} loading={isLoading}>
           Sign Up
         </Button>
 
         <div className={css['navigate-form-wrapper']}>
           Already have an account?
-          <Link to={'/login'}>Login</Link>
+          <Link data-testid='link-to-login' to={'/login'}>Login</Link>
         </div>
       </form>
     </FormLayout>

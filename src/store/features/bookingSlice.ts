@@ -20,11 +20,10 @@ const initialState: BookingState = {
 
   bookings: bookings,
   currentBooking: null,
-
 };
 
-export const bookingSlice = createSlice({
-  name: 'auth',
+const bookingSlice = createSlice({
+  name: 'bookings',
   initialState,
   reducers: {
     toggleSideBar: (state) => {
@@ -38,14 +37,16 @@ export const bookingSlice = createSlice({
     },
     setCurrentBooking: (state, { payload }: PayloadAction<EventProps>) => {
       state.currentBooking = payload;
-
     },
   },
 });
 
 export const { toggleSideBar, removeBooking, togglePopover, setCurrentBooking } =
-
   bookingSlice.actions;
-export const selectBooking = (state: RootState) => state.booking;
+
+export const selectBooking = (state: RootState) => state.bookings;
+
+export { initialState };
+export type { BookingState };
 
 export default bookingSlice.reducer;
