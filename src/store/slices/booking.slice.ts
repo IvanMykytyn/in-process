@@ -13,19 +13,18 @@ interface BookingState {
   currentBooking: EventProps | null;
 }
 
-const initialState: BookingState = {
+const initialBookingState: BookingState = {
   isLoading: false,
   isSideBarOpen: true,
   isPopoverOpen: false,
 
   bookings: bookings,
   currentBooking: null,
-
 };
 
-export const bookingSlice = createSlice({
-  name: 'auth',
-  initialState,
+const bookingSlice = createSlice({
+  name: 'bookings',
+  initialState: initialBookingState,
   reducers: {
     toggleSideBar: (state) => {
       state.isSideBarOpen = !state.isSideBarOpen;
@@ -38,14 +37,16 @@ export const bookingSlice = createSlice({
     },
     setCurrentBooking: (state, { payload }: PayloadAction<EventProps>) => {
       state.currentBooking = payload;
-
     },
   },
 });
 
 export const { toggleSideBar, removeBooking, togglePopover, setCurrentBooking } =
-
   bookingSlice.actions;
-export const selectBooking = (state: RootState) => state.booking;
+
+export const selectBooking = (state: RootState) => state.bookings;
+
+export { initialBookingState };
+export type { BookingState };
 
 export default bookingSlice.reducer;

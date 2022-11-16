@@ -10,6 +10,7 @@ import type {
   ResetPasswordProps,
   UserInterface,
 } from 'models';
+
 import {
   loginRequest,
   signUpRequest,
@@ -20,8 +21,9 @@ import {
   resetPasswordRequest,
   getMeRequest,
 } from 'services';
-import { clearStore } from 'store/slices/auth.slice';
-import { AppDispatch } from 'store';
+
+import { clearUser } from 'store/slices/auth.slice';
+import type { AppDispatch } from 'store';
 
 export const loginUser = createAsyncThunk<
   UserWithToken,
@@ -96,7 +98,7 @@ export const logoutUser = createAsyncThunk<
   }
 >('auth/logoutUser', async (notify = true, thunkAPI) => {
   try {
-    thunkAPI.dispatch(clearStore());
+    thunkAPI.dispatch(clearUser());
     return { notify };
   } catch (err) {
     return thunkAPI.rejectWithValue('Logout failed');

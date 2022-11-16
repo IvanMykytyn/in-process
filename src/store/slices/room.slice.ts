@@ -7,13 +7,13 @@ interface IRoom {
     rooms: IRooms[]
 };
 
-const initialState: IRoom = {
+const initialRoomState: IRoom = {
     rooms: []
 };
 
 const roomSlice = createSlice({
-    name: 'roomSlice',
-    initialState,
+    name: 'room',
+    initialState: initialRoomState,
     reducers: {},
     extraReducers: builder =>
         builder
@@ -31,5 +31,6 @@ const roomActions = {
 
 export {
     roomReducer,
-    roomActions
+    roomActions,
+    initialRoomState,
 };
