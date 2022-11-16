@@ -24,7 +24,23 @@ interface IBookingRecurring {
     users: string[]
 }
 
+interface IBookingPut
+{
+    scheduleId: number,
+    name: string,
+    description: string,
+    roomId: string,
+    usersIds: [
+        null
+    ]
+}
+interface IBookingDelete{
+    scheduleId: number
+}
+
 export type {
     BookingInterface,
-    IBookingRecurring
+    IBookingRecurring,
+    IBookingPut,
+    IBookingDelete
 };

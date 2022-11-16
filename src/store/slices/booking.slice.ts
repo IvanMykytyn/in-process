@@ -1,69 +1,56 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-import {IBookingRecurring, IRooms} from "../../models";
-import {getAll} from "../thunk";
-import {recurringPost} from '../store';
+import {IBookingRecurring, IBookingDelete, IBookingPut} from "../../models";
+import {recPost, recPut, recDelete, getAllBookings} from 'store';
 
 interface IBooking {
-  booking: IBookingRecurring | null;
+    bookings: IBookingRecurring[];
+    bookingForUpdate: IBookingPut[];
+    scheduleId: IBookingDelete | null;
 };
 
 const initialState: IBooking = {
-  booking: null
+    bookings: [],
+    bookingForUpdate: [],
+    scheduleId: null
 };
 
 const bookingSlice = createSlice({
-  name: 'bookingSlice',
-  initialState,
-  reducers: {},
-  extraReducers: builder =>
-      builder
-          .addCase(recurringPost.fulfilled, (state, action) => {
-            state.booking = action.payload.id
-          })
+    name: 'bookingSlice',
+    initialState,
+    reducers: {},
+    extraReducers: builder =>
+        builder
+            .addCase(getAllBookings.fulfilled, (state, action) => {
+                state.bookings = action.payload
+            })
+            .addCase(recPost.fulfilled, (state, action) => {
+                state.bookings.push(action.payload)
+            })
+            .addCase(recPut.fulfilled, ((state, action) => {
+                const index = state.bookings.findIndex(booking => booking.roomId === action.payload.scheduleId.toString());
+                state.bookings[index] = {...state.bookings[index], ...action.payload}
 
+            }))
+            .addCase(recDelete.fulfilled, ((state, action) => {
+                const index = state.bookingForUpdate.findIndex(booking => booking.roomId === action.payload.scheduleId.toString());
+                state.bookings.slice(index, 1)
+            }))
 });
 
 const {reducer: bookingReducer} = bookingSlice;
 
 const bookingActions = {
-  recurringPost
+    getAllBookings,
+    recPost,
+    recPut,
+    recDelete
 };
 
 export {
-  bookingReducer,
-  bookingActions
+    bookingReducer,
+    bookingActions
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { BookingInterface } from 'models';
