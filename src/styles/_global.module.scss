@@ -25,11 +25,13 @@
   }
 }
 
+*
+
 body {
   line-height: 1.2;
   font-family: sans-serif;
-  //color: var(--accent-text-color);
-  //background-color: var(--background);
+  background-color: var(--background);
+  color: var(--accent-text-color);
 }
 
 .container {

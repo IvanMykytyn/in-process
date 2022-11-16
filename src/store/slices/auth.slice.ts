@@ -16,16 +16,16 @@ import {
 
 import { setToLocalStorage, removeFromLocalStorage } from 'utils';
 import { NotifyService } from 'services';
-import { User } from 'models';
+import { UserInterface } from 'models';
 import { Id } from 'react-toastify';
 
 interface AuthState {
-  user: User | null;
+  user: UserInterface | null;
   isLoading: boolean;
   error: string;
   notifyId: Id;
 }
-const initialState: AuthState = {
+const initialUserState: AuthState = {
   user: null,
   isLoading: false,
   error: '',
@@ -34,11 +34,11 @@ const initialState: AuthState = {
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: initialUserState,
   reducers: {
     clearUser: (state) => {
       state.user = null;
-      state.error = ''
+      state.error = '';
       removeFromLocalStorage('token');
     },
   },
@@ -248,9 +248,7 @@ const authSlice = createSlice({
 export const { clearUser } = authSlice.actions;
 export const selectUser = (state: RootState) => state.auth;
 
-export { initialState };
+export { initialUserState };
 export type { AuthState };
 
 export default authSlice.reducer;
-
-

@@ -8,7 +8,8 @@ import { SectionLayout } from './SectionLayout';
 import { SectionInput } from './SectionInput';
 import { SectionButtons } from './SectionButtons';
 
-import { changePassword, selectUser, useAppDispatch, useAppSelector } from 'store';
+import { changePassword, selectUser } from 'store';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import { validatePassword, validateConfirmPassword } from 'utils';
 import { changePasswordProps } from 'models';
 

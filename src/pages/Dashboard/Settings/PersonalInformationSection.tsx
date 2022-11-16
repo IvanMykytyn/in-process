@@ -8,8 +8,9 @@ import { SectionLayout } from './SectionLayout';
 import { SectionInput } from './SectionInput';
 import { SectionButtons } from './SectionButtons';
 
-import { selectUser, useAppDispatch, useAppSelector } from 'store';
-import { User, UserFields } from 'models';
+import { selectUser } from 'store';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import { UserInterface, UserFields } from 'models';
 import { validateName } from 'utils';
 
 // styles
@@ -25,7 +26,7 @@ const PersonalInfoValidator = Joi.object({
 
 const PersonalInformationSection: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
-  const { firstName, lastName, email } = user || ({} as User);
+  const { firstName, lastName, email } = user || ({} as UserInterface);
 
   const fullName = `${firstName} ${lastName}`;
 

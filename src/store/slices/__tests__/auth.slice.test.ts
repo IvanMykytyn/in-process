@@ -1,5 +1,5 @@
-import reducer, { clearUser, initialState } from '../authSlice';
-import type { AuthState } from '../authSlice';
+import reducer, { clearUser, initialUserState } from '../auth.slice';
+import type { AuthState } from '../auth.slice';
 import { setupStore } from 'store/store';
 import { setToLocalStorage } from 'utils';
 import { act } from 'react-dom/test-utils';
@@ -7,7 +7,7 @@ import { changePassword, getMe } from 'store/thunk';
 
 describe('Auth Slice testing', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, { type: undefined })).toEqual(initialState);
+    expect(reducer(undefined, { type: undefined })).toEqual(initialUserState);
   });
 
   it('should clear User from store', () => {
@@ -23,7 +23,7 @@ describe('Auth Slice testing', () => {
       notifyId: '',
     };
 
-    expect(reducer(previousState, clearUser())).toEqual(initialState);
+    expect(reducer(previousState, clearUser())).toEqual(initialUserState);
   });
 
   it('should get Me, if token exist', async () => {

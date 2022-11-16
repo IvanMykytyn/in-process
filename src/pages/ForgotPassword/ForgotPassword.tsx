@@ -14,7 +14,8 @@ import { validateEmail } from '../../utils';
 import { FormLayout } from 'pages/FormLayout/FormLayout';
 import { arrowLeft, keyIcon } from 'assets/images/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { forgotPassword, useAppDispatch } from 'store';
+import { forgotPassword } from 'store';
+import {useAppDispatch} from '../../hooks';
 import { UserEmailField } from 'models';
 
 const ForgotPasswordValidation = Joi.object({

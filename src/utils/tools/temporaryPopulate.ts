@@ -1,4 +1,4 @@
-import { Booking } from 'models';
+import { BookingInterface } from 'models';
 import { Room } from 'models';
 import moment, { Moment } from 'moment';
 import { v4 as uuidv4 } from 'uuid';
@@ -72,7 +72,7 @@ export const rooms: Room[] = [
   },
 ];
 
-export const bookings: Booking[] = [
+export const bookings: BookingInterface[] = [
   {
     id: 1,
     name: 'Oyoloo',

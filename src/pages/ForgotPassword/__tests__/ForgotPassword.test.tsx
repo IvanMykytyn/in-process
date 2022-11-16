@@ -1,5 +1,6 @@
-import { act, fireEvent, screen } from '@testing-library/react';
-import { renderWithProviders } from 'utils/test-utils';
+import { fireEvent, screen } from '@testing-library/react';
+import { renderWithProviders } from 'utils/tests/test-utils';
+
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { ForgotPassword } from '../ForgotPassword';

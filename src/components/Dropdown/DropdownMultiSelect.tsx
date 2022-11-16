@@ -1,4 +1,4 @@
-import react,{FC,useState} from 'react';
+import {FC,useState} from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,32 +17,32 @@ interface FilterProps{
     setSelected?: any,
     filterItems: IFilters[],
     filterCapacity: IFilters[],
-    value?: string
+    name?: string
 }
 
-const DropdownMultiSelect: FC<FilterProps> = ({filterItems,filterCapacity,value}) =>{
+const DropdownMultiSelect: FC<FilterProps> = (({filterItems,filterCapacity,name}) =>{
     const [personName, setPersonName] = useState<string[]>([]);
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
         const {
-            target: { value },
+            target: { name },
         } = event;
         setPersonName(
-            typeof value === 'string' ? value.split(',') : value,
+            typeof name === 'string' ? name.split(',') : name,
         );
     };
 
     return (
         <div>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-checBekbox-label">{value}</InputLabel>
+                <InputLabel id="demo-multiple-checBekbox-label">{name}</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
                     id="demo-multiple-checkbox"
                     multiple
                     value={personName}
                     onChange={handleChange}
-                    input={<OutlinedInput label={value} />}
+                    input={<OutlinedInput label={name} />}
                     renderValue={(selected) => selected.join(', ')}
                 >
                    <div className={'filter_text'}>
@@ -62,7 +62,8 @@ const DropdownMultiSelect: FC<FilterProps> = ({filterItems,filterCapacity,value}
                     {filterItems.map((name) => (
                         <MenuItem  className={cn(css.menuItem)}
                                    key={name.id}
-                                   value={name.name}>
+                                   value={name.name}
+                        >
                             <Checkbox checked={personName.indexOf(name.name) > -1} />
                             <ListItemText primary={name.name} />
                         </MenuItem>
@@ -71,6 +72,6 @@ const DropdownMultiSelect: FC<FilterProps> = ({filterItems,filterCapacity,value}
             </FormControl>
         </div>
     );
-}
+})
 
 export {DropdownMultiSelect};

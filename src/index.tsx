@@ -1,10 +1,9 @@
 import React from 'react';
-
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
-import { setupStore } from './store/store';
+import { setupStore } from './store';
 import { Provider } from 'react-redux';
 import { setupAxiosInterceptors } from 'services';
 import { logoutUser } from 'store';

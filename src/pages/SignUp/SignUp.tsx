@@ -9,7 +9,7 @@ import css from '../Login/login.module.scss';
 
 import registration from 'assets/images/icons/registration.png';
 
-import { useAppDispatch, useAppSelector } from 'store';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectUser } from 'store';
 import { signUpUser } from 'store/thunk';
 import { Input, Button } from 'components/index';

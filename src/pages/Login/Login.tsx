@@ -15,7 +15,7 @@ import { FormLayout } from '../FormLayout/FormLayout';
 import { selectUser } from 'store';
 import { loginUser } from 'store/thunk';
 import { UserLoginProps } from 'models';
-import { useAppDispatch, useAppSelector } from 'store';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isLoggedIn } from 'services';
 
 const initialValues = {

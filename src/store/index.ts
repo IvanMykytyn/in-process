@@ -1,5 +1,3 @@
-export * from './store'
-export * from './hooks'
-
-export * from './features/authSlice'
-export * from './thunk'
+export * from './store';
+export * from './slices'
+export * from './thunk';

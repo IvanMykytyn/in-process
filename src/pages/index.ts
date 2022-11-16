@@ -12,4 +12,4 @@ export * from './ForgotPassword/ResetPassword';
 export * from './GetAccess/GetAccess';
 export * from './FormLayout/FormLayout';
 export * from './SignUp/SignUp';
-export * from './Dashboard/BookingFormPage/Booking_Form_Page';
+export * from './Dashboard/BookingFormPage/BookingFormPage';

@@ -16,7 +16,8 @@ import { FormLayout } from 'pages/FormLayout/FormLayout';
 // icons
 import { keyIcon, arrowLeft } from 'assets/images/icons';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { resetPassword, useAppDispatch } from 'store';
+import { resetPassword} from 'store';
+import {useAppDispatch } from '../../hooks';
 import { ResetPasswordProps } from 'models';
 
 const ResetPasswordValidation = Joi.object({

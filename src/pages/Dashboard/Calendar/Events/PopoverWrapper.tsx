@@ -4,8 +4,8 @@ import { EventProps } from '../constants';
 import { PopoverEvent } from './PopoverEvent';
 
 import scss from './events.module.scss';
-import { useAppDispatch } from 'store';
-import { togglePopover } from 'store/features/bookingSlice';
+import { useAppDispatch } from '../../../../hooks';
+import { togglePopover } from 'store/slices/booking.slice';
 
 type PopoverWrapperProps = {
   event: EventProps;

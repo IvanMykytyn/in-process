@@ -1,5 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { renderWithProviders } from 'utils/test-utils';
+import { renderWithProviders } from 'utils/tests/test-utils';
+
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import userEvent from '@testing-library/user-event';

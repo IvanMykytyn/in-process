@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Booking } from 'models';
+import { BookingInterface } from 'models';
 import { EventProps } from 'pages/Dashboard/Calendar/constants';
 import type { RootState } from 'store';
 import { bookings } from 'utils';
@@ -9,11 +9,11 @@ interface BookingState {
   isSideBarOpen: boolean;
   isPopoverOpen: boolean;
 
-  bookings: Array<Booking>;
+  bookings: Array<BookingInterface>;
   currentBooking: EventProps | null;
 }
 
-const initialState: BookingState = {
+const initialBookingState: BookingState = {
   isLoading: false,
   isSideBarOpen: true,
   isPopoverOpen: false,
@@ -24,7 +24,7 @@ const initialState: BookingState = {
 
 const bookingSlice = createSlice({
   name: 'bookings',
-  initialState,
+  initialState: initialBookingState,
   reducers: {
     toggleSideBar: (state) => {
       state.isSideBarOpen = !state.isSideBarOpen;
@@ -46,7 +46,7 @@ export const { toggleSideBar, removeBooking, togglePopover, setCurrentBooking } 
 
 export const selectBooking = (state: RootState) => state.bookings;
 
-export { initialState };
+export { initialBookingState };
 export type { BookingState };
 
 export default bookingSlice.reducer;

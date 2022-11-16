@@ -1,5 +1,5 @@
 
-import {board, tv, marker, plug, window, conditioner} from '../assets/images/icons';
+import {board, tv, marker, plug, window, conditioner} from '../../assets/images/icons';
 
 export  interface Tool {
     id: string;
@@ -7,7 +7,7 @@ export  interface Tool {
     img: string
 }
 
- export const tools: Tool[] = [
+ export const staff: Tool[] = [
     {
         id: '0',
         alt: 'board',

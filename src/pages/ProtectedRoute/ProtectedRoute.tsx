@@ -1,7 +1,10 @@
 import { FC, PropsWithChildren, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { isLoggedIn, NotifyService } from 'services';
-import { getMe, selectUser, useAppDispatch, useAppSelector } from 'store';
+import { isLoggedIn } from 'services';
+import { getMe } from 'store';
+import { selectUser } from 'store/slices';
+
+import { useAppDispatch, useAppSelector} from 'hooks';
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
   const { user } = useAppSelector(selectUser);

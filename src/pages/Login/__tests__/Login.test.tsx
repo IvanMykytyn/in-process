@@ -1,8 +1,8 @@
-import { cleanup, screen } from '@testing-library/react';
-import { renderWithProviders } from 'utils/test-utils';
+import { screen } from '@testing-library/react';
+import { renderWithProviders } from 'utils/tests/test-utils';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { initialState, loginUser, logoutUser, setupStore } from 'store';
+import { initialUserState, loginUser, logoutUser, setupStore } from 'store';
 import { isLoggedIn } from 'services';
 import { removeFromLocalStorage } from 'utils';
 
@@ -66,7 +66,7 @@ describe('Test login page', () => {
 
     const userAfterLogout = store.getState().auth.user;
 
-    expect(userAfterLogout).toEqual(initialState.user);
+    expect(userAfterLogout).toEqual(initialUserState.user);
     expect(isLoggedIn()).toBeFalsy();
   });
 });

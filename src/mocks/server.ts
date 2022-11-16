@@ -1,5 +1,5 @@
 import { setupServer } from 'msw/node';
-import { authHandlers } from './authHandlers';
+import { authHandlers } from './auth.handlers';
 
 const handlers = [...authHandlers];
 

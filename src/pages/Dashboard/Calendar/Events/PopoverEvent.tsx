@@ -1,3 +1,10 @@
+import { FC } from 'react';
+import { selectUser } from 'store';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+
+import cn from 'classnames';
+import scss from './events.module.scss';
+
 import {
   creator,
   details,
@@ -8,14 +15,9 @@ import {
   room,
   trash,
 } from 'assets/images/icons';
-import { FC } from 'react';
 import { getFullDateRange } from 'utils';
-
-import cn from 'classnames';
-import scss from './events.module.scss';
 import { EventProps } from '../constants';
-import { selectUser, useAppDispatch, useAppSelector } from 'store';
-import { removeBooking, togglePopover } from 'store/features/bookingSlice';
+import { removeBooking, togglePopover } from 'store/slices/booking.slice';
 
 type PopoverEventProps = {
   event: EventProps;
@@ -42,9 +44,9 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
 
   return (
     <div className={scss['event-popover']}>
-      <header className={scss['tools-bar']}>
+      <header className={scss['staff-bar']}>
         {showControlIcons && (
-          <div className={scss['tools-wrapper']}>
+          <div className={scss['staff-wrapper']}>
             <img
               src={edit}
               alt="edit"
