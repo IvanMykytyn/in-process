@@ -5,7 +5,7 @@ const urls = {
   admin: '/admin',
   rooms: '/rooms',
   users: '/users',
-  booking: '/booking'
+  bookings: '/bookings'
 }
 
 export { baseURL, urls }
