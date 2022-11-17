@@ -15,7 +15,7 @@ import "swiper/css/scrollbar";
 // import 'swiper/swiper.min.css';
 
 import {Room,DropdownMultiSelect} from '../../../components';
-import {useAppDispatch, useWindowDimensionsHook} from '../../../hooks';
+import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../hooks';
 
 import {roomsService} from 'services/rooms.service';
 import {IRooms} from '../../../models'
@@ -29,37 +29,6 @@ export interface IFilters {
     name: string
 }
 
-export const rooms: IRooms[] = [
-    {
-        id: 1,
-        name: 'Room1',
-        description: 'the room has PS and TV.That is all what you need',
-        floor: 1,
-        maxCapacity: 15,
-        equipment: [
-            {
-                id: 0,
-                name: '123'
-            }, {
-                id: 1,
-                name: '123'
-            }, {
-                id: 2,
-                name: '123'
-            }, {
-                id: 3,
-                name: '123'
-            }, {
-                id: 4,
-                name: '123'
-            },
-            {
-                id: 5,
-                name: '123'
-            }
-        ]
-    },
-];
 export const filterCapacity: IFilters[] = [
     {
         id: 0,
@@ -104,12 +73,14 @@ export const filterItems: IFilters[] = [
 
 const Rooms: FC = () => {
 
-    // const {rooms} = useAppSelector(state => state.rooms);
-    const dispatch = useAppDispatch();
+    const {rooms} = useAppSelector(state => state.rooms);
 
-    useEffect(() => {
-        dispatch(roomActions.getAll())
-    }, [dispatch]);
+    const dispatch = useAppDispatch();
+    
+    useEffect(()=>{
+       dispatch(roomActions.getAllRooms({officeId: 2}))
+    },[dispatch, rooms]);
+
 
     const {width} = useWindowDimensionsHook();
     return (
@@ -140,7 +111,7 @@ const Rooms: FC = () => {
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {rooms.filter(room => room.floor === 1).map(room =>
+                            {rooms && rooms.filter(room => room.floor === 1).map(room =>
                                 <SwiperSlide className={cn(css.my_swiper__swiperslide)}
                                              key={room.id}
                                              virtualIndex={room.id}
@@ -169,7 +140,7 @@ const Rooms: FC = () => {
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {rooms.filter(room => room.floor === 2).map(room =>
+                            {rooms && rooms.filter(room => room.floor === 2).map(room =>
                                 <SwiperSlide className={cn(css.my_swiper__swiperslide)}
                                              key={room.id}
                                              virtualIndex={room.id}
