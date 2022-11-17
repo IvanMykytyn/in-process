@@ -1,16 +1,15 @@
 export interface InstrumentsProps {
-    id: string
+    id: number,
+    name: string
 };
 
 export interface IRooms{
     id: number,
     name: string,
-    img: string,
     description: string,
     floor: number,
     maxCapacity: number,
-    office:  number,
-    equipment: InstrumentsProps[]
+    equipments: InstrumentsProps[]
 }
 
 export interface Room {
