@@ -3,13 +3,13 @@ export interface InstrumentsProps {
     name: string
 };
 
-export interface IRooms{
+export interface IRooms {
     id: number,
     name: string,
     description: string,
     floor: number,
     maxCapacity: number,
-    equipments: InstrumentsProps[]
+    equipment: InstrumentsProps[]
 }
 
 export interface Room {
