@@ -7,14 +7,19 @@ import {useNavigate} from "react-router-dom";
 // styles
 import cn from 'classnames';
 import css from './rooms.module.scss';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import "swiper/css/scrollbar";
 
-import {Room, DropdownMultiSelect} from '../../../components';
+// import 'swiper/swiper.min.css';
+
+import {Room,DropdownMultiSelect} from '../../../components';
 import {useAppDispatch, useWindowDimensionsHook} from '../../../hooks';
+
+import {roomsService} from 'services/rooms.service';
 import {IRooms} from '../../../models'
-import {roomActions} from "../../../store";
+import {roomActions} from "store";
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);

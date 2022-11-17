@@ -6,5 +6,6 @@ export const ToastifyContainer = () => (
     position="bottom-right"
     autoClose={3000}
     pauseOnFocusLoss={false}
+    data-testid='toast-container'
   />
 );
