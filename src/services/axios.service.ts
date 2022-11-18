@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import { logoutUser, store } from 'store';
+// import { store } from 'index';
 import { getFromLocalStorage } from 'utils';
 import { baseURL } from 'utils/constants/urls';
 
@@ -34,6 +34,5 @@ const setupAxiosInterceptors = (onUnauthenticated: () => void) => {
     }
   );
 };
-
 
 export { axiosService, setupAxiosInterceptors };
