@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 
+
 // styles
 import cn from 'classnames';
 import css from './login.module.scss';
@@ -12,7 +13,7 @@ import login from 'assets/images/icons/login.png';
 import { Input, Button } from 'components';
 import { loginValidator } from './login.validators';
 import { FormLayout } from '../FormLayout/FormLayout';
-import { selectUser } from 'store';
+import {authActions, selectUser} from 'store';
 import { loginUser } from 'store/thunk';
 import { UserLoginProps } from 'models';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -46,7 +47,7 @@ const Login: FC = () => {
 
   let submit = async ({ email, password }: UserLoginProps) => {
     try {
-      await dispatch(loginUser({ email, password }));
+      await dispatch(authActions.loginUser({ email, password }));
     } catch (err) {
       console.log(err);
     }

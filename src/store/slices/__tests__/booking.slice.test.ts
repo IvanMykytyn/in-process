@@ -1,7 +1,7 @@
-import reducer, { initialBookingState } from '../booking.slice';
+import { initialBookingState, bookingReducer } from '../booking.slice';
 
 describe('Booking Slice testing', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, { type: undefined })).toEqual(initialBookingState);
+    expect(bookingReducer(undefined, { type: undefined })).toEqual(initialBookingState);
   });
 });

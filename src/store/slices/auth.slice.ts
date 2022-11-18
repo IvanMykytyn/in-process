@@ -1,254 +1,275 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { RootState } from 'store';
+import {createSlice} from '@reduxjs/toolkit';
+import type {RootState} from 'store';
 
 // thunk
 import {
-  loginUser,
-  getAccessUser,
-  signUpUser,
-  logoutUser,
-  addUsers,
-  changePassword,
-  forgotPassword,
-  resetPassword,
-  getMe,
+    loginUser,
+    getAccessUser,
+    signUpUser,
+    logoutUser,
+    addUsers,
+    changePassword,
+    forgotPassword,
+    resetPassword,
+    getMe,
 } from 'store/thunk';
 
-import { setToLocalStorage, removeFromLocalStorage } from 'utils';
-import { NotifyService } from 'services';
-import { UserInterface } from 'models';
-import { Id } from 'react-toastify';
+import {setToLocalStorage, removeFromLocalStorage} from 'utils';
+import {NotifyService} from 'services';
+import {UserInterface} from 'models';
+import {Id} from 'react-toastify';
 
 interface AuthState {
-  user: UserInterface | null;
-  isLoading: boolean;
-  error: string;
-  notifyId: Id;
+    user: UserInterface | null;
+    isLoading: boolean;
+    error: string;
+    notifyId: Id;
 }
+
 const initialUserState: AuthState = {
-  user: null,
-  isLoading: false,
-  error: '',
-  notifyId: '',
+    user: null,
+    isLoading: false,
+    error: '',
+    notifyId: '',
 };
 
 const authSlice = createSlice({
-  name: 'auth',
-  initialState: initialUserState,
-  reducers: {
-    clearUser: (state) => {
-      state.user = null;
-      state.error = '';
-      removeFromLocalStorage('token');
+    name: 'auth',
+    initialState: initialUserState,
+    reducers: {
+        clearUser: (state) => {
+            state.user = null;
+            state.error = '';
+            removeFromLocalStorage('token');
+        },
     },
-  },
-  extraReducers: (builder) => {
-    // Login
-    builder.addCase(loginUser.pending, (state) => {
-      state.isLoading = true;
+    extraReducers: (builder) => {
+        // Login
+        builder
+            .addCase(loginUser.pending, (state) => {
+            state.isLoading = true;
 
-      state.notifyId = NotifyService.loading();
-    });
+            state.notifyId = NotifyService.loading();
+        })
 
-    builder.addCase(loginUser.fulfilled, (state, { payload }) => {
-      const { access_token, ...restUserData } = payload;
-      state.user = restUserData;
-      setToLocalStorage('token', payload.access_token);
+        .addCase(loginUser.fulfilled, (state, {payload}) => {
+            const {access_token, ...restUserData} = payload;
+            state.user = restUserData;
+            setToLocalStorage('token', payload.access_token);
 
-      state.isLoading = false;
-      NotifyService.update(
-        state.notifyId,
-        `Welcome Back ${state.user?.firstName}`,
-        'success'
-      );
-    });
+            state.isLoading = false;
+            NotifyService.update(
+                state.notifyId,
+                `Welcome Back ${state.user?.firstName}`,
+                'success'
+            );
+        })
 
-    builder.addCase(loginUser.rejected, (state, { payload }) => {
-      state.isLoading = false;
+        .addCase(loginUser.rejected, (state, {payload}) => {
+            state.isLoading = false;
 
-      state.error = payload?.message ?? 'Something went Wrong';
-      NotifyService.update(state.notifyId, state.error, 'error');
-    });
+            state.error = payload?.message ?? 'Something went Wrong';
+            NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // Sign Up
-    builder.addCase(signUpUser.pending, (state) => {
-      state.isLoading = true;
+        // Sign Up
+        builder.addCase(signUpUser.pending, (state) => {
+            state.isLoading = true;
 
-      state.notifyId = NotifyService.loading();
-    });
+            state.notifyId = NotifyService.loading();
+        });
 
-    builder.addCase(signUpUser.fulfilled, (state, { payload }) => {
-      const { access_token, ...restUserData } = payload;
-      state.user = restUserData;
-      setToLocalStorage('token', payload.access_token);
+        builder.addCase(signUpUser.fulfilled, (state, {payload}) => {
+            const {access_token, ...restUserData} = payload;
+            state.user = restUserData;
+            setToLocalStorage('token', payload.access_token);
 
-      state.isLoading = false;
-      NotifyService.update(
-        state.notifyId,
-        `Hello There ${state.user?.firstName}`,
-        'success'
-      );
-    });
+            state.isLoading = false;
+            NotifyService.update(
+                state.notifyId,
+                `Hello There ${state.user?.firstName}`,
+                'success'
+            );
+        });
 
-    builder.addCase(signUpUser.rejected, (state, { payload }) => {
-      state.isLoading = false;
+        builder.addCase(signUpUser.rejected, (state, {payload}) => {
+            state.isLoading = false;
 
-      state.error = payload?.message ?? 'Something went Wrong';
-      NotifyService.update(state.notifyId, state.error, 'error');
-    });
+            state.error = payload?.message ?? 'Something went Wrong';
+            NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // get Access
-    builder.addCase(getAccessUser.pending, (state) => {
-      state.isLoading = true;
+        // get Access
+        builder.addCase(getAccessUser.pending, (state) => {
+            state.isLoading = true;
 
-      state.notifyId = NotifyService.loading();
-    });
+            state.notifyId = NotifyService.loading();
+        });
 
-    builder.addCase(getAccessUser.fulfilled, (state) => {
-      state.isLoading = false;
+        builder.addCase(getAccessUser.fulfilled, (state) => {
+            state.isLoading = false;
 
-      // TODO change message text
-      NotifyService.update(state.notifyId, `TEXT MESSAGE`, 'success');
-    });
+            // TODO change message text
+            NotifyService.update(state.notifyId, `TEXT MESSAGE`, 'success');
+        });
 
-    builder.addCase(getAccessUser.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload?.message ?? 'Something went Wrong';
-      NotifyService.update(state.notifyId, state.error, 'error');
-    });
+        builder.addCase(getAccessUser.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload?.message ?? 'Something went Wrong';
+            NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // add Users Admin
-    builder.addCase(addUsers.pending, (state) => {
-      state.isLoading = true;
+        // add Users Admin
+        builder.addCase(addUsers.pending, (state) => {
+            state.isLoading = true;
 
-      state.notifyId = NotifyService.loading();
-    });
+            state.notifyId = NotifyService.loading();
+        });
 
-    builder.addCase(addUsers.fulfilled, (state) => {
-      state.isLoading = false;
-      NotifyService.update(state.notifyId, `Users Successfully added`, 'success');
-    });
+        builder.addCase(addUsers.fulfilled, (state) => {
+            state.isLoading = false;
+            NotifyService.update(state.notifyId, `Users Successfully added`, 'success');
+        });
 
-    builder.addCase(addUsers.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload?.message[0] ?? 'Add Users Failed.';
-      NotifyService.update(state.notifyId, state.error, 'error');
-    });
+        builder.addCase(addUsers.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload?.message[0] ?? 'Add Users Failed.';
+            NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // logout
-    builder.addCase(logoutUser.pending, (state, { meta }) => {
-      state.isLoading = true;
+        // logout
+        builder.addCase(logoutUser.pending, (state, {meta}) => {
+            state.isLoading = true;
 
-      const isNotify = meta.arg;
-      if (isNotify) state.notifyId = NotifyService.loading();
-    });
+            const isNotify = meta.arg;
+            if (isNotify) state.notifyId = NotifyService.loading();
+        });
 
-    builder.addCase(logoutUser.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+        builder.addCase(logoutUser.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
 
-      const { notify } = payload;
-      if (notify)
-        NotifyService.update(state.notifyId, `Successfully log out`, 'success');
-    });
+            const {notify} = payload;
+            if (notify)
+                NotifyService.update(state.notifyId, `Successfully log out`, 'success');
+        });
 
-    builder.addCase(logoutUser.rejected, (state, { payload, meta }) => {
-      state.isLoading = false;
-      state.error = payload ?? 'Something went Wrong';
+        builder.addCase(logoutUser.rejected, (state, {payload, meta}) => {
+            state.isLoading = false;
+            state.error = payload ?? 'Something went Wrong';
 
-      const isNotify = meta.arg;
-      if (isNotify) NotifyService.update(state.notifyId, state.error, 'error');
-    });
+            const isNotify = meta.arg;
+            if (isNotify) NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // change password
-    builder.addCase(changePassword.pending, (state) => {
-      state.isLoading = true;
+        // change password
+        builder.addCase(changePassword.pending, (state) => {
+            state.isLoading = true;
 
-      state.notifyId = NotifyService.loading();
-    });
+            state.notifyId = NotifyService.loading();
+        });
 
-    builder.addCase(changePassword.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+        builder.addCase(changePassword.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
 
-      NotifyService.update(
-        state.notifyId,
-        `Password changed successfully`,
-        'success'
-      );
-    });
+            NotifyService.update(
+                state.notifyId,
+                `Password changed successfully`,
+                'success'
+            );
+        });
 
-    builder.addCase(changePassword.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload?.message ?? "Can't Change Password! Try Again Later";
-      NotifyService.update(state.notifyId, state.error, 'error');
-    });
+        builder.addCase(changePassword.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload?.message ?? "Can't Change Password! Try Again Later";
+            NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // forgot password
-    builder.addCase(forgotPassword.pending, (state) => {
-      state.isLoading = true;
+        // forgot password
+        builder.addCase(forgotPassword.pending, (state) => {
+            state.isLoading = true;
 
-      state.notifyId = NotifyService.loading();
-    });
+            state.notifyId = NotifyService.loading();
+        });
 
-    builder.addCase(forgotPassword.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+        builder.addCase(forgotPassword.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
 
-      NotifyService.update(
-        state.notifyId,
-        `Instructions for changing the password have been sent to the mail`,
-        'success'
-      );
-    });
+            NotifyService.update(
+                state.notifyId,
+                `Instructions for changing the password have been sent to the mail`,
+                'success'
+            );
+        });
 
-    builder.addCase(forgotPassword.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload?.message ?? 'Error! Try Again Later';
-      NotifyService.update(state.notifyId, state.error, 'error');
-    });
+        builder.addCase(forgotPassword.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload?.message ?? 'Error! Try Again Later';
+            NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // reset password
-    builder.addCase(resetPassword.pending, (state) => {
-      state.isLoading = true;
+        // reset password
+        builder.addCase(resetPassword.pending, (state) => {
+            state.isLoading = true;
 
-      state.notifyId = NotifyService.loading();
-    });
+            state.notifyId = NotifyService.loading();
+        });
 
-    builder.addCase(resetPassword.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+        builder.addCase(resetPassword.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
 
-      NotifyService.update(
-        state.notifyId,
-        `Password changed successfully`,
-        'success'
-      );
-    });
+            NotifyService.update(
+                state.notifyId,
+                `Password changed successfully`,
+                'success'
+            );
+        });
 
-    builder.addCase(resetPassword.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload?.message ?? 'Error! Try Again Later';
-      NotifyService.update(state.notifyId, state.error, 'error');
-    });
+        builder.addCase(resetPassword.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload?.message ?? 'Error! Try Again Later';
+            NotifyService.update(state.notifyId, state.error, 'error');
+        });
 
-    // get me
-    builder.addCase(getMe.pending, (state) => {
-      state.isLoading = true;
-    });
+        // get me
+        builder.addCase(getMe.pending, (state) => {
+            state.isLoading = true;
+        });
 
-    builder.addCase(getMe.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      state.user = payload;
-    });
+        builder.addCase(getMe.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
+            state.user = payload;
+        });
 
-    builder.addCase(getMe.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload?.message ?? 'Error! Try Again Later';
-    });
-  },
+        builder.addCase(getMe.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload?.message ?? 'Error! Try Again Later';
+        });
+    },
 });
 
-export const { clearUser } = authSlice.actions;
+const {reducer: authReducer} = authSlice;
+
+const authActions ={
+    loginUser,
+    signUpUser,
+    getAccessUser,
+    addUsers,
+    logoutUser,
+    changePassword,
+    forgotPassword,
+    resetPassword,
+    getMe
+}
+
+
+export const {clearUser} = authSlice.actions;
 export const selectUser = (state: RootState) => state.auth;
 
-export { initialUserState };
-export type { AuthState };
+export {
+    initialUserState,
+    authReducer,
+    authActions
+};
 
-export default authSlice.reducer;
+export type {AuthState};
+

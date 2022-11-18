@@ -32,7 +32,7 @@ interface BookingState {
     currentBooking: EventProps | null;
 }
 
-const initialState: BookingState = {
+const initialBookingState: BookingState = {
     bookingsRecurring: [],
     bookingsOneTime: [],
     bookingsOwn: [],
@@ -51,7 +51,7 @@ const initialState: BookingState = {
 
 export const bookingSlice = createSlice({
     name: 'bookingSlice/booking',
-    initialState,
+    initialState: initialBookingState,
     reducers: {
         toggleSideBar: (state) => {
             state.isSideBarOpen = !state.isSideBarOpen;
@@ -113,6 +113,8 @@ export const bookingSlice = createSlice({
 
 export const {toggleSideBar, removeBooking, togglePopover, setCurrentBooking} = bookingSlice.actions;
 
+const {reducer: bookingReducer} = bookingSlice;
+
 const bookingActions = {
     getAllBookings,
     recPost,
@@ -124,7 +126,8 @@ const bookingActions = {
 export const selectBooking = (state: RootState) => state.booking;
 
 export {
-    bookingActions
+    bookingActions,
+    bookingReducer,
+    initialBookingState
 };
 
-export default bookingSlice.reducer;

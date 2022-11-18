@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'utils/tests/test-utils';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { initialUserState, loginUser, logoutUser, setupStore } from 'store';
+import {authActions, initialUserState, loginUser, logoutUser, setupStore} from 'store';
 import { isLoggedIn } from 'services';
 import { removeFromLocalStorage } from 'utils';
 
@@ -47,7 +47,7 @@ describe('Test login page', () => {
 
     await act(async () => {
       await store.dispatch(
-        loginUser({ email: 'roman@incorainc.com', password: 'Password' })
+        authActions.loginUser({ email: 'roman@incorainc.com', password: 'Password' })
       );
     });
 
@@ -61,7 +61,7 @@ describe('Test login page', () => {
     expect(isLoggedIn()).toBeTruthy();
 
     await act(async () => {
-      await store.dispatch(logoutUser());
+      await store.dispatch(authActions.logoutUser());
     });
 
     const userAfterLogout = store.getState().auth.user;
