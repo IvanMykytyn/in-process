@@ -27,7 +27,7 @@ const DashboardRoutes: FC = () => {
                 <Route path="timeline" element={<Timeline/>}/>
                 <Route path="calendar" element={<Calendar/>}/>
                 <Route path="settings" element={<Settings/>}/>
-                <Route path="bookig-form" element={<BookingFormPage/>}/>
+                <Route path="booking-form" element={<BookingFormPage/>}/>
             </Route>
         </Routes>
     );

@@ -44,7 +44,7 @@ const Calendar: FC = () => {
   useEffect(() => {
     setTimeout(() => {
       calendarRef?.current?.getApi?.().updateSize();
-    }, 500);
+    }, 1000);
   }, [isSideBarOpen]);
 
   // useEffect(() => {
@@ -83,7 +83,7 @@ const Calendar: FC = () => {
         headerToolbar={{
           left: 'addBooking today',
           center: 'prev,title,next',
-          right: 'day,timeGridWeek,dayGridMonth,listWeek',
+          right: 'day timeGridWeek dayGridMonth listWeek',
         }}
         selectable={false}
         selectMirror={false}

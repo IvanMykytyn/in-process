@@ -3,11 +3,11 @@ import {IRooms} from "../../models";
 import {roomsService} from "../../services";
 import {AxiosError} from "axios";
 
- export const getAll = createAsyncThunk<IRooms[], void>(
-    'roomSlice/getAll',
-    async (_, {rejectWithValue}) => {
+ export const getAllRooms = createAsyncThunk<IRooms[], {officeId :number, soonestBookingsDays?:number, capacity?: number, items?: number }>(
+    'roomSlice/getAllRooms',
+    async ({officeId ,soonestBookingsDays, items, capacity}, {rejectWithValue}) => {
         try {
-            const {data} = await roomsService.getAll();
+            const {data} = await roomsService.getAll(officeId ,soonestBookingsDays, items, capacity);
             return data
         } catch (e) {
             const err = e as AxiosError
