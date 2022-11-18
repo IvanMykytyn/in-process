@@ -1,7 +1,7 @@
 import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
 
 import authSlice from './slices/auth.slice';
-import bookingReducer from './slices/booking.slice';
+import {bookingReducer} from './slices/booking.slice';
 import {roomReducer} from "./slices";
 
 const rootReducer = combineReducers({

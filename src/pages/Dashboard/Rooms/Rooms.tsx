@@ -18,8 +18,7 @@ import {Room,DropdownMultiSelect} from '../../../components';
 import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../hooks';
 
 import {roomsService} from 'services/rooms.service';
-import {IRooms} from '../../../models'
-import {roomActions} from "store";
+import { roomActions } from 'store/slices/room.slice';
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
@@ -79,8 +78,7 @@ const Rooms: FC = () => {
     
     useEffect(()=>{
        dispatch(roomActions.getAllRooms({officeId: 2}))
-    },[dispatch, rooms]);
-
+    },[dispatch]);
 
     const {width} = useWindowDimensionsHook();
     return (

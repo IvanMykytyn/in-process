@@ -4,14 +4,14 @@ import cn from 'classnames';
 import React, { FC } from 'react';
 import { InstrumentsProps } from 'models';
 import { staff } from 'utils/tools/staff';
+import { roomsImg } from 'assets/images/bg';
 
 interface BookingRoomProps {
   id: number;
   name: string;
-  img: string;
   floor: number;
   maxCapacity: number;
-  equipment: InstrumentsProps[];
+  equipments: InstrumentsProps[];
   handleChange: (id: number) => void;
   disabled?: boolean;
   isActive?: boolean;
@@ -19,11 +19,10 @@ interface BookingRoomProps {
 
 const BookingRoom: FC<BookingRoomProps> = ({
   id,
-  img,
   name,
   floor,
   maxCapacity,
-  equipment,
+  equipments,
   handleChange,
   disabled,
   isActive,
@@ -38,7 +37,7 @@ const BookingRoom: FC<BookingRoomProps> = ({
       onClick={() => handleChange(id)}
     >
       <div className={css['booking-room__image-section']}>
-        <img src={img} alt="room" />
+        <img src={roomsImg} alt="room" />
       </div>
       <div className={css['booking-room__content']}>
         <div className={css['booking-room__text-content']}>
@@ -50,7 +49,7 @@ const BookingRoom: FC<BookingRoomProps> = ({
         <ul className={cn(css.container__equipment)}>
           <li className={css['floor-number']}>{floor}</li>
           {staff.map((tool) =>
-            equipment.map((inst) =>
+            equipments.map((inst) =>
               inst.id === tool.id ? (
                 <li key={tool.id}>
                   {<img src={tool.img} alt={tool.alt} width={15} height={15} />}

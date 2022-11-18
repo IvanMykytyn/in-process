@@ -12,7 +12,7 @@ import {bookingService} from "../../services";
 import {AxiosError} from "axios";
 
 export const getAllBookings = createAsyncThunk<IBookingRecurring[], { startDate: string, endDate: string, officeId: number, roomId?: string }>(
-    'bookingSlice/getAll',
+    'booking/getAllBookings',
     async ({startDate, endDate, officeId, roomId}, {rejectWithValue}) => {
         try {
             const {data} = await bookingService.getAllBookings(startDate, endDate, officeId, roomId);
@@ -51,7 +51,7 @@ export const recPut = createAsyncThunk<IBookingPut, { scheduleId: number, newBoo
 );
 
 export const recDelete = createAsyncThunk<IBookingDelete, { scheduleId: number }>(
-    'bookingSlice/recPut',
+    'bookingSlice/recDelete',
     async ({scheduleId}, {rejectWithValue}) => {
         try {
             const {data} = await bookingService.recurringDelete(scheduleId);
@@ -103,7 +103,7 @@ export const oneTimePut = createAsyncThunk<IBookingOneTimePut, { bookingId: numb
 );
 
 export const getAllOwnBookings = createAsyncThunk<IBookingOwn[], { page: number, limit: number }>(
-    'bookingSlice/getAll',
+    'bookingSlice/getAllOwnBookings',
     async ({page, limit}, {rejectWithValue}) => {
         try {
             const {data} = await bookingService.getBookingOwn(page, limit);

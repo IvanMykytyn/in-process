@@ -9,7 +9,7 @@ export interface IRooms {
     description: string,
     floor: number,
     maxCapacity: number,
-    equipment: InstrumentsProps[]
+    equipments: InstrumentsProps[]
 }
 
 export interface Room {

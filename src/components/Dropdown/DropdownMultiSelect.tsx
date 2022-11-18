@@ -12,7 +12,7 @@ import {IFilters} from "../../pages";
 import cn from 'classnames';
 import css from './DropdownMultiSelect.style.scss';
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {roomActions} from "../../store";
+import { roomActions } from 'store/slices/room.slice';
 
 interface FilterProps {
     selected?: string,
@@ -48,11 +48,7 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
 
     return (
         <div>
-<<<<<<< HEAD
-            <FormControl sx={{ m: 1, width: 300 }}>
-=======
             <FormControl sx={{m: 1, width: 300}}>
->>>>>>> ed9d0de7e025f13dd61b71a6f6e53297cb4f4111
                 <InputLabel id="demo-multiple-checkbox-label">{name}</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
@@ -67,19 +63,11 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                         Filter by capacity
                     </div>
                     {filterCapacity.map((name) => (
-<<<<<<< HEAD
-                        <MenuItem  className={cn(css.menuItem)}
-                                   key={name.id}
-                                   value={name.name}>
-                            <Checkbox checked={personName?.indexOf(name.name) > -1} />
-                            <ListItemText primary={name.name} />
-=======
                         <MenuItem className={cn(css.menuItem)}
                                   key={name.id}
                                   value={name.name}>
                             <Checkbox checked={personName.indexOf(name.name) > -1} onClick={()=>setCapacity(name.id)}/>
                             <ListItemText primary={name.name}/>
->>>>>>> ed9d0de7e025f13dd61b71a6f6e53297cb4f4111
                         </MenuItem>
                     ))}
                     <div className={'filter_text'}>

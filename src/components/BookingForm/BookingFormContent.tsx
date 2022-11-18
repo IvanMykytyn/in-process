@@ -22,9 +22,10 @@ import { users as usersIcon } from 'assets/images/icons';
 import { Select } from 'components/Select/Select';
 import { DaysPicker } from 'components/DaysPicker/DaysPicker';
 import { Button } from 'components/Button/Button';
-import { rooms } from 'pages';
 import { BookingRoom } from './BookingRoom';
 import { staff } from 'utils/tools/staff';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { roomActions } from 'store/slices/room.slice';
 
 type BookingFormContentProps = {
   activeStep: number;
@@ -36,6 +37,14 @@ const BookingFormContent: FC<BookingFormContentProps> = ({
   setActiveStep,
 }) => {
   const { register, handleSubmit, reset } = useForm();
+
+  const { rooms } = useAppSelector((state) => state.rooms);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(roomActions.getAllRooms({ officeId: 2 }));
+  }, []);
 
   const [users, setUsers] = useState<string[]>([]);
   const [members, setMembers] = useState<Array<string>>([]);
@@ -96,16 +105,18 @@ const BookingFormContent: FC<BookingFormContentProps> = ({
   };
 
   const bookingRooms = rooms.map((room) => {
-    const { id, img, name, floor, maxCapacity, equipment } = room;
-    return { id, img, name, floor, maxCapacity, equipment };
+    const { id, name, floor, maxCapacity, equipments } = room;
+    return { id, name, floor, maxCapacity, equipments };
   });
-  const [currentBookingRoomId, setCurrentBookingRoomId] = useState<number>(1);
 
-  const currentBookingRoom = rooms.findIndex(
-    (room) => room.id === currentBookingRoomId
-  );
-  const { id, description, img, name, floor, maxCapacity, equipment } =
-    rooms[currentBookingRoom];
+  console.log(rooms);
+  
+  const [currentBookingRoomId, setCurrentBookingRoomId] = useState<number>(2);
+
+  const currentBookingRoom = rooms.find((room) => room.id === currentBookingRoomId);
+
+  const { id, description, name, floor, maxCapacity, equipments } =
+    currentBookingRoom || {};
 
   if (activeStep === 0) {
     return (
@@ -187,7 +198,10 @@ const BookingFormContent: FC<BookingFormContentProps> = ({
               [css['recurring-booking']]: toggled,
             })}
           >
-            <div data-label={'Repeat every: '} className={cn(css['repeat-range'], css.booking__label)}>
+            <div
+              data-label={'Repeat every: '}
+              className={cn(css['repeat-range'], css.booking__label)}
+            >
               <div className={'second-step-form__count-input'}>
                 <Input type={'number'} inputProps={{ min: 1, max: 31 }} fullWidth />
               </div>
@@ -245,7 +259,7 @@ const BookingFormContent: FC<BookingFormContentProps> = ({
             </h4>
             <ul className={cn(css.container__equipment)}>
               {staff.map((tool) =>
-                equipment.map((inst) =>
+                equipments?.map((inst) =>
                   inst.id === tool.id ? (
                     <li key={tool.id}>
                       {<img src={tool.img} alt={tool.alt} width={20} height={20} />}
