@@ -49,8 +49,8 @@ const initialState: BookingState = {
     isPopoverOpen: false,
 };
 
-export const bookingSlice = createSlice({
-    name: 'bookingSlice/booking',
+const bookingSlice = createSlice({
+    name: 'bookingSlice',
     initialState,
     reducers: {
         toggleSideBar: (state) => {
@@ -66,26 +66,22 @@ export const bookingSlice = createSlice({
             state.currentBooking = payload;
         },
     },
-    extraReducers: (builder) => {
+    extraReducers: builder => {
         builder
             .addCase(getAllBookings.pending, (state) => {
                 state.bookingLoading = true;
             })
-            .addCase(getAllBookings.fulfilled, (state, action) => {
-                state.bookingsRecurring = action.payload;
-                state.bookingLoading = false;
-            })
             .addCase(recPost.fulfilled, (state, action) => {
                 state.bookingsRecurring.push(action.payload);
             })
-            .addCase(recPut.fulfilled, ((state, action) => {
+            .addCase(recPut.fulfilled, (state, action) => {
                 const index = state.bookingsRecurring.findIndex(booking => booking.roomId === action.payload.scheduleId.toString());
                 state.bookingsRecurring[index] = {...state.bookingsRecurring[index], ...action.payload};
-            }))
-            .addCase(recDelete.fulfilled, ((state, action) => {
+            })
+            .addCase(recDelete.fulfilled, (state, action) => {
                 const index = state.bookingsRecurring.findIndex(booking => booking.roomId === action.payload.scheduleId.toString());
                 state.bookingsRecurring.slice(index, 1);
-            }))
+            })
             .addCase(oneTimePost.pending, (state) => {
                 state.oneTimeLoading = true;
             })
@@ -93,25 +89,28 @@ export const bookingSlice = createSlice({
                 state.bookingsOneTime.push(action.payload);
                 state.oneTimeLoading = false;
             })
-            .addCase(oneTimePut.fulfilled, ((state, action) => {
+            .addCase(oneTimePut.fulfilled, (state, action) => {
                 const index = state.bookingsRecurring.findIndex(booking => booking.roomId === action.payload.id.toString());
                 state.bookingsRecurring[index] = {...state.bookingsRecurring[index], ...action.payload};
-            }))
-            .addCase(oneTimeDelete.fulfilled, ((state, action) => {
+            })
+            .addCase(oneTimeDelete.fulfilled, (state, action) => {
                 const index = state.bookingsOneTime.findIndex(booking => booking.roomId === action.payload.bookingId.toString());
                 state.bookingsRecurring.slice(index, 1);
-            }))
-            .addCase(getAllOwnBookings.pending, ((state) => {
+            })
+            .addCase(getAllOwnBookings.pending, (state) => {
                 state.ownLoading = true;
-            }))
-            .addCase(getAllOwnBookings.fulfilled, ((state, action) => {
+            })
+            .addCase(getAllOwnBookings.fulfilled, (state, action) => {
                 state.bookingsOwn = action.payload;
                 state.ownLoading = false;
-            }))
+            })
     }
 });
 
-export const {toggleSideBar, removeBooking, togglePopover, setCurrentBooking} = bookingSlice.actions;
+const {
+    reducer: bookingReducer,
+    actions: {toggleSideBar, removeBooking, togglePopover, setCurrentBooking}
+} = bookingSlice;
 
 const bookingActions = {
     getAllBookings,
@@ -119,12 +118,18 @@ const bookingActions = {
     recPut,
     recDelete,
     oneTimePost,
+    oneTimeDelete,
+    oneTimePut
 };
 
-export const selectBooking = (state: RootState) => state.booking;
+const selectBooking = (state: RootState) => state.booking;
 
 export {
-    bookingActions
+    bookingReducer,
+    bookingActions,
+    selectBooking,
+    toggleSideBar,
+    removeBooking,
+    togglePopover,
+    setCurrentBooking
 };
-
-export default bookingSlice.reducer;
