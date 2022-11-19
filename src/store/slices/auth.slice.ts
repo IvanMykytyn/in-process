@@ -1,3 +1,4 @@
+
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import type {RootState} from 'store';
 
@@ -14,10 +15,11 @@ import {
     getMe,
 } from 'store/thunk';
 
-import {addToLocalStorage, removeFromLocalStorage} from 'utils';
+import {setToLocalStorage, removeFromLocalStorage} from 'utils';
 import {NotifyService} from 'services';
 import {UserInterface} from 'models';
 import {Id} from 'react-toastify';
+
 
 interface AuthState {
     user: UserInterface | null;
@@ -54,7 +56,7 @@ const authSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, {payload}) => {
                 const {access_token, ...restUserData} = payload;
                 state.user = restUserData;
-                addToLocalStorage('token', payload.access_token);
+                setToLocalStorage('token', payload.access_token);
 
                 state.isLoading = false;
                 NotifyService.update(
@@ -81,7 +83,7 @@ const authSlice = createSlice({
             .addCase(signUpUser.fulfilled, (state, {payload}) => {
                 const {access_token, ...restUserData} = payload;
                 state.user = restUserData;
-                addToLocalStorage('token', payload.access_token);
+                setToLocalStorage('token', payload.access_token);
 
                 state.isLoading = false;
                 NotifyService.update(

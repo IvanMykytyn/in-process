@@ -1,24 +1,24 @@
 import { createSlice} from "@reduxjs/toolkit";
 
 import {IRooms} from "models";
-import {getAll} from '../thunk';
+import {getAllRooms} from '../thunk';
 
 interface IRoom {
     rooms: IRooms[]
 };
 
-const initialState: IRoom = {
+const initialRoomState: IRoom = {
     rooms: []
 };
 
 const roomSlice = createSlice({
-    name: 'roomSlice',
-    initialState,
+    name: 'room',
+    initialState: initialRoomState,
     reducers: {},
     extraReducers: builder =>
         builder
-            .addCase(getAll.fulfilled, (state, action) => {
-                state.rooms = action.payload
+            .addCase(getAllRooms.fulfilled, (state, action) => {
+                state.rooms = action.payload;
             })
 
 });
@@ -26,10 +26,11 @@ const roomSlice = createSlice({
 const {reducer: roomReducer} = roomSlice;
 
 const roomActions = {
-    getAll
+    getAllRooms
 };
 
 export {
     roomReducer,
-    roomActions
+    roomActions,
+    initialRoomState,
 };

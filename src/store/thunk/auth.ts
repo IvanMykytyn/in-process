@@ -10,6 +10,7 @@ import type {
     ResetPasswordProps,
     UserInterface,
 } from 'models';
+
 import {
     loginRequest,
     signUpRequest,
@@ -20,6 +21,7 @@ import {
     resetPasswordRequest,
     getMeRequest,
 } from 'services';
+
 import {authActions, clearStore} from 'store/slices/auth.slice';
 import {AppDispatch} from 'store';
 

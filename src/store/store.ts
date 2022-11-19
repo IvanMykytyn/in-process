@@ -1,4 +1,4 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
 
 import {authReducer} from './slices';
 import {bookingReducer} from './slices';
@@ -10,9 +10,12 @@ const rootReducer = combineReducers({
     rooms: roomReducer,
 });
 
-const setupStore = () => configureStore({
-    reducer: rootReducer
-});
+const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState
+  })
+}
 
 type RootState = ReturnType<typeof rootReducer>;
 type AppStore = ReturnType<typeof setupStore>;

@@ -1,5 +1,5 @@
 import moment, { Moment } from 'moment';
-import 'moment/min/locales';
+import 'moment/locale/en-gb';
 moment.locale('en-gb');
 
 export const getDate = (date: Moment) => {

@@ -1,22 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter} from 'react-router-dom';
-import {Provider} from 'react-redux';
-
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-import {setupStore} from './store';
+
+import { setupStore } from './store';
+import { Provider } from 'react-redux';
+import { setupAxiosInterceptors } from 'services';
+import { logoutUser } from 'store';
+
+export const store = setupStore();
+
+const { dispatch } = store;
+setupAxiosInterceptors(() => {
+  dispatch(logoutUser());
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const store = setupStore();
-
 root.render(
-    // <React.StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>
-    // </React.StrictMode>
-
+  // <React.StrictMode>
+  <Router>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Router>
+  // </React.StrictMode>
 );

@@ -4,5 +4,6 @@ import {AxiosRes} from 'models';
 import {IRooms} from "../models";
 
  export const roomsService={
-    getAll:():AxiosRes<IRooms[]>=> axiosService.get(urls.rooms),
+    getAll:(officeId: number, soonestBookingsDays?: number, items?: number, capacity?: number):AxiosRes<IRooms[]>=>
+        axiosService.get(`${urls.rooms}?officeId=${officeId}${!!soonestBookingsDays && '&soonestBookingsDays=' + soonestBookingsDays || ''}${!!items && '&equipments='+ items || ''}${!!capacity && '&maxCapacity='+ capacity || ''}`)
 };
