@@ -12,7 +12,7 @@ const initialRoomState: IRoom = {
 };
 
 const roomSlice = createSlice({
-    name: 'room',
+    name: 'roomSlice',
     initialState: initialRoomState,
     reducers: {},
     extraReducers: builder =>

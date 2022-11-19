@@ -13,6 +13,7 @@ import cn from 'classnames';
 import css from './DropdownMultiSelect.style.scss';
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {roomActions} from "../../store";
+import {setItemId} from "../../store/slices/filter.slice";
 
 interface FilterProps {
     selected?: string,
@@ -28,10 +29,12 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
     const [items, setItems] = useState<number>(0);
     const [capacity, setCapacity] = useState<number>(0);
 
-
-
-    const {rooms} = useAppSelector(state => state.rooms);
+    const itemId = useAppSelector(state => state.filter.itemId);
     const dispatch = useAppDispatch();
+
+    // const onChangeItemId =(id)=> {
+    //     console.log(id)
+    // }
 
     useEffect(() => {
         dispatch(roomActions.getAllRooms({officeId: 2, items: items, capacity: capacity}))

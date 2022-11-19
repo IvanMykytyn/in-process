@@ -2,13 +2,15 @@ import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolki
 
 import authSlice from './slices/auth.slice';
 import bookingSlice from './slices/booking.slice';
-import {roomReducer} from "./slices/room.slice";
+import {roomReducer} from './slices/room.slice';
+import filterSlice from './slices/filter.slice';
 
 const rootReducer = combineReducers({
     auth: authSlice,
     bookings: bookingSlice,
     rooms: roomReducer,
-});
+    filter: filterSlice
+})
 
 const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({

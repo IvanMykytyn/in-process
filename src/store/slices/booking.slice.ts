@@ -1,29 +1,56 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BookingInterface } from 'models';
 import { EventProps } from 'pages/Dashboard/Calendar/constants';
 import type { RootState } from 'store';
 import { bookings } from 'utils';
+import {BookingInterface, IBookingDelete, IBookingOneTime, IBookingOwn, IBookingPut, IBookingRecurring} from 'models';
+import {
+  recPost,
+  recPut,
+  recDelete,
+  getAllBookings,
+  oneTimePost,
+  oneTimePut,
+  oneTimeDelete,
+  getAllOwnBookings
+} from '../thunk';
 
 interface BookingState {
   isLoading: boolean;
   isSideBarOpen: boolean;
   isPopoverOpen: boolean;
 
+  bookingsRecurring: IBookingRecurring[];
+  bookingsOneTime: IBookingOneTime[];
+  bookingsOwn: IBookingOwn[];
+  bookingForUpdate: IBookingPut | null;
+  scheduleId: IBookingDelete | null;
+  bookingLoading: boolean;
+  oneTimeLoading: boolean;
+  ownLoading: boolean;
+
   bookings: Array<BookingInterface>;
   currentBooking: EventProps | null;
 }
 
 const initialBookingState: BookingState = {
+  bookingsRecurring: [],
+  bookingsOneTime: [],
+  bookingsOwn: [],
+  bookingForUpdate: null,
+  scheduleId: null,
+  bookingLoading: false,
+  oneTimeLoading: false,
+  ownLoading: false,
+  bookings: [],
+  currentBooking: null,
+
   isLoading: false,
   isSideBarOpen: true,
   isPopoverOpen: false,
-
-  bookings: bookings,
-  currentBooking: null,
 };
 
 const bookingSlice = createSlice({
-  name: 'bookings',
+  name: 'bookingSlice',
   initialState: initialBookingState,
   reducers: {
     toggleSideBar: (state) => {
@@ -39,6 +66,12 @@ const bookingSlice = createSlice({
       state.currentBooking = payload;
     },
   },
+  extraReducers: builder => {
+    builder
+        .addCase(getAllBookings.pending, (state) => {
+      state.bookingLoading = true;
+    })
+  }
 });
 
 export const { toggleSideBar, removeBooking, togglePopover, setCurrentBooking } =
