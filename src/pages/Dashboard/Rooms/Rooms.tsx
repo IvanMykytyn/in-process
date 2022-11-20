@@ -1,6 +1,6 @@
 import {FC, useEffect, useCallback, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel} from 'swiper';
+import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel, Autoplay} from 'swiper';
 import {StyledEngineProvider} from '@mui/material/styles';
 import {useNavigate} from "react-router-dom";
 
@@ -14,15 +14,14 @@ import "swiper/css/scrollbar";
 
 // import 'swiper/swiper.min.css';
 
-import {Room,DropdownMultiSelect} from '../../../components';
+import {Room, DropdownMultiSelect} from '../../../components';
 import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../hooks';
 
-import {roomsService} from 'services/rooms.service';
-import {IRooms} from '../../../models'
 import {roomActions} from "store";
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
+SwiperCore.use([Autoplay]);
 
 export interface IFilters {
     id: number,
@@ -304,10 +303,10 @@ const Rooms: FC = () => {
     const {rooms} = useAppSelector(state => state.rooms);
 
     const dispatch = useAppDispatch();
-    
-    useEffect(()=>{
-       dispatch(roomActions.getAllRooms({officeId: 2}))
-    },[dispatch, rooms]);
+
+    useEffect(() => {
+        dispatch(roomActions.getAllRooms({officeId: 2}))
+    }, [dispatch, rooms]);
 
     const {width} = useWindowDimensionsHook();
     return (
@@ -330,15 +329,19 @@ const Rooms: FC = () => {
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}
+                        autoplay={{
+                            delay: 3000,
+                        }}
                         navigation={true}
-                        slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
+                        slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        loop={true}
                         modules={[Navigation]}
                         spaceBetween={25}
                         scrollbar={{draggable: true}}
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {rooms && rooms.filter(room => room.floor === 1).map(room =>
+                            {rooms && rooms.filter(room => room.floor === 2).map(room =>
                                 <SwiperSlide className={cn(css.my_swiper__swiperslide)}
                                              key={room.id}
                                              virtualIndex={room.id}
@@ -360,7 +363,11 @@ const Rooms: FC = () => {
                     <Swiper
                         className={cn(css.my_swiper)}
                         navigation={true}
-                        slidesPerView={width > 1700 ? 1700 / 400 : Math.floor(width / 350)}
+                        slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        autoplay={{
+                            delay: 3000,
+                        }}
+                        loop={true}
                         modules={[Navigation]}
                         spaceBetween={25}
                         scrollbar={{draggable: true}}

@@ -1,35 +1,35 @@
 import 'moment/locale/uk';
-import { FC, useState } from 'react';
+import {FC, useState} from 'react';
 import moment from 'moment';
 
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
 
-import { Input } from '../index';
-import { clock } from '../../assets/images/icons';
-import { BookedRoom } from 'components/BookedRoom/BookedRoom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectBooking, toggleSideBar } from 'store/slices/booking.slice';
+import {Input} from '../index';
+import {clock} from '../../assets/images/icons';
+import {BookedRoom} from 'components/BookedRoom/BookedRoom';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {selectBooking, toggleSideBar} from 'store/slices/booking.slice';
 import Moment from 'react-moment';
-import { SideBarHeader } from './SideBarHeader';
+import {SideBarHeader} from './SideBarHeader';
 
 interface Instruments {
-  id: string;
-  name: string;
+    id: string;
+    name: string;
 }
 
 export interface Data {
-  roomId: string;
-  answer: {
-    date: string;
-    time: {
-      hours: number;
-      minuts: number;
+    roomId: string;
+    answer: {
+        date: string;
+        time: {
+            hours: number;
+            minuts: number;
+        };
+        room: string;
+        instruments: Instruments[];
     };
-    room: string;
-    instruments: Instruments[];
-  };
 }
 
 const data: Data[] = [
@@ -187,11 +187,11 @@ const data: Data[] = [
 
 
 const SideBar: FC = () => {
-    const { isSideBarOpen } = useAppSelector(selectBooking);
+    const {isSideBarOpen} = useAppSelector(selectBooking);
     const dispatch = useAppDispatch();
 
     const handleClick = () => {
-      dispatch(toggleSideBar());
+        dispatch(toggleSideBar());
     };
 
     const roomsTimeSort = data && data.sort((a, b) =>
@@ -204,11 +204,11 @@ const SideBar: FC = () => {
 
         <div className={isSideBarOpen ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
             <div className={cn(scss.wrapper)}>
-                <SideBarHeader />
+                <SideBarHeader/>
                 <button className={cn(scss.burger)} onClick={handleClick}>
                     Menu
                 </button>
-                
+
                 <div className={scss.inner}>
                     <span className={isSideBarOpen ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15} color={'red'}/>
@@ -217,7 +217,9 @@ const SideBar: FC = () => {
                     <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                         {
                             roomsTimeSort.map((value) =>
-                                <BookedRoom key={value.answer.room} room={value}/>
+                                <li>
+                                    <BookedRoom key={value.answer.room} room={value}/>
+                                </li>
                             )
                         }
                     </ul>
@@ -228,4 +230,4 @@ const SideBar: FC = () => {
         ;
 };
 
-export { SideBar };
+export {SideBar};

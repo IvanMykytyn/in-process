@@ -5,7 +5,6 @@
   align-items: flex-start;
   width: 100%;
   flex: 1 1;
-
 }
 
 .dashboard {
@@ -14,21 +13,30 @@
   justify-content: space-between;
   grid-gap: 20px;
   padding: 15px;
-  //max-height: 100vh;
-
+  max-height: 100vh;
 }
 
 .dashboard-page {
   display: flex;
   justify-content: center;
-
   background-color: var(--background);
-  //height: 100vh;
-  min-height: 760px;
+  height: 96vh;
+  //min-height: 625px;
+  overflow: scroll;
   flex: 1;
   border-radius: 25px;
   box-shadow: $outerBoxShadow;
-  padding: 25px;
+  padding: 15px;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
 }
 
 .bookmarks {
