@@ -16,10 +16,10 @@ const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [dispatch]);
 
-  // if (!isLoggedIn()) {
-  //   // NotifyService.error('Please login');
-  //   return <Navigate to="/login" />;
-  // }
+  if (!isLoggedIn()) {
+    // NotifyService.error('Please login');
+    return <Navigate to="/login" />;
+  }
 
   return <>{children}</>;
 };

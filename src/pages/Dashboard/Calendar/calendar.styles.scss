@@ -66,14 +66,16 @@ $lineColor: $nowIndicatorColor;
 .fc-today-button {
   text-transform: capitalize;
   border: 0 !important ;
-  color: $primaryColor400 !important;
-  background: $btnBackground !important;
+  // color: $primaryColor400 !important;
+  color: var(--accent-text-color) !important;
+  background: var(--background) !important;
+  box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white);
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+  font-family: 'Montserrat-Regular', sans-serif !important;
   font-weight: 500 !important;
   text-transform: capitalize !important;
   font-size: 0.875rem !important;
@@ -81,8 +83,10 @@ $lineColor: $nowIndicatorColor;
   &:hover,
   &:focus,
   &:active {
-    background-color: $activeBtnBackground !important;
-    color: $primaryColor400 !important;
+    color: var(--primary-color) !important;
+    background: var(--background) !important;
+    border-color: var(--background) !important;
+    text-shadow: var(--primary-color) 1px 0 50px;
   }
 
   &:disabled {
@@ -93,12 +97,13 @@ $lineColor: $nowIndicatorColor;
 }
 .fc-button-group {
   height: 40px;
-  background: $btnBackground;
+  background: var(--background);
   font-family: 'Montserrat-Regular', sans-serif;
   font-weight: 400;
 
-  border-radius: 5px;
-
+  margin-right: 5px;
+  border-radius: 8px;
+  box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white);
   .fc-today-button,
   .fc-timeGridWeek-button,
   .fc-dayGridMonth-button,
@@ -106,25 +111,68 @@ $lineColor: $nowIndicatorColor;
   .fc-day-button {
     text-transform: capitalize;
     border: none;
-    color: $primaryColor400;
-    background: transparent;
+    background: var(--background);
 
     font-weight: 500;
-    // width: 50px;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-family: 'Montserrat-Regular', sans-serif;
+
     font-size: 0.875rem;
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: $activeBtnBackground !important;
-      color: $primaryColor400 !important;
+
+    color: var(--accent-text-color);
+
+    cursor: pointer;
+    transition: 0.5s, text-shadow 0.5s, border 0.5s;
+    position: relative;
+
+    &:disabled {
+      opacity: 0.7;
     }
-    transition: 0.5s ease-in;
+
+    &:hover:enabled,
+    &:focus:enabled,
+    &:active:enabled {
+      // box-shadow: $innerBoxShadow;
+      color: var(--primary-color);
+      background: var(--background);
+      border-color: var(--background);
+      text-shadow: var(--primary-color) 1px 0 50px;
+    }
+
+    // &::after {
+    //   content: '';
+    //   height: 100%;
+    //   width: 100%;
+    //   background-color: transparent;
+    //   border: 2px solid var(--light-blue);
+    //   box-shadow: inset 0 0 6px var(--light-blue), 0 0 3px var(--light-blue);
+    //   position: absolute;
+    //   left: 50%;
+    //   top: 50%;
+    //   transform: translate(-50%, -50%);
+    //   border-radius: 15px;
+    // }
+
+    // &:hover:enabled {
+
+    //   &::after {
+    //     content: '';
+    //     height: 100%;
+    //     width: 100%;
+    //     background-color: transparent;
+    //     border: 2px solid var(--primary-color);
+    //     box-shadow: inset 0 0 6px var(--primary-color), 0 0 3px var(--primary-color);
+    //     position: absolute;
+    //     left: 50%;
+    //     top: 50%;
+    //     transform: translate(-50%, -50%);
+    //     border-radius: 15px;
+    //   }
+    // }
   }
 
   .fc-button-active {
@@ -150,20 +198,56 @@ $lineColor: $nowIndicatorColor;
   text-transform: capitalize;
   border: none !important;
   color: $primaryColor400 !important;
-  background: $btnBackground !important;
-  font-weight: 500 !important;
+  background: var(--background) !important;
+  box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white);
+
+  padding: 8px 14px !important;
+  border-radius: 5px;
+  font-weight: 700 !important;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+  font-family: 'Montserrat-Regular', sans-serif !important;
   font-size: 0.875rem !important;
   &:hover,
   &:focus,
   &:active {
-    background-color: $activeBtnBackground !important;
-    color: $primaryColor400 !important;
+    color: var(--primary-color) !important;
+    background: var(--background) !important;
+    border-color: var(--background) !important;
+    text-shadow: var(--primary-color) 1px 0 50px;
+  }
+  position: relative;
+  &::after {
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--light-blue);
+    box-shadow: inset 0 0 2px var(--light-blue), 0 0 1px var(--light-blue);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+  }
+
+  &:hover:enabled {
+    &::after {
+      content: '';
+      height: 100%;
+      width: 100%;
+      background-color: transparent;
+      border: 1px solid var(--primary-color);
+      box-shadow: inset 0 0 2px var(--primary-color), 0 0 1px var(--primary-color);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px;
+    }
   }
 }
 
@@ -211,11 +295,15 @@ $lineColor: $nowIndicatorColor;
   justify-content: center;
   width: 100%;
 }
-.fc-timegrid-slot {
-  width: 100%;
+.fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion li {
+  width: 64px !important;
+  border-right: 0 !important;
 }
 .fc-timegrid-slot-label-cushion {
-  width: 100%;
+  padding: 0 !important;
+  width: 62px;
+  left: -2px !important;
+  right: 12px !important;
 }
 
 .fc-timegrid-slot-lane {
@@ -229,10 +317,11 @@ $lineColor: $nowIndicatorColor;
 .fc-scrollgrid-section-header {
   background: var(--light-gray-940) !important;
 }
-
 .fc-timegrid-slot-label {
   position: relative;
   height: 96px;
+  min-width: 60px;
+  width: 60px;
   border-right: $border500 !important;
   border-top: 0 !important;
   border-bottom: 0 !important;
@@ -242,6 +331,7 @@ $lineColor: $nowIndicatorColor;
 }
 .fc-timegrid-axis {
   border-right: $border500 !important;
+  background: var(--background);
 }
 .fc-timegrid-slot-label-frame {
   height: 96px;
@@ -335,7 +425,6 @@ $lineColor: $nowIndicatorColor;
   border: 1px solid var(--text-color-930) !important;
 }
 
-
 .fc-v-event,
 .fc-daygrid-event {
   background: var(--background);
@@ -348,4 +437,10 @@ $lineColor: $nowIndicatorColor;
 .fc-event-selected:after,
 .fc-event:focus:after {
   background: transparent;
+}
+
+.fc-timegrid,
+.fc-daygrid,
+.fc-list {
+  box-shadow: $outerBoxShadow;
 }

@@ -49,14 +49,13 @@ const BookingRoom: FC<BookingRoomProps> = ({
         <ul className={cn(css.container__equipment)}>
           <li className={css['floor-number']}>{floor}</li>
           {staff.map((tool) =>
-            equipments.map((inst) =>
-              inst.id === tool.id ? (
-                <li key={tool.id}>
-                  {<img src={tool.img} alt={tool.alt} width={15} height={15} />}
-                </li>
-              ) : (
-                <></>
-              )
+            equipments?.map(
+              (inst) =>
+                inst.id === tool.id && (
+                  <li key={tool.id}>
+                    {<img src={tool.img} alt={tool.alt} width={20} height={20} />}
+                  </li>
+                )
             )
           )}
         </ul>

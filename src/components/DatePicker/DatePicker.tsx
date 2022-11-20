@@ -1,29 +1,31 @@
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { Input } from 'components/Input/Input';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { FC, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { SetStateType } from 'models';
 import { MainCalendar } from 'components/MainCalendar/MainCalendar';
 import { calendar } from 'assets/images/icons';
 
 import css from './date-picker.module.scss';
 import cn from 'classnames';
-import TouchRipple from '@mui/material/ButtonBase/TouchRipple';
-import { ButtonBase } from '@mui/material';
 
 type DatePickerProps = {
   date: Moment | null;
-  setDate: SetStateType<Moment | null>;
+  handleChange: (newValue: Moment | null) => void;
   disabled?: boolean;
+  error: boolean;
+  errorText?: string;
 };
 
-const DatePicker: FC<DatePickerProps> = ({ date, setDate, disabled }) => {
-  const handleChange = (newValue: Moment | null) => {
-    setDate(newValue);
-  };
-
+const DatePicker: FC<DatePickerProps> = ({
+  date = moment(),
+  handleChange,
+  disabled,
+  error,
+  errorText,
+  ...rest
+}) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
   const handleClickAway = () => {
     setIsCalendarOpen(false);
@@ -38,7 +40,9 @@ const DatePicker: FC<DatePickerProps> = ({ date, setDate, disabled }) => {
           value={date}
           disabled={disabled}
           onChange={handleChange}
-          renderInput={(params) => <Input {...params} fullWidth />}
+          renderInput={(params) => (
+            <Input {...params} fullWidth error={error} errorText={errorText} />
+          )}
         />
       </LocalizationProvider>
       <img
@@ -51,7 +55,7 @@ const DatePicker: FC<DatePickerProps> = ({ date, setDate, disabled }) => {
         <div className={css['form-calendar']}>
           <MainCalendar
             date={date}
-            setDate={setDate}
+            handleChange={(value) => handleChange(moment(value))}
             handleClickAway={handleClickAway}
           />
         </div>

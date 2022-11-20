@@ -15,11 +15,12 @@ const DaysPicker: FC<DaysPickerProps> = ({ values, setValues, ...rest }) => {
       if (dayIndex < 0) {
         return [...values, day];
       }
+      if (values.length === 1) {
+        return values;
+      }
       return values.filter((value) => value !== day);
     });
   };
-
-  console.log(values);
 
   return (
     <div className={css['days-picker']}>
@@ -27,6 +28,7 @@ const DaysPicker: FC<DaysPickerProps> = ({ values, setValues, ...rest }) => {
         const isActive = values.includes(currentDayIndex);
         return (
           <div
+            key={currentDayIndex}
             className={cn(css.day, {
               [css.activeDay]: isActive,
             })}

@@ -1,4 +1,5 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
 import {
     IBookingRecurring,
     IBookingPut,
@@ -7,12 +8,12 @@ import {
     IBookingOneTimePut,
     IBookingOneTimeDelete,
     IBookingOwn
-} from "../../models";
-import {bookingService} from "../../services";
+} from "models";
+import {bookingService} from "services";
 import {AxiosError} from "axios";
 
 export const getAllBookings = createAsyncThunk<IBookingRecurring[], { startDate: string, endDate: string, officeId: number, roomId?: string }>(
-    'booking/getAllBookings',
+    'bookingSlice/getAllBookings',
     async ({startDate, endDate, officeId, roomId}, {rejectWithValue}) => {
         try {
             const {data} = await bookingService.getAllBookings(startDate, endDate, officeId, roomId);
@@ -28,9 +29,14 @@ export const recPost = createAsyncThunk<IBookingRecurring, { booking: IBookingRe
     'bookingSlice/recPost',
     async ({booking}, {rejectWithValue}) => {
         try {
+            console.log('here');
+            
             const {data} = await bookingService.recurringPost(booking);
+            console.log(data);
             return data;
         } catch (e) {
+            console.log(e);
+            
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data);
         }
@@ -67,9 +73,14 @@ export const oneTimePost = createAsyncThunk<IBookingOneTime, { booking: IBooking
     'bookingSlice/oneTimePost',
     async ({booking}, {rejectWithValue}) => {
         try {
+            console.log('here2');
+
             const {data} = await bookingService.postBookingOneTime(booking);
+            console.log(data);
+            
             return data;
         } catch (e) {
+            console.log(e);
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data);
         }

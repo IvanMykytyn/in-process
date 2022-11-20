@@ -14,11 +14,9 @@ interface BookingInterface {
 interface IBookingRecurring {
     start: string;
     end: string;
+    since: string;
     until: string;
-    pattern: {
-        kind: string;
-        weeks: 0
-    };
+    pattern: PatternType;
     name: string;
     description: string;
     roomId: string;
@@ -67,6 +65,28 @@ interface IBookingOwn {
     room: IRooms
 };
 
+
+type PatternType = DaysOfEveryNWeeksType | XDayOfEveryNMonthType | EveryNDayType;
+
+interface PatternKind {
+  kind: 'DAYS_OF_EVERY_N_WEEKS' | 'X_DAY_OF_EVERY_N_MONTH' | 'EVERY_N_DAYS';
+}
+interface DaysOfEveryNWeeksType extends PatternKind {
+  kind: 'DAYS_OF_EVERY_N_WEEKS';
+  days: number[];
+  weeks: number;
+}
+interface XDayOfEveryNMonthType extends PatternKind {
+  kind: 'X_DAY_OF_EVERY_N_MONTH';
+  days: number;
+  month: number;
+}
+
+interface EveryNDayType extends PatternKind {
+  kind: 'EVERY_N_DAYS';
+  days: number;
+}
+
 export type {
     BookingInterface,
     IBookingRecurring,
@@ -75,5 +95,10 @@ export type {
     IBookingOneTime,
     IBookingOneTimePut,
     IBookingOneTimeDelete,
-    IBookingOwn
+    IBookingOwn,
+    PatternType,
+    PatternKind,
+    DaysOfEveryNWeeksType,
+    EveryNDayType,
+    XDayOfEveryNMonthType,
 };

@@ -6,7 +6,6 @@ $calendarHeaderHeight: 35px;
 
 .left-bar__container {
   height: 100%;
-  background: var(--light-gray-940);
   border: $border500;
   padding-bottom: 5px;
   border-top: none;
@@ -14,19 +13,27 @@ $calendarHeaderHeight: 35px;
   position: sticky;
   left: 0;
   z-index: 7;
+  background: var(--background);
+
 }
 
 .left-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: var(--background);
 }
 
 .time-number {
-  width: 100%;
+  width: 100%;  
   height: 24px;
   max-height: 24px;
+  min-width: 60px;
+  width: 60px;
   @include centerDiv();
+  background: var(--background);
+  border-left: 3px solid var(--gray);
+  border-right: 2px solid var(--gray);
 
   &.hour {
     font-weight: 600;
@@ -94,7 +101,7 @@ $calendarHeaderHeight: 35px;
 
 .time-cell-row {
   height: 24px;
-
+  background: var(--background);
   width: 100%;
 
   &[data-time='hour'] {

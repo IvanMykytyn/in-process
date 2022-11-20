@@ -42,6 +42,7 @@ type UserWithToken = UserInterface & { access_token: string };
 export type {
     UserInterface,
     UserFields,
+    UserIdField,
     UserLoginProps,
     UserSignUpProps,
     UserEmailField,

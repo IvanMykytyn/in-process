@@ -15,6 +15,7 @@ interface CustomSelectProps {
   handleChange: (event: SelectChangeEvent) => void;
   options: Array<string>;
   disabled?: boolean;
+  count?: number;
 }
 
 const Select: FC<SelectProps & CustomSelectProps> = ({
@@ -22,6 +23,7 @@ const Select: FC<SelectProps & CustomSelectProps> = ({
   handleChange,
   options,
   disabled,
+  count,
   ...rest
 }) => {
   return (
@@ -31,6 +33,7 @@ const Select: FC<SelectProps & CustomSelectProps> = ({
           return (
             <MenuItem key={option} value={option}>
               {option}
+              {!!count && count > 1 && 's'}
             </MenuItem>
           );
         })}

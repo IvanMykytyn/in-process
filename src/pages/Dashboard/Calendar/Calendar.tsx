@@ -44,7 +44,7 @@ const Calendar: FC = () => {
   useEffect(() => {
     setTimeout(() => {
       calendarRef?.current?.getApi?.().updateSize();
-    }, 1000);
+    }, 1200);
   }, [isSideBarOpen]);
 
   // useEffect(() => {
@@ -68,6 +68,7 @@ const Calendar: FC = () => {
         initialView={'day'}
         locale={'en-GB'}
         scrollTime={scrollTo}
+        allDaySlot={false}
         // slot
         slotLabelInterval={'01:00'}
         slotDuration={'01:00'}
@@ -83,7 +84,7 @@ const Calendar: FC = () => {
         headerToolbar={{
           left: 'addBooking today',
           center: 'prev,title,next',
-          right: 'day timeGridWeek dayGridMonth listWeek',
+          right: 'day,timeGridWeek,dayGridMonth,listWeek',
         }}
         selectable={false}
         selectMirror={false}

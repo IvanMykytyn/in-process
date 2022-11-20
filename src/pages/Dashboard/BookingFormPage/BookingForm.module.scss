@@ -38,15 +38,7 @@
       font-size: 14px;
     }
   }
-
-
-  &__label--select {
-    margin-bottom: 20px;
-
-    &::before {
-      content: 'Select Members';
-    }
-  }
+  
 }
 
 .btn {
@@ -64,6 +56,7 @@
   display: flex;
   padding: 10px 20px;
   gap: 15px;
+  padding-right: 50px;
   justify-content: flex-end;
 }
 
@@ -103,6 +96,19 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      position: relative;
+
+      &__error{
+        position: absolute;
+        bottom: -13px;
+        left: 10px;
+        right: 0;
+        color: rgba(226, 61, 40, 0.9568627451);
+        font-size: 12px;
+        text-shadow: 0 0 10px rgb(255 0 0 / 15%);
+        animation: 0.3s slidein;
+        transition: 0.5s translateX;
+      }
 
       &__text {
         font-size: 1rem;

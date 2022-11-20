@@ -10,25 +10,22 @@ import { SetStateType } from 'models';
 interface Props {
   range?: boolean;
   handleClickAway: () => void;
-  setDate: SetStateType<Moment | null>;
+  handleChange: (selectedDate: Date) => void;
   date: Moment | null;
 }
 
-const MainCalendar: FC<Props> = ({ range, handleClickAway, setDate, date }) => {
-  const onChange = (selectedDate: Date) => {
-    setDate(moment(selectedDate));
-  };
+const MainCalendar: FC<Props> = ({ range, handleClickAway, handleChange, date }) => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div className={css.calendar}>
         <Calendar
           locale={'en-gb'}
-          onChange={onChange}
+          onChange={handleChange}
           selectRange={range}
           defaultActiveStartDate={date?.toDate()}
           onClickDay={(value) => {
-            setDate(moment(value));
+            handleChange(value);
             handleClickAway();
           }}
         />

@@ -38,7 +38,8 @@ $eventBorderRadius: 5px;
   height: 100%;
   background: var(--background);
   width: $roomWidth;
-
+  box-shadow: 1px 1px 6px var(--gray),
+  -1px -1px 6px var(--white);;
   border-radius: $eventBorderRadius;
 
   overflow: hidden;

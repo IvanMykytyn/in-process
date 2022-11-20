@@ -1,7 +1,8 @@
 import { createSlice} from "@reduxjs/toolkit";
 
 import {IRooms} from "models";
-import {getAllRooms} from '../thunk';
+import { RootState } from "store/store";
+import {getAllRooms } from '../thunk';
 
 interface IRoom {
     rooms: IRooms[]
@@ -25,6 +26,7 @@ const roomSlice = createSlice({
 
 const {reducer: roomReducer} = roomSlice;
 
+const selectRooms = (state: RootState) => state.rooms;
 const roomActions = {
     getAllRooms
 };
@@ -32,5 +34,6 @@ const roomActions = {
 export {
     roomReducer,
     roomActions,
+    selectRooms,
     initialRoomState,
 };
