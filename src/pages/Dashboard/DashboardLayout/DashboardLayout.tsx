@@ -21,6 +21,14 @@ const DashboardLayout: FC = () => {
                         </div>
                         <ul className={cn(css.bookmarks)}>
                             <li className={cn(css.bookmarks__item)}>
+                                <Link to={'/dashboard/map'}>
+                                    <button className={cn(css.bookmarks__btn)}
+                                            type={'button'}>
+                                        Rooms
+                                    </button>
+                                </Link>
+                            </li>
+                            <li className={cn(css.bookmarks__item)}>
                                 <Link to={'/dashboard/calendar'}>
                                     <button className={cn(css.bookmarks__btn)}
                                             type={'button'}>
@@ -28,22 +36,14 @@ const DashboardLayout: FC = () => {
                                     </button>
                                 </Link>
                             </li>
-                            <li className={cn(css.bookmarks__item)}>
-                                <Link to={'/dashboard/timeline'}>
-                                    <button className={cn(css.bookmarks__btn)}
-                                            type={'button'}>
-                                        Timeline
-                                    </button>
-                                </Link>
-                            </li>
-                            <li className={cn(css.bookmarks__item)}>
-                                <Link to={'/dashboard/map'}>
-                                    <button className={cn(css.bookmarks__btn)}
-                                            type={'button'}>
-                                        Map
-                                    </button>
-                                </Link>
-                            </li>
+                            {/*<li className={cn(css.bookmarks__item)}>*/}
+                            {/*    <Link to={'/dashboard/timeline'}>*/}
+                            {/*        <button className={cn(css.bookmarks__btn)}*/}
+                            {/*                type={'button'}>*/}
+                            {/*            Timeline*/}
+                            {/*        </button>*/}
+                            {/*    </Link>*/}
+                            {/*</li>*/}
                         </ul>
                     </div>
                     <SideBar/>

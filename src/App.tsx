@@ -20,7 +20,7 @@ function App() {
 
     return (
         <div role={'application'} className={'app'} data-theme={theme}>
-            <button type={'button'} onClick={toggleTheme}>
+            <button className={'app__btn'} type={'button'} onClick={toggleTheme}>
                 {theme === 'light' ? 'dark' : 'light'}
             </button>
             <AppRoutes/>
