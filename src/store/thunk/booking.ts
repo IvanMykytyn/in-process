@@ -13,7 +13,7 @@ import {
 
 import {bookingService} from "../../services";
 
-export  const getAllBookings = createAsyncThunk<IBookingRecurring[], { startDate: string, endDate: string, officeId: number, roomId?: string }>(
+export const getAllBookings = createAsyncThunk<IBookingRecurring[], { startDate: string, endDate: string, officeId: number, roomId?: string }>(
     'bookingSlice/getAllBookings',
     async ({startDate, endDate, officeId, roomId}, {rejectWithValue}) => {
         try {
@@ -104,7 +104,7 @@ export const oneTimePut = createAsyncThunk<IBookingOneTimePut, { bookingId: numb
     }
 );
 
-export const getAllOwnBookings = createAsyncThunk<IBookingOwn[], { page: number, limit: number }>(
+export const getAllOwnBookings = createAsyncThunk<IBookingOwn, { page: number, limit: number }>(
     'bookingSlice/getAllOwnBookings',
     async ({page, limit}, {rejectWithValue}) => {
         try {

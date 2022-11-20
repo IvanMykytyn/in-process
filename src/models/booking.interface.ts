@@ -56,7 +56,7 @@ interface IBookingOneTimeDelete {
   bookingId: number;
 }
 
-interface IBookingOwn {
+interface IBookingOwnData {
   id: number;
   start: string;
   end: string;
@@ -67,6 +67,13 @@ interface IBookingOwn {
   room: IRooms
 };
 
+interface IBookingOwn{
+  data: IBookingOwnData[];
+  page: string;
+  limit: string;
+  totalCount: number;
+}
+
 export type {
   BookingInterface,
   IBookingRecurring,
@@ -75,7 +82,8 @@ export type {
   IBookingOneTime,
   IBookingOneTimePut,
   IBookingOneTimeDelete,
-  IBookingOwn
+  IBookingOwn,
+  IBookingOwnData
 };
 
 

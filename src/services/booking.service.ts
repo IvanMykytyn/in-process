@@ -24,7 +24,7 @@ const bookingService = {
     deleteBookingOneTime: (bookingId: number): AxiosRes<IBookingOneTimeDelete> => axiosService.delete(`${urls.bookings}/one-time/${bookingId}`),
     putBookingOneTime: (bookingId: number, newBooking: IBookingOneTimePut): AxiosRes<IBookingOneTimePut> => axiosService.put(`${urls.bookings}/${bookingId}`, newBooking),
 
-    getBookingOwn: (page: number, limit: number): AxiosRes<IBookingOwn[]> => axiosService.get(`${urls.bookings}/own?page=${page}&limit=${limit}`)
+    getBookingOwn: (page: number, limit: number): AxiosRes<IBookingOwn> => axiosService.get(`${urls.bookings}/own?page=${page}&limit=${limit}`)
 };
 
 export {bookingService};
