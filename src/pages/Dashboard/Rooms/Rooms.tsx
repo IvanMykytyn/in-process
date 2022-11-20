@@ -83,7 +83,6 @@ const Rooms: FC = () => {
 
     useEffect(() => {
         dispatch(roomActions.getAllRooms({officeId: 2}))
-        console.log(rooms)
     }, [dispatch]);
 
     const {width} = useWindowDimensionsHook();

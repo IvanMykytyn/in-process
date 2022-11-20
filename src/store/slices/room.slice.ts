@@ -19,7 +19,6 @@ const roomSlice = createSlice({
     reducers: {
         getFilteredRooms(state, action) {
             state.filteredRooms = action.payload;
-            console.log(state.filteredRooms)
         }
     },
     extraReducers: builder =>
