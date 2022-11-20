@@ -5,6 +5,186 @@ import Moment from 'react-moment';
 
 // styles
 import cn from 'classnames';
+import scss from './sidebar.module.scss';
+
+import {Input} from '../index';
+import {clock} from '../../assets/images/icons';
+import {BookedRoom} from 'components/BookedRoom/BookedRoom';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {selectBooking, toggleSideBar} from 'store/slices/booking.slice';
+import Moment from 'react-moment';
+import {SideBarHeader} from './SideBarHeader';
+
+interface Instruments {
+    id: string;
+    name: string;
+}
+
+export interface Data {
+    roomId: string;
+    answer: {
+        date: string;
+        time: {
+            hours: number;
+            minuts: number;
+        };
+        room: string;
+        instruments: Instruments[];
+    };
+}
+
+const data: Data[] = [
+    {
+        roomId: 'room 1',
+        answer: {
+            date: '2022-11-11',
+            time: {
+                hours: 13,
+                minuts: 30
+            },
+            room: '1',
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
+        }
+    },
+    {
+        roomId: 'room 2',
+        answer: {
+            date: '2022-11-11',
+            time: {
+                hours: 18,
+                minuts: 30
+            },
+            room: '2',
+            instruments: [
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
+        }
+    },
+    {
+        roomId: 'room 3',
+        answer: {
+            date: '2022-11-14',
+            time: {
+                hours: 18,
+                minuts: 30
+            },
+            room: '3',
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
+        }
+    }, {
+        roomId: 'room 4',
+        answer: {
+            date: '2022-11-13',
+            time: {
+                hours: 14,
+                minuts: 30
+            },
+            room: '4',
+            instruments: [
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
+        }
+    },
+    {
+        roomId: 'room 5',
+        answer: {
+            date: '2022-11-16',
+            time: {
+                hours: 20,
+                minuts: 30
+            },
+            room: '5',
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
+        }
+    },
+    {
+        roomId: 'room 6',
+        answer: {
+            date: '2022-11-17',
+            time: {
+                hours: 16,
+                minuts: 20
+            },
+            room: '6',
+            instruments: [
+                {
+                    id: '0',
+                    name: 'board'
+                },
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+            ]
+        }
+    },
+    {
+        roomId: 'room 7',
+        answer: {
+            date: '2022-11-19',
+            time: {
+                hours: 17,
+                minuts: 0
+            },
+            room: '7',
+            instruments: [
+                {
+                    id: '1',
+                    name: 'tv'
+                },
+                {
+                    id: '2',
+                    name: 'markers'
+                }
+            ]
+        }
+    },
+];
 
 import scss from './sidebar.module.scss';
 import {clock} from '../../assets/images/icons';
@@ -49,6 +229,7 @@ const SideBar: FC = () => {
                         {
                             bookingsOwn && bookingsOwn.data.map((value) =>
                                 <BookedRoom key={value.id} room={value.room} endDate={value.end}/>
+
                             )
                         }
                     </ul>

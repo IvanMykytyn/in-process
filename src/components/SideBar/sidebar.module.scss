@@ -3,7 +3,8 @@
 .sidebar {
   max-width: 350px;
   width: 100%;
-  min-height: 760px;
+  max-height: 100vh;
+  //min-height: 625px;
   border-radius: 25px;
   box-shadow: $outerBoxShadow;
   padding: 15px;
@@ -11,6 +12,7 @@
   top: 0;
   transition: width 0.7s;
   background: var(--background);
+  //overflow: hidden;
 }
 
 .sidebar.hide {
@@ -21,7 +23,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
   position: relative;
   grid-gap: 15px;
 }
@@ -89,8 +90,7 @@
     border-radius: 50%;
 
     // text-color filter
-    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%)
-      contrast(83%);
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
     transition: 0.5s ease-in-out;
 
     cursor: pointer;
@@ -99,8 +99,7 @@
     &:focus,
     &:active {
       // primary-color filter
-      filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg)
-        brightness(91%) contrast(94%);
+      filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%) contrast(94%);
     }
   }
 
@@ -121,8 +120,7 @@
 
 .logout-btn {
   img {
-    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%)
-      contrast(83%);
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
     transition: 0.5s ease-in-out;
     width: 20px;
     width: 20px;
@@ -132,8 +130,7 @@
   &:focus,
   &:active {
     // primary-color filter
-    filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%)
-      contrast(94%);
+    filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%) contrast(94%);
   }
 }
 
@@ -216,7 +213,7 @@ button {
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
-  height: 540px;
+  max-height: calc(100vh - 250px);
   overflow: scroll;
   transition: 0.5s opacity;
   box-shadow: inset 10px 10px 10px var(--background);
@@ -234,7 +231,7 @@ button {
   width: 48px;
   min-height: 48px;
   height: 48px;
-  
+
   cursor: pointer;
   border-radius: 50%;
   display: inline-block;
