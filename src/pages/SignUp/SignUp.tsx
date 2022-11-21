@@ -16,7 +16,7 @@ import { Input, Button } from 'components/index';
 import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
 import { UserSignUpProps } from 'models';
-import { isLoggedIn, NotifyService } from 'services';
+import { userService, NotifyService } from 'services';
 
 const initialValues = {
   firstName: '',
@@ -31,7 +31,7 @@ const SignUp: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
 
   useEffect(() => {
-    if (isLoggedIn()) {
+    if (userService.isLoggedIn()) {
       navigate('/dashboard');
     }
   }, [user, navigate]);

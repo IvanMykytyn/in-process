@@ -1,13 +1,11 @@
-import { FC, useState, useEffect, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
+import { FC, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import css from './BookingForm.module.scss';
 import './BookingForm.styles.scss';
 import cn from 'classnames';
 
 import { Step, StepLabel, Stepper } from '@mui/material';
-import { bookingService, getUsersRequest } from 'services';
 import moment, { Moment } from 'moment';
 import { FormFirstStep } from './BookingFormSteps/FormFirstStep';
 import { FormThirdStep } from './BookingFormSteps/FormThirdStep';
@@ -15,7 +13,7 @@ import { FormSecondStep } from './BookingFormSteps/FormSecondStep';
 import { IBookingOneTime, IBookingRecurring, PatternType } from 'models';
 import { getNextDay } from 'utils';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { bookingActions, roomActions, selectRooms } from 'store';
+import { bookingActions, selectRooms } from 'store';
 
 export interface ValuesType {
   name: string;
@@ -39,8 +37,12 @@ const steps = [
 ];
 
 const BookingFormPage: FC = () => {
-  const { roomId = '', date } = useParams();
+  const [params, _] = useSearchParams();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const paramsDate = moment(params.get('date'));
+  const defaultParamsDate = paramsDate.isValid() ? paramsDate : moment();
   const { rooms } = useAppSelector(selectRooms);
 
   const initialValues: ValuesType = {
@@ -53,11 +55,12 @@ const BookingFormPage: FC = () => {
     },
     startTime: moment('2023-08-18T00:00:00'),
     endTime: moment('2023-08-18T00:00:00'),
-    startDate: moment(date && date),
-    endDate: getNextDay(moment(date && date)),
-    roomId: (parseInt(roomId) || rooms[0]?.id) ?? 2,
+    startDate: defaultParamsDate,
+    endDate: getNextDay(defaultParamsDate),
+    roomId: (parseInt(params.get('roomId') ?? '') || rooms[0]?.id) ?? 2,
     isRecurring: false,
   };
+
   const [errors, setErrors] = useState<ErrorsType>({});
 
   const [activeStep, setActiveStep] = useState<number>(0);

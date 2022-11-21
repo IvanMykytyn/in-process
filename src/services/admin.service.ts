@@ -7,4 +7,6 @@ const addUsersRequest = (users: Array<string>): PR<void> =>
     usersEmails: users,
   });
 
-export { addUsersRequest };
+const adminService = { addUsersRequest };
+
+export {adminService}

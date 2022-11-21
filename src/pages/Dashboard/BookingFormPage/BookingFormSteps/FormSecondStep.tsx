@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import moment, { Moment } from 'moment';
 
 import { SelectChangeEvent } from '@mui/material';
@@ -27,8 +27,9 @@ import {
 
 import { getDiffInMinutes } from 'utils';
 
+const selectRepeatingRange = ['day', 'week', 'month', 'year'];
+
 const FormSecondStep: FC<BuildStepProps> = ({
-  activeStep,
   handleBack,
   handleNext,
   values,
@@ -36,11 +37,15 @@ const FormSecondStep: FC<BuildStepProps> = ({
   errors,
   setErrors,
 }) => {
-  const selectRepeatingRange = ['day', 'week', 'month', 'year'];
-  const [select, setSelect] = useState<string>(selectRepeatingRange[1]);
 
-  const [days, setDays] = useState<number[]>([moment().day()]);
-  const [generalCount, setGeneralCount] = useState<number>(1);
+  const { currDays, currGeneralCount, currSelect } = useMemo(
+    () => getDefaultPatternValues(values.pattern),
+    [values.pattern]
+  );
+
+  const [select, setSelect] = useState<string>(currSelect);
+  const [days, setDays] = useState<number[]>(currDays);
+  const [generalCount, setGeneralCount] = useState<number>(currGeneralCount);
 
   const handleDateChange = (inputName: string) => {
     return (newValue: Moment | null) => {
@@ -296,4 +301,34 @@ const isValidSelectMonth = (pattern: XDayOfEveryNMonthType) => {
     errors.generalCount = 'Value must be less than 80';
   }
   return errors;
+};
+
+const getDefaultPatternValues = (pattern: PatternType) => {
+
+  let currDays = [moment().day()];
+  let currSelect = selectRepeatingRange[1];
+  let currGeneralCount = 1;
+
+  if (pattern.kind === 'DAYS_OF_EVERY_N_WEEKS') {
+    currSelect = selectRepeatingRange[1];
+    currDays = pattern.days;
+    currGeneralCount = pattern.weeks;
+  } else if (pattern.kind === 'EVERY_N_DAYS') {
+    currSelect = selectRepeatingRange[0];
+    currGeneralCount = pattern.days;
+  } else if (pattern.kind === 'X_DAY_OF_EVERY_N_MONTH') {
+    if (pattern.month % 12 === 0) {
+      currSelect = selectRepeatingRange[3];
+      currGeneralCount = pattern.month / 12;
+    } else {
+      currSelect = selectRepeatingRange[2];
+      currGeneralCount = pattern.month;
+    }
+  }
+
+  return {
+    currDays,
+    currSelect,
+    currGeneralCount,
+  };
 };

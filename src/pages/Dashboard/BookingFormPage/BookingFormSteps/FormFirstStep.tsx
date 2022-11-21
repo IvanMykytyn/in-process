@@ -7,11 +7,9 @@ import { Input } from 'components/Input/Input';
 import { MultipleSelectWithBadges } from 'components/MultipleSelectWithBadges/MultipleSelectWithBadges';
 import { AutocompleteRenderInputParams, TextField } from '@mui/material';
 import { Button } from 'components/Button/Button';
-import { getUsersRequest } from 'services';
+import { userService } from 'services';
 
 const FormFirstStep: FC<BuildStepProps> = ({
-  activeStep,
-  handleBack,
   handleNext,
   values,
   setValues,
@@ -41,7 +39,7 @@ const FormFirstStep: FC<BuildStepProps> = ({
   };
 
   const getUsers = useCallback(async () => {
-    const response = await getUsersRequest();
+    const response = await userService.getUsersRequest();
     const usersData = response.data.map((user) => {
       const { email, id } = user;
       return {
@@ -124,7 +122,6 @@ const FormFirstStep: FC<BuildStepProps> = ({
         </label>
       </div>
       <div className={css.buttons}>
-       
         <Button type={'button'} onClick={handleNextStage}>
           Next
         </Button>

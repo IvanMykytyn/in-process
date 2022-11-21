@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
 import { BuildStepProps, ErrorsType, ValuesType } from '../BookingFormPage';
 import css from '../BookingForm.module.scss';
 import '../BookingForm.styles.scss';
@@ -11,35 +11,37 @@ import { staff } from 'utils/tools/staff';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { roomActions } from 'store/slices/room.slice';
 
-const FormThirdStep: FC<BuildStepProps> = ({
-  activeStep,
-  handleBack,
-  handleNext,
-  values,
-  setValues,
-  errors,
-  setErrors,
-}) => {
+const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) => {
   const { rooms } = useAppSelector((state) => state.rooms);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(roomActions.getAllRooms({ officeId: 2 }));
+    if (rooms.length === 0) {
+      dispatch(roomActions.getAllRooms({ officeId: 2 }));
+    }
+    // eslint-disable-next-line
   }, [dispatch]);
 
   const handleChangeRoom = (id: number) => {
     setValues({ ...values, roomId: id });
   };
 
-  const bookingRooms = rooms.map((room) => {
-    const { id, name, floor, maxCapacity, equipments } = room;
-    return { id, name, floor, maxCapacity, equipments };
-  });
+  const bookingRooms = useMemo(() => {
+    return rooms.map((room) => {
+      const { id, name, floor, maxCapacity, equipments } = room;
+      return { id, name, floor, maxCapacity, equipments };
+    });
+  }, [rooms]);
 
-  const currentBookingRoom = rooms.find((room) => room.id === values.roomId);
+  const currentBookingRoom = useMemo(() => {
+    return rooms.find((room) => room.id === values.roomId);
+  }, [rooms, values.roomId]);
+
   const { id, description, name, floor, maxCapacity, equipments } =
-    currentBookingRoom || {};
+    useMemo(() => {
+      return currentBookingRoom;
+    }, [currentBookingRoom]) || {};
 
   return (
     <div className={cn(css['third-step-form'])}>
@@ -105,9 +107,3 @@ const FormThirdStep: FC<BuildStepProps> = ({
 };
 
 export { FormThirdStep };
-
-const isValidThirdStep = (values: ValuesType) => {
-  let errors: ErrorsType = {};
-
-  return errors;
-};

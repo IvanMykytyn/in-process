@@ -9,18 +9,11 @@ import type {
   UserWithToken,
   ResetPasswordProps,
   UserInterface,
+  UserFields,
+  UpdateMeResponse,
 } from 'models';
 
-import {
-  loginRequest,
-  signUpRequest,
-  getAccessRequest,
-  addUsersRequest,
-  changePasswordRequest,
-  forgotPasswordRequest,
-  resetPasswordRequest,
-  getMeRequest,
-} from 'services';
+import { userService, adminService } from 'services';
 
 import { clearUser } from 'store/slices/auth.slice';
 import type { AppDispatch } from 'store';
@@ -33,7 +26,7 @@ export const loginUser = createAsyncThunk<
   }
 >('auth/loginUser', async (userData, { rejectWithValue }) => {
   try {
-    const response = await loginRequest(userData);
+    const response = await userService.loginRequest(userData);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -53,7 +46,7 @@ export const signUpUser = createAsyncThunk<
   }
 >('auth/signUpUser', async (userData, { rejectWithValue }) => {
   try {
-    const response = await signUpRequest(userData);
+    const response = await userService.signUpRequest(userData);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -74,7 +67,7 @@ export const getAccessUser = createAsyncThunk<
   }
 >('auth/getAccessUser', async ({ email }, { rejectWithValue }) => {
   try {
-    const response = await getAccessRequest({ email });
+    const response = await userService.getAccessRequest({ email });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -113,7 +106,7 @@ export const addUsers = createAsyncThunk<
   }
 >('auth/addUsers', async (users, { rejectWithValue }) => {
   try {
-    await addUsersRequest(users);
+    await adminService.addUsersRequest(users);
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
 
@@ -136,7 +129,7 @@ export const changePassword = createAsyncThunk<
   }
 >('auth/changePassword', async ({ newPassword }, { rejectWithValue }) => {
   try {
-    const response = await changePasswordRequest({ newPassword });
+    const response = await userService.changePasswordRequest({ newPassword });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -156,7 +149,7 @@ export const forgotPassword = createAsyncThunk<
   }
 >('auth/forgotPassword', async ({ email }, { rejectWithValue }) => {
   try {
-    const response = await forgotPasswordRequest({ email });
+    const response = await userService.forgotPasswordRequest({ email });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -176,7 +169,7 @@ export const resetPassword = createAsyncThunk<
   }
 >('auth/resetPassword', async ({ id, newPassword }, { rejectWithValue }) => {
   try {
-    const response = await resetPasswordRequest({ id, newPassword });
+    const response = await userService.resetPasswordRequest({ id, newPassword });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -196,7 +189,27 @@ export const getMe = createAsyncThunk<
   }
 >('auth/getMe', async (_, { rejectWithValue }) => {
   try {
-    const response = await getMeRequest();
+    const response = await userService.getMeRequest();
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const updateMe = createAsyncThunk<
+  UpdateMeResponse,
+  UserFields,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>('auth/updateMe', async (userData, { rejectWithValue }) => {
+  try {
+    const response = await userService.updateMeRequest(userData);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;

@@ -23,7 +23,8 @@ body {
   --box-shadow-sidebar-btn-color: #B0B0B099;
   --login-circle: #B0CAE9BF;
 
-  --card-hover-background: #d1d1d1;
+  --card-background:#e9e9e9;
+  --card-hover-background: #efefef;
   --more-card-background: #ededed;
 
   --grid-background:#edededae; 
@@ -60,6 +61,7 @@ body {
   --box-shadow-sidebar-btn-color: rgba(30, 30, 30, 0.7);
   --accent-text-color: #878787;
 
+  --card-background:hsl(0, 0%, 12%);
   --card-hover-background: hsl(0, 0%, 18%);
   --more-card-background: hsl(0, 0%, 10%);
   // p = percent

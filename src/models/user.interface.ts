@@ -20,8 +20,7 @@ interface IUserOwn extends UserIdField, UserFields, UserEmailField {
 
 type UserLoginProps = UserEmailField & UserPasswordField;
 type UserSignUpProps = UserFields & UserPasswordField & UserIdField;
-
-// type UserUpdateProps = UserFields;
+type UpdateMeResponse = [UserFields];
 
 interface changePasswordProps {
     newPassword: string;
@@ -50,5 +49,5 @@ export type {
     UserWithToken,
     changePasswordProps,
     IUserOwn,
-    // UserUpdateProps,
+    UpdateMeResponse,
 };

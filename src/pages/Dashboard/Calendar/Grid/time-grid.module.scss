@@ -32,7 +32,7 @@ $calendarHeaderHeight: 35px;
   width: 60px;
   @include centerDiv();
   background: var(--background);
-  border-left: 3px solid var(--gray);
+  border-left: 2.5px solid var(--gray);
   border-right: 2px solid var(--gray);
 
   &.hour {
