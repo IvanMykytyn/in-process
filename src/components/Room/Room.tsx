@@ -54,7 +54,7 @@ const Room: FC<RoomProps> = ({room}) => {
                         )}
                 </ul>
                 <div className={cn(css.pre_btn)}>
-                    <Link to={'/dashboard/bookig-form'}>
+                    <Link to={`/dashboard/booking-form?roomId=${room.id}`} >
                         <button className={cn(css.pre_btn__btn)}>Book</button>
                     </Link>
                 </div>

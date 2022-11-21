@@ -9,9 +9,9 @@ import {
     IBookingOneTimePut,
     IBookingOneTimeDelete,
     IBookingOwn
-} from "../../models";
+} from "models";
+import {bookingService} from "services";
 
-import {bookingService} from "../../services";
 
 export const getAllBookings = createAsyncThunk<IBookingRecurring[], { startDate: string, endDate: string, officeId: number, roomId?: string }>(
     'bookingSlice/getAllBookings',
@@ -31,8 +31,11 @@ export const recPost = createAsyncThunk<IBookingRecurring, { booking: IBookingRe
     async ({booking}, {rejectWithValue}) => {
         try {
             const {data} = await bookingService.recurringPost(booking);
+            console.log(data);
             return data;
         } catch (e) {
+            console.log(e);
+            
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data);
         }
@@ -72,6 +75,7 @@ export const oneTimePost = createAsyncThunk<IBookingOneTime, { booking: IBooking
             const {data} = await bookingService.postBookingOneTime(booking);
             return data;
         } catch (e) {
+            console.log(e);
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data);
         }
@@ -116,4 +120,3 @@ export const getAllOwnBookings = createAsyncThunk<IBookingOwn, { page: number, l
         }
     }
 );
-

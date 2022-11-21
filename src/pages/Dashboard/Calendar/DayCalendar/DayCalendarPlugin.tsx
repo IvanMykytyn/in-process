@@ -3,7 +3,7 @@ import { sliceEvents, createPlugin } from '@fullcalendar/core';
 import { CalendarDay } from './CalendarDay';
 
 const dayCalendarPlugin: FC = (props: any) => {
-  let events = sliceEvents(props, false); // allDay=true
+  let events = sliceEvents(props, false); 
 
   return (
     <CalendarDay

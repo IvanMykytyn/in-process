@@ -20,7 +20,7 @@ const bookingService = {
     recurringPut: (scheduleId: number, newBooking: IBookingPut): AxiosRes<IBookingPut> => axiosService.put(`${urls.bookings}/recurring/${scheduleId}`, newBooking),
     recurringDelete: (scheduleId: number): AxiosRes<IBookingDelete> => axiosService.delete(`${urls.bookings}/recurring/${scheduleId}`),
 
-    postBookingOneTime: (booking: IBookingOneTime): AxiosRes<IBookingOneTime> => axiosService.post(`${urls.bookings}/one-time?`, booking),
+    postBookingOneTime: (booking: IBookingOneTime): AxiosRes<IBookingOneTime> => axiosService.post(`${urls.bookings}/one-time`, booking),
     deleteBookingOneTime: (bookingId: number): AxiosRes<IBookingOneTimeDelete> => axiosService.delete(`${urls.bookings}/one-time/${bookingId}`),
     putBookingOneTime: (bookingId: number, newBooking: IBookingOneTimePut): AxiosRes<IBookingOneTimePut> => axiosService.put(`${urls.bookings}/${bookingId}`, newBooking),
 

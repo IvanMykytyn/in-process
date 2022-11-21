@@ -2,36 +2,6 @@
 @import './fonts.styles.scss';
 @import './mixins.styles.scss';
 
-* {
-  @extend %montserrat-regular-400;
-  color: var(--accent-text-color);
-
-  &::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    margin: 5px;
-    background-color: var(--background);
-  }
-
-  &::-webkit-scrollbar-track,
-  &::-webkit-scrollbar-corner {
-    background-color: var(--background);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--light-blue);
-    border-radius: 10px;
-    transition: opacity 0.5s;
-  }
-}
-
-body {
-  line-height: 1.2;
-  font-family: sans-serif;
-  background-color: var(--background);
-  color: var(--accent-text-color);
-}
-
 .container {
   width: 100vw;
   max-width: 2400px;

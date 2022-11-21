@@ -44,9 +44,9 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
 
   return (
     <div className={scss['event-popover']}>
-      <header className={scss['staff-bar']}>
+      <header className={scss['tools-bar']}>
         {showControlIcons && (
-          <div className={scss['staff-wrapper']}>
+          <div className={scss['tools-wrapper']}>
             <img
               src={edit}
               alt="edit"
