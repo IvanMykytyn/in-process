@@ -7,8 +7,11 @@ $errorTextColor: #d32f2f;
   width: 100%;
 
   .badges-container {
-    height: 60px;
-    overflow: auto;
+    min-height: 30px;
+    // height: 30px;
+    overflow-y: scroll;
+    max-height: 60px;
+
     //display: flex;
     //flex-wrap: wrap-reverse;
 
@@ -33,6 +36,30 @@ $errorTextColor: #d32f2f;
       border-radius: 12px;
       color: rgba(0, 0, 0, 0.5);
       font-size: 1.1rem;
+      padding-left: 10px;
+    }
+    
+    .MuiInputLabel-root {
+      letter-spacing: 1.2px;
+      text-transform: capitalize;
+      padding: 0 5px;
+      font-size: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 10px;
+      color: var(--text-color);
+      transition: color 0.3s, opacity 0.3s;
+      @extend %montserrat-medium-500;
+    }
+  
+    .MuiInputLabel-root[data-shrink='true'] {
+      opacity: 0;
+      color: var(--primary-color);
+      font-size: 14px;
+    }
+  
+    .MuiOutlinedInput-notchedOutline {
+      border: 0;
     }
 
     .MuiOutlinedInput-notchedOutline {
@@ -41,7 +68,6 @@ $errorTextColor: #d32f2f;
 
     .MuiOutlinedInput-root {
       display: flex;
-      flex-direction: column;
       grid-gap: 5px;
 
       .MuiAutocomplete-input {
@@ -52,10 +78,11 @@ $errorTextColor: #d32f2f;
 }
 
 .MuiAutocomplete-popper {
+  padding-bottom: 5px;
   .MuiAutocomplete-listbox,
   .MuiAutocomplete-noOptions {
     overflow-x: hidden;
-    background: var(--light-gray);
+    background: var(--more-card-background);
     box-shadow: $outerBoxShadow;
     font-size: 0.9rem;
     max-height: 200px;
@@ -93,10 +120,8 @@ $errorTextColor: #d32f2f;
     top: -25px;
   }
 
-
   .MuiOutlinedInput-root .MuiAutocomplete-endAdornment {
     right: 15px !important;
-
   }
 }
 

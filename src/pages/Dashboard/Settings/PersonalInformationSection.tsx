@@ -8,8 +8,8 @@ import { SectionLayout } from './SectionLayout';
 import { SectionInput } from './SectionInput';
 import { SectionButtons } from './SectionButtons';
 
-import { selectUser } from 'store';
-import {useAppDispatch, useAppSelector} from '../../../hooks';
+import { selectUser, updateMe } from 'store';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { UserInterface, UserFields } from 'models';
 import { validateName } from 'utils';
 
@@ -28,15 +28,15 @@ const PersonalInformationSection: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
   const { firstName, lastName, email } = user || ({} as UserInterface);
 
-  const fullName = `${firstName} ${lastName}`;
-
+  const fullName = `${firstName ?? ''} ${lastName ?? ''}`;
   const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors
+    clearErrors,
+    reset,
   } = useForm({
     defaultValues: { firstName, lastName },
     resolver: joiResolver(PersonalInfoValidator),
@@ -45,15 +45,15 @@ const PersonalInformationSection: FC = () => {
 
   const submit = async ({ firstName, lastName }: UserFields) => {
     try {
-      //   await dispatch();
+      await dispatch(updateMe({ firstName, lastName }));
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   const handleCancel = () => {
-    clearErrors()
-  }
+    reset();
+  };
 
   return (
     <SectionLayout
@@ -65,8 +65,8 @@ const PersonalInformationSection: FC = () => {
           <img src={avatar} className={scss['section-avatar__img']} alt="avatar" />
         </div>
         <div className={scss['section__user-details']}>
-          <h3>{fullName}</h3>
-          <p>{email}</p>
+          <h3>{fullName ?? ''}</h3>
+          <p>{email ?? ''}</p>
         </div>
       </div>
 
@@ -88,7 +88,7 @@ const PersonalInformationSection: FC = () => {
         errorText={errors.lastName?.message}
       />
 
-      <SectionButtons handleCancel={handleCancel}/>
+      <SectionButtons handleCancel={handleCancel} />
     </SectionLayout>
   );
 };

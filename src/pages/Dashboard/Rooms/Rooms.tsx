@@ -17,7 +17,6 @@ import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../
 import {roomActions} from "store";
 import {InstrumentsProps} from "../../../models";
 
-
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
 SwiperCore.use([Autoplay]);

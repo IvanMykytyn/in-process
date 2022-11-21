@@ -1,18 +1,28 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {EventProps} from 'pages/Dashboard/Calendar/constants';
-import type {RootState} from 'store';
-import {bookings} from 'utils';
-import {BookingInterface, IBookingDelete, IBookingOneTime, IBookingOwn, IBookingPut, IBookingRecurring} from 'models';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { EventProps } from 'pages/Dashboard/Calendar/constants';
+import type { RootState } from 'store';
+import { bookings } from 'utils';
+
 import {
-    recPost,
-    recPut,
-    recDelete,
-    getAllBookings,
-    oneTimePost,
-    oneTimePut,
-    oneTimeDelete,
-    getAllOwnBookings
+  BookingInterface,
+  IBookingDelete,
+  IBookingOneTime,
+  IBookingOwn,
+  IBookingPut,
+  IBookingRecurring,
+} from 'models';
+
+import {
+  getAllBookings,
+  recPost,
+  recPut,
+  recDelete,
+  oneTimePost,
+  oneTimePut,
+  oneTimeDelete,
+  getAllOwnBookings,
 } from '../thunk';
+
 
 interface BookingState {
     isLoading: boolean;
@@ -41,7 +51,7 @@ const initialBookingState: BookingState = {
     bookingLoading: false,
     oneTimeLoading: false,
     ownLoading: false,
-    bookings: [],
+    bookings: bookings,
     currentBooking: null,
 
     isLoading: false,
@@ -71,8 +81,16 @@ const bookingSlice = createSlice({
             .addCase(getAllBookings.pending, (state) => {
                 state.bookingLoading = true;
             })
+            .addCase(recPost.pending, (state) => {
+              // state.bookingsRecurring.push(action.payload);
+            })
             .addCase(recPost.fulfilled, (state, action) => {
-                state.bookingsRecurring.push(action.payload);
+              // state.bookingsRecurring.push(action.payload);
+              console.log(action);
+            })
+            .addCase(recPost.rejected, (state, action) => {
+              // state.bookingsRecurring.push(action.payload);
+              console.log(action);
             })
             .addCase(recPut.fulfilled, (state, action) => {
                 const index = state.bookingsRecurring.findIndex(booking => booking.roomId === action.payload.scheduleId.toString());
@@ -83,11 +101,19 @@ const bookingSlice = createSlice({
                 state.bookingsRecurring.slice(index, 1);
             })
             .addCase(oneTimePost.pending, (state) => {
-                state.oneTimeLoading = true;
+              state.oneTimeLoading = true;
             })
             .addCase(oneTimePost.fulfilled, (state, action) => {
-                state.bookingsOneTime.push(action.payload);
-                state.oneTimeLoading = false;
+              // state.bookingsOneTime.push(action.payload);
+              console.log(action);
+      
+              state.oneTimeLoading = false;
+            })
+            .addCase(oneTimePost.rejected, (state, action) => {
+              // state.bookingsOneTime.push(action.payload);
+              console.log(action);
+      
+              state.oneTimeLoading = false;
             })
             .addCase(oneTimePut.fulfilled, (state, action) => {
                 const index = state.bookingsRecurring.findIndex(booking => booking.roomId === action.payload.id.toString());
