@@ -1,0 +1,249 @@
+@import 'styles/global.module';
+
+.booking {
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: var(--background);
+  box-shadow: $outerBoxShadow;
+
+  &__content {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  &__title {
+    @extend %montserrat-semi-bold-600;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--gray);
+  }
+
+  &__form {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 5px;
+  }
+
+  &__label {
+    width: 100%;
+    position: relative;
+
+    &::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 5px;
+      top: -19px;
+      font-size: 14px;
+    }
+  }
+  
+}
+
+.btn {
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr;
+  padding: 5px;
+  grid-gap: 15px;
+  width: 100%;
+}
+.time-pickers {
+  display: flex;
+  gap: 15px;
+}
+.buttons {
+  display: flex;
+  padding: 10px 20px;
+  gap: 15px;
+  padding-right: 50px;
+  justify-content: flex-end;
+}
+
+.step-form {
+  padding: 70px 50px 20px;
+}
+
+.first-step-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.second-step-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  &__left-side {
+    padding: 0 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  &__right-side {
+    padding: 0 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    opacity: 0.5;
+    pointer-events: none;
+    &.recurring-booking {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .repeat-range {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+
+      &__error{
+        position: absolute;
+        bottom: -13px;
+        left: 10px;
+        right: 0;
+        color: rgba(226, 61, 40, 0.9568627451);
+        font-size: 12px;
+        text-shadow: 0 0 10px rgb(255 0 0 / 15%);
+        animation: 0.3s slidein;
+        transition: 0.5s translateX;
+      }
+
+      &__text {
+        font-size: 1rem;
+        padding-bottom: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .date-picker-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.form-checkbox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  p {
+    cursor: pointer;
+    padding-top: 2px;
+  }
+}
+
+.third-step-form {
+  height: calc(100% - 145px);
+  width: 100%;
+  // border-radius: 15px;
+
+  margin-top: 30px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  box-shadow: 0 0 7px var(--gray), 0px 0 5px var(--white);
+  .booking__image {
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 5px;
+      background-color: var(--primary-color);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      box-shadow: 0 0 7px var(--primary-color);
+      z-index: 10;
+    }
+
+    .booking-img {
+      object-fit: cover;
+    }
+  }
+
+  .booking__info {
+    padding: 15px;
+    border-right: 1px solid var(--gray);
+    height: 100%;
+  }
+
+  .booking__room-name {
+    @extend %montserrat-semi-bold-600;
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+}
+
+.booking-room__right-side {
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 90px);
+  .buttons {
+    box-shadow: 0 -1px 3px var(--gray), 0px 0 3px var(--white);
+    align-items: center;
+  }
+  .rooms-picker-wrapper {
+    position: relative;
+  }
+  .rooms-picker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.booking-room__capacity {
+  position: absolute;
+  right: 25px;
+  bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  background-color: var(--background);
+  opacity: 0.9;
+  padding: 6px 10px;
+  border-radius: 5px;
+  
+
+  img {
+    height: 16px;
+  }
+}
+
+.booking__description{
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+
+}
+.booking__floor{
+  font-size: 1.1rem;
+  padding-left: 5px;
+  span{
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+}
+
+.container__equipment {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  padding-left: 5px;
+}

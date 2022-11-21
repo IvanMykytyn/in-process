@@ -30,7 +30,7 @@ export default {
 
 interface Props {
   options: Array<string>;
-  setSelectedOptions: Dispatch<SetStateAction<Array<string>>>;
+  handleChange: (e: React.SyntheticEvent, values: string[]) => void;
   noOptionsText?: string;
   style?: object;
 }
@@ -61,6 +61,6 @@ const names = [
 
 Default.args = {
   options: names,
-  setSelectedOptions: (e) => console.log(e),
+  handleChange: (e, values) => console.log(e),
   style: { width: '400px' },
 };

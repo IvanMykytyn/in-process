@@ -6,6 +6,9 @@ import type {
   ResetPasswordProps,
   UserWithToken,
   UserInterface,
+  UserIdField,
+  UserFields,
+  UpdateMeResponse,
   // UserUpdateProps,
 } from 'models';
 import { axiosService } from './axios.service';
@@ -32,17 +35,18 @@ const changePasswordRequest = ({ newPassword }: ChangePasswordProps): PR<void> =
 
 const getMeRequest = (): PR<UserInterface> => axiosService.get(`${urls.users}/me`);
 
-const getUsersRequest = (): PR<UserInterface[]> => axiosService.get(`${urls.users}`);
+const updateMeRequest = (userData: UserFields): PR<UpdateMeResponse> =>
+  axiosService.put(`${urls.users}/me`, userData);
+
+const getUsersRequest = (): PR<Array<UserInterface & UserIdField>> =>
+  axiosService.get(`${urls.users}`);
 
 const isLoggedIn = (): boolean => {
   const token: string | null = getFromLocalStorage('token');
   return !!token;
 };
 
-// const updateUserRequest = (userData: UserUpdateProps): AxiosRes =>
-//   axiosService.put(`${urls.auth}/update-user`, userData);
-
-export {
+const userService = {
   loginRequest,
   signUpRequest,
   getAccessRequest,
@@ -52,4 +56,7 @@ export {
   isLoggedIn,
   getMeRequest,
   getUsersRequest,
+  updateMeRequest,
 };
+
+export { userService };

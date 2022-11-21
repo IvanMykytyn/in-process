@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, FC } from 'react';
+import React, { Dispatch, SetStateAction, FC, useRef } from 'react';
 import {
   Autocomplete,
   AutocompleteProps,
@@ -12,13 +12,13 @@ import cn from 'classnames';
 import './multiple-select-with-badges.styles.scss';
 
 interface CustomProps {
-  setSelectedOptions: Dispatch<SetStateAction<Array<string>>>;
+  handleChange: (e: React.SyntheticEvent, values: string[]) => void;
   options?: Array<string>;
   expandSize?: boolean;
   handleInputChange?: () => void;
   inputError?: boolean;
   inputTextError?: string;
-  customHandleChange?: (e: React.SyntheticEvent, values: string[]) => void;
+  label?: string;
 }
 
 type AutocompleteSetup = AutocompleteProps<
@@ -30,19 +30,18 @@ type AutocompleteSetup = AutocompleteProps<
 >;
 
 const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
-  setSelectedOptions,
+  handleChange,
   handleInputChange,
   options = [],
   expandSize,
   inputError,
+  label,
   inputTextError,
-  customHandleChange,
   ...rest
 }) => {
 
-  const handleChange = (e: React.SyntheticEvent, values: string[]) => {
-    setSelectedOptions(values);
-  };
+
+  const badgeContainerRef = useRef<null | HTMLInputElement>(null);
 
   return (
     <div
@@ -54,7 +53,11 @@ const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
       <Autocomplete
         multiple
         options={options}
-        onChange={customHandleChange || handleChange}
+        onChange={(e: React.SyntheticEvent, members: string[]) => {
+          badgeContainerRef?.current?.scrollIntoView({ behavior: 'smooth' });
+
+          return handleChange(e, members);
+        }}
         renderTags={(value: readonly string[], getTagProps) => (
           <div className="badges-container">
             {value.map((option: string, index: number) => (
@@ -65,11 +68,12 @@ const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
                 {...getTagProps({ index })}
               />
             ))}
+            <div ref={badgeContainerRef} />
           </div>
         )}
         {...rest}
         renderInput={(params: AutocompleteRenderInputParams) => (
-          <TextField {...params} error={inputError} helperText={inputTextError} />
+          <TextField {...params} error={inputError} helperText={inputTextError} label={label}/>
         )}
       />
     </div>

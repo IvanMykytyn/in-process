@@ -21,7 +21,7 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
   const navigate = useNavigate();
 
   const { firstName, lastName, email } = user || ({} as UserInterface);
-  const fullName = `${firstName} ${lastName}`;
+  const fullName = `${firstName ?? ''} ${lastName ?? ''}`;
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -36,8 +36,8 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
         </div>
 
         <div>
-          <h4 className={cn(scss.info__userName)}>{fullName}</h4>
-          <p className={cn(scss.info__email)}>{email}</p>
+          <h4 className={cn(scss.info__userName)}>{fullName ?? ''}</h4>
+          <p className={cn(scss.info__email)}>{email ?? ''}</p>
         </div>
       </div>
       <div className={cn(scss.icons)}>

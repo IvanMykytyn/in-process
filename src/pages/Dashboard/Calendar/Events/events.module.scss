@@ -36,9 +36,10 @@ $eventBorderRadius: 5px;
 .event__container {
   overflow: hidden;
   height: 100%;
-  background: var(--background);
+  background: var(--card-background);
   width: $roomWidth;
-
+  box-shadow: 1px 1px 6px var(--gray),
+  -1px -1px 6px var(--white);;
   border-radius: $eventBorderRadius;
 
   overflow: hidden;
@@ -210,6 +211,8 @@ $eventBorderRadius: 5px;
   position: relative;
 
   background: var(--light-gray-910);
+
+  border-radius: 10px;
 }
 
 .tools-bar {

@@ -16,7 +16,7 @@ import { selectUser } from 'store';
 import { loginUser } from 'store/thunk';
 import { UserLoginProps } from 'models';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { isLoggedIn } from 'services';
+import { userService } from 'services';
 
 const initialValues = {
   email: '',
@@ -29,7 +29,7 @@ const Login: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
   
   useEffect(() => {
-    if (isLoggedIn()) {
+    if (userService.isLoggedIn()) {
       navigate('/dashboard');
     }
   }, [navigate, user]);

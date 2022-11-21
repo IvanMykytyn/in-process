@@ -1,0 +1,25 @@
+@import 'styles/global.module';
+
+.custom-select {
+  padding: 0 5px 5px;
+  .MuiInputBase-root {
+    .MuiOutlinedInput-input {
+      border-radius: 10px;
+      box-shadow: inset 1px 1px 3px var(--gray),inset -1px -1px 3px var(--white);
+    }
+
+    min-width: 100px;
+    width: 110px;
+    // height: 40px;
+
+    .MuiOutlinedInput-notchedOutline {
+      border: 0;
+    }
+    input {
+      border: 0;
+    }
+  }
+  .MuiSelect-select {
+    padding: 11px 12px;
+  }
+}

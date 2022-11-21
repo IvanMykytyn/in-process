@@ -12,10 +12,10 @@ import {IFilters} from "../../pages";
 import cn from 'classnames';
 import css from './DropdownMultiSelect.style.scss';
 import {useAppDispatch, useAppSelector} from "../../hooks";
+
 import {setItemId, setCapacityId} from "../../store/slices/filter.slice";
 import {getFilteredRooms} from '../../store';
 import {InstrumentsProps, IRooms} from "../../models";
-
 
 interface FilterProps {
     selected?: string,

@@ -3,7 +3,7 @@ import { renderWithProviders } from 'utils/tests/test-utils';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { initialUserState, loginUser, logoutUser, setupStore } from 'store';
-import { isLoggedIn } from 'services';
+import { userService } from 'services';
 import { removeFromLocalStorage } from 'utils';
 
 import { Login } from '../Login';
@@ -58,7 +58,7 @@ describe('Test login page', () => {
 
     expect(email).toEqual('roman@incorainc.com');
     expect(firstName).toEqual('Roman');
-    expect(isLoggedIn()).toBeTruthy();
+    expect(userService.isLoggedIn()).toBeTruthy();
 
     await act(async () => {
       await store.dispatch(logoutUser());
@@ -67,6 +67,6 @@ describe('Test login page', () => {
     const userAfterLogout = store.getState().auth.user;
 
     expect(userAfterLogout).toEqual(initialUserState.user);
-    expect(isLoggedIn()).toBeFalsy();
+    expect(userService.isLoggedIn()).toBeFalsy();
   });
 });
