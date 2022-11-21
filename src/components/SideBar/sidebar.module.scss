@@ -4,7 +4,6 @@
   max-width: 350px;
   width: 100%;
   max-height: 100vh;
-  //min-height: 625px;
   border-radius: 25px;
   box-shadow: $outerBoxShadow;
   padding: 15px;
@@ -12,10 +11,49 @@
   top: 0;
   transition: width 0.7s;
   background: var(--background);
-  //overflow: hidden;
+
+  &__buttons {
+    display: flex;
+    grid-gap: 25px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__button {
+    box-shadow: 1px 1px 4px var(--gray), -2px -2px 7px var(--white);
+    padding: 5px;
+    border-radius: 5px;
+
+    &:hover {
+      box-shadow: inset 1px 1px 2px var(--gray), inset -2px -1px 4px var(--white)
+    }
+  }
 }
 
-.sidebar.hide {
+.sidebar__button.disabled {
+  opacity: 0.5;
+  box-shadow: inset 1px 1px 2px var(--gray), inset -2px -1px 4px var(--white);
+}
+
+.sidebar__button.hide{
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.wrapper__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.sidebar.hide{
   width: 0;
 }
 
@@ -106,13 +144,11 @@
   &__settings {
     img {
       width: 20px;
-      width: 20px;
     }
   }
 
   &__userImg {
     img {
-      width: 30px;
       width: 30px;
     }
   }
@@ -122,7 +158,6 @@
   img {
     filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
     transition: 0.5s ease-in-out;
-    width: 20px;
     width: 20px;
   }
 
@@ -204,6 +239,7 @@ button {
     transform: translate(-50%, -50%);
     border-radius: 15px;
   }
+
 }
 
 .booked {
@@ -213,7 +249,7 @@ button {
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
-  max-height: calc(100vh - 250px);
+  max-height: calc(100vh - 275px);
   overflow: scroll;
   transition: 0.5s opacity;
   box-shadow: inset 10px 10px 10px var(--background);
@@ -223,6 +259,11 @@ button {
     width: 0;
     background-color: inherit;
   }
+}
+
+.null {
+  text-align: center;
+  font-size: 14px;
 }
 
 .initials-avatar {
