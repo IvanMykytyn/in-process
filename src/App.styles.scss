@@ -113,6 +113,12 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   transition: all .5s;
+
+  &__btn {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
 }
 
 button {

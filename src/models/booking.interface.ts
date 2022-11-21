@@ -54,16 +54,23 @@ interface IBookingOneTimeDelete {
     bookingId: number;
 }
 
-interface IBookingOwn {
-    id: number;
-    start: string;
-    end: string;
-    name: string;
-    description: string;
-    users: IUserOwn[];
-    creator: IUserOwn;
-    room: IRooms
+interface IBookingOwnData {
+  id: number;
+  start: string;
+  end: string;
+  name: string;
+  description: string;
+  users: IUserOwn[];
+  creator: IUserOwn;
+  room: IRooms
 };
+
+interface IBookingOwn{
+  data: IBookingOwnData[];
+  page: string;
+  limit: string;
+  totalCount: number;
+}
 
 
 type PatternType = DaysOfEveryNWeeksType | XDayOfEveryNMonthType | EveryNDayType;
@@ -102,3 +109,4 @@ export type {
     EveryNDayType,
     XDayOfEveryNMonthType,
 };
+

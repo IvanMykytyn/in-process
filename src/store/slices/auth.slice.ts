@@ -34,7 +34,7 @@ const initialUserState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'authSlice',
   initialState: initialUserState,
   reducers: {
     clearUser: (state) => {

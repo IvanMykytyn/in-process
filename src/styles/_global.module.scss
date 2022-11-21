@@ -3,7 +3,8 @@
 @import './mixins.styles.scss';
 
 .container {
-  max-width: 1345px;
+  width: 100vw;
+  max-width: 2400px;
   padding: 0 15px;
   margin: 0 auto;
 }

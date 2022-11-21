@@ -23,8 +23,9 @@
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-  border: none;
+  border: none !important;
 }
+
 
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
   backdrop-filter: blur(20px) !important;
@@ -35,6 +36,10 @@
   border-radius: 10px;
   box-shadow: $outerBoxShadow;
   background-color: var(--background);
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus{
+  border-radius: 10px;
+  border: none;
 }
 
 .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {

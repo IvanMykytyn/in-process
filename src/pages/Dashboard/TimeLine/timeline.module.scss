@@ -1,9 +1,11 @@
 @import "../../../styles/global.module";
 
 .timeline {
-  width: 100%;
-  max-width: 1000px;
+  width: 90%;
+  //max-width: 1000px;
+  height: 100vh;
   display: flex;
+  overflow: auto;
   justify-content: center;
   flex-direction: column;
   align-items: center;

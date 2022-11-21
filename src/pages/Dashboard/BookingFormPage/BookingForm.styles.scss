@@ -25,6 +25,10 @@
     .Mui-active,
     .Mui-completed {
       color: var(--primary-color) !important;
+      path{
+        color: var(--primary-color);
+
+      }
     }
   }
   .MuiStepConnector-root.Mui-completed {

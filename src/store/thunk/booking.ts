@@ -1,4 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {AxiosError} from "axios";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
 import {
     IBookingRecurring,
@@ -10,7 +11,7 @@ import {
     IBookingOwn
 } from "models";
 import {bookingService} from "services";
-import {AxiosError} from "axios";
+
 
 export const getAllBookings = createAsyncThunk<IBookingRecurring[], { startDate: string, endDate: string, officeId: number, roomId?: string }>(
     'bookingSlice/getAllBookings',
@@ -29,8 +30,6 @@ export const recPost = createAsyncThunk<IBookingRecurring, { booking: IBookingRe
     'bookingSlice/recPost',
     async ({booking}, {rejectWithValue}) => {
         try {
-            console.log('here');
-            
             const {data} = await bookingService.recurringPost(booking);
             console.log(data);
             return data;
@@ -73,11 +72,7 @@ export const oneTimePost = createAsyncThunk<IBookingOneTime, { booking: IBooking
     'bookingSlice/oneTimePost',
     async ({booking}, {rejectWithValue}) => {
         try {
-            console.log('here2');
-
             const {data} = await bookingService.postBookingOneTime(booking);
-            console.log(data);
-            
             return data;
         } catch (e) {
             console.log(e);
@@ -113,7 +108,7 @@ export const oneTimePut = createAsyncThunk<IBookingOneTimePut, { bookingId: numb
     }
 );
 
-export const getAllOwnBookings = createAsyncThunk<IBookingOwn[], { page: number, limit: number }>(
+export const getAllOwnBookings = createAsyncThunk<IBookingOwn, { page: number, limit: number }>(
     'bookingSlice/getAllOwnBookings',
     async ({page, limit}, {rejectWithValue}) => {
         try {
