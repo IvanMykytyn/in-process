@@ -56,6 +56,7 @@ const SideBar: FC = () => {
                             bookingsOwn && bookingsOwn.data.map((value) =>
                                 <BookedRoom key={value.id}
                                             room={value.room}
+                                            meetingName={value.name}
                                             creator={value.creator}
                                             members={value.users}
                                             endDate={value.end}

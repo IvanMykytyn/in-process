@@ -14,6 +14,7 @@ interface Props {
     startDate: string;
     creator: IUserOwn;
     members: IUserOwn[];
+    meetingName: string;
 }
 
 const BookedRoom: FC<Props> = ({
@@ -21,7 +22,8 @@ const BookedRoom: FC<Props> = ({
                                    endDate,
                                    startDate,
                                    creator: {firstName, lastName, email},
-                                   members
+                                   members,
+                                   meetingName
                                }) => {
 
     const getCurrentDateTime = moment();
@@ -43,7 +45,7 @@ const BookedRoom: FC<Props> = ({
         }>
             <li className={css.booked__info}>
                 <div>
-                    {name} {id}/{floor}
+                    {meetingName}
                 </div>
             </li>
             <ul className={css.booked__time}>
@@ -144,15 +146,19 @@ const BookedRoom: FC<Props> = ({
                                 Members:
                             </span>
                         </li>
-                        {
-                            members.map(user =>
-                                <li key={user.id} className={css['booked__information-member']}>
+                        <li>
+                            <ul className={css.booked__list}>
+                                {
+                                    members.map(user =>
+                                            <li key={user.id} className={css['booked__information-member']}>
                                     <span>
                                         {user.email}
                                     </span>
-                                </li>
-                            )
-                        }
+                                            </li>
+                                    )
+                                }
+                            </ul>
+                        </li>
                     </ul>
                 </ul>
             </li>

@@ -76,6 +76,13 @@
     }
   }
 
+  &__list{
+    max-height: 100px;
+    height: 100%;
+    overflow: auto;
+    padding: 5px;
+  }
+
   &__information-name,
   &__information-member {
     color: var(--accent-text-color);
