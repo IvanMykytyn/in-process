@@ -34,8 +34,8 @@ export interface IFilters {
 export const filterCapacity: IFilters[] = [
     {
         id: 0,
-        name: '5-10',
-        range: [5,10]
+        name: '0-10',
+        range: [0,10]
     },
     {
         id: 1,

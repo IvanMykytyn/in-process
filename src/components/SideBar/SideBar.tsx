@@ -1,18 +1,14 @@
 import 'moment/locale/uk';
 import {FC, useEffect} from 'react';
-import moment from 'moment';
 import Moment from 'react-moment';
 
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
-
-import {Input} from '../index';
 import {clock} from '../../assets/images/icons';
 import {BookedRoom} from 'components/BookedRoom/BookedRoom';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {selectBooking, toggleSideBar} from 'store/slices/booking.slice';
-import Moment from 'react-moment';
+import {bookingActions, selectBooking, toggleSideBar} from 'store/slices/booking.slice';
 import {SideBarHeader} from './SideBarHeader';
 
 interface Instruments {
@@ -186,13 +182,6 @@ const data: Data[] = [
     },
 ];
 
-import scss from './sidebar.module.scss';
-import {clock} from '../../assets/images/icons';
-import {BookedRoom} from 'components/BookedRoom/BookedRoom';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {bookingActions, selectBooking, toggleSideBar} from 'store/slices/booking.slice';
-import {SideBarHeader} from './SideBarHeader';
-
 const SideBar: FC = () => {
     const {isSideBarOpen, bookingsOwn} = useAppSelector(selectBooking);
     const dispatch = useAppDispatch();
@@ -229,7 +218,6 @@ const SideBar: FC = () => {
                         {
                             bookingsOwn && bookingsOwn.data.map((value) =>
                                 <BookedRoom key={value.id} room={value.room} endDate={value.end}/>
-
                             )
                         }
                     </ul>
