@@ -1,6 +1,7 @@
 import 'moment/locale/uk';
-import {FC, useState} from 'react';
+import {FC, useEffect} from 'react';
 import moment from 'moment';
+import Moment from 'react-moment';
 
 // styles
 import cn from 'classnames';
@@ -185,20 +186,30 @@ const data: Data[] = [
     },
 ];
 
+import scss from './sidebar.module.scss';
+import {clock} from '../../assets/images/icons';
+import {BookedRoom} from 'components/BookedRoom/BookedRoom';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {bookingActions, selectBooking, toggleSideBar} from 'store/slices/booking.slice';
+import {SideBarHeader} from './SideBarHeader';
 
 const SideBar: FC = () => {
-    const {isSideBarOpen} = useAppSelector(selectBooking);
+    const {isSideBarOpen, bookingsOwn} = useAppSelector(selectBooking);
     const dispatch = useAppDispatch();
 
     const handleClick = () => {
         dispatch(toggleSideBar());
     };
 
-    const roomsTimeSort = data && data.sort((a, b) =>
-        Number(moment(`${a.answer.date} ${a.answer.time.hours}:${a.answer.time.minuts}:00`))
-        -
-        Number(moment(`${b.answer.date} ${b.answer.time.hours}:${b.answer.time.minuts}:00`))
-    );
+    useEffect(() => {
+        dispatch(bookingActions.getAllOwnBookings({page: 3, limit: 10}))
+    }, [dispatch])
+
+    // const roomsTimeSort = bookingsOwn && bookingsOwn.sort((a, b) =>
+    //     Number(moment(a.start))
+    //     -
+    //     Number(moment(b.end))
+    // );
 
     return (
 
@@ -216,10 +227,9 @@ const SideBar: FC = () => {
                     </span>
                     <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                         {
-                            roomsTimeSort.map((value) =>
-                                <li>
-                                    <BookedRoom key={value.answer.room} room={value}/>
-                                </li>
+                            bookingsOwn && bookingsOwn.data.map((value) =>
+                                <BookedRoom key={value.id} room={value.room} endDate={value.end}/>
+
                             )
                         }
                     </ul>
@@ -227,7 +237,6 @@ const SideBar: FC = () => {
             </div>
         </div>
     )
-        ;
 };
 
 export {SideBar};

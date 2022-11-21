@@ -8,14 +8,14 @@ import css from './room.module.scss';
 import {IRooms} from '../../models';
 import {staff} from '../../utils/tools/staff';
 import {users} from '../../assets/images/icons';
-import { roomsImg } from 'assets/images/bg';
+import {roomsImg} from 'assets/images/bg';
 
 interface RoomProps {
     room: IRooms
-}
+};
 
 const Room: FC<RoomProps> = ({room}) => {
-    const {id,name, equipments, maxCapacity, description}= room && room;
+    const {id, name, equipments, maxCapacity, description} = room && room;
 
     return (
         <ul>
@@ -54,7 +54,7 @@ const Room: FC<RoomProps> = ({room}) => {
                         )}
                 </ul>
                 <div className={cn(css.pre_btn)}>
-                    <Link to={'/dashboard/bookig-form'} >
+                    <Link to={'/dashboard/bookig-form'}>
                         <button className={cn(css.pre_btn__btn)}>Book</button>
                     </Link>
                 </div>

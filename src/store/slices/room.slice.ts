@@ -1,29 +1,35 @@
-import { createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 import {IRooms} from "models";
 import {getAllRooms} from '../thunk';
 
 interface IRoom {
-    rooms: IRooms[]
+    rooms: IRooms[],
+    filteredRooms: IRooms[]
 };
 
 const initialRoomState: IRoom = {
-    rooms: []
+    rooms: [],
+    filteredRooms: []
 };
 
 const roomSlice = createSlice({
-    name: 'room',
+    name: 'roomSlice',
     initialState: initialRoomState,
-    reducers: {},
+    reducers: {
+        getFilteredRooms(state, action) {
+            state.filteredRooms = action.payload;
+        }
+    },
     extraReducers: builder =>
         builder
             .addCase(getAllRooms.fulfilled, (state, action) => {
                 state.rooms = action.payload;
-            })
-
+                state.filteredRooms = action.payload;
+            }),
 });
 
-const {reducer: roomReducer} = roomSlice;
+const {reducer: roomReducer, actions: {getFilteredRooms}} = roomSlice;
 
 const roomActions = {
     getAllRooms
@@ -33,4 +39,5 @@ export {
     roomReducer,
     roomActions,
     initialRoomState,
+    getFilteredRooms
 };

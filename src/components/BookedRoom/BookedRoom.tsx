@@ -1,21 +1,21 @@
 import {DetailedHTMLProps, FC, HTMLAttributes} from "react";
+import Moment from "react-moment";
 import moment from 'moment';
 
 import css from './BookedRoom.module.scss';
-import {clock, calendar, staffIcon, board, tv, marker} from '../../assets/images/icons';
 
-import {Data} from "components/SideBar/SideBar";
-import {staff} from '../../utils/tools/staff'
-import Moment from "react-moment";
+import {clock, calendar, staffIcon, board, tv, marker} from '../../assets/images/icons';
+import {IRooms} from '../../models'
 
 interface Props {
-    room: Data;
+    room: IRooms;
+    endDate: string;
 }
 
-const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instruments}}}) => {
+const BookedRoom: FC<Props> = ({room: {id, name,floor,maxCapacity, equipments},endDate}) => {
 
     const getCurrentDateTime = moment();
-    const getRoomDateTime = moment(`${date} ${time.hours}:${time.minuts}:00`);
+    const getRoomDateTime = moment(endDate);
 
     const milliseconds = getRoomDateTime.diff(getCurrentDateTime, 'millisecond');
 
@@ -27,14 +27,14 @@ const BookedRoom: FC<Props> = ({room: {roomId, answer: {date, room, time, instru
         }>
             <li className={css.booked__info}>
                 <div>
-                    Room {room}
+                    Room {id}/{floor}
                 </div>
             </li>
             <ul className={css.booked__time}>
                 <li className={css.booked__info}>
                     <img src={calendar} alt="Data" height={15} width={15}/>
                     <span>
-                        {date}
+                        {endDate}
                     </span>
                 </li>
                 <li className={css.booked__info}>

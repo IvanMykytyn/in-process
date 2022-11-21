@@ -9,8 +9,9 @@ export interface IRooms{
     description: string,
     floor: number,
     maxCapacity: number,
+    currentBooking: [],
     equipments: InstrumentsProps[]
-}
+};
 
 export interface Room {
     id: string;
