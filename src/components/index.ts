@@ -8,6 +8,7 @@ export * from './Toggle/Toggle';
 export * from './Badge/Badge';
 export * from './Modal/Modal';
 export * from './SideBar/SideBar';
+export * from './SideBar/SideBarSkeleton';
 export * from './ToastifyContainer/ToastifyContainer';
 export * from './BookedRoom/BookedRoom';
 export * from './Room/Room';

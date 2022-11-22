@@ -13,10 +13,11 @@ import {bookingActions, selectBooking, toggleSideBar} from 'store/slices/booking
 import {SideBarHeader} from './SideBarHeader';
 
 import {arrowLeft, arrowRight} from '../../assets/images/icons';
+import {SideBarSkeleton} from 'components';
 
 const SideBar: FC = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
-    const {isSideBarOpen, bookingsOwn} = useAppSelector(selectBooking);
+    const {isSideBarOpen, bookingsOwn, ownLoading} = useAppSelector(selectBooking);
     const dispatch = useAppDispatch();
 
     const getTotalCountOfPages = bookingsOwn && Math.ceil(bookingsOwn.totalCount / 10);
@@ -53,16 +54,19 @@ const SideBar: FC = () => {
                 <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                     {
                         bookingsOwn ?
-                            bookingsOwn && bookingsOwn.data.map((value) =>
-                                <BookedRoom key={value.id}
-                                            room={value.room}
-                                            meetingName={value.name}
-                                            creator={value.creator}
-                                            members={value.users}
-                                            endDate={value.end}
-                                            startDate={value.start}
-                                />
-                            )
+                            ownLoading ?
+                                <SideBarSkeleton amount={10}/>
+                                :
+                                bookingsOwn && bookingsOwn.data.map((value) =>
+                                    <BookedRoom key={value.id}
+                                                room={value.room}
+                                                meetingName={value.name}
+                                                creator={value.creator}
+                                                members={value.users}
+                                                endDate={value.end}
+                                                startDate={value.start}
+                                    />
+                                )
                             :
                             <h3 className={scss.null}>
                                 You don't have any meetings added yet

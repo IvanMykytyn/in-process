@@ -4,39 +4,55 @@
   width: 100%;
   padding-top: 20px;
   margin: 2px;
+  color: var(--accent-text-color) !important;
+
   .MuiStepConnector-horizontal {
     top: 25px;
+
     span {
       border-top-width: 2px;
     }
   }
+
   .MuiStepLabel-iconContainer {
     .MuiSvgIcon-root {
       width: 50px;
       height: 50px;
       padding: 10px;
+
     }
+
     .MuiStepIcon-text {
       font-size: 0.8rem;
-      color: var(--background);
+      color: red;
       fill: var(--background);
     }
 
     .Mui-active,
     .Mui-completed {
       color: var(--primary-color) !important;
-      path{
-        color: var(--primary-color);
 
+      path {
+        color: var(--primary-color);
       }
+
     }
+
   }
+
   .MuiStepConnector-root.Mui-completed {
     color: var(--primary-color);
+
     .MuiStepConnector-line {
+      transition: all 0.5s;
       border-color: var(--primary-color);
     }
   }
+}
+
+.css-1hv8oq8-MuiStepLabel-label.Mui-active,
+.css-1hv8oq8-MuiStepLabel-label.Mui-completed{
+  color: var(--primary-color) !important;
 }
 
 .booking__label--description {
@@ -44,14 +60,17 @@
     content: attr(data-label);
     top: -15px;
   }
+
   .text-field .MuiInputLabel-root {
     top: 25px;
     transform: translateY(-50%);
   }
 }
+
 .MuiStepLabel-labelContainer {
   display: flex;
   justify-content: center;
+
   span {
     max-width: 80%;
     @extend %montserrat-medium-500;
@@ -65,13 +84,16 @@
   max-width: 65px;
   display: flex;
   align-items: center;
+
   .text-field {
     padding-bottom: 5px;
+
     input {
       font-size: 1.25rem;
     }
   }
 }
+
 .MuiClockPointer-thumb,
 .MuiClockPointer-root {
   background-color: var(--primary-color) !important;
@@ -82,9 +104,32 @@
   background: var(--background);
   box-shadow: $outerBoxShadow;
 }
+
 .MuiClockNumber-root {
   font-family: 'Montserrat-Regular', sans-serif !important;
+
   &.Mui-selected {
     color: var(--background) !important;
+  }
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list{
+  color: var(--text-color);
+}
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root{
+ transition: all 0.3s;
+  &:hover{
+    color: var(--primary-color);
+  }
+}
+
+.css-i4bv87-MuiSvgIcon-root{
+  color: var(--accent-text-color);
+}
+
+.days-picker_days-picker__Rzvak .days-picker_day__8JodR{
+  transition: opacity 0.5s;
+  &:hover{
+    opacity: 0.7;
   }
 }
