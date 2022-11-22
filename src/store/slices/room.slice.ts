@@ -2,18 +2,20 @@ import {createSlice} from "@reduxjs/toolkit";
 
 import {IRooms, IRoomsWithSoonestBookings, ISoonestBookings} from "models";
 import {getAllRooms, getAllSoonestBookings} from '../thunk';
-import { RootState } from "store/store";
+import {RootState} from "store/store";
 
 interface IRoom {
-    rooms: IRooms[],
-    filteredRooms: IRooms[],
-    soonestBookings: IRoomsWithSoonestBookings | null,
-};
+    rooms: IRooms[];
+    filteredRooms: IRooms[];
+    soonestBookings: IRoomsWithSoonestBookings | null;
+    isLoading: boolean;
+}
 
 const initialRoomState: IRoom = {
     rooms: [],
     filteredRooms: [],
-    soonestBookings: null
+    soonestBookings: null,
+    isLoading: false
 };
 
 const roomSlice = createSlice({
@@ -26,11 +28,15 @@ const roomSlice = createSlice({
     },
     extraReducers: builder =>
         builder
+            .addCase(getAllRooms.pending, (state) => {
+                state.isLoading = true;
+            })
             .addCase(getAllRooms.fulfilled, (state, action) => {
                 state.rooms = action.payload;
                 state.filteredRooms = action.payload;
+                state.isLoading = false;
             })
-            .addCase(getAllSoonestBookings.fulfilled,(state, action) => {
+            .addCase(getAllSoonestBookings.fulfilled, (state, action) => {
                 state.soonestBookings = action.payload;
             })
 
