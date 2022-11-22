@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel, Autoplay} from 'swiper';
 import {StyledEngineProvider} from '@mui/material/styles';
@@ -16,6 +16,7 @@ import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../
 
 import {roomActions} from "store";
 import {InstrumentsProps} from "../../../models";
+import {RoomSkeleton} from "../../../components/Skeleton/RoomSkeleton";
 
 
 SwiperCore.use([Scrollbar]);
@@ -76,6 +77,7 @@ export const filterItems: InstrumentsProps[] = [
 ]
 
 const Rooms: FC = () => {
+    const [isLoading,setIsLoading] = useState(true);
     const {rooms} = useAppSelector(state => state.rooms);
 
     const {filteredRooms} = useAppSelector(state => state.rooms);
@@ -84,6 +86,7 @@ const Rooms: FC = () => {
 
     useEffect(() => {
         dispatch(roomActions.getAllRooms({officeId: 2}))
+        setIsLoading(false);
     }, [dispatch]);
 
     const {width} = useWindowDimensionsHook();
@@ -117,11 +120,11 @@ const Rooms: FC = () => {
                             // when window width is >= 1100px
                             1100: {
                                 width: 1100,
-                                slidesPerView: 3.5,
+                                slidesPerView: 4.5,
                             },
                             1500: {
                                 width: 1500,
-                                slidesPerView: 5,
+                                slidesPerView: 6,
                             },
                             // when window width is >= 1900px
                             1900: {
@@ -131,12 +134,13 @@ const Rooms: FC = () => {
                         }}
                         loop={true}
                         modules={[Navigation]}
-                        spaceBetween={0}
-                        scrollbar={{draggable: true}}
+                        spaceBetween={5}
+                        // scrollbar={{draggable: true}}
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {filteredRooms && filteredRooms.filter(room => room.floor === 1).map(room =>
+                            {/*{isLoading ? [...new Array(3)].map((_,index)=> <RoomSkeleton key={index}/>) :*/}
+                            { filteredRooms && filteredRooms.filter(room => room.floor === 1).map(room =>
                                 <SwiperSlide className={cn(css.my_swiper__swiperslide)}
                                              key={room.id}
                                              virtualIndex={room.id}
@@ -165,11 +169,11 @@ const Rooms: FC = () => {
                             // when window width is >= 1100px
                             1100: {
                                 width: 1100,
-                                slidesPerView: 3.5,
+                                slidesPerView: 4.5,
                             },
                             1500: {
                                 width: 1500,
-                                slidesPerView: 5,
+                                slidesPerView: 6,
                             },
                             // when window width is >= 1900px
                             1900: {
@@ -179,20 +183,20 @@ const Rooms: FC = () => {
                         }}
                         loop={true}
                         modules={[Navigation]}
-                        spaceBetween={25}
-                        scrollbar={{draggable: true}}
+                        spaceBetween={5}
+                        // scrollbar={{draggable: true}}
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
+                            {/*{isLoading ? [...new Array(3)].map((_,index)=> <RoomSkeleton key={index}/>) :*/}
                             {filteredRooms && filteredRooms.filter(room => room.floor === 2).map(room =>
-                                <SwiperSlide className={cn(css.my_swiper__swiperslide)}
-                                             key={room.id}
-                                             virtualIndex={room.id}
-                                >
-                                    <Room room={room} key={room.id}/>
-
-                                </SwiperSlide>
-                            )}
+                                    <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                                 key={room.id}
+                                                 virtualIndex={room.id}
+                                    >
+                                        <Room room={room} key={room.id}/>
+                                    </SwiperSlide>
+                                )}
                         </ul>
                     </Swiper>
                 </li>
