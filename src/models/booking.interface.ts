@@ -63,7 +63,7 @@ interface IBookingOwnData {
   users: IUserOwn[];
   creator: IUserOwn;
   room: IRooms
-};
+}
 
 interface IBookingOwn{
   data: IBookingOwnData[];
