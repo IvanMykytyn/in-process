@@ -1,0 +1,20 @@
+@import 'styles/global.module';
+
+.form-calendar {
+  position: absolute;
+  z-index: 15;
+  right: 0;
+  top: 60px;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 10px;
+  top: 13px;
+  width: 20px;
+  height: 20px;
+
+  filter: invert(40%) sepia(0%) saturate(1011%) hue-rotate(140deg) brightness(90%)
+    contrast(74%);
+  cursor: pointer;
+}

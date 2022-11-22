@@ -18,7 +18,6 @@ import {roomActions} from "store";
 import {InstrumentsProps} from "../../../models";
 import {RoomSkeleton} from "../../../components/Skeleton/RoomSkeleton";
 
-
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
 SwiperCore.use([Autoplay]);

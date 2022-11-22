@@ -1,4 +1,4 @@
-@import "../../App.styles";
+@import "styles/global.module";
 
 .booked {
   &__item {
@@ -23,7 +23,7 @@
       box-shadow: 0 0 7px var(--primary-color);
     }
 
-    &::after{
+    &::after {
       content: '';
       width: 10px;
       height: 10px;
@@ -40,18 +40,114 @@
     position: relative;
 
     &::before,
-    &::after{
+    &::after {
       background-color: #e23d28f4;
       box-shadow: 0 0 7px #e23d28f4;
     }
   }
 
+
   &__item.glowing {
     position: relative;
 
     &::before,
-    &::after{
+    &::after {
       animation: glowing 1300ms infinite;
+    }
+  }
+
+  &__all-information {
+    font-size: 0;
+    transition: height 0.3s, width 0.3s, font-size 0.3s, opacity 0.9s, margin-bottom 0.3s;
+    opacity: 0;
+    margin: 0;
+
+    &::before {
+      box-shadow: none;
+    }
+
+    img,
+    ul {
+      font-size: 0;
+      height: 0;
+      width: 0;
+      transition: height 0.3s, width 0.3s, font-size 0.3s, opacity 0.1s;
+      opacity: 0;
+    }
+  }
+
+  &__list{
+    max-height: 100px;
+    height: 100%;
+    overflow: auto;
+    padding: 5px;
+  }
+
+  &__information-name,
+  &__information-member {
+    color: var(--accent-text-color);
+    @extend %montserrat-medium-500;
+    margin-right: 5px;
+    padding: 0 0 0 10px;
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 0 5px var(--primary-color);
+    }
+  }
+
+  &__information-member {
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+
+    &::before {
+      width: 5px;
+      height: 5px;
+      left: 10px;
+    }
+  }
+
+  &__item:hover &__all-information,
+  &__item:focus &__all-information,
+  &__item:active &__all-information {
+    opacity: 1;
+    font-size: 15px;
+    height: 100%;
+    width: 100%;
+    margin: 0 0 5px 0;
+
+    &:not(:last-child) {
+      &::after {
+        content: '.';
+      }
+    }
+
+    img {
+      width: 15px;
+      height: 15px;
+      font-size: 15px;
+      opacity: 1;
+    }
+
+    ul {
+      opacity: 1;
+      font-size: 15px;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -67,6 +163,12 @@
     div {
       @extend %montserrat-semi-bold-600;
     }
+  }
+
+
+  &__information-wrapper {
+    display: flex;
+    flex-direction: column;
   }
 
   &__time {
@@ -96,6 +198,11 @@
     display: flex;
     align-items: center;
     grid-gap: 10px;
+  }
+
+  &__staff {
+    display: flex;
+    grid-gap: 5px;
   }
 }
 

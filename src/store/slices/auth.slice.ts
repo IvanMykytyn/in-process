@@ -12,6 +12,7 @@ import {
   forgotPassword,
   resetPassword,
   getMe,
+  updateMe,
 } from 'store/thunk';
 
 import { setToLocalStorage, removeFromLocalStorage } from 'utils';
@@ -241,6 +242,33 @@ const authSlice = createSlice({
     builder.addCase(getMe.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload?.message ?? 'Error! Try Again Later';
+    });
+
+    // update me
+    builder.addCase(updateMe.pending, (state) => {
+      state.isLoading = true;
+
+      state.notifyId = NotifyService.loading();
+    });
+
+    builder.addCase(updateMe.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      const { firstName, lastName } = payload[0];
+
+      if (state.user) {
+        state.user = { ...state.user, firstName, lastName };
+        NotifyService.update(
+          state.notifyId,
+          `Name successfully changed`,
+          'success'
+        );
+      }
+    });
+
+    builder.addCase(updateMe.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload?.message ?? 'Error! Try Again Later';
+      NotifyService.update(state.notifyId, state.error, 'error');
     });
   },
 });

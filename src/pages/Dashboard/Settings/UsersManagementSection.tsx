@@ -61,10 +61,9 @@ const UsersManagementSection: FC = () => {
             expandSize
             options={[]}
             value={userEmails}
-            setSelectedOptions={setUserEmails}
             inputError={!!error}
             inputTextError={error}
-            customHandleChange={handleSelectedChange}
+            handleChange={handleSelectedChange}
             renderInput={(params: AutocompleteRenderInputParams) => (
               <Input {...params} />
             )}

@@ -1,32 +1,33 @@
 import { FC, useState } from 'react';
-
+import moment, { Moment } from 'moment';
 import { Calendar } from 'react-calendar';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+
 import css from './MainCalendar.module.scss';
+
 import { SetStateType } from 'models';
-import moment, { Moment } from 'moment';
 
 interface Props {
   range?: boolean;
-  handleClickAway: (e: MouseEvent | TouchEvent) => void;
-  setDate: SetStateType<Moment>;
-  date: Moment;
+  handleClickAway: () => void;
+  handleChange: (selectedDate: Date) => void;
+  date: Moment | null;
 }
 
-const MainCalendar: FC<Props> = ({ range, handleClickAway, setDate, date }) => {
-  const onChange = (selectedDate: Date) => {
-    setDate(moment(selectedDate));
-  };
+const MainCalendar: FC<Props> = ({ range, handleClickAway, handleChange, date }) => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div className={css.calendar}>
         <Calendar
-          locale={'uk-UK'}
-          onChange={onChange}
-        //   value={date.toDate()}
+          locale={'en-gb'}
+          onChange={handleChange}
           selectRange={range}
-          defaultActiveStartDate={date.toDate()}
+          defaultActiveStartDate={date?.toDate()}
+          onClickDay={(value) => {
+            handleChange(value);
+            handleClickAway();
+          }}
         />
       </div>
     </ClickAwayListener>

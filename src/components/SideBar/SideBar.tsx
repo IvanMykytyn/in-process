@@ -1,227 +1,99 @@
 import 'moment/locale/uk';
-import {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Moment from 'react-moment';
 
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
+
 import {clock} from '../../assets/images/icons';
 import {BookedRoom} from 'components/BookedRoom/BookedRoom';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {bookingActions, selectBooking, toggleSideBar} from 'store/slices/booking.slice';
 import {SideBarHeader} from './SideBarHeader';
 
-interface Instruments {
-    id: string;
-    name: string;
-}
-
-export interface Data {
-    roomId: string;
-    answer: {
-        date: string;
-        time: {
-            hours: number;
-            minuts: number;
-        };
-        room: string;
-        instruments: Instruments[];
-    };
-}
-
-const data: Data[] = [
-    {
-        roomId: 'room 1',
-        answer: {
-            date: '2022-11-11',
-            time: {
-                hours: 13,
-                minuts: 30
-            },
-            room: '1',
-            instruments: [
-                {
-                    id: '0',
-                    name: 'board'
-                },
-                {
-                    id: '1',
-                    name: 'tv'
-                },
-                {
-                    id: '2',
-                    name: 'markers'
-                }
-            ]
-        }
-    },
-    {
-        roomId: 'room 2',
-        answer: {
-            date: '2022-11-11',
-            time: {
-                hours: 18,
-                minuts: 30
-            },
-            room: '2',
-            instruments: [
-                {
-                    id: '1',
-                    name: 'tv'
-                },
-                {
-                    id: '2',
-                    name: 'markers'
-                }
-            ]
-        }
-    },
-    {
-        roomId: 'room 3',
-        answer: {
-            date: '2022-11-14',
-            time: {
-                hours: 18,
-                minuts: 30
-            },
-            room: '3',
-            instruments: [
-                {
-                    id: '0',
-                    name: 'board'
-                },
-                {
-                    id: '2',
-                    name: 'markers'
-                }
-            ]
-        }
-    }, {
-        roomId: 'room 4',
-        answer: {
-            date: '2022-11-13',
-            time: {
-                hours: 14,
-                minuts: 30
-            },
-            room: '4',
-            instruments: [
-                {
-                    id: '1',
-                    name: 'tv'
-                },
-                {
-                    id: '2',
-                    name: 'markers'
-                }
-            ]
-        }
-    },
-    {
-        roomId: 'room 5',
-        answer: {
-            date: '2022-11-16',
-            time: {
-                hours: 20,
-                minuts: 30
-            },
-            room: '5',
-            instruments: [
-                {
-                    id: '0',
-                    name: 'board'
-                },
-                {
-                    id: '2',
-                    name: 'markers'
-                }
-            ]
-        }
-    },
-    {
-        roomId: 'room 6',
-        answer: {
-            date: '2022-11-17',
-            time: {
-                hours: 16,
-                minuts: 20
-            },
-            room: '6',
-            instruments: [
-                {
-                    id: '0',
-                    name: 'board'
-                },
-                {
-                    id: '1',
-                    name: 'tv'
-                },
-            ]
-        }
-    },
-    {
-        roomId: 'room 7',
-        answer: {
-            date: '2022-11-19',
-            time: {
-                hours: 17,
-                minuts: 0
-            },
-            room: '7',
-            instruments: [
-                {
-                    id: '1',
-                    name: 'tv'
-                },
-                {
-                    id: '2',
-                    name: 'markers'
-                }
-            ]
-        }
-    },
-];
+import {arrowLeft, arrowRight} from '../../assets/images/icons';
+import {SideBarSkeleton} from 'components';
 
 const SideBar: FC = () => {
-    const {isSideBarOpen, bookingsOwn} = useAppSelector(selectBooking);
+    const [pageNumber, setPageNumber] = useState<number>(1);
+    const {isSideBarOpen, bookingsOwn, ownLoading} = useAppSelector(selectBooking);
     const dispatch = useAppDispatch();
+
+    const getTotalCountOfPages = bookingsOwn && Math.ceil(bookingsOwn.totalCount / 10);
 
     const handleClick = () => {
         dispatch(toggleSideBar());
     };
 
-    useEffect(() => {
-        dispatch(bookingActions.getAllOwnBookings({page: 3, limit: 10}))
-    }, [dispatch])
+    const getPageNumber = (id: string) => {
+        if (id === '+' && typeof getTotalCountOfPages === 'number' && pageNumber < getTotalCountOfPages) {
+            setPageNumber(pageNumber + 1);
+        } else if (id === '-' && pageNumber > 1) {
+            setPageNumber(pageNumber - 1);
+        }
+    }
 
-    // const roomsTimeSort = bookingsOwn && bookingsOwn.sort((a, b) =>
-    //     Number(moment(a.start))
-    //     -
-    //     Number(moment(b.end))
-    // );
+    useEffect(() => {
+        dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}))
+    }, [dispatch, pageNumber])
 
     return (
-
         <div className={isSideBarOpen ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
             <div className={cn(scss.wrapper)}>
                 <SideBarHeader/>
                 <button className={cn(scss.burger)} onClick={handleClick}>
                     Menu
                 </button>
-
-                <div className={scss.inner}>
+            </div>
+            <div className={scss.inner}>
                     <span className={isSideBarOpen ? `${scss.clock}` : `${scss.clock} ${scss.hide}`}>
                         <img src={clock} alt="clock" width={15} height={15} color={'red'}/>
                         <Moment locale={'uk'} local={true} format={`LLL`} interval={30000}/>
                     </span>
-                    <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
-                        {
-                            bookingsOwn && bookingsOwn.data.map((value) =>
-                                <BookedRoom key={value.id} room={value.room} endDate={value.end}/>
-                            )
-                        }
-                    </ul>
-                </div>
+                <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
+                    {
+                        bookingsOwn ?
+                            ownLoading ?
+                                <SideBarSkeleton amount={10}/>
+                                :
+                                bookingsOwn && bookingsOwn.data.map((value) =>
+                                    <BookedRoom key={value.id}
+                                                room={value.room}
+                                                meetingName={value.name}
+                                                creator={value.creator}
+                                                members={value.users}
+                                                endDate={value.end}
+                                                startDate={value.start}
+                                    />
+                                )
+                            :
+                            <h3 className={scss.null}>
+                                You don't have any meetings added yet
+                            </h3>
+                    }
+                </ul>
+            </div>
+            <div className={scss.sidebar__buttons}>
+                <button
+                    className={isSideBarOpen ?
+                        typeof getTotalCountOfPages === 'number' && pageNumber === 1 ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
+                        :
+                        `${scss.sidebar__button} ${scss.hide}`
+                    }
+                    onClick={() => getPageNumber('-')} disabled={pageNumber === 0}>
+                    <img src={arrowLeft} alt={"arrow left"} height={10} width={10}/>
+                </button>
+                <button
+                    className={
+                        isSideBarOpen ?
+                            pageNumber === getTotalCountOfPages ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
+                            :
+                            `${scss.sidebar__button} ${scss.hide}`
+                    }
+                    onClick={() => getPageNumber('+')} disabled={pageNumber === getTotalCountOfPages}>
+                    <img src={arrowRight} alt={"arrow right"} height={10} width={10}/>
+                </button>
             </div>
         </div>
     )
