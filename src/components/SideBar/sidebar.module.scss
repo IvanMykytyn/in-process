@@ -110,11 +110,12 @@
   &__userName {
     font-size: 1.1rem;
     transition: color 0.5s;
-    color: var(--text-color);
+    color: var(--text-color-500);
     @extend %montserrat-semi-bold-600;
 
     &:hover {
-      color: var(--primary-color);
+      opacity: 0.5;
+      cursor: pointer;
     }
   }
 

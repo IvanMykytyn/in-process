@@ -4,7 +4,7 @@ import cn from 'classnames';
 import React, { FC } from 'react';
 import { InstrumentsProps } from 'models';
 import { staff } from 'utils/tools/staff';
-import { roomsImg } from 'assets/images/bg';
+import { room1 } from 'assets/images/bg';
 
 interface BookingRoomProps {
   id: number;
@@ -37,7 +37,7 @@ const BookingRoom: FC<BookingRoomProps> = ({
       onClick={() => handleChange(id)}
     >
       <div className={css['booking-room__image-section']}>
-        <img src={roomsImg} alt="room" />
+        <img src={room1} alt="room" />
       </div>
       <div className={css['booking-room__content']}>
         <div className={css['booking-room__text-content']}>

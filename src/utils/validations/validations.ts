@@ -7,9 +7,9 @@ const validateEmail = Joi.string()
     // .regex(/@incorainc.com\s*$/)
     .messages({
         'string.empty': 'The email cannot be empty.',
-        // 'string.pattern.base': 'The email can only end with incorainc.com',
         'string.min': 'The email must contain at least 1 character.',
-        'string.max': 'The email should not contain more than 320 characters.'
+        'string.max': 'The email should not contain more than 320 characters.',
+        // 'string.pattern.base': 'The email can only end with incorainc.com'
     });
 
 const validatePassword = Joi.string()
@@ -19,8 +19,9 @@ const validatePassword = Joi.string()
     .regex(/^(?=.*[A-Z])(?=.*[a-z]).{8,255}$/)
     .messages({
         'string.empty': 'The password cannot be empty.',
-        'string.pattern.base': 'The password must be longer than 8 characters and contain at least one capital letter.',
-        'srting.max': 'The should not contain more than 255 characters.'
+        'string.min': 'The password must be longer than 8 characters.',
+        'string.max': 'The should not contain more than 255 characters.',
+        'string.pattern.base': 'The password must be contain at least one capital letter.'
     });
 
 const validateConfirmPassword = Joi.any().valid(Joi.ref('newPassword')).messages({

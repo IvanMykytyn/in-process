@@ -8,7 +8,7 @@ import css from './room.module.scss';
 import {IRooms} from '../../models';
 import {staff} from '../../utils/tools/staff';
 import {users} from '../../assets/images/icons';
-import {roomsImg} from 'assets/images/bg';
+import {photos} from '../../utils/tools/rooms.img';
 
 interface RoomProps {
     room: IRooms
@@ -19,12 +19,17 @@ const Room: FC<RoomProps> = ({room}) => {
 
     return (
         <ul>
+            <Link to={`/dashboard/booking-form?roomId=${id}`}>
             <li className={cn(css.container)}>
                 <div className={cn(css.photo)}>
-                    <img src={roomsImg}
+                    {photos.map(photo => photo.id === id ?
+                    <img src={photo.img}
                          className={cn(css.container__img)}
                          alt="img" height={150}
                          width={150}/>
+                            :
+                            ''
+                    )}
                     <div className={cn(css.photo__icons)}>
                         <img src={users} alt="users" width={15} height={15}/>{maxCapacity}
                     </div>
@@ -53,12 +58,13 @@ const Room: FC<RoomProps> = ({room}) => {
                             )
                         )}
                 </ul>
-                <div className={cn(css.pre_btn)}>
-                    <Link to={`/dashboard/booking-form?roomId=${room.id}`} >
-                        <button className={cn(css.pre_btn__btn)}>Book</button>
-                    </Link>
-                </div>
+                {/*<div className={cn(css.pre_button)}>*/}
+                {/*    <Link to={'/dashboard/bookig-form'}>*/}
+                {/*        <button className={cn(css.pre_button__button)}>Book</button>*/}
+                {/*    </Link>*/}
+                {/*</div>*/}
             </li>
+            </Link>
         </ul>
     );
 }

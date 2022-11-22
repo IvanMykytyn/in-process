@@ -1,17 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-import {IRooms} from "models";
+import {IRooms, IRoomsWithSoonestBookings, ISoonestBookings} from "models";
+import {getAllRooms, getAllSoonestBookings} from '../thunk';
 import { RootState } from "store/store";
-import {getAllRooms } from '../thunk';
 
 interface IRoom {
     rooms: IRooms[],
-    filteredRooms: IRooms[]
+    filteredRooms: IRooms[],
+    soonestBookings: IRoomsWithSoonestBookings | null,
 };
 
 const initialRoomState: IRoom = {
     rooms: [],
-    filteredRooms: []
+    filteredRooms: [],
+    soonestBookings: null
 };
 
 const roomSlice = createSlice({
@@ -27,14 +29,19 @@ const roomSlice = createSlice({
             .addCase(getAllRooms.fulfilled, (state, action) => {
                 state.rooms = action.payload;
                 state.filteredRooms = action.payload;
-            }),
+            })
+            .addCase(getAllSoonestBookings.fulfilled,(state, action) => {
+                state.soonestBookings = action.payload;
+            })
+
 });
 
 const {reducer: roomReducer, actions: {getFilteredRooms}} = roomSlice;
 
 const selectRooms = (state: RootState) => state.rooms;
 const roomActions = {
-    getAllRooms
+    getAllRooms,
+    getAllSoonestBookings
 };
 
 export {

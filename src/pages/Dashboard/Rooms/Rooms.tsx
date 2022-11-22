@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Scrollbar, Navigation, Keyboard, Mousewheel, Autoplay} from 'swiper';
 import {StyledEngineProvider} from '@mui/material/styles';
@@ -16,6 +16,7 @@ import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../
 
 import {roomActions} from "store";
 import {InstrumentsProps} from "../../../models";
+import {RoomSkeleton} from "../../../components/Skeleton/RoomSkeleton";
 
 SwiperCore.use([Scrollbar]);
 SwiperCore.use([Keyboard, Mousewheel]);
@@ -33,8 +34,8 @@ export interface IFilters {
 export const filterCapacity: IFilters[] = [
     {
         id: 0,
-        name: '5-10',
-        range: [5,10]
+        name: '0-10',
+        range: [0,10]
     },
     {
         id: 1,
@@ -75,6 +76,7 @@ export const filterItems: InstrumentsProps[] = [
 ]
 
 const Rooms: FC = () => {
+    const [isLoading,setIsLoading] = useState(true);
     const {rooms} = useAppSelector(state => state.rooms);
 
     const {filteredRooms} = useAppSelector(state => state.rooms);
@@ -83,6 +85,7 @@ const Rooms: FC = () => {
 
     useEffect(() => {
         dispatch(roomActions.getAllRooms({officeId: 2}))
+        setIsLoading(false);
     }, [dispatch]);
 
     const {width} = useWindowDimensionsHook();
@@ -107,19 +110,36 @@ const Rooms: FC = () => {
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}
-                        autoplay={{
-                            delay: 3000,
-                        }}
+                        // autoplay={{
+                        //     delay: 5000,
+                        // }}
                         navigation={true}
-                        slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        // slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        breakpoints={{
+                            // when window width is >= 1100px
+                            1100: {
+                                width: 1100,
+                                slidesPerView: 4.5,
+                            },
+                            1500: {
+                                width: 1500,
+                                slidesPerView: 6,
+                            },
+                            // when window width is >= 1900px
+                            1900: {
+                                width: 1900,
+                                slidesPerView: 7,
+                            },
+                        }}
                         loop={true}
                         modules={[Navigation]}
-                        spaceBetween={25}
-                        scrollbar={{draggable: true}}
+                        spaceBetween={5}
+                        // scrollbar={{draggable: true}}
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {rooms && rooms.filter(room => room.floor === 2).map(room =>
+                            {/*{isLoading ? [...new Array(3)].map((_,index)=> <RoomSkeleton key={index}/>) :*/}
+                            { filteredRooms && filteredRooms.filter(room => room.floor === 1).map(room =>
                                 <SwiperSlide className={cn(css.my_swiper__swiperslide)}
                                              key={room.id}
                                              virtualIndex={room.id}
@@ -139,27 +159,43 @@ const Rooms: FC = () => {
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}
+                        // autoplay={{
+                        //     delay: 5000,
+                        // }}
                         navigation={true}
-                        slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
-                        autoplay={{
-                            delay: 3000,
+                        // slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        breakpoints={{
+                            // when window width is >= 1100px
+                            1100: {
+                                width: 1100,
+                                slidesPerView: 4.5,
+                            },
+                            1500: {
+                                width: 1500,
+                                slidesPerView: 6,
+                            },
+                            // when window width is >= 1900px
+                            1900: {
+                                width: 1900,
+                                slidesPerView: 7,
+                            },
                         }}
                         loop={true}
                         modules={[Navigation]}
-                        spaceBetween={25}
-                        scrollbar={{draggable: true}}
+                        spaceBetween={5}
+                        // scrollbar={{draggable: true}}
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
+                            {/*{isLoading ? [...new Array(3)].map((_,index)=> <RoomSkeleton key={index}/>) :*/}
                             {filteredRooms && filteredRooms.filter(room => room.floor === 2).map(room =>
-                                <SwiperSlide className={cn(css.my_swiper__swiperslide)}
-                                             key={room.id}
-                                             virtualIndex={room.id}
-                                >
-                                    <Room room={room} key={room.id}/>
-
-                                </SwiperSlide>
-                            )}
+                                    <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                                 key={room.id}
+                                                 virtualIndex={room.id}
+                                    >
+                                        <Room room={room} key={room.id}/>
+                                    </SwiperSlide>
+                                )}
                         </ul>
                     </Swiper>
                 </li>
