@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import useLocalStorage from 'use-local-storage';
 import './App.styles.scss';
 
@@ -7,22 +7,16 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import {ToastifyContainer, Toggle} from 'components';
 import {AppRoutes} from 'routes';
+import {useAppSelector} from 'hooks';
+import {selectTheme} from "./store";
 
 
 function App() {
-    const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light', 'theme');
-
-    const toggleTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-    };
-
+    const {newTheme} = useAppSelector(selectTheme);
 
     return (
-        <div role={'application'} className={'app'} data-theme={theme}>
-            <button className={'app__btn'} type={'button'} onClick={toggleTheme}>
-                {theme === 'light' ? 'dark' : 'light'}
-            </button>
+        <div role={'application'} className={'app'}
+             data-theme={newTheme}>
             <AppRoutes/>
             <ToastifyContainer/>
         </div>

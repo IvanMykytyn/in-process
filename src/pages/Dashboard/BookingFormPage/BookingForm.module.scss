@@ -6,6 +6,7 @@
   overflow: hidden;
   background-color: var(--background);
   box-shadow: $outerBoxShadow;
+  color: var(--accent-text-color);
 
   &__content {
     flex: 1;
