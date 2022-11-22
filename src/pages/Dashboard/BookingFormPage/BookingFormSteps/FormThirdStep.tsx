@@ -1,5 +1,5 @@
-import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
-import { BuildStepProps, ErrorsType, ValuesType } from '../BookingFormPage';
+import { FC, useEffect, useMemo } from 'react';
+import { BuildStepProps } from '../BookingFormPage';
 import css from '../BookingForm.module.scss';
 import '../BookingForm.styles.scss';
 import cn from 'classnames';
@@ -45,7 +45,7 @@ const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) =>
 
   return (
     <div className={cn(css['third-step-form'])}>
-      <div className={css.booking__wrap}>
+      <div className={css['booking-room__left-side']}>
         <div className={css.booking__image}>
           <img
             className={css['booking-img']}
@@ -83,17 +83,17 @@ const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) =>
         </div>
       </div>
       <div className={css['booking-room__right-side']}>
-        <div className={css['rooms-picker-wrapper']}>
-          <div className={css['rooms-picker']}>
-            {bookingRooms.map((room) => (
-              <BookingRoom
-                {...room}
-                key={room.id}
-                handleChange={handleChangeRoom}
-                isActive={values.roomId === room.id}
-              />
-            ))}
-          </div>
+          <div className={css['rooms-picker-wrapper']}>
+            <div className={css['rooms-picker']}>
+              {bookingRooms.map((room) => (
+                <BookingRoom
+                  {...room}
+                  key={room.id}
+                  handleChange={handleChangeRoom}
+                  isActive={values.roomId === room.id}
+                />
+              ))}
+            </div>
         </div>
         <div className={css.buttons}>
           <Button type={'button'} onClick={handleBack}>

@@ -1,31 +1,38 @@
-import { FC } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
 import cn from 'classnames';
 import scss from './events.module.scss';
 
-import { getTimeFromDate, rooms } from 'utils';
+import { getTimeFromDate } from 'utils';
 import { clock } from 'assets/images/icons';
 
-import { EventProps } from '../constants';
 import { getEventPosition } from '../utils';
-import { useAppDispatch } from '../../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { setCurrentBooking, togglePopover } from 'store/slices/booking.slice';
+import { selectRooms } from 'store';
+import { ExtendedSingleBooking } from 'models';
 
-export interface ExtendedEventProps extends EventProps {
-  viewType: 'day' | 'week' | 'month';
-  remove?: any;
-}
-
-const Event: FC<ExtendedEventProps> = (eventData) => {
+const Event: FC<ExtendedSingleBooking> = (eventData) => {
   const dispatch = useAppDispatch();
+  const { rooms } = useAppSelector(selectRooms);
   const { color, viewType } = eventData;
 
-  const { styles, currentEventHeight } = getEventPosition(rooms, eventData);
+  const eventPosition = useMemo(
+    () => getEventPosition(rooms, eventData),
+    [rooms, eventData]
+  );
+  const { styles, currentEventHeight } = eventPosition;
 
   const isDayViewType = viewType === 'day';
 
   const handleClick = () => {
-    dispatch(setCurrentBooking(eventData));
+    dispatch(
+      setCurrentBooking({
+        ...eventData,
+        start: eventData.start.toISOString(),
+        end: eventData.end.toISOString(),
+      })
+    );
     dispatch(togglePopover());
   };
 
@@ -53,7 +60,7 @@ export { Event };
 
 const buildEventContentDay = (
   eventHeight: number,
-  eventData: ExtendedEventProps
+  eventData: ExtendedSingleBooking
 ): JSX.Element => {
   const { name, description, start, end, viewType } = eventData;
 
@@ -62,6 +69,7 @@ const buildEventContentDay = (
 
   const isDayViewType = viewType === 'day';
   const isMonthViewType = viewType === 'month';
+  const isListViewType = viewType === 'list';
 
   if (isMonthViewType) {
     const clockContent = getClockContent(getTimeFromDate(start));
@@ -69,6 +77,14 @@ const buildEventContentDay = (
       <div className={scss['event-calendar-content']}>
         <h3 className={scss['event__month-title']}>{name}</h3>
         {clockContent}
+      </div>
+    );
+  }
+  if (isListViewType) {
+    return (
+      <div className={scss['event-calendar-content-list']}>
+        <h3 className={scss['event__month-title']}>{name}</h3>
+        {/* {clockContent} */}
       </div>
     );
   }

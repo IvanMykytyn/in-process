@@ -7,18 +7,19 @@ import {
     IBookingDelete,
     IBookingOneTime,
     IBookingOneTimePut,
-    IBookingOneTimeDelete,
-    IBookingOwn
+    IBookingOwn,
+    GetAllBookingsResponse
 } from "models";
 import {bookingService} from "services";
 
+export type GetAllBookings = GetAllBookingsResponse['data']['bookings']
 
-export const getAllBookings = createAsyncThunk<IBookingRecurring[], { startDate: string, endDate: string, officeId: number, roomId?: string }>(
+export const getAllBookings = createAsyncThunk<GetAllBookings, { startDate: string, endDate: string, officeId: number, roomId?: string }>(
     'bookingSlice/getAllBookings',
     async ({startDate, endDate, officeId, roomId}, {rejectWithValue}) => {
         try {
             const {data} = await bookingService.getAllBookings(startDate, endDate, officeId, roomId);
-            return data;
+            return data.data.bookings;
         } catch (e) {
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data);
@@ -31,7 +32,6 @@ export const recPost = createAsyncThunk<IBookingRecurring, { booking: IBookingRe
     async ({booking}, {rejectWithValue}) => {
         try {
             const {data} = await bookingService.recurringPost(booking);
-            console.log(data);
             return data;
         } catch (e) {
             console.log(e);
@@ -55,12 +55,12 @@ export const recPut = createAsyncThunk<IBookingPut, { scheduleId: number, newBoo
     }
 );
 
-export const recDelete = createAsyncThunk<IBookingDelete, { scheduleId: number }>(
+export const recDelete = createAsyncThunk<{ scheduleId: number }, { scheduleId: number }>(
     'bookingSlice/recDelete',
     async ({scheduleId}, {rejectWithValue}) => {
         try {
-            const {data} = await bookingService.recurringDelete(scheduleId);
-            return data;
+            await bookingService.recurringDelete(scheduleId);
+            return {scheduleId};
         } catch (e) {
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data);
@@ -82,12 +82,12 @@ export const oneTimePost = createAsyncThunk<IBookingOneTime, { booking: IBooking
     }
 );
 
-export const oneTimeDelete = createAsyncThunk<IBookingOneTimeDelete, { bookingId: number }>(
+export const oneTimeDelete = createAsyncThunk<{bookingId: number}, { bookingId: number }>(
     'bookingSlice/oneTimeDelete',
     async ({bookingId}, {rejectWithValue}) => {
         try {
-            const {data} = await bookingService.deleteBookingOneTime(bookingId);
-            return data;
+            await bookingService.deleteBookingOneTime(bookingId);
+            return {bookingId};
         } catch (e) {
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data);

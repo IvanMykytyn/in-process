@@ -1,31 +1,40 @@
 import { FC, useEffect, useRef } from 'react';
+// full calendar plugins
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
-
 import interactionPlugin from '@fullcalendar/interaction';
-
 import dayViewPlugin from './DayCalendar/DayCalendarPlugin';
+
+import moment from 'moment';
+import { useNavigate } from 'react-router';
 
 // styles
 import './calendar.styles.scss';
 
+import { getAllBookings } from 'store';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { selectBooking } from 'store/slices/booking.slice';
+
+import { colorFromString } from 'utils';
+
 import { TimeSlot } from './Grid';
 import { buildEvents } from './FullCalendarComponents/BuildEvent';
-import { colorFromString } from 'utils';
-import moment from 'moment';
-import { useAppSelector } from '../../../hooks';
-import { selectBooking } from 'store/slices/booking.slice';
 import { PopoverWrapper } from './Events';
 
 const Calendar: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const calendarRef = useRef<null | any>(null);
-  const { isSideBarOpen, bookings, isPopoverOpen, currentBooking } =
+
+  const { isSideBarOpen, bookings,isLoading, isPopoverOpen, currentBooking } =
     useAppSelector(selectBooking);
 
   const fullCalendarBookings = bookings.map((book) => {
-    const { name, start, end, description, roomId, id, users } = book;
+    const { name, start, end, description, room, id, users, creator, schedule } =
+      book;
 
     return {
       id: id.toString(),
@@ -34,12 +43,24 @@ const Calendar: FC = () => {
       end,
       extendedProps: {
         description: description,
-        roomId: roomId,
+        room: room,
         users: users,
         color: colorFromString(name ?? ''),
+        creator,
+        schedule,
       },
     };
   });
+
+  const getRangeOfBookings = (start: string, end: string) => {
+    dispatch(
+      getAllBookings({
+        startDate: start,
+        endDate: end,
+        officeId: 2,
+      })
+    );
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,11 +68,7 @@ const Calendar: FC = () => {
     }, 1200);
   }, [isSideBarOpen]);
 
-  // useEffect(() => {
-  //   calendarRef?.current?.getApi?.().refetchEvents();
-  // }, [bookings]);
-
-  const scrollTo = moment().format('HH') + ':00:00';
+  // const scrollTo = moment().format('HH') + ':00:00';
 
   return (
     <div className="full-calendar">
@@ -64,10 +81,9 @@ const Calendar: FC = () => {
           listPlugin,
         ]}
         ref={calendarRef}
-        timeZone={'local'}
-        initialView={'day'}
+        timeZone="local"
+        initialView={'dayGridMonth'}
         locale={'en-GB'}
-        scrollTime={scrollTo}
         allDaySlot={false}
         // slot
         slotLabelInterval={'01:00'}
@@ -90,6 +106,8 @@ const Calendar: FC = () => {
         selectMirror={false}
         dayMaxEvents={true}
         nowIndicator={true}
+        navLinks={true}
+        // weekends={false}
         // event
         events={fullCalendarBookings}
         eventContent={buildEvents}
@@ -98,8 +116,20 @@ const Calendar: FC = () => {
         customButtons={{
           addBooking: {
             text: 'Add',
-            click: function () {},
+            click: () => {
+              const { currentDate } =
+                calendarRef?.current?.getApi?.().currentDataManager.data;
+              const date = moment(currentDate).toISOString();
+              navigate(`/dashboard/booking-form?date=${date}`);
+            },
           },
+        }}
+        datesSet={(params) => {
+          const { endStr, startStr } = params;
+          getRangeOfBookings(
+            moment(startStr).toISOString(),
+            moment(endStr).toISOString()
+          );
         }}
       />
 

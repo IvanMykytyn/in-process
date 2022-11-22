@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ToastifyContainer, Toggle} from 'components';
 import {AppRoutes} from 'routes';
 
-
 function App() {
     const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light', 'theme');
 

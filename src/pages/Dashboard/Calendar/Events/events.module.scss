@@ -38,8 +38,7 @@ $eventBorderRadius: 5px;
   height: 100%;
   background: var(--card-background);
   width: $roomWidth;
-  box-shadow: 1px 1px 6px var(--gray),
-  -1px -1px 6px var(--white);;
+  box-shadow: 1px 1px 6px var(--gray), -1px -1px 6px var(--white);
   border-radius: $eventBorderRadius;
 
   overflow: hidden;
@@ -213,6 +212,15 @@ $eventBorderRadius: 5px;
   background: var(--light-gray-910);
 
   border-radius: 10px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 100;
+
+  box-shadow: $outerBoxShadow;
 }
 
 .tools-bar {
@@ -308,7 +316,9 @@ $eventBorderRadius: 5px;
     padding-top: 4px;
   }
 }
-
+.list{
+  width: 95%;
+}
 .event-calendar-content {
   display: flex;
   align-items: center;
@@ -324,17 +334,79 @@ $eventBorderRadius: 5px;
     color: var(--text-color-400);
   }
 }
+.event-calendar-content-list{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 250px;
+  padding-right: 5px;
+  padding: 3px;
+  width: 100%;
+  justify-content: space-between;
+  h3 {
+    overflow: hidden;
+    max-width: 80%;
+    color: var(--text-color-400);
+  }
+}
 .event__month-title {
   font-size: 0.8rem;
 }
 
-.event-popover {
+.delete-popover {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 100px;
 
-  z-index: 100;
+  z-index: 110;
 
   box-shadow: $outerBoxShadow;
+
+  width: 250px;
+  // height: 125px;
+
+  padding: 15px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+
+  background: var(--background);
+
+  border-radius: 10px;
+
+  &__text {
+    font-size: 1.4rem;
+    padding: 10px 0;
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 5px 20px 10px;
+
+    p {
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      padding-top: 4px;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .exit-wrapper {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+  }
+}
+
+.user-emails {
+  p {
+    max-height: 150px;
+    overflow-y: auto;
+  }
 }

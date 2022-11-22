@@ -425,4 +425,39 @@ $lineColor: $nowIndicatorColor;
 .fc-daygrid,
 .fc-list {
   box-shadow: $outerBoxShadow;
+  border-radius: 10px;
+}
+
+.delete-popover__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 20px;
+
+  .contained-styles::after {
+    height: 30px;
+  }
+  .contained-styles:hover:enabled {
+    color: var(--primary-color);
+  }
+  button {
+    height: 30px;
+    padding: 15px 30px;
+  }
+}
+
+tr.fc-list-event {
+  &:hover td {
+    background: var(--background) !important;
+    opacity: 0.8;
+  }
+}
+.fc-list-event-graphic {
+  .fc-list-event-dot {
+    border: 5px solid var(--primary-color) !important;
+  }
+}
+.fc-list-day-cushion {
+  background: var(--background) !important;
+  box-shadow: $outerBoxShadow !important;
 }

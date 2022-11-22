@@ -1,15 +1,17 @@
 import { FC, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Step, StepLabel, Stepper } from '@mui/material';
+import moment, { Moment } from 'moment';
+import 'moment-timezone';
 
 import css from './BookingForm.module.scss';
 import './BookingForm.styles.scss';
 import cn from 'classnames';
 
-import { Step, StepLabel, Stepper } from '@mui/material';
-import moment, { Moment } from 'moment';
 import { FormFirstStep } from './BookingFormSteps/FormFirstStep';
 import { FormThirdStep } from './BookingFormSteps/FormThirdStep';
 import { FormSecondStep } from './BookingFormSteps/FormSecondStep';
+
 import { IBookingOneTime, IBookingRecurring, PatternType } from 'models';
 import { getNextDay } from 'utils';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -41,8 +43,9 @@ const BookingFormPage: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const paramsDate = moment(params.get('date'));
-  const defaultParamsDate = paramsDate.isValid() ? paramsDate : moment();
+  const paramsDate = params.get('date');
+  const isValidParamsDate = !!paramsDate && moment(paramsDate).isValid();
+  const defaultParamsDate = isValidParamsDate ? moment(paramsDate) : moment();
   const { rooms } = useAppSelector(selectRooms);
 
   const initialValues: ValuesType = {
@@ -56,7 +59,7 @@ const BookingFormPage: FC = () => {
     startTime: moment('2023-08-18T00:00:00'),
     endTime: moment('2023-08-18T00:00:00'),
     startDate: defaultParamsDate,
-    endDate: getNextDay(defaultParamsDate),
+    endDate: getNextDay(defaultParamsDate.clone()),
     roomId: (parseInt(params.get('roomId') ?? '') || rooms[0]?.id) ?? 2,
     isRecurring: false,
   };
@@ -77,16 +80,16 @@ const BookingFormPage: FC = () => {
   const handleBookingFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      console.log(values);
-      console.log(errors);
-
       if (Object.keys(errors).length === 0) {
         if (!values.isRecurring) {
+          // TODO change redirect
           const booking = getOneTimeBooking(values);
           await dispatch(bookingActions.oneTimePost({ booking }));
+          navigate(-1);
         } else {
           const booking = getRecurringBooking(values);
           await dispatch(bookingActions.recPost({ booking }));
+          navigate(-1);
         }
       }
     } catch (error) {
@@ -148,9 +151,9 @@ const buildStep = (activeStep: number) => {
 const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
   const { name, description, roomId, users } = values;
 
-  const date = values.startDate.toISOString().slice(0, 10);
-  const startTime = values.startTime.toISOString().slice(10);
-  const endTime = values.endTime.toISOString().slice(10);
+  const date = values.startDate.add(2, 'hours').toISOString(false).slice(0, 10);
+  const startTime = values.startTime.add(1, 'hours').toISOString().slice(10);
+  const endTime = values.endTime.add(1, 'hours').toISOString().slice(10);
 
   const start = date + startTime;
   const end = date + endTime;
@@ -168,10 +171,10 @@ const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
 const getRecurringBooking = (values: ValuesType): IBookingRecurring => {
   const { name, description, roomId, users, pattern } = values;
 
-  const since = values.startDate.toISOString();
-  const until = values.endDate.toISOString();
-  const start = values.startTime.format('HH:mm');
-  const end = values.endTime.format('HH:mm');
+  const since = values.startDate.add(2, 'hours').toISOString();
+  const until = values.endDate.add(2, 'hours').toISOString();
+  const start = values.startTime.add(-2, 'hours').format('HH:mm');
+  const end = values.endTime.add(-2, 'hours').format('HH:mm');
 
   return {
     since,

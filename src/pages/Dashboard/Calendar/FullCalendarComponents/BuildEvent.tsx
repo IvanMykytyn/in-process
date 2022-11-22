@@ -7,27 +7,32 @@ export const buildEvents = (props: EventContentArg) => {
   const {
     _def: { title, extendedProps, publicId },
     _instance,
-    remove,
   } = props.event;
-  
-  const start = moment(_instance!.range.end);
-  const end = moment(_instance!.range.start);
-  const { description, roomId, users, color } = extendedProps;
 
-  const currentViewType = props.view.type === 'timeGridWeek' ? 'week' : 'month';
+  const start = moment(_instance!.range.start);
+  const end = moment(_instance!.range.end);
+  const { description, room, users, color, creator, schedule } = extendedProps;
+
+  const currentViewType =
+    props.view.type === 'timeGridWeek'
+      ? 'week'
+      : props.view.type === 'listWeek'
+      ? 'list'
+      : 'month';
 
   return (
     <Event
       id={parseInt(publicId)}
       name={title}
       description={description}
-      roomId={roomId}
+      room={room}
       color={color}
       users={users}
-      start={moment(start)}
-      end={moment(end)}
+      creator={creator}
+      start={start.add(-2, 'hours')}
+      end={end.add(-2, 'hours')}
       viewType={currentViewType}
-      remove={remove}
+      schedule={schedule}
     />
   );
 };

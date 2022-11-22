@@ -1,12 +1,15 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
+import { AutocompleteRenderInputParams, TextField } from '@mui/material';
 import { BuildStepProps, ErrorsType, ValuesType } from '../BookingFormPage';
+
 import css from '../BookingForm.module.scss';
 import '../BookingForm.styles.scss';
 import cn from 'classnames';
+
 import { Input } from 'components/Input/Input';
 import { MultipleSelectWithBadges } from 'components/MultipleSelectWithBadges/MultipleSelectWithBadges';
-import { AutocompleteRenderInputParams, TextField } from '@mui/material';
 import { Button } from 'components/Button/Button';
+
 import { userService } from 'services';
 
 const FormFirstStep: FC<BuildStepProps> = ({

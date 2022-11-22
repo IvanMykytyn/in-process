@@ -9,7 +9,7 @@ import { selectBooking } from 'store/slices/booking.slice';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout, setting } from 'assets/images/icons';
 import { UserInterface } from 'models';
-import { getInitials } from 'utils';
+import { getFullName, getInitials } from 'utils';
 
 interface SideBarHeaderProps {}
 
@@ -21,7 +21,7 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
   const navigate = useNavigate();
 
   const { firstName, lastName, email } = user || ({} as UserInterface);
-  const fullName = `${firstName ?? ''} ${lastName ?? ''}`;
+  const fullName = getFullName(firstName, lastName);;
 
   const handleLogout = () => {
     dispatch(logoutUser());

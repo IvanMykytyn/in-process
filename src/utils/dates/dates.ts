@@ -1,4 +1,5 @@
-import moment, { Moment } from 'moment';
+import moment, {Moment} from 'moment';
+import 'moment-timezone';
 import 'moment/locale/en-gb';
 moment.locale('en-gb');
 
