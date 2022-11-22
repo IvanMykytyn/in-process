@@ -38,7 +38,8 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                 const roomCurrent = room.equipments.map(item => item.id);
                 const isValidEquipment = itemId.every(id => roomCurrent.includes(id));
                 const capacity = room.maxCapacity;
-                const isValidCapacity = capacityId.some(range => capacity > range[0] && capacity <= range[1])
+                const isCapacitySelected = capacityId.length === 0
+                const isValidCapacity = isCapacitySelected || capacityId.some(range => capacity > range[0] && capacity <= range[1]);
                 return isValidEquipment && isValidCapacity;
             })))
         }, [itemId, capacityId]);

@@ -6,13 +6,13 @@ import {getAllRooms, getAllSoonestBookings} from '../thunk';
 interface IRoom {
     rooms: IRooms[],
     filteredRooms: IRooms[],
-    soonestBookings: IRoomsWithSoonestBookings[],
+    soonestBookings: IRoomsWithSoonestBookings | null,
 };
 
 const initialRoomState: IRoom = {
     rooms: [],
     filteredRooms: [],
-    soonestBookings: []
+    soonestBookings: null
 };
 
 const roomSlice = createSlice({

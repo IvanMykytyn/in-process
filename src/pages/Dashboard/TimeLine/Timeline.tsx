@@ -22,23 +22,31 @@ const Timeline: FC = () => {
             <h3 className={css.timeline__title}>
                 Soonest Bookings
             </h3>
-            <ul className={css.timeline__items}>
+                <ul className={css.timeline__items}>
                 <li className={css.timeline__item}>
-                    {soonestBookings && soonestBookings.map(room => room.soonestBookings.map( booking =>
-                        <details className={css.timeline__details}>
-                            <summary className={css.timeline__summary}>{booking.name}</summary>
-                            <div>
-                                <ul className={css.timeline__description}>
-                                    <li>{booking.start}</li>
-                                    <li>{booking.end}</li>
-                                    <li>{booking.description}</li>
-                                    {booking.users.map(user =>
-                                        <li>{user.firstName} {user.lastName} {user.email}</li>
-                                    )}
-                                </ul>
-                            </div>
-                        </details>
-                    ))}
+                    {/*{soonestBookings && soonestBookings.soonestBookings.map(booking =>*/}
+                    {/*<details className={css.timeline__details}>*/}
+                    {/*    <summary className={css.timeline__summary}>Name : {booking.name}</summary>*/}
+                    {/*    <ul>*/}
+                    {/*        <li>Start: {booking.start}</li>*/}
+                    {/*        <li>End: {booking.end}</li>*/}
+                    {/*        <li>Description: {booking.description}</li>*/}
+                    {/*        <ul>*/}
+                    {/*        {booking.users.map(user =>*/}
+                    {/*        <li>User: {user.firstName} {user.lastName} {user.email}</li>*/}
+                    {/*        )}*/}
+                    {/*        </ul>*/}
+                    {/*    </ul>*/}
+                    {/*</details>*/}
+                    {/*)}*/}
+                    <details className={css.timeline__details}>
+                        <summary className={css.timeline__summary}>Event 1</summary>
+                        <div>
+                            <p className={css.timeline__description}>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, dicta!
+                            </p>
+                        </div>
+                    </details>
                 </li>
             </ul>
         </div>

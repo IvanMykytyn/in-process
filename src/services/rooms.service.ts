@@ -7,6 +7,6 @@ export const roomsService = {
     getAll: (officeId: number): AxiosRes<IRooms[]> =>
         axiosService.get(`${urls.rooms}?officeId=${officeId}`),
 
-    getAllSoonestBookings: (roomId: number, soonestBookingsDays: number): AxiosRes<IRoomsWithSoonestBookings[]> =>
+    getAllSoonestBookings: (roomId: number, soonestBookingsDays: number): AxiosRes<IRoomsWithSoonestBookings> =>
         axiosService.get(`${urls.rooms}/soonestBookings?roomId=${roomId}&soonestBookingsDays=${soonestBookingsDays}`)
 };

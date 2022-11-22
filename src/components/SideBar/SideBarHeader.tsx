@@ -32,13 +32,14 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
     <header className={isSideBarOpen ? `${scss.info}` : `${scss.info} ${scss.hide}`}>
       <div className={cn(scss['user-information'])}>
         <div role="img" className={cn(scss['initials-avatar'])}>
-          <div>{getInitials(firstName, lastName)}</div>
+            <div>{getInitials(firstName, lastName)}</div>
         </div>
-
+        <Link to={'/dashboard/settings'} >
         <div>
           <h4 className={cn(scss.info__userName)}>{fullName}</h4>
           <p className={cn(scss.info__email)}>{email}</p>
         </div>
+        </Link>
       </div>
       <div className={cn(scss.icons)}>
         <Link to={'/dashboard/settings'} className={cn(scss.info__settings)}>

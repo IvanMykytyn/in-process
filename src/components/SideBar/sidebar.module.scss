@@ -71,11 +71,12 @@
   &__userName {
     font-size: 1.1rem;
     transition: color 0.5s;
-    color: var(--text-color);
+    color: var(--text-color-500);
     @extend %montserrat-semi-bold-600;
 
     &:hover {
-      color: var(--primary-color);
+      opacity: 0.5;
+      cursor: pointer;
     }
   }
 
@@ -106,13 +107,11 @@
   &__settings {
     img {
       width: 20px;
-      width: 20px;
     }
   }
 
   &__userImg {
     img {
-      width: 30px;
       width: 30px;
     }
   }
@@ -122,7 +121,6 @@
   img {
     filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
     transition: 0.5s ease-in-out;
-    width: 20px;
     width: 20px;
   }
 

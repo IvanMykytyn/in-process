@@ -108,19 +108,35 @@ const Rooms: FC = () => {
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}
-                        autoplay={{
-                            delay: 3000,
-                        }}
+                        // autoplay={{
+                        //     delay: 5000,
+                        // }}
                         navigation={true}
-                        slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        // slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        breakpoints={{
+                            // when window width is >= 1100px
+                            1100: {
+                                width: 1100,
+                                slidesPerView: 3.5,
+                            },
+                            1500: {
+                                width: 1500,
+                                slidesPerView: 5,
+                            },
+                            // when window width is >= 1900px
+                            1900: {
+                                width: 1900,
+                                slidesPerView: 7,
+                            },
+                        }}
                         loop={true}
                         modules={[Navigation]}
-                        spaceBetween={25}
+                        spaceBetween={0}
                         scrollbar={{draggable: true}}
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {rooms && rooms.filter(room => room.floor === 2).map(room =>
+                            {filteredRooms && filteredRooms.filter(room => room.floor === 1).map(room =>
                                 <SwiperSlide className={cn(css.my_swiper__swiperslide)}
                                              key={room.id}
                                              virtualIndex={room.id}
@@ -140,10 +156,26 @@ const Rooms: FC = () => {
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}
+                        // autoplay={{
+                        //     delay: 5000,
+                        // }}
                         navigation={true}
-                        slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
-                        autoplay={{
-                            delay: 3000,
+                        // slidesPerView={width > 1700 ? 1700 / 350 : Math.floor(width / 350)}
+                        breakpoints={{
+                            // when window width is >= 1100px
+                            1100: {
+                                width: 1100,
+                                slidesPerView: 3.5,
+                            },
+                            1500: {
+                                width: 1500,
+                                slidesPerView: 5,
+                            },
+                            // when window width is >= 1900px
+                            1900: {
+                                width: 1900,
+                                slidesPerView: 7,
+                            },
                         }}
                         loop={true}
                         modules={[Navigation]}

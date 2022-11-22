@@ -15,7 +15,7 @@
 }
 
 .room_container {
-  padding: 20px;
+  padding: 5px;
   display: grid;
   grid-gap: 40px;
 
@@ -45,7 +45,7 @@
     display: flex;
     grid-gap: 15px;
     overflow: auto;
-    padding: 10px 50px 10px 10px;
+    padding: 10px 10px 10px 10px;
     border-radius: 10px;
   }
 }
@@ -88,7 +88,7 @@
   //}
 
   &__swiperslide {
-    padding: 10px 10px 10px 10px;
+    padding: 10px 0;
     border-radius: 10px;
     --webkit-transform: translateZ(0);
   }

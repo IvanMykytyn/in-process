@@ -16,7 +16,7 @@ import {AxiosError} from "axios";
     }
 );
 
- export const getAllSoonestBookings = createAsyncThunk<IRoomsWithSoonestBookings[], {roomId :number, soonestBookingsDays:number}>(
+ export const getAllSoonestBookings = createAsyncThunk<IRoomsWithSoonestBookings, {roomId :number, soonestBookingsDays:number}>(
     'roomSlice/getAllSoonestBookings',
     async ({roomId ,soonestBookingsDays}, {rejectWithValue}) => {
         try {
