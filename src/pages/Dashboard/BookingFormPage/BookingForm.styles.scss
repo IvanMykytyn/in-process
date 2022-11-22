@@ -25,11 +25,15 @@
     .MuiStepIcon-text {
       font-size: 0.8rem;
       color: red;
-      fill: var(--background);
+      fill: var(--text-color);
     }
 
     .Mui-active,
     .Mui-completed {
+      .MuiStepIcon-text {
+        fill: var(--background);
+        ;
+      }
       color: var(--primary-color) !important;
 
       path {
@@ -50,6 +54,13 @@
   }
 }
 
+.BookingForm_second-step-form__eDrqa{
+  .MuiSvgIcon-root{
+    path{
+      color: var(--icon-color);
+    }
+  }
+}
 .css-1hv8oq8-MuiStepLabel-label.Mui-active,
 .css-1hv8oq8-MuiStepLabel-label.Mui-completed{
   color: var(--primary-color) !important;
@@ -124,7 +135,7 @@
 }
 
 .css-i4bv87-MuiSvgIcon-root{
-  color: var(--accent-text-color);
+  // color: var(--accent-text-color);
 }
 
 .days-picker_days-picker__Rzvak .days-picker_day__8JodR{

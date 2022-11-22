@@ -461,3 +461,23 @@ tr.fc-list-event {
   background: var(--background) !important;
   box-shadow: $outerBoxShadow !important;
 }
+
+.fc-theme-standard .fc-list {
+  border: 0 !important;
+}
+.fc-dayGridMonth-view {
+  .fc-scrollgrid-section {
+    overflow-y: scroll;
+  }
+}
+
+.fc-list-day-side-text,
+.fc-list-day-text{
+  color: var(--text-color-500);
+
+}
+
+
+.fc-list-event-time {
+  color: var(--text-color);
+}

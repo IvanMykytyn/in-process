@@ -48,6 +48,7 @@ body {
   --text-color-200: hsl(0, 0%, 20%);
 
   --icon-filter: none;
+  --icon-color:rgba(0, 0, 0, 0.54);
 }
 
 [data-theme='dark'] {
@@ -84,6 +85,7 @@ body {
   --grid-background: hsl(0, 0%, 9%);
 
   --icon-filter: invert(45%) sepia(0%) saturate(3099%) hue-rotate(191deg) brightness(91%) contrast(105%);
+  --icon-color: var(--text-color)
 }
 
 * {
