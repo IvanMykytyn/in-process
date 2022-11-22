@@ -26,4 +26,11 @@ const getInitials = (firstName: string, lastName?: string): string => {
   return '';
 };
 
-export { truncate, colorFromString, getInitials };
+const getFullName = (firstName: string, lastName: string) => {
+  return `${firstName ?? ''} ${lastName ?? ''}`;
+};
+
+const getUrlId = (path: string, replacePart: string) => {
+  return path.replace(replacePart, '');
+};
+export { truncate, colorFromString, getInitials, getFullName, getUrlId };

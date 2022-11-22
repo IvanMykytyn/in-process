@@ -10,14 +10,14 @@ import css from './forgot-password.module.scss';
 import { Button, Input } from 'components';
 
 // utils
-import { validateConfirmPassword, validatePassword } from 'utils';
+import { getUrlId, validateConfirmPassword, validatePassword } from 'utils';
 import { FormLayout } from 'pages/FormLayout/FormLayout';
 
 // icons
 import { keyIcon, arrowLeft } from 'assets/images/icons';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { resetPassword} from 'store';
-import {useAppDispatch } from '../../hooks';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { resetPassword } from 'store';
+import { useAppDispatch } from '../../hooks';
 import { ResetPasswordProps } from 'models';
 
 const ResetPasswordValidation = Joi.object({
@@ -28,13 +28,12 @@ const ResetPasswordValidation = Joi.object({
 const ResetPassword: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { id = '' } = useParams();
+  const location = useLocation();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     defaultValues: {
       newPassword: '',
@@ -48,7 +47,8 @@ const ResetPassword: FC = () => {
     newPassword,
   }: Omit<ResetPasswordProps, 'id'>) => {
     try {
-      await dispatch(resetPassword({ id, newPassword }));
+      const userId = getUrlId(location.pathname, '/resetPassword/');
+      await dispatch(resetPassword({ id: userId, newPassword }));
       navigate('/login');
     } catch (err) {
       console.log(err);

@@ -1,7 +1,7 @@
 import css from './Booking-room.module.scss';
 import cn from 'classnames';
 
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { InstrumentsProps } from 'models';
 import { staff } from 'utils/tools/staff';
 import { room1 } from 'assets/images/bg';

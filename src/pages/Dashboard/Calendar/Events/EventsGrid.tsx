@@ -19,9 +19,7 @@ const EventsGrid: FC<EventsGridProps> = ({ events }) => {
           def: { publicId, title, extendedProps },
           range: { start, end },
         } = event;
-        console.log(event);
-
-        const { description, roomId, color, users } = extendedProps;
+        const { description, room, color, users, creator, schedule } = extendedProps;
 
         return (
           <Event
@@ -29,12 +27,14 @@ const EventsGrid: FC<EventsGridProps> = ({ events }) => {
             id={parseInt(publicId)}
             name={title}
             description={description}
-            roomId={roomId}
+            room={room}
             color={color}
             users={users}
-            start={moment(start)}
-            end={moment(end)}
+            start={moment(start).add(-2,'hours')}
+            end={moment(end).add(-2,'hours')}
+            creator={creator}
             viewType={'day'}
+            schedule={schedule}
           />
         );
       })}

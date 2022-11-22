@@ -9,10 +9,10 @@ const AppRoutes = () => {
       <Route path="/">
         <Route path="/dashboard/*" element={<DashboardRoutes />} />
         <Route path="login" element={<Login />} />
-        <Route path="signup/:userId" element={<SignUp />} />
+        <Route path="signup/*" element={<SignUp />} />
         <Route path="get-access" element={<GetAccess />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="resetPassword/:id" element={<ResetPassword />} />
+        <Route path="resetPassword/*" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

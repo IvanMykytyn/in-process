@@ -1,10 +1,9 @@
 import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 // styles
-import cn from 'classnames';
 import css from '../Login/login.module.scss';
 
 import registration from 'assets/images/icons/registration.png';
@@ -17,6 +16,7 @@ import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
 import { UserSignUpProps } from 'models';
 import { userService, NotifyService } from 'services';
+import { getUrlId } from 'utils';
 
 const initialValues = {
   firstName: '',
@@ -25,9 +25,9 @@ const initialValues = {
 };
 
 const SignUp: FC = () => {
-  const params = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, isLoading } = useAppSelector(selectUser);
 
   useEffect(() => {
@@ -46,10 +46,12 @@ const SignUp: FC = () => {
     mode: 'onSubmit',
   });
 
+  console.log(location.pathname);
+
   let submit = async (values: Omit<UserSignUpProps, 'id'>) => {
     try {
-      const userId = params.userId;
-      if (userId) {
+      const userId = getUrlId(location.pathname, '/signup/');
+      if (!!userId) {
         await dispatch(signUpUser({ ...values, id: userId }));
       } else {
         NotifyService.error('Invalid Link');
@@ -62,8 +64,16 @@ const SignUp: FC = () => {
 
   return (
     // TODO change header text
-    <FormLayout dataTestid='signUp-page' header={'Lorem ipsum dolor sit.'} icon={registration}>
-      <form data-testid='signUp-form' className={css['form-wrapper']} onSubmit={handleSubmit(submit)}>
+    <FormLayout
+      dataTestid="signUp-page"
+      header={'Lorem ipsum dolor sit.'}
+      icon={registration}
+    >
+      <form
+        data-testid="signUp-form"
+        className={css['form-wrapper']}
+        onSubmit={handleSubmit(submit)}
+      >
         <Input
           type={'text'}
           label={'First Name'}
@@ -91,13 +101,21 @@ const SignUp: FC = () => {
           errorText={errors.password?.message}
         />
 
-        <Button data-testid='submit-button' type={'submit'} fullWidth disabled={isLoading} loading={isLoading}>
+        <Button
+          data-testid="submit-button"
+          type={'submit'}
+          fullWidth
+          disabled={isLoading}
+          loading={isLoading}
+        >
           Sign Up
         </Button>
 
         <div className={css['navigate-form-wrapper']}>
           Already have an account?
-          <Link data-testid='link-to-login' to={'/login'}>Login</Link>
+          <Link data-testid="link-to-login" to={'/login'}>
+            Login
+          </Link>
         </div>
       </form>
     </FormLayout>

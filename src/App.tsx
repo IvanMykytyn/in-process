@@ -10,7 +10,6 @@ import {AppRoutes} from 'routes';
 import {useAppSelector} from 'hooks';
 import {selectTheme} from "./store";
 
-
 function App() {
     const {newTheme} = useAppSelector(selectTheme);
 

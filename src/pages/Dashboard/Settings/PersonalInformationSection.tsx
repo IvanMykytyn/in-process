@@ -11,7 +11,7 @@ import { SectionButtons } from './SectionButtons';
 import { selectUser, updateMe } from 'store';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { UserInterface, UserFields } from 'models';
-import { validateName } from 'utils';
+import { getFullName, validateName } from 'utils';
 
 // styles
 import scss from './settings.module.scss';
@@ -28,14 +28,13 @@ const PersonalInformationSection: FC = () => {
   const { user, isLoading } = useAppSelector(selectUser);
   const { firstName, lastName, email } = user || ({} as UserInterface);
 
-  const fullName = `${firstName ?? ''} ${lastName ?? ''}`;
+  const fullName = getFullName(firstName, lastName);
   const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors,
     reset,
   } = useForm({
     defaultValues: { firstName, lastName },

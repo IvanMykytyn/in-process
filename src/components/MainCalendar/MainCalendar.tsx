@@ -23,6 +23,7 @@ const MainCalendar: FC<Props> = ({ range, handleClickAway, handleChange, date })
           locale={'en-gb'}
           onChange={handleChange}
           selectRange={range}
+          value={date?.toDate()}
           defaultActiveStartDate={date?.toDate()}
           onClickDay={(value) => {
             handleChange(value);

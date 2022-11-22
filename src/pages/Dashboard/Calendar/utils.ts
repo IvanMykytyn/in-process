@@ -1,8 +1,9 @@
-import { SetStateType } from 'models';
-import { Room } from 'models';
 import moment, { Moment } from 'moment';
+import { v4 as uuidv4 } from 'uuid';
+
+import { ExtendedSingleBooking, IRooms, SetStateType } from 'models';
 import { getDate, getDiffInMinutes } from 'utils';
-import { cellHeight, EventProps, roomWidth, TimeSegments } from './constants';
+import { blankAngleWidth, cellHeight, roomWidth, TimeSegments } from './constants';
 
 export const getTimeSegments = (index: number): TimeSegments => {
   switch (index % 4) {
@@ -22,16 +23,16 @@ export const getTimeSegments = (index: number): TimeSegments => {
 export const getIsCurrentDate = (currentDate: Moment): boolean =>
   moment(currentDate).date() === moment().date();
 
-export const getCurrentEventRoomsPosition = (rooms: Room[], id: string) =>
-  rooms.findIndex((item) => item.id === id);
+export const getCurrentEventRoomsPosition = (rooms: IRooms[], id: number) =>
+  rooms.findIndex((room) => room.id === id);
 
-export const getEventPosition = (rooms: Room[], eventData: EventProps) => {
+export const getEventPosition = (rooms: IRooms[], eventData: ExtendedSingleBooking) => {
   const { start, end } = eventData;
 
   const durationInMinutes = getDiffInMinutes(start, end);
   const { hour: startHours, minutes: startMinutes } = getDate(start);
 
-  const currentEventPosition = getCurrentEventRoomsPosition(rooms, eventData.roomId);
+  const currentEventPosition = getCurrentEventRoomsPosition(rooms, eventData.room.id);
 
   const currentEventTimePosition = getPixelsFromTop(startMinutes, startHours);
   const currentEventHeight = Math.abs(getPixelsFromTop(durationInMinutes));
@@ -59,4 +60,12 @@ export const getPixelsFromTop = (
 export interface CalendarTableProps {
   currentDate: Moment;
   setCurrentDate: SetStateType<Moment>;
+}
+
+export const getDayCalendarWidth = (countOfRooms: number) => {
+  return countOfRooms * roomWidth + blankAngleWidth
+}
+
+export const getTotalColumns = (countOfRooms: number) => {
+  return Array.from({ length: countOfRooms }, (_, i) => uuidv4())
 }
