@@ -16,6 +16,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setItemId, setCapacityId} from "../../store/slices/filter.slice";
 import {getFilteredRooms} from '../../store';
 import {InstrumentsProps, IRooms} from "../../models";
+// import {useStyle} from '../../hooks';
 import {makeStyles} from "@material-ui/styles";
 
 interface FilterProps {
@@ -30,14 +31,13 @@ interface FilterProps {
 const useStyles: any = makeStyles({
     select: {
         "& ul": {
-            backgroundColor: "var(--background)",
-            borderRadius: 15,
+            // backgroundColor:"rgba(197,197,197,0.7)",
+            // borderRadius: 0,
             backdropFilter: "blur(20px)",
-        },
-        "& li": {
-        },
-    },
-});
+            "& svg": {
+                color: "rgba(197,197,197,0.26)"},
+        }
+    }})
 
 const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, name, rooms}) => {
         const [personName, setPersonName] = useState<string[]>([]);
@@ -74,8 +74,8 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
 
         return (
             <div>
-                <FormControl sx={{m: 1, width: 300}}>
-                    <InputLabel id="demo-multiple-checkbox-label">{name}</InputLabel>
+                <FormControl sx={{m: 1, width: 300}} className={css.filter_form}>
+                    <InputLabel id="demo-multiple-checkbox-label" className={css.filter_form__input}>{name}</InputLabel>
                     <Select
                         labelId="demo-multiple-checkbox-label"
                         id="demo-multiple-checkbox"
@@ -84,9 +84,9 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                         onChange={handleChange}
                         input={<OutlinedInput label={name}/>}
                         renderValue={(selected) => selected.join(', ')}
-                        MenuProps={{ classes: { paper: classes.select } }}
+                        MenuProps={{ classes: { paper: classes.select} }}
                     >
-                        <div className={'filter_text'}>
+                        <div className={css.filter_text}>
                             Filter by capacity
                         </div>
                         {filterCapacity && filterCapacity.map((item) => (
@@ -99,7 +99,7 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                                 <ListItemText primary={item.name}/>
                             </MenuItem>
                         ))}
-                        <div className={'filter_text'}>
+                        <div className={css.filter_text}>
                             Filter by items
                         </div>
                         {filterItems.map((item) => (

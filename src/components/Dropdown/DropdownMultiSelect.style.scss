@@ -1,11 +1,32 @@
 @import "../../styles/global.module";
 
+.filter_form{
+  border: none!important;
+  padding: 10px 10px!important;
+  border-radius: 10px!important;
+  box-shadow: $outerBoxShadow!important;
+  background-color: var(--background)!important;
+
+  &__input{
+    color: var(--accent-text-color)!important;
+  }
+}
+
+.filter_text{
+  padding: 10px 10px 10px 20px;
+  font-family: "Montserrat-SemiBold", sans-serif;
+  color: var(--accent-text-color)!important;
+}
+
+
+
+
 .css-2m9kme-MuiFormControl-root {
   width: 300px;
   margin: 0;
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   font-family: "Montserrat-Regular", sans-serif;
   color: var(--accent-text-color) !important;
 }
@@ -14,18 +35,10 @@
   display: none;
 }
 
-.filter_text {
-  padding: 10px 10px 10px 20px;
-  font-family: "Montserrat-SemiBold", sans-serif;
-  font-weight: 300;
-  color: var(--accent-text-color) !important;
-}
-
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border: none !important;
 }
-
 
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
   backdrop-filter: blur(20px) !important;
@@ -37,6 +50,7 @@
   box-shadow: $outerBoxShadow;
   background-color: var(--background);
 }
+
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus{
   border-radius: 10px;
   border: none;
@@ -48,12 +62,6 @@
   left: 0;
   color: var(--accent-text-color);
 }
-
-.css-6hp17o-MuiList-root-MuiMenu-list {
-  border-radius: 15px;
-  backdrop-filter: blur(20px) !important;
-}
-
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
   box-shadow: none;
   border-radius: 15px;
@@ -66,10 +74,15 @@
   font-family: "Montserrat-Regular", sans-serif;
 }
 
+.css-i4bv87-MuiSvgIcon-root{
+  color: var(--text-color)!important;
+}
+
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover {
   backdrop-filter: blur(20px) !important;
 }
 
-.css-6hp17o-MuiList-root-MuiMenu-list {
-  backdrop-filter: blur(20px) !important;
-}
+//.css-6hp17o-MuiList-root-MuiMenu-list {
+//  backdrop-filter: blur(20px) !important;
+//  border: 15px;
+//}
