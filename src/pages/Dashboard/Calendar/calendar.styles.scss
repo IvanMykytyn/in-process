@@ -467,7 +467,7 @@ tr.fc-list-event {
 }
 .fc-dayGridMonth-view {
   .fc-scrollgrid-section {
-    overflow-y: scroll;
+    // overflow-y: scroll;
   }
 }
 
@@ -480,4 +480,7 @@ tr.fc-list-event {
 
 .fc-list-event-time {
   color: var(--text-color);
+}
+.fc-list-day th{
+  z-index: 10;
 }

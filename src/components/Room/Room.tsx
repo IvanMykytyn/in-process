@@ -15,21 +15,19 @@ interface RoomProps {
 };
 
 const Room: FC<RoomProps> = ({room}) => {
-    const {id, name, equipments, maxCapacity, description} = room && room;
+    const {id, name, equipments, maxCapacity, description,roomImg} = room && room;
 
     return (
         <ul>
             <Link to={`/dashboard/booking-form?roomId=${id}`}>
             <li className={cn(css.container)}>
                 <div className={cn(css.photo)}>
-                    {photos.map(photo => photo.id === id ?
-                    <img src={photo.img}
+                    
+                    <img src={roomImg}
                          className={cn(css.container__img)}
                          alt="img" height={150}
                          width={150}/>
-                            :
-                            ''
-                    )}
+                          
                     <div className={cn(css.photo__icons)}>
                         <img src={users} alt="users" width={15} height={15}/>{maxCapacity}
                     </div>

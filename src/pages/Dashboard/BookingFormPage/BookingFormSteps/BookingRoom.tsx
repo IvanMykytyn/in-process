@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { InstrumentsProps } from 'models';
 import { staff } from 'utils/tools/staff';
 import { room1 } from 'assets/images/bg';
+import { getRoomImage } from 'utils/tools/rooms.img';
 
 interface BookingRoomProps {
   id: number;
@@ -13,6 +14,7 @@ interface BookingRoomProps {
   maxCapacity: number;
   equipments: InstrumentsProps[];
   handleChange: (id: number) => void;
+  roomImg: string;
   disabled?: boolean;
   isActive?: boolean;
 }
@@ -26,6 +28,7 @@ const BookingRoom: FC<BookingRoomProps> = ({
   handleChange,
   disabled,
   isActive,
+  roomImg,
 }) => {
   return (
     <div
@@ -37,7 +40,7 @@ const BookingRoom: FC<BookingRoomProps> = ({
       onClick={() => handleChange(id)}
     >
       <div className={css['booking-room__image-section']}>
-        <img src={room1} alt="room" />
+        <img src={roomImg} alt="room" />
       </div>
       <div className={css['booking-room__content']}>
         <div className={css['booking-room__text-content']}>

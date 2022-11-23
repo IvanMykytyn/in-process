@@ -82,13 +82,6 @@ const Rooms: FC = () => {
 
     const {filteredRooms} = useAppSelector(state => state.rooms);
 
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(roomActions.getAllRooms({officeId: 2}))
-        setIsLoading(false);
-    }, [dispatch]);
-
     const {width} = useWindowDimensionsHook();
     return (
         <div className={cn(css.wrapper)}>
