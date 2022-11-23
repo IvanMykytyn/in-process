@@ -2,12 +2,12 @@ import React, { FC, useState } from 'react';
 
 import { AutocompleteRenderInputParams } from '@mui/material';
 
-import { Input, MultipleSelectWithBadges } from 'components';
+import { Checkbox, Input, MultipleSelectWithBadges, Toggle } from 'components';
 import { SectionLayout } from './SectionLayout';
 import { SectionButtons } from './SectionButtons';
 
-import { addUsers, selectUser} from 'store';
-import {useAppDispatch, useAppSelector } from '../../../hooks';
+import { addUsers, selectUser } from 'store';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { validateAddUserEmail, validateArrayOfEmails } from 'utils';
 
 // styles
