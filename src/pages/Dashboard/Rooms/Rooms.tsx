@@ -101,7 +101,6 @@ const Rooms: FC = () => {
                                 />
                             </StyledEngineProvider>
                         </div>
-
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}
@@ -148,7 +147,7 @@ const Rooms: FC = () => {
                                                      key={room.id}
                                                      virtualIndex={room.id}
                                         >
-                                            <Room room={room} key={room.id}/>
+                                            <Room key={room.id} room={room}/>
                                         </SwiperSlide>
                                     )
                             }
@@ -207,7 +206,7 @@ const Rooms: FC = () => {
                                                      key={room.id}
                                                      virtualIndex={room.id}
                                         >
-                                            <Room room={room} key={room.id}/>
+                                            <Room key={room.id} room={room}/>
                                         </SwiperSlide>
                                     )
                             }

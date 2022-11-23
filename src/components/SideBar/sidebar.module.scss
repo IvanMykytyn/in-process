@@ -241,7 +241,6 @@ button {
     transform: translate(-50%, -50%);
     border-radius: 15px;
   }
-
 }
 
 .booked {
@@ -251,7 +250,7 @@ button {
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
-  max-height: calc(100vh - 275px);
+  max-height: calc(100vh - 265px);
   overflow: scroll;
   transition: 0.5s opacity;
   box-shadow: inset 10px 10px 10px var(--background);
