@@ -15,6 +15,7 @@ const SideBarSkeleton: FC<Props> = ({amount}) => {
     return (
         <>
             {
+
                 [...Array(amount)].map((_, index) =>
                     <div className={css.booked__item} key={index}>
                         <ContentLoader
