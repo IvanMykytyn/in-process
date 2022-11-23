@@ -17,6 +17,7 @@ import {SideBarSkeleton} from 'components';
 
 const SideBar: FC = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
+    const [accordionIndex, setAccordionIndex] = useState<number>(-1);
     const {isSideBarOpen, bookingsOwn, ownLoading} = useAppSelector(selectBooking);
     const dispatch = useAppDispatch();
 
@@ -24,6 +25,10 @@ const SideBar: FC = () => {
 
     const handleClick = () => {
         dispatch(toggleSideBar());
+    };
+
+    const toggleAccordion = (index: number) => {
+        setAccordionIndex(index);
     };
 
     const getPageNumber = (id: string) => {
@@ -35,7 +40,17 @@ const SideBar: FC = () => {
     }
 
     useEffect(() => {
-        dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}))
+        dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}));
+    }, []);
+
+    useEffect(() => {
+        function first() {
+            setInterval(function () {
+                dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}));
+            }, 30000);
+        };
+
+        first();
     }, [dispatch, pageNumber])
 
     return (
@@ -53,24 +68,30 @@ const SideBar: FC = () => {
                     </span>
                 <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
                     {
-                        bookingsOwn ?
-                            ownLoading ?
+                        ownLoading ?
+                            <li>
                                 <SideBarSkeleton amount={10}/>
-                                :
-                                bookingsOwn && bookingsOwn.data.map((value) =>
-                                    <BookedRoom key={value.id}
-                                                room={value.room}
-                                                meetingName={value.name}
-                                                creator={value.creator}
-                                                members={value.users}
-                                                endDate={value.end}
-                                                startDate={value.start}
-                                    />
-                                )
+                            </li>
                             :
-                            <h3 className={scss.null}>
-                                You don't have any meetings added yet
-                            </h3>
+                            bookingsOwn ?
+                                bookingsOwn && bookingsOwn.data.map((value, i) =>
+                                    <li key={value.id} onClick={() => toggleAccordion(i)}>
+                                        <BookedRoom room={value.room}
+                                                    meetingName={value.name}
+                                                    creator={value.creator}
+                                                    members={value.users}
+                                                    endDate={value.end}
+                                                    startDate={value.start}
+                                                    isActive={accordionIndex === i}
+                                        />
+                                    </li>
+                                )
+                                :
+                                <li>
+                                    <h3 className={scss.null}>
+                                        You don't have any meetings added yet
+                                    </h3>
+                                </li>
                     }
                 </ul>
             </div>

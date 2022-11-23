@@ -2,11 +2,42 @@
 @import "styles/reset.styles";
 
 
+* {
+  @extend %montserrat-regular-400;
+  // color: var(--accent-text-color);
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    margin: 5px;
+    background-color: var(--background);
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-corner {
+    background-color: var(--background);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--light-blue);
+    border-radius: 10px;
+    transition: opacity 0.5s;
+  }
+}
+
 body {
   line-height: 1.2;
   font-family: sans-serif;
   background-color: var(--background);
   color: var(--accent-text-color);
+
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb {
+    width: 0;
+    height: 0;
+    margin: 0;
+    background-color: var(--background);
+  }
 }
 
 :root {
@@ -23,22 +54,22 @@ body {
   --box-shadow-sidebar-btn-color: #B0B0B099;
   --login-circle: #B0CAE9BF;
 
-  --card-background:#e9e9e9;
+  --card-background: #e9e9e9;
   --card-hover-background: #efefef;
   --more-card-background: #ededed;
 
-  --grid-background:#edededae; 
+  --grid-background: #edededae;
 
-  --light-gray:hsl(0, 0%, 93%);
+  --light-gray: hsl(0, 0%, 93%);
   // p = percent
   --light-gray-180p: hsla(0, 0%, 69%, 0.18);
   --light-gray-280p: hsla(0, 0%, 69%, 0.28);
   --light-gray-370p: hsla(0, 0%, 69%, 0.37);
 
-  --light-gray-910:hsl(0, 0%, 91%);
-  --light-gray-940:hsl(0, 0%, 94%);
+  --light-gray-910: hsl(0, 0%, 91%);
+  --light-gray-940: hsl(0, 0%, 94%);
 
-  --text-color-930:hsl(0, 0%, 93%);
+  --text-color-930: hsl(0, 0%, 93%);
 
   --text-color-700: hsl(0, 1%, 70%);
   --text-color-650: hsl(0, 0%, 65%);
@@ -61,7 +92,7 @@ body {
   --box-shadow-sidebar-btn-color: rgba(30, 30, 30, 0.7);
   --accent-text-color: #878787;
 
-  --card-background:hsl(0, 0%, 12%);
+  --card-background: hsl(0, 0%, 12%);
   --card-hover-background: hsl(0, 0%, 18%);
   --more-card-background: hsl(0, 0%, 10%);
   // p = percent
@@ -69,10 +100,10 @@ body {
   --light-gray-280p: hsla(0, 0%, 31%, 0.28);
   --light-gray-370p: hsla(0, 0%, 31%, 0.37);
 
-  --light-gray-910:hsl(0, 0%, 9%);
+  --light-gray-910: hsl(0, 0%, 9%);
   --light-gray-940: #212121;
 
-  --text-color-930:hsl(0, 0%, 7%);
+  --text-color-930: hsl(0, 0%, 7%);
 
   --text-color-700: hsl(0, 1%, 30%);
   --text-color-650: hsl(0, 0%, 35%);
@@ -80,33 +111,10 @@ body {
   --text-color-400: hsl(0, 0%, 60%);
   --text-color-300: hsl(0, 0%, 70%);
   --text-color-200: hsl(0, 0%, 80%);
-  
+
   --grid-background: hsl(0, 0%, 9%);
 
   --icon-filter: invert(45%) sepia(0%) saturate(3099%) hue-rotate(191deg) brightness(91%) contrast(105%);
-}
-
-* {
-  @extend %montserrat-regular-400;
-  // color: var(--accent-text-color);
-
-  &::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    margin: 5px;
-    background-color: var(--background);
-  }
-
-  &::-webkit-scrollbar-track,
-  &::-webkit-scrollbar-corner {
-    background-color: var(--background);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--light-blue);
-    border-radius: 10px;
-    transition: opacity 0.5s;
-  }
 }
 
 .app {
