@@ -23,6 +23,7 @@ import {
   GetAllBookings,
 } from '../thunk';
 import { NotifyService } from 'services';
+import { formatErrorDate } from 'utils';
 
 interface BookingState {
   isLoading: boolean;
@@ -100,9 +101,15 @@ const bookingSlice = createSlice({
 
         NotifyService.update(state.notifyId, `Successfully booked`, 'success');
       })
-      .addCase(recPost.rejected, (state, action) => {
-        const error = 'Something went Wrong';
-        NotifyService.update(state.notifyId, error, 'error');
+      .addCase(recPost.rejected, (state, {payload}) => {
+        const { message, statusCode } = payload || {};
+
+        let error = message ?? 'Something went Wrong';
+        if (statusCode === 400 && !!message) {
+          error = formatErrorDate(message);
+        }
+
+        NotifyService.update(state.notifyId, error, 'error', 8000);
         state.oneTimeLoading = false;
       })
 
@@ -132,8 +139,14 @@ const bookingSlice = createSlice({
         NotifyService.update(state.notifyId, `Successfully booked`, 'success');
       })
       .addCase(oneTimePost.rejected, (state, { payload }) => {
-        const error = 'Something went Wrong';
-        NotifyService.update(state.notifyId, error, 'error');
+        const { message, statusCode } = payload || {};
+
+        let error = message ?? 'Something went Wrong';
+        if (statusCode === 400 && !!message) {
+          error = formatErrorDate(message);
+        }
+
+        NotifyService.update(state.notifyId, error, 'error', 8000);
         state.oneTimeLoading = false;
       })
 

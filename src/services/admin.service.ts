@@ -7,6 +7,9 @@ const addUsersRequest = (users: Array<string>): PR<void> =>
     usersEmails: users,
   });
 
-const adminService = { addUsersRequest };
+const switchHiddenStatus = (): PR<void> =>
+  axiosService.put(`${urls.admin}/hiddenStatus`);
 
-export {adminService}
+const adminService = { addUsersRequest, switchHiddenStatus };
+
+export { adminService };

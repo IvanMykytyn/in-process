@@ -24,15 +24,13 @@
 
     .MuiStepIcon-text {
       font-size: 0.8rem;
-      color: red;
-      fill: var(--text-color);
+      fill: var(--text-color-700);
     }
 
     .Mui-active,
     .Mui-completed {
       .MuiStepIcon-text {
         fill: var(--background);
-        ;
       }
       color: var(--primary-color) !important;
 
@@ -58,6 +56,11 @@
   .MuiSvgIcon-root{
     path{
       color: var(--icon-color);
+    }
+  }
+  .MuiCheckbox-root{
+    path{
+      color: transparent;
     }
   }
 }
@@ -132,10 +135,6 @@
   &:hover{
     color: var(--primary-color);
   }
-}
-
-.css-i4bv87-MuiSvgIcon-root{
-  // color: var(--accent-text-color);
 }
 
 .days-picker_days-picker__Rzvak .days-picker_day__8JodR{

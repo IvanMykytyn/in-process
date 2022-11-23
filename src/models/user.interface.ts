@@ -37,7 +37,9 @@ interface UserInterface extends UserFields, UserEmailField {
 }
 
 type UserWithToken = UserInterface & { access_token: string };
-
+interface ExtendedUserInterface extends UserInterface {
+    isHidden: boolean
+}
 export type {
     UserInterface,
     UserFields,
@@ -50,4 +52,5 @@ export type {
     changePasswordProps,
     IUserOwn,
     UpdateMeResponse,
+    ExtendedUserInterface,
 };

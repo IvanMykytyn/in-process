@@ -7,9 +7,10 @@ import {StyledEngineProvider} from '@mui/material/styles';
 import cn from 'classnames';
 import css from './rooms.module.scss';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import "swiper/css/scrollbar";
+// import 'swiper/css';
+import 'swiper/swiper.min.css';
+// import 'swiper/css/navigation';
+// import "swiper/css/scrollbar";
 
 import {Room, DropdownMultiSelect} from '../../../components';
 import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../hooks';
