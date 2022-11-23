@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   // <React.StrictMode>
-  <Router>
+  <Router basename='/'>
     <Provider store={store}>
       <App />
     </Provider>
