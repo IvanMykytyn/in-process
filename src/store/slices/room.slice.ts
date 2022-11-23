@@ -9,12 +9,14 @@ interface IRoom {
   rooms: IRooms[];
   filteredRooms: IRooms[];
   soonestBookings: IRoomsWithSoonestBookings | null;
+  isLoading: boolean;
 }
 
 const initialRoomState: IRoom = {
   rooms: [],
   filteredRooms: [],
   soonestBookings: null,
+  isLoading: false,
 };
 
 const roomSlice = createSlice({
@@ -27,13 +29,16 @@ const roomSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
+      .addCase(getAllRooms.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(getAllRooms.fulfilled, (state, action) => {
         const roomsWithImage = action.payload.map((room) => {
           return { ...room, roomImg: getRoomImage(room.id) };
         });
-
+        state.isLoading = false;
         state.rooms = [...roomsWithImage];
-        state.filteredRooms = [...roomsWithImage ];
+        state.filteredRooms = [...roomsWithImage];
       })
       .addCase(getAllSoonestBookings.fulfilled, (state, action) => {
         state.soonestBookings = action.payload;

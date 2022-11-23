@@ -36,17 +36,17 @@ export const filterCapacity: IFilters[] = [
     {
         id: 0,
         name: '0-10',
-        range: [0,10]
+        range: [0, 10]
     },
     {
         id: 1,
         name: '10-20',
-        range: [10,20]
+        range: [10, 20]
     },
     {
         id: 2,
         name: '20-30',
-        range: [20,30]
+        range: [20, 30]
     }
 ]
 export const filterItems: InstrumentsProps[] = [
@@ -77,10 +77,9 @@ export const filterItems: InstrumentsProps[] = [
 ]
 
 const Rooms: FC = () => {
-    const [isLoading,setIsLoading] = useState(true);
-    const {rooms} = useAppSelector(state => state.rooms);
+    // const [isLoading,setIsLoading] = useState(true);
+    const {rooms, filteredRooms,isLoading} = useAppSelector(state => state.rooms);
 
-    const {filteredRooms} = useAppSelector(state => state.rooms);
 
     const {width} = useWindowDimensionsHook();
     return (
@@ -100,7 +99,6 @@ const Rooms: FC = () => {
                                 />
                             </StyledEngineProvider>
                         </div>
-
                     </div>
                     <Swiper
                         className={cn(css.my_swiper)}
@@ -132,15 +130,25 @@ const Rooms: FC = () => {
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {/*{isLoading ? [...new Array(3)].map((_,index)=> <RoomSkeleton key={index}/>) :*/}
-                            { filteredRooms && filteredRooms.filter(room => room.floor === 1).map(room =>
-                                <SwiperSlide className={cn(css.my_swiper__swiperslide)}
-                                             key={room.id}
-                                             virtualIndex={room.id}
-                                >
-                                    <Room room={room} key={room.id}/>
-                                </SwiperSlide>
-                            )}
+                            {
+                                isLoading ?
+                                    [...new Array(8)].map((_, index) =>
+                                        <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                                     key={index}
+                                                     virtualIndex={index}>
+                                            <RoomSkeleton key={index}/>
+                                        </SwiperSlide>
+                                    )
+                                    :
+                                    filteredRooms && filteredRooms.filter(room => room.floor === 1).map(room =>
+                                        <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                                     key={room.id}
+                                                     virtualIndex={room.id}
+                                        >
+                                            <Room key={room.id} room={room}/>
+                                        </SwiperSlide>
+                                    )
+                            }
                         </ul>
                     </Swiper>
                 </li>
@@ -181,15 +189,25 @@ const Rooms: FC = () => {
                         mousewheel={true}
                     >
                         <ul className={cn(css.room_container__rooms)}>
-                            {/*{isLoading ? [...new Array(3)].map((_,index)=> <RoomSkeleton key={index}/>) :*/}
-                            {filteredRooms && filteredRooms.filter(room => room.floor === 2).map(room =>
-                                    <SwiperSlide className={cn(css.my_swiper__swiperslide)}
-                                                 key={room.id}
-                                                 virtualIndex={room.id}
-                                    >
-                                        <Room room={room} key={room.id}/>
-                                    </SwiperSlide>
-                                )}
+                            {
+                                isLoading ?
+                                    [...new Array(8)].map((_, index) =>
+                                        <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                                     key={index}
+                                                     virtualIndex={index}>
+                                            <RoomSkeleton key={index}/>
+                                        </SwiperSlide>
+                                    )
+                                    :
+                                    filteredRooms && filteredRooms.filter(room => room.floor === 2).map(room =>
+                                        <SwiperSlide className={cn(css.my_swiper__swiperslide)}
+                                                     key={room.id}
+                                                     virtualIndex={room.id}
+                                        >
+                                            <Room key={room.id} room={room}/>
+                                        </SwiperSlide>
+                                    )
+                            }
                         </ul>
                     </Swiper>
                 </li>
