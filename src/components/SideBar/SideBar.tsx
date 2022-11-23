@@ -41,7 +41,7 @@ const SideBar: FC = () => {
 
     useEffect(() => {
         dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}));
-    }, []);
+    }, [pageNumber]);
 
     useEffect(() => {
         function first() {
@@ -51,7 +51,7 @@ const SideBar: FC = () => {
         };
 
         first();
-    }, [dispatch, pageNumber])
+    }, [dispatch])
 
     return (
         <div className={isSideBarOpen ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
@@ -98,21 +98,21 @@ const SideBar: FC = () => {
             <div className={scss.sidebar__buttons}>
                 <button
                     className={isSideBarOpen ?
-                        typeof getTotalCountOfPages === 'number' && pageNumber === 1 ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
+                        ownLoading || typeof getTotalCountOfPages === 'number' && pageNumber === 1 ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
                         :
                         `${scss.sidebar__button} ${scss.hide}`
                     }
-                    onClick={() => getPageNumber('-')} disabled={pageNumber === 0}>
+                    onClick={() => getPageNumber('-')} disabled={ownLoading || pageNumber === 0}>
                     <img src={arrowLeft} alt={"arrow left"} height={10} width={10}/>
                 </button>
                 <button
                     className={
                         isSideBarOpen ?
-                            pageNumber === getTotalCountOfPages ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
+                            ownLoading || pageNumber === getTotalCountOfPages ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
                             :
                             `${scss.sidebar__button} ${scss.hide}`
                     }
-                    onClick={() => getPageNumber('+')} disabled={pageNumber === getTotalCountOfPages}>
+                    onClick={() => getPageNumber('+')} disabled={ownLoading || pageNumber === getTotalCountOfPages}>
                     <img src={arrowRight} alt={"arrow right"} height={10} width={10}/>
                 </button>
             </div>

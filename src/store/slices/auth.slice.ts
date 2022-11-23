@@ -132,7 +132,7 @@ const authSlice = createSlice({
 
     builder.addCase(addUsers.rejected, (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload?.message[0] ?? 'Add Users Failed.';
+      state.error = payload?.message ?? 'Add Users Failed.';
       NotifyService.update(state.notifyId, state.error, 'error');
     });
 
