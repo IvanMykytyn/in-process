@@ -16,6 +16,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setItemId, setCapacityId} from "../../store/slices/filter.slice";
 import {getFilteredRooms} from '../../store';
 import {InstrumentsProps, IRooms} from "../../models";
+import {makeStyles} from "@material-ui/styles";
 
 interface FilterProps {
     selected?: string,
@@ -26,11 +27,22 @@ interface FilterProps {
     rooms: IRooms[]
 };
 
+const useStyles: any = makeStyles({
+    select: {
+        "& ul": {
+            backgroundColor: "var(--background)",
+            borderRadius: 15,
+            backdropFilter: "blur(20px)",
+        },
+        "& li": {
+        },
+    },
+});
+
 const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, name, rooms}) => {
         const [personName, setPersonName] = useState<string[]>([]);
-
+        const classes = useStyles();
         const {itemId, capacityId} = useAppSelector(state => state.filterRoom);
-
         const dispatch = useAppDispatch();
 
         useEffect(() => {
@@ -47,7 +59,6 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
         const onChangeItemId = (id: number) => {
             dispatch(setItemId(id))
         };
-
         const onChangeCapacityId = (id: [number, number]) => {
             dispatch(setCapacityId(id))
         };
@@ -60,6 +71,7 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                 typeof value === 'string' ? value.split(',') : value,
             );
         };
+
         return (
             <div>
                 <FormControl sx={{m: 1, width: 300}}>
@@ -72,6 +84,7 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                         onChange={handleChange}
                         input={<OutlinedInput label={name}/>}
                         renderValue={(selected) => selected.join(', ')}
+                        MenuProps={{ classes: { paper: classes.select } }}
                     >
                         <div className={'filter_text'}>
                             Filter by capacity
