@@ -11,6 +11,7 @@ import type {
   UserInterface,
   UserFields,
   UpdateMeResponse,
+  ExtendedUserInterface,
 } from 'models';
 
 import { userService, adminService } from 'services';
@@ -182,7 +183,7 @@ export const resetPassword = createAsyncThunk<
 });
 
 export const getMe = createAsyncThunk<
-  UserInterface,
+  ExtendedUserInterface,
   void,
   {
     rejectValue: ErrorMessageObject;

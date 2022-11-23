@@ -11,7 +11,7 @@
   overflow-y: auto;
   color: var(--accent-text-color);
 
-  &__top{
+  &__top {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -78,8 +78,8 @@
       border-radius: 50%;
       padding: 6px;
       border: 4px solid var(--light-blue);
-      box-shadow: 2px 2px 4px var(--gray), -2px -2px 4px var(--white), inset 1px 1px 2px var(--gray),
-      inset -1px -1px 2px var(--white);
+      box-shadow: 2px 2px 4px var(--gray), -2px -2px 4px var(--white),
+        inset 1px 1px 2px var(--gray), inset -1px -1px 2px var(--white);
     }
   }
 
@@ -152,5 +152,28 @@
 .section-multiple-input {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
-  gap: 15px
+  gap: 15px;
+}
+.is-hidden-toggle__container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  p {
+    font-size: 1rem;
+    color: var(--text-color-500);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+  }
+}
+
+.toggle__container {
+  display: flex;
+  gap: 30px;
+}
+.toggle-hidden {
+  display: flex;
+  gap: 10px;
 }

@@ -2,11 +2,12 @@ import { FC, PropsWithChildren, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { userService } from 'services';
 import { getMe } from 'store';
-import { selectUser } from 'store/slices';
+import { roomActions, selectRooms, selectUser } from 'store/slices';
 
 import { useAppDispatch, useAppSelector} from 'hooks';
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
+  const { rooms } = useAppSelector(selectRooms);
   const { user } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
@@ -14,6 +15,13 @@ const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
     if (userService.isLoggedIn() && !user) {
       dispatch(getMe());
     }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (rooms.length === 0) {
+      dispatch(roomActions.getAllRooms({ officeId: 2 }));
+    }
+    // eslint-disable-next-line
   }, [dispatch]);
 
   if (!userService.isLoggedIn()) {

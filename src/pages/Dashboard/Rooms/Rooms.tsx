@@ -7,9 +7,10 @@ import {StyledEngineProvider} from '@mui/material/styles';
 import cn from 'classnames';
 import css from './rooms.module.scss';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import "swiper/css/scrollbar";
+// import 'swiper/css';
+import 'swiper/swiper.min.css';
+// import 'swiper/css/navigation';
+// import "swiper/css/scrollbar";
 
 import {Room, DropdownMultiSelect} from '../../../components';
 import {useAppDispatch, useAppSelector, useWindowDimensionsHook} from '../../../hooks';
@@ -76,12 +77,9 @@ export const filterItems: InstrumentsProps[] = [
 ]
 
 const Rooms: FC = () => {
-    const {rooms, filteredRooms, isLoading} = useAppSelector(state => state.rooms);
-    const dispatch = useAppDispatch();
+    // const [isLoading,setIsLoading] = useState(true);
+    const {rooms, filteredRooms,isLoading} = useAppSelector(state => state.rooms);
 
-    useEffect(() => {
-        dispatch(roomActions.getAllRooms({officeId: 2}))
-    }, [dispatch]);
 
     const {width} = useWindowDimensionsHook();
     return (

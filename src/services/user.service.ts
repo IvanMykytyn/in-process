@@ -9,6 +9,7 @@ import type {
   UserIdField,
   UserFields,
   UpdateMeResponse,
+  ExtendedUserInterface,
   // UserUpdateProps,
 } from 'models';
 import { axiosService } from './axios.service';
@@ -33,7 +34,7 @@ const resetPasswordRequest = ({ id, newPassword }: ResetPasswordProps): PR<void>
 const changePasswordRequest = ({ newPassword }: ChangePasswordProps): PR<void> =>
   axiosService.put(`${urls.users}/changePassword`, { newPassword });
 
-const getMeRequest = (): PR<UserInterface> => axiosService.get(`${urls.users}/me`);
+const getMeRequest = (): PR<ExtendedUserInterface> => axiosService.get(`${urls.users}/me`);
 
 const updateMeRequest = (userData: UserFields): PR<UpdateMeResponse> =>
   axiosService.put(`${urls.users}/me`, userData);
