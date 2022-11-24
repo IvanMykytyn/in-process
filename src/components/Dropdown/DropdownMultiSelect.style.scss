@@ -1,5 +1,22 @@
 @import "../../styles/global.module";
 
+//.filter_form{
+//  border: none!important;
+//  padding: 10px 10px!important;
+//  border-radius: 10px!important;
+//  box-shadow: $outerBoxShadow!important;
+//  background-color: var(--background)!important;
+//
+//  &__input{
+//    color: var(--accent-text-color)!important;
+//  }
+//}
+//.filter_text{
+//  padding: 10px 20px;
+//  font-family: "Montserrat-SemiBold", sans-serif;
+//  color: var(--accent-text-color)!important;
+//}
+
 .css-2m9kme-MuiFormControl-root {
   width: 300px;
   margin: 0;
@@ -21,6 +38,10 @@
   color: var(--accent-text-color) !important;
 }
 
+.css-i4bv87-MuiSvgIcon-root{
+  color: var(--accent-text-color) !important;
+}
+
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border: none !important;
@@ -37,6 +58,7 @@
   box-shadow: $outerBoxShadow;
   background-color: var(--background);
 }
+
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus{
   border-radius: 10px;
   border: none;

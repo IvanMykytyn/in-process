@@ -23,35 +23,33 @@ import room from './room.svg';
 import window from './window.svg';
 import conditioner from './conditioner.svg';
 import logout from './logout.svg';
-import sun from './sun.svg';
-import moon from './moon.svg';
+import print from './print.svg';
 
 export {
-    keyIcon,
-    arrowLeft,
-    arrowRight,
-    user,
-    setting,
-    search,
-    clock,
-    calendar,
-    staffIcon,
-    board,
-    tv,
-    marker,
-    users,
-    plug,
-    edit,
-    exit,
-    trash,
-    details,
-    people,
-    creator,
-    location,
-    room,
-    conditioner,
-    window,
-    logout,
-    sun,
-    moon
+  keyIcon,
+  arrowLeft,
+  arrowRight,
+  user,
+  setting,
+  search,
+  clock,
+  calendar,
+  staffIcon,
+  board,
+  tv,
+  marker,
+  users,
+  plug,
+  edit,
+  exit,
+  trash,
+  details,
+  people,
+  creator,
+  location,
+  room,
+  conditioner,
+  window,
+  logout,
+  print
 };

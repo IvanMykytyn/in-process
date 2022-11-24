@@ -23,7 +23,7 @@ const DashboardRoutes: FC = () => {
                 }
             >
                 <Route index element={<Rooms/>}/>
-                <Route path="map" element={<Map/>}/>
+                <Route path="rooms" element={<Map/>}/>
                 <Route path="timeline" element={<Timeline/>}/>
                 <Route path="calendar" element={<Calendar/>}/>
                 <Route path="settings" element={<Settings/>}/>
