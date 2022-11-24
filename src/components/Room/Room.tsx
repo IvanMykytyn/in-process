@@ -24,6 +24,7 @@ const Room: FC<RoomProps> = ({room}) => {
                 <div className={cn(css.photo)}>
                     {photos.map(photo => photo.id === id ?
                     <img src={photo.img}
+                         key={photo.id}
                          className={cn(css.container__img)}
                          alt="img" height={150}
                          width={150}/>
@@ -59,8 +60,8 @@ const Room: FC<RoomProps> = ({room}) => {
                         )}
                 </ul>
                 {/*<div className={cn(css.pre_button)}>*/}
-                {/*    <Link to={'/dashboard/bookig-form'}>*/}
-                {/*        <button className={cn(css.pre_button__button)}>Book</button>*/}
+                {/*    <Link to={'/dashboard/timeline'}>*/}
+                {/*        <button className={cn(css.pre_button__button)}>Soonest Booking</button>*/}
                 {/*    </Link>*/}
                 {/*</div>*/}
             </li>

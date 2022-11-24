@@ -33,9 +33,10 @@ const useStyles: any = makeStyles({
         "& ul": {
             // backgroundColor:"rgba(197,197,197,0.7)",
             // borderRadius: 0,
-            backdropFilter: "blur(20px)",
+            // backdropFilter: "blur(20px)",
             "& svg": {
-                color: "rgba(197,197,197,0.26)"},
+                // color: "rgba(197,197,197,0.26)"
+                },
         }
     }})
 

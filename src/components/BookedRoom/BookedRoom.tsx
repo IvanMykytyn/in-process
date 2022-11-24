@@ -34,7 +34,7 @@ const BookedRoom: FC<Props> = ({
     const endTime = getRoomEndDateTime.diff(getCurrentDateTime, 'millisecond');
 
     return (
-        <ul className={
+        <div className={
             endTime === 0 ?
                 `${css.booked__item} ${css.red}`
                 :
@@ -43,11 +43,11 @@ const BookedRoom: FC<Props> = ({
                     :
                     `${css.booked__item} ${css.glowing}`
         }>
-            <li className={css.booked__info}>
-                <div>
+            <div className={css.booked__info}>
+                <span>
                     {meetingName}
-                </div>
-            </li>
+                </span>
+            </div>
             <ul className={css.booked__time}>
                 <li className={css.booked__info}>
                     <img src={calendar} alt="Data" height={15} width={15}/>
@@ -70,7 +70,7 @@ const BookedRoom: FC<Props> = ({
                     }
                 </li>
             </ul>
-            <li className={css['booked__all-information']}>
+            <div className={css['booked__all-information']}>
                 <ul className={css['booked__information-wrapper']}>
                     <li className={css['booked__all-information']}>
                         <span className={css['booked__information-name']}>
@@ -116,15 +116,15 @@ const BookedRoom: FC<Props> = ({
                             {endDate}
                         </Moment>
                     </li>
-                    <ul className={css.booked__staff}>
-                        <li className={css['booked__all-information']} style={{display: 'flex', gridGap: '5px'}}>
+                    <div className={css.booked__staff}>
+                        <div className={css['booked__all-information']} style={{display: 'flex', gridGap: '5px'}}>
                             <span className={css['booked__information-name']}>
                             Equipments:
                             </span>
                             {
                                 staff.map((tool) =>
                                     equipments.map(equipment => equipment.id === tool.id ?
-                                        <li key={tool.id}>
+                                        <div key={tool.id}>
                                             {
                                                 <img
                                                     src={tool.img}
@@ -132,37 +132,37 @@ const BookedRoom: FC<Props> = ({
                                                     width={15}
                                                     height={15}/>
                                             }
-                                        </li>
+                                        </div>
                                         :
                                         ''
                                     )
                                 )
                             }
-                        </li>
-                    </ul>
-                    <ul>
-                        <li className={css['booked__all-information']}>
+                        </div>
+                    </div>
+                    <div>
+                        <div className={css['booked__all-information']}>
                             <span className={css['booked__information-name']}>
                                 Members:
                             </span>
-                        </li>
+                        </div>
                         <li>
-                            <ul className={css.booked__list}>
+                            <div className={css.booked__list}>
                                 {
                                     members.map(user =>
-                                            <li key={user.id} className={css['booked__information-member']}>
+                                            <div key={user.id} className={css['booked__information-member']}>
                                     <span>
                                         {user.email}
                                     </span>
-                                            </li>
+                                            </div>
                                     )
                                 }
-                            </ul>
+                            </div>
                         </li>
-                    </ul>
+                    </div>
                 </ul>
-            </li>
-        </ul>
+            </div>
+        </div>
     );
 };
 
