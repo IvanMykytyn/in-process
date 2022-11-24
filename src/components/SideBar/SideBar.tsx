@@ -47,7 +47,7 @@ const SideBar: FC = () => {
         function first() {
             setInterval(function () {
                 dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}));
-            }, 30000);
+            }, 60000);
         };
 
         first();
@@ -66,23 +66,23 @@ const SideBar: FC = () => {
                         <img src={clock} alt="clock" width={15} height={15} color={'red'}/>
                         <Moment locale={'uk'} local={true} format={`LLL`} interval={30000}/>
                     </span>
-                <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
-                    {
-                        ownLoading ?
-                            <li>
-                                <SideBarSkeleton amount={10}/>
-                            </li>
-                            :
-                            bookingsOwn ?
-                                bookingsOwn && bookingsOwn.data.map((value, i) =>
-                                    <li key={value.id} onClick={() => toggleAccordion(i)}>
+                {
+                    ownLoading ?
+                        <ul className={isSideBarOpen ? `${scss.booked__skeleton}` : `${scss.booked} ${scss.hide}`}>
+                            <SideBarSkeleton amount={10}/>
+                        </ul>
+                        :
+                        <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
+                            {bookingsOwn ?
+                                bookingsOwn && bookingsOwn.data.map((value) =>
+                                    <li key={value.id} onClick={() => toggleAccordion(value.id)}>
                                         <BookedRoom room={value.room}
                                                     meetingName={value.name}
                                                     creator={value.creator}
                                                     members={value.users}
                                                     endDate={value.end}
                                                     startDate={value.start}
-                                                    isActive={accordionIndex === i}
+                                                    isActive={accordionIndex === value.id}
                                         />
                                     </li>
                                 )
@@ -92,8 +92,9 @@ const SideBar: FC = () => {
                                         You don't have any meetings added yet
                                     </h3>
                                 </li>
-                    }
-                </ul>
+                            }
+                        </ul>
+                }
             </div>
             <div className={scss.sidebar__buttons}>
                 <button

@@ -13,7 +13,7 @@ const SectionButtons: FC<SectionButtonsProps> = ({ isLoading, handleCancel }) =>
   return (
     <div className={scss['section__buttons']}>
       <div>
-        <Button type="submit" variant="contained" loading={isLoading}>
+        <Button type="submit" loading={isLoading}>
           Save
         </Button>
         <Button type="reset" disabled={isLoading} onClick={handleCancel}>
