@@ -10,7 +10,8 @@ export interface IRooms {
     floor: number,
     maxCapacity: number,
     currentBooking: [],
-    equipments: InstrumentsProps[]
+    equipments: InstrumentsProps[],
+    roomImg: string,
 };
 
 export interface Room {

@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const truncate = (str: string, maxlength: number): string => {
   return str.length > maxlength ? str.slice(0, maxlength - 1) + '…' : str;
 };
@@ -33,4 +35,21 @@ const getFullName = (firstName: string, lastName: string) => {
 const getUrlId = (path: string, replacePart: string) => {
   return path.replace(replacePart, '');
 };
-export { truncate, colorFromString, getInitials, getFullName, getUrlId };
+
+const formatErrorDate = (message: string): string => {
+  // Overlapping on dates 2022-11-24 15:25:00+00,2022-11-24 18:35:00+00
+  const dates = message.replace('Overlapping on dates ', '').split(',');
+  const formattedDates = dates.map((date) => {
+    return moment(date).format('llll');
+  });
+  return 'Overlapping on dates ' + formattedDates.join(', ');
+};
+
+export {
+  truncate,
+  colorFromString,
+  getInitials,
+  getFullName,
+  getUrlId,
+  formatErrorDate,
+};

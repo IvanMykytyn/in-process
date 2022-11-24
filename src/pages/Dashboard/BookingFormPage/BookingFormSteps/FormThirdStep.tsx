@@ -8,20 +8,12 @@ import { users as usersIcon } from 'assets/images/icons';
 import { Button } from 'components/Button/Button';
 import { BookingRoom } from './BookingRoom';
 import { staff } from 'utils/tools/staff';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { roomActions } from 'store/slices/room.slice';
+import { useAppSelector } from 'hooks';
+
 
 const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) => {
   const { rooms } = useAppSelector((state) => state.rooms);
 
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (rooms.length === 0) {
-      dispatch(roomActions.getAllRooms({ officeId: 2 }));
-    }
-    // eslint-disable-next-line
-  }, [dispatch]);
 
   const handleChangeRoom = (id: number) => {
     setValues({ ...values, roomId: id });
@@ -29,8 +21,8 @@ const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) =>
 
   const bookingRooms = useMemo(() => {
     return rooms.map((room) => {
-      const { id, name, floor, maxCapacity, equipments } = room;
-      return { id, name, floor, maxCapacity, equipments };
+      const { id, name, floor, maxCapacity, equipments, roomImg } = room;
+      return { id, name, floor, maxCapacity, equipments, roomImg };
     });
   }, [rooms]);
 
@@ -38,7 +30,7 @@ const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) =>
     return rooms.find((room) => room.id === values.roomId);
   }, [rooms, values.roomId]);
 
-  const { id, description, name, floor, maxCapacity, equipments } =
+  const { id, description, name, floor, maxCapacity, equipments, roomImg } =
     useMemo(() => {
       return currentBookingRoom;
     }, [currentBookingRoom]) || {};
@@ -47,13 +39,7 @@ const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) =>
     <div className={cn(css['third-step-form'])}>
       <div className={css['booking-room__left-side']}>
         <div className={css.booking__image}>
-          <img
-            className={css['booking-img']}
-            src={
-              'https://images.squarespace-cdn.com/content/v1/540f5515e4b06c4e8629c108/1600932097980-NHBGP5WD2F7YIK8ZFHRA/conference-room-boardroom-business-setup.jpg?format=2500w'
-            }
-            alt="room"
-          />
+          <img className={css['booking-img']} src={roomImg} alt="room" />
           <div className={css['booking-room__capacity']}>
             <img src={usersIcon} alt={'users-icon'} />
             <p>{maxCapacity} capacity</p>
@@ -83,17 +69,17 @@ const FormThirdStep: FC<BuildStepProps> = ({ handleBack, values, setValues }) =>
         </div>
       </div>
       <div className={css['booking-room__right-side']}>
-          <div className={css['rooms-picker-wrapper']}>
-            <div className={css['rooms-picker']}>
-              {bookingRooms.map((room) => (
-                <BookingRoom
-                  {...room}
-                  key={room.id}
-                  handleChange={handleChangeRoom}
-                  isActive={values.roomId === room.id}
-                />
-              ))}
-            </div>
+        <div className={css['rooms-picker-wrapper']}>
+          <div className={css['rooms-picker']}>
+            {bookingRooms.map((room) => (
+              <BookingRoom
+                {...room}
+                key={room.id}
+                handleChange={handleChangeRoom}
+                isActive={values.roomId === room.id}
+              />
+            ))}
+          </div>
         </div>
         <div className={css.buttons}>
           <Button type={'button'} onClick={handleBack}>

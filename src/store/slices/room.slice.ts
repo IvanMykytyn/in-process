@@ -1,53 +1,59 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import {IRooms, IRoomsWithSoonestBookings, ISoonestBookings} from "models";
-import {getAllRooms, getAllSoonestBookings} from '../thunk';
-import { RootState } from "store/store";
+import { IRooms, IRoomsWithSoonestBookings, ISoonestBookings } from 'models';
+import { getAllRooms, getAllSoonestBookings } from '../thunk';
+import { RootState } from 'store/store';
+import { getRoomImage } from 'utils/tools/rooms.img';
 
 interface IRoom {
-    rooms: IRooms[],
-    filteredRooms: IRooms[],
-    soonestBookings: IRoomsWithSoonestBookings | null,
-};
+  rooms: IRooms[];
+  filteredRooms: IRooms[];
+  soonestBookings: IRoomsWithSoonestBookings | null;
+  isLoading: boolean;
+}
 
 const initialRoomState: IRoom = {
-    rooms: [],
-    filteredRooms: [],
-    soonestBookings: null
+  rooms: [],
+  filteredRooms: [],
+  soonestBookings: null,
+  isLoading: false,
 };
 
 const roomSlice = createSlice({
-    name: 'roomSlice',
-    initialState: initialRoomState,
-    reducers: {
-        getFilteredRooms(state, action) {
-            state.filteredRooms = action.payload;
-        }
+  name: 'roomSlice',
+  initialState: initialRoomState,
+  reducers: {
+    getFilteredRooms(state, action) {
+      state.filteredRooms = action.payload;
     },
-    extraReducers: builder =>
-        builder
-            .addCase(getAllRooms.fulfilled, (state, action) => {
-                state.rooms = action.payload;
-                state.filteredRooms = action.payload;
-            })
-            .addCase(getAllSoonestBookings.fulfilled,(state, action) => {
-                state.soonestBookings = action.payload;
-            })
-
+  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getAllRooms.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllRooms.fulfilled, (state, action) => {
+        const roomsWithImage = action.payload.map((room) => {
+          return { ...room, roomImg: getRoomImage(room.id) };
+        });
+        state.isLoading = false;
+        state.rooms = [...roomsWithImage];
+        state.filteredRooms = [...roomsWithImage];
+      })
+      .addCase(getAllSoonestBookings.fulfilled, (state, action) => {
+        state.soonestBookings = action.payload;
+      }),
 });
 
-const {reducer: roomReducer, actions: {getFilteredRooms}} = roomSlice;
+const {
+  reducer: roomReducer,
+  actions: { getFilteredRooms },
+} = roomSlice;
 
 const selectRooms = (state: RootState) => state.rooms;
 const roomActions = {
-    getAllRooms,
-    getAllSoonestBookings
+  getAllRooms,
+  getAllSoonestBookings,
 };
 
-export {
-    roomReducer,
-    roomActions,
-    selectRooms,
-    initialRoomState,
-    getFilteredRooms
-};
+export { roomReducer, roomActions, selectRooms, initialRoomState, getFilteredRooms };

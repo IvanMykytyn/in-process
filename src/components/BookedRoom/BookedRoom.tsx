@@ -1,10 +1,10 @@
-import React, {DetailedHTMLProps, FC, HTMLAttributes, SetStateAction} from "react";
+import React, {FC} from "react";
 import Moment from "react-moment";
 import moment from 'moment';
 
 import css from './BookedRoom.module.scss';
 
-import {clock, calendar, staffIcon, board, tv, marker} from '../../assets/images/icons';
+import {clock, calendar} from '../../assets/images/icons';
 import {IRooms, IUserOwn} from '../../models'
 import {staff} from '../../utils/tools/staff';
 
@@ -15,16 +15,19 @@ interface Props {
     creator: IUserOwn;
     members: IUserOwn[];
     meetingName: string;
+    isActive: boolean;
 }
 
 const BookedRoom: FC<Props> = ({
                                    room: {id, name, floor, maxCapacity, equipments},
                                    endDate,
                                    startDate,
-                                   creator: {firstName, lastName, email},
+                                   creator: {email},
                                    members,
-                                   meetingName
+                                   meetingName,
+                                   isActive
                                }) => {
+
 
     const getCurrentDateTime = moment();
     const getRoomStartDateTime = moment(startDate);
@@ -36,10 +39,10 @@ const BookedRoom: FC<Props> = ({
     return (
         <div className={
             endTime === 0 ?
-                `${css.booked__item} ${css.red}`
+                `${isActive && `${css.booked__item} ${css.active}` || `${css.booked__item}`} ${css.red}`
                 :
                 startTime >= 0 ?
-                    `${css.booked__item}`
+                    `${isActive && `${css.booked__item} ${css.active}` || `${css.booked__item}`}`
                     :
                     `${css.booked__item} ${css.glowing}`
         }>

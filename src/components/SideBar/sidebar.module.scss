@@ -241,17 +241,17 @@ button {
     transform: translate(-50%, -50%);
     border-radius: 15px;
   }
-
 }
 
-.booked {
+.booked,
+.booked__skeleton {
   padding: 10px;
   width: 100%;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   grid-gap: 15px;
-  max-height: calc(100vh - 275px);
+  max-height: calc(100vh - 265px);
   overflow: scroll;
   transition: 0.5s opacity;
   box-shadow: inset 10px 10px 10px var(--background);
@@ -261,6 +261,10 @@ button {
     width: 0;
     background-color: inherit;
   }
+}
+
+.booked__skeleton{
+  //padding: 5px;
 }
 
 .null {

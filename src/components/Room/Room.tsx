@@ -1,21 +1,21 @@
-import React, {FC} from 'react';
-import {Link} from 'react-router-dom';
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 // styles
 import cn from 'classnames';
 import css from './room.module.scss';
 
-import {IRooms} from '../../models';
-import {staff} from '../../utils/tools/staff';
-import {users} from '../../assets/images/icons';
-import {photos} from '../../utils/tools/rooms.img';
+import { IRooms } from '../../models';
+import { staff } from '../../utils/tools/staff';
+import { users } from '../../assets/images/icons';
+import { photos } from '../../utils/tools/rooms.img';
 
 interface RoomProps {
-    room: IRooms
-};
+  room: IRooms;
+}
 
-const Room: FC<RoomProps> = ({room}) => {
-    const {id, name, equipments, maxCapacity, description} = room && room;
+const Room: FC<RoomProps> = ({ room }) => {
+  const { id, name, equipments, maxCapacity, description, roomImg } = room && room;
 
     return (
         <ul>
@@ -70,4 +70,4 @@ const Room: FC<RoomProps> = ({room}) => {
     );
 }
 
-export {Room};
+export { Room };

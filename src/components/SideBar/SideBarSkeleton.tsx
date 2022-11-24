@@ -1,7 +1,8 @@
 import {FC} from "react";
 import ContentLoader from "react-content-loader";
-import useLocalStorage from "use-local-storage";
+
 import css from '../BookedRoom/BookedRoom.module.scss';
+
 import {useAppSelector} from "../../hooks";
 import {selectTheme} from "../../store";
 
@@ -15,8 +16,9 @@ const SideBarSkeleton: FC<Props> = ({amount}) => {
     return (
         <>
             {
+
                 [...Array(amount)].map((_, index) =>
-                    <div className={css.booked__item} key={index}>
+                    <li className={`${css.booked__item}`} key={index}>
                         <ContentLoader
                             speed={2}
                             width={279}
@@ -30,7 +32,7 @@ const SideBarSkeleton: FC<Props> = ({amount}) => {
                             <rect x="0" y="40" rx="5" ry="5" width="115" height="10"/>
                             <rect x="200" y="40" rx="5" ry="5" width="70" height="10"/>
                         </ContentLoader>
-                    </div>
+                    </li>
                 )
             }
         </>

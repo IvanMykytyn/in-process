@@ -108,15 +108,17 @@ const BookingFormPage: FC = () => {
           ))}
         </Stepper>
       </div>
-      {buildStep(activeStep)({
-        activeStep,
-        handleBack,
-        handleNext,
-        values,
-        setValues,
-        errors,
-        setErrors,
-      })}
+      <div className={css['stepper-form']}>
+        {buildStep(activeStep)({
+          activeStep,
+          handleBack,
+          handleNext,
+          values,
+          setValues,
+          errors,
+          setErrors,
+        })}
+      </div>
     </form>
   );
 };

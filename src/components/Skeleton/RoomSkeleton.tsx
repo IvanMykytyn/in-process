@@ -1,25 +1,36 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const RoomSkeleton = () => (
-    <ContentLoader
-    speed={2}
-    width={300}
-    height={410}
-    viewBox="0 0 300 410"
-    backgroundColor="#b5b5b5"
-    foregroundColor="#ecebeb"
-  >
-    <rect x="135" y="66" rx="0" ry="0" width="0" height="1" />
-    <rect x="36" y="187" rx="5" ry="5" width="116" height="23" />
-    <rect x="36" y="223" rx="5" ry="5" width="237" height="32" />
-    <rect x="40" y="261" rx="2" ry="2" width="15" height="15" />
-    <rect x="97" y="261" rx="2" ry="2" width="15" height="15" />
-    <rect x="68" y="261" rx="2" ry="2" width="15" height="15" />
-    <rect x="127" y="262" rx="2" ry="2" width="15" height="15" />
-    <rect x="157" y="261" rx="2" ry="2" width="15" height="15" />
-    <rect x="35" y="3" rx="5" ry="5" width="247" height="174" />
-  </ContentLoader>
-)
+import css from '../Room/room.module.scss';
+import cn from "classnames";
+import {useAppSelector} from "../../hooks";
+import {selectTheme} from "../../store";
+
+const RoomSkeleton = () => {
+    const {newTheme} = useAppSelector(selectTheme);
+
+    return (
+        <div className={cn(css.container)}>
+            <ContentLoader
+                speed={2}
+                width={240}
+                height={245}
+                viewBox="0 0 240 245"
+                backgroundColor={newTheme === "light" ? "rgba(197,197,197,0.7)" : "#3E3E3E"}
+                foregroundColor={newTheme === "light" ? "rgba(215,215,215,0.7)" : "rgba(109,109,109,0.5)"}
+            >
+                <rect x="0" y="66" rx="0" ry="0" width="0" height="1"/>
+                <rect x="0" y="170" rx="5" ry="5" width="116" height="18"/>
+                <rect x="0" y="200" rx="5" ry="5" width="220" height="20"/>
+                <rect x="0" y="230" rx="2" ry="2" width="15" height="15"/>
+                <rect x="57" y="230" rx="2" ry="2" width="15" height="15"/>
+                <rect x="28" y="230" rx="2" ry="2" width="15" height="15"/>
+                <rect x="87" y="230" rx="2" ry="2" width="15" height="15"/>
+                <rect x="117" y="230" rx="2" ry="2" width="15" height="15"/>
+                <rect x="0" y="3" rx="5" ry="5" width="220" height="160"/>
+            </ContentLoader>
+        </div>
+    )
+}
 
 export {RoomSkeleton};

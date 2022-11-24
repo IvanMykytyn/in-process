@@ -34,10 +34,13 @@ interface ResetPasswordProps {
 
 interface UserInterface extends UserFields, UserEmailField {
     role: 'user' | 'admin';
+    isHidden?: boolean
 }
 
 type UserWithToken = UserInterface & { access_token: string };
-
+interface ExtendedUserInterface extends UserInterface {
+    isHidden: boolean
+}
 export type {
     UserInterface,
     UserFields,
@@ -50,4 +53,5 @@ export type {
     changePasswordProps,
     IUserOwn,
     UpdateMeResponse,
+    ExtendedUserInterface,
 };
