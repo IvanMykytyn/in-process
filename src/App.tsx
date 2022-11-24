@@ -12,7 +12,6 @@ import {selectTheme} from "./store";
 
 function App() {
     const {newTheme} = useAppSelector(selectTheme);
-
     return (
         <div role={'application'} className={'app'}
              data-theme={newTheme}>

@@ -30,7 +30,6 @@ const ForgotPassword: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     defaultValues: {
       email: '',
@@ -44,7 +43,7 @@ const ForgotPassword: FC = () => {
       await dispatch(forgotPassword({ email }));
       // navigate('/login');
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

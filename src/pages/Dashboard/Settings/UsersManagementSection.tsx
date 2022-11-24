@@ -34,7 +34,7 @@ const UsersManagementSection: FC = () => {
       await dispatch(addUsers(userEmails));
       if (!serverError) clearField();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

@@ -21,7 +21,7 @@ const DashboardLayout: FC = () => {
                         </div>
                         <ul className={cn(css.bookmarks)}>
                             <li className={cn(css.bookmarks__item)}>
-                                <Link to={'/dashboard/map'}>
+                                <Link to={'/dashboard/rooms'}>
                                     <button className={cn(css.bookmarks__btn)}
                                             type={'button'}>
                                         Rooms

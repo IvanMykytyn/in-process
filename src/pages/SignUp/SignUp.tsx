@@ -46,8 +46,6 @@ const SignUp: FC = () => {
     mode: 'onSubmit',
   });
 
-  console.log(location.pathname);
-
   let submit = async (values: Omit<UserSignUpProps, 'id'>) => {
     try {
       const userId = getUrlId(location.pathname, '/signup/');
@@ -58,15 +56,14 @@ const SignUp: FC = () => {
         navigate('/login');
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
   return (
-    // TODO change header text
     <FormLayout
       dataTestid="signUp-page"
-      header={'Lorem ipsum dolor sit.'}
+      header={'Sign Up'}
       icon={registration}
     >
       <form

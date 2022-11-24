@@ -4,7 +4,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   IBookingRecurring,
   IBookingPut,
-  IBookingDelete,
   IBookingOneTime,
   IBookingOneTimePut,
   IBookingOwn,

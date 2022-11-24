@@ -48,7 +48,7 @@ const Login: FC = () => {
     try {
       await dispatch(loginUser({ email, password }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

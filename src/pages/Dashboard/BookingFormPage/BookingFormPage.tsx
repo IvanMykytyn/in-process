@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Step, StepLabel, Stepper } from '@mui/material';
 import moment, { Moment } from 'moment';
@@ -15,7 +15,7 @@ import { FormSecondStep } from './BookingFormSteps/FormSecondStep';
 import { IBookingOneTime, IBookingRecurring, PatternType } from 'models';
 import { getNextDay } from 'utils';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { bookingActions, selectRooms } from 'store';
+import { bookingActions, selectBooking, selectRooms } from 'store';
 
 export interface ValuesType {
   name: string;
@@ -47,6 +47,7 @@ const BookingFormPage: FC = () => {
   const isValidParamsDate = !!paramsDate && moment(paramsDate).isValid();
   const defaultParamsDate = isValidParamsDate ? moment(paramsDate) : moment();
   const { rooms } = useAppSelector(selectRooms);
+  const { isSuccess } = useAppSelector(selectBooking);
 
   const initialValues: ValuesType = {
     name: '',
@@ -82,20 +83,23 @@ const BookingFormPage: FC = () => {
     try {
       if (Object.keys(errors).length === 0) {
         if (!values.isRecurring) {
-          // TODO change redirect
           const booking = getOneTimeBooking(values);
           await dispatch(bookingActions.oneTimePost({ booking }));
-          navigate(-1);
         } else {
           const booking = getRecurringBooking(values);
           await dispatch(bookingActions.recPost({ booking }));
-          navigate(-1);
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(-1);
+    }
+  }, [navigate, isSuccess]);
 
   return (
     <form className={css.booking} onSubmit={handleBookingFormSubmit}>
@@ -153,9 +157,10 @@ const buildStep = (activeStep: number) => {
 const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
   const { name, description, roomId, users } = values;
 
-  const date = values.startDate.add(2, 'hours').toISOString(false).slice(0, 10);
-  const startTime = values.startTime.add(1, 'hours').toISOString().slice(10);
-  const endTime = values.endTime.add(1, 'hours').toISOString().slice(10);
+  
+  const date = values.startDate.clone().add(2, 'hours').toISOString(false).slice(0, 10);
+  const startTime = values.startTime.clone().add(1, 'hours').toISOString().slice(10);
+  const endTime = values.endTime.clone().add(1, 'hours').toISOString().slice(10);
 
   const start = date + startTime;
   const end = date + endTime;
@@ -173,10 +178,10 @@ const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
 const getRecurringBooking = (values: ValuesType): IBookingRecurring => {
   const { name, description, roomId, users, pattern } = values;
 
-  const since = values.startDate.add(2, 'hours').toISOString();
-  const until = values.endDate.add(2, 'hours').toISOString();
-  const start = values.startTime.add(-2, 'hours').format('HH:mm');
-  const end = values.endTime.add(-2, 'hours').format('HH:mm');
+  const since = values.startDate.clone().add(2, 'hours').toISOString();
+  const until = values.endDate.clone().add(2, 'hours').toISOString();
+  const start = values.startTime.clone().add(-2, 'hours').format('HH:mm');
+  const end = values.endTime.clone().add(-2, 'hours').format('HH:mm');
 
   return {
     since,

@@ -46,7 +46,7 @@ const PersonalInformationSection: FC = () => {
     try {
       await dispatch(updateMe({ firstName, lastName }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

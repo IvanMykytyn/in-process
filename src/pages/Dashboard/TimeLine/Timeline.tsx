@@ -9,7 +9,6 @@ import {roomActions} from "../../../store";
 
 const Timeline: FC = () => {
     const {soonestBookings} = useAppSelector(state => state.rooms);
-    console.log(soonestBookings);
 
     const dispatch = useAppDispatch();
 
