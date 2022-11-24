@@ -4,6 +4,7 @@
   padding: 75px;
   @include centerDiv;
   height: 100vh;
+  color: var(--accent-text-color);
 
   &__wrapper {
     display: flex;
