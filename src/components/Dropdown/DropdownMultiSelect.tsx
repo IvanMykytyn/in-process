@@ -74,9 +74,9 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
         };
 
         return (
-            <div>
-                <FormControl sx={{m: 1, width: 300}} className={css.filter_form}>
-                    <InputLabel id="demo-multiple-checkbox-label" className={css.filter_form__input}>{name}</InputLabel>
+            <div className={'filter_form'}>
+                <FormControl sx={{m: 1, width: 300}}>
+                    <InputLabel id="demo-multiple-checkbox-label" className={'filter_form__input'}>{name}</InputLabel>
                     <Select
                         labelId="demo-multiple-checkbox-label"
                         id="demo-multiple-checkbox"
@@ -85,13 +85,13 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                         onChange={handleChange}
                         input={<OutlinedInput label={name}/>}
                         renderValue={(selected) => selected.join(', ')}
-                        MenuProps={{ classes: { paper: classes.select} }}
+                        MenuProps={{ classes: { paper: classes.select}, disablePortal: true }}
                     >
                         <div className={css.filter_text}>
                             Filter by capacity
                         </div>
                         {filterCapacity && filterCapacity.map((item) => (
-                            <MenuItem className={cn(css.menuItem)}
+                            <MenuItem className={cn('menuItem')}
                                       key={item.id}
                                       value={item.name}>
                                 <Checkbox checked={personName.indexOf(item.name) > -1}
@@ -104,7 +104,7 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                             Filter by items
                         </div>
                         {filterItems.map((item) => (
-                            <MenuItem className={cn(css.menuItem)}
+                            <MenuItem className={cn('menuItem')}
                                       key={item.id}
                                       value={item.name}
                             >

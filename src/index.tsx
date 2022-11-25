@@ -6,6 +6,7 @@ import { setupStore } from './store';
 import { Provider } from 'react-redux';
 import { setupAxiosInterceptors } from 'services';
 import { logoutUser } from 'store';
+import { ThemeOptions, ThemeProvider } from '@mui/material';
 
 export const store = setupStore();
 
@@ -18,7 +19,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   // <React.StrictMode>
-  <Router basename='/'>
+  <Router basename="/">
     <Provider store={store}>
       <App />
     </Provider>

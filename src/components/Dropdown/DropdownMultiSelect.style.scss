@@ -1,102 +1,97 @@
-@import "../../styles/global.module";
+@import '../../styles/global.module';
 
-//.filter_form{
-//  border: none!important;
-//  padding: 10px 10px!important;
-//  border-radius: 10px!important;
-//  box-shadow: $outerBoxShadow!important;
-//  background-color: var(--background)!important;
-//
-//  &__input{
-//    color: var(--accent-text-color)!important;
-//  }
-//}
-//.filter_text{
-//  padding: 10px 20px;
-//  font-family: "Montserrat-SemiBold", sans-serif;
-//  color: var(--accent-text-color)!important;
-//}
-
-.css-2m9kme-MuiFormControl-root {
-  width: 300px;
-  margin: 0;
-}
-
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-  font-family: "Montserrat-Regular", sans-serif;
-  color: var(--accent-text-color) !important;
-}
-
-.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
-  display: none;
-}
-
-.filter_text {
-  padding: 10px 10px 10px 20px;
-  font-family: "Montserrat-SemiBold", sans-serif;
-  font-weight: 300;
-  color: var(--accent-text-color) !important;
-}
-
-.css-i4bv87-MuiSvgIcon-root {
-  color: var(--accent-text-color) !important;
-}
-
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+.filter_form {
   border: none !important;
+  //padding: 10px 10px !important;
+  border-radius: 10px !important;
+  // box-shadow: $outerBoxShadow !important;
+  // background-color: var(--background) !important;
 }
 
 
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-  backdrop-filter: blur(20px) !important;
+.filter_form__input {
+  padding-bottom: 10px;
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-  padding: 10px 10px;
-  border-radius: 10px;
-  box-shadow: $outerBoxShadow;
-  background-color: var(--background);
+.filter_form {
+  .MuiFormControl-root {
+    .MuiFormLabel-root[data-shrink="true"] {
+      display: none !important;
+    }
+  }
+
+  .MuiList-root div {
+    color: var(--accent-text-color) !important;
+
+  }
+
+
+  .MuiInputBase-root {
+    padding: 0 10px;
+    border-radius: 10px;
+    box-shadow: $outerBoxShadow;
+    background-color: var(--background);
+
+    .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+      font-family: 'Montserrat-Regular', sans-serif;
+      color: var(--accent-text-color) !important;
+    }
+
+    .MuiSvgIcon-root {
+      color: var(--accent-text-color) !important;
+    }
+
+    .MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+    .MuiOutlinedInput-notchedOutline,
+    .MuiOutlinedInput-notchedOutline {
+      border: none !important;
+    }
+
+    .MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+      backdrop-filter: blur(20px) !important;
+    }
+
+    .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus {
+      border-radius: 10px;
+      border: none;
+    }
+
+    .MuiList-root-MuiMenu-list {
+      border-radius: 15px;
+      backdrop-filter: blur(20px) !important;
+    }
+
+    .MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+      box-shadow: none;
+      border-radius: 15px;
+      margin-top: 10px;
+      background: none !important;
+      top: 105px !important;
+    }
+
+    .MuiTypography-root {
+      font-family: 'Montserrat-Regular', sans-serif;
+    }
+
+    .MuiPaper-root {
+      box-shadow: none;
+      border-radius: 15px;
+      margin-top: 10px;
+      background: var(--background) !important;
+      box-shadow: $outerBoxShadow;
+      top: 105px !important;
+      backdrop-filter: blur(20px) !important;
+      padding: 10px;
+    }
+
+    .MuiSelect-select.MuiSelect-outlined {
+      padding: 10px 25px 10px 10px;
+    }
+  }
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus {
-  border-radius: 10px;
-  border: none;
-}
-
-.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
-  font-family: "Montserrat-Regular", sans-serif;
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+  color: var(--text-color) !important;
+  left: 5px;
   top: -5px;
-  left: 0;
-  color: var(--accent-text-color);
-}
-
-.css-6hp17o-MuiList-root-MuiMenu-list {
-  border-radius: 15px;
-  backdrop-filter: blur(20px) !important;
-}
-
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-  box-shadow: none;
-  border-radius: 15px;
-  margin-top: 10px;
-  background: none !important;
-  top: 105px !important;
-}
-
-.css-10hburv-MuiTypography-root {
-  font-family: "Montserrat-Regular", sans-serif;
-}
-
-.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover {
-  backdrop-filter: blur(20px) !important;
-}
-
-.css-6hp17o-MuiList-root-MuiMenu-list {
-  backdrop-filter: blur(20px) !important;
-}
-
-.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon,
-.css-bpeome-MuiSvgIcon-root-MuiSelect-icon{
-  color: var(--text-color);
 }

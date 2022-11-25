@@ -143,3 +143,19 @@
     opacity: 0.7;
   }
 }
+
+
+.css-1rndd9j-MuiPopper-root-MuiAutocomplete-popper > *,
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+  color: var(--text-color) !important;
+}
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
+  background-color: var(--background) !important;
+}
+
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
+  path{
+    color: var(--text-color);
+  }
+}

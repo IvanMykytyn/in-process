@@ -9,7 +9,7 @@ import {UserInterface} from 'models';
 
 // styles
 import scss from './settings.module.scss';
-import {sun, moon} from '../../../assets/images/icons';
+// import {sun, moon} from '../../../assets/images/icons';
 
 import {UsersManagementSection} from './UsersManagementSection';
 import useLocalStorage from 'use-local-storage';
@@ -54,7 +54,8 @@ const Settings: FC = () => {
                         </div>
                     )}
                     <button className={scss.settings__theme} onClick={toggleTheme}>
-                        <img src={newTheme === 'light' ? sun : moon} alt="change theme" height={15} width={15}/>
+                        AAAA
+                        {/* <img src={newTheme === 'light' ? sun : moon} alt="change theme" height={15} width={15}/> */}
                     </button>
                 </div>
             </div>
