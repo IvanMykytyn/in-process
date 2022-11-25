@@ -2,7 +2,7 @@
 
 .filter_form {
   border: none !important;
-  padding: 10px 10px !important;
+  //padding: 10px 10px !important;
   border-radius: 10px !important;
   // box-shadow: $outerBoxShadow !important;
   // background-color: var(--background) !important;
@@ -19,12 +19,13 @@
       display: none !important;
     }
   }
-  .MuiList-root div{
+
+  .MuiList-root div {
     color: var(--accent-text-color) !important;
 
   }
 
-  
+
   .MuiInputBase-root {
     padding: 0 10px;
     border-radius: 10px;
@@ -41,7 +42,7 @@
     }
 
     .MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
-      .MuiOutlinedInput-notchedOutline,
+    .MuiOutlinedInput-notchedOutline,
     .MuiOutlinedInput-notchedOutline {
       border: none !important;
     }
@@ -87,4 +88,10 @@
       padding: 10px 25px 10px 10px;
     }
   }
+}
+
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+  color: var(--text-color) !important;
+  left: 5px;
+  top: -5px;
 }
