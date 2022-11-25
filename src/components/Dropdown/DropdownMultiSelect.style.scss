@@ -38,7 +38,7 @@
   color: var(--accent-text-color) !important;
 }
 
-.css-i4bv87-MuiSvgIcon-root{
+.css-i4bv87-MuiSvgIcon-root {
   color: var(--accent-text-color) !important;
 }
 
@@ -59,7 +59,7 @@
   background-color: var(--background);
 }
 
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus{
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus {
   border-radius: 10px;
   border: none;
 }
@@ -94,4 +94,9 @@
 
 .css-6hp17o-MuiList-root-MuiMenu-list {
   backdrop-filter: blur(20px) !important;
+}
+
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon,
+.css-bpeome-MuiSvgIcon-root-MuiSelect-icon{
+  color: var(--text-color);
 }

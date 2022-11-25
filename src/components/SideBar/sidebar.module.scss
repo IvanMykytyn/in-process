@@ -38,7 +38,7 @@
   box-shadow: inset 1px 1px 2px var(--gray), inset -2px -1px 4px var(--white);
 }
 
-.sidebar__button.hide{
+.sidebar__button.hide {
   opacity: 0;
   width: 0;
   height: 0;
@@ -54,7 +54,7 @@
   position: relative;
 }
 
-.sidebar.hide{
+.sidebar.hide {
   width: 0;
 }
 
@@ -109,7 +109,7 @@
 
   &__userName {
     font-size: 1.1rem;
-    transition: color 0.5s;
+    transition: opacity 0.5s;
     color: var(--text-color-500);
     @extend %montserrat-semi-bold-600;
 
@@ -144,6 +144,12 @@
   }
 
   &__settings {
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: rotate(90deg);
+    }
+
     img {
       width: 20px;
     }
@@ -159,8 +165,9 @@
 .logout-btn {
   img {
     filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
-    transition: 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     width: 20px;
+
   }
 
   &:hover,
@@ -263,7 +270,7 @@ button {
   }
 }
 
-.booked__skeleton{
+.booked__skeleton {
   //padding: 5px;
 }
 
