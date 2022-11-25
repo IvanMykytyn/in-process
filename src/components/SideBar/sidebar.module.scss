@@ -270,9 +270,6 @@ button {
   }
 }
 
-.booked__skeleton {
-  //padding: 5px;
-}
 
 .null {
   text-align: center;
@@ -292,12 +289,18 @@ button {
   box-sizing: border-box;
 
   background: var(--gray);
-  border: 1.5px solid black;
+  border: 0.5px solid black;
 
   margin: 2px;
   padding: 4px;
   box-shadow: 1px 1px 2px var(--gray), -1px -1px 2px var(--white);
 
+  img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+
+  }
   div {
     color: #5a5a5a;
     height: 100%;

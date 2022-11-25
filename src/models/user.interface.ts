@@ -34,6 +34,7 @@ interface ResetPasswordProps {
 
 interface UserInterface extends UserFields, UserEmailField {
     role: 'user' | 'admin';
+    avatar_url: string | null;  
     isHidden?: boolean
 }
 
