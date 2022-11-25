@@ -30,7 +30,6 @@ describe('Test Forgot Password page', () => {
     const submit = screen.getByRole('button', { name: /Reset Password/i });
 
     await userEvent.type(input, 'roman@incorainc.com');
-    // await fireEvent.change(input, { target: { value: 'roman@incorainc.com' } });
 
     expect(input).toHaveValue('roman@incorainc.com');
 

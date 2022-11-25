@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { sliceEvents, createPlugin } from '@fullcalendar/core';
 import { CalendarDay } from './CalendarDay';
+import { createPlugin, sliceEvents } from '@fullcalendar/react';
 
 const dayCalendarPlugin: FC = (props: any) => {
-  let events = sliceEvents(props, false); 
+  let events = sliceEvents(props, false);
 
   return (
     <CalendarDay

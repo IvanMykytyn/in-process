@@ -51,7 +51,7 @@ const ResetPassword: FC = () => {
       await dispatch(resetPassword({ id: userId, newPassword }));
       navigate('/login');
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

@@ -44,7 +44,7 @@ const ChangePasswordSection: FC = () => {
       await dispatch(changePassword({ newPassword }));
       reset();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

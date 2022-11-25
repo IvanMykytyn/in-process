@@ -61,6 +61,6 @@ const names = [
 
 Default.args = {
   options: names,
-  handleChange: (e, values) => console.log(e),
+  handleChange: (e, values) => alert(e),
   style: { width: '400px' },
 };

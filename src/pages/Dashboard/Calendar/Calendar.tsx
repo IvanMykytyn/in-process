@@ -23,13 +23,14 @@ import { TimeSlot } from './Grid';
 import { buildEvents } from './FullCalendarComponents/BuildEvent';
 import { PopoverWrapper } from './Events';
 
+
 const Calendar: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const calendarRef = useRef<null | any>(null);
 
-  const { isSideBarOpen, bookings,isLoading, isPopoverOpen, currentBooking } =
+  const { isSideBarOpen, bookings, isPopoverOpen, currentBooking } =
     useAppSelector(selectBooking);
 
   const fullCalendarBookings = bookings.map((book) => {
@@ -111,7 +112,6 @@ const Calendar: FC = () => {
         // event
         events={fullCalendarBookings}
         eventContent={buildEvents}
-        eventClick={(props) => console.log(props)}
         // buttons
         customButtons={{
           addBooking: {

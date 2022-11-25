@@ -2,13 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from 'store';
 import { Id } from 'react-toastify';
 import {
-  ExtendedSingleBooking,
   ExtendedSingleISOBooking,
-  IBookingDelete,
-  IBookingOneTime,
   IBookingOwn,
-  IBookingPut,
-  IBookingRecurring,
 } from 'models';
 
 import {
@@ -39,6 +34,7 @@ interface BookingState {
   currentBooking: ExtendedSingleISOBooking | null;
 
   notifyId: Id;
+  isSuccess: boolean;
 }
 
 const initialBookingState: BookingState = {
@@ -53,6 +49,8 @@ const initialBookingState: BookingState = {
   isLoading: false,
   isSideBarOpen: true,
   isPopoverOpen: false,
+
+  isSuccess: false,
 
   notifyId: '',
 };
@@ -89,19 +87,20 @@ const bookingSlice = createSlice({
       })
       .addCase(getAllBookings.rejected, (state, { payload }) => {
         state.bookingLoading = false;
-        console.log(payload);
       })
 
       // recurring post
       .addCase(recPost.pending, (state) => {
         state.notifyId = NotifyService.loading();
+        state.isSuccess = false;
       })
       .addCase(recPost.fulfilled, (state, action) => {
         state.oneTimeLoading = false;
+        state.isSuccess = true;
 
         NotifyService.update(state.notifyId, `Successfully booked`, 'success');
       })
-      .addCase(recPost.rejected, (state, {payload}) => {
+      .addCase(recPost.rejected, (state, { payload }) => {
         const { message, statusCode } = payload || {};
 
         let error = message ?? 'Something went Wrong';
@@ -130,10 +129,12 @@ const bookingSlice = createSlice({
 
       // one time post
       .addCase(oneTimePost.pending, (state) => {
+        state.isSuccess = false;
         state.oneTimeLoading = true;
         state.notifyId = NotifyService.loading();
       })
       .addCase(oneTimePost.fulfilled, (state, action) => {
+        state.isSuccess = true;
         state.oneTimeLoading = false;
 
         NotifyService.update(state.notifyId, `Successfully booked`, 'success');
@@ -145,7 +146,7 @@ const bookingSlice = createSlice({
         if (statusCode === 400 && !!message) {
           error = formatErrorDate(message);
         }
-
+        
         NotifyService.update(state.notifyId, error, 'error', 8000);
         state.oneTimeLoading = false;
       })

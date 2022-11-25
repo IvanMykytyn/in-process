@@ -28,10 +28,10 @@ const GetAccess: FC = () => {
     });
 
     let submit = async (value: object) => {
-        try {
-            await console.log(value);
-        } catch (e) {
-        }
+        // try {
+        //     await console.log(value);
+        // } catch (e) {
+        // }
     };
 
     return (
