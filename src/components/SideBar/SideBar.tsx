@@ -41,17 +41,17 @@ const SideBar: FC = () => {
 
     useEffect(() => {
         dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}));
-    }, []);
+    }, [pageNumber]);
 
     useEffect(() => {
         function first() {
             setInterval(function () {
                 dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}));
-            }, 30000);
+            }, 60000);
         };
 
         first();
-    }, [dispatch, pageNumber])
+    }, [dispatch])
 
     return (
         <div className={isSideBarOpen ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>
@@ -66,23 +66,23 @@ const SideBar: FC = () => {
                         <img src={clock} alt="clock" width={15} height={15} color={'red'}/>
                         <Moment locale={'uk'} local={true} format={`LLL`} interval={30000}/>
                     </span>
-                <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
-                    {
-                        ownLoading ?
-                            <li>
-                                <SideBarSkeleton amount={10}/>
-                            </li>
-                            :
-                            bookingsOwn ?
-                                bookingsOwn && bookingsOwn.data.map((value, i) =>
-                                    <li key={value.id} onClick={() => toggleAccordion(i)}>
+                {
+                    ownLoading ?
+                        <ul className={isSideBarOpen ? `${scss.booked__skeleton}` : `${scss.booked} ${scss.hide}`}>
+                            <SideBarSkeleton amount={10}/>
+                        </ul>
+                        :
+                        <ul className={isSideBarOpen ? `${scss.booked}` : `${scss.booked} ${scss.hide}`}>
+                            {bookingsOwn ?
+                                bookingsOwn && bookingsOwn.data.map((value) =>
+                                    <li key={value.id} onClick={() => toggleAccordion(value.id)}>
                                         <BookedRoom room={value.room}
                                                     meetingName={value.name}
                                                     creator={value.creator}
                                                     members={value.users}
                                                     endDate={value.end}
                                                     startDate={value.start}
-                                                    isActive={accordionIndex === i}
+                                                    isActive={accordionIndex === value.id}
                                         />
                                     </li>
                                 )
@@ -92,27 +92,28 @@ const SideBar: FC = () => {
                                         You don't have any meetings added yet
                                     </h3>
                                 </li>
-                    }
-                </ul>
+                            }
+                        </ul>
+                }
             </div>
             <div className={scss.sidebar__buttons}>
                 <button
                     className={isSideBarOpen ?
-                        typeof getTotalCountOfPages === 'number' && pageNumber === 1 ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
+                        ownLoading || typeof getTotalCountOfPages === 'number' && pageNumber === 1 ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
                         :
                         `${scss.sidebar__button} ${scss.hide}`
                     }
-                    onClick={() => getPageNumber('-')} disabled={pageNumber === 0}>
+                    onClick={() => getPageNumber('-')} disabled={ownLoading || pageNumber === 0}>
                     <img src={arrowLeft} alt={"arrow left"} height={10} width={10}/>
                 </button>
                 <button
                     className={
                         isSideBarOpen ?
-                            pageNumber === getTotalCountOfPages ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
+                            ownLoading || pageNumber === getTotalCountOfPages ? `${scss.sidebar__button} ${scss.disabled}` : `${scss.sidebar__button}`
                             :
                             `${scss.sidebar__button} ${scss.hide}`
                     }
-                    onClick={() => getPageNumber('+')} disabled={pageNumber === getTotalCountOfPages}>
+                    onClick={() => getPageNumber('+')} disabled={ownLoading || pageNumber === getTotalCountOfPages}>
                     <img src={arrowRight} alt={"arrow right"} height={10} width={10}/>
                 </button>
             </div>

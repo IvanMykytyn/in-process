@@ -44,7 +44,7 @@
       border-radius: 5px;
       border: none;
       background-color: var(--background) !important;
-      box-shadow: inset 1px 2px 3px #b8b9be, inset -1px -1px 4px #ffffff;
+      box-shadow: inset 1px 2px 3px var(--gray), inset -1px -1px 4px var(--white);
     }
 
     &.Mui-disabled {
@@ -62,7 +62,7 @@
       border-radius: 50%;
       border: none;
       background-color: var(--background) !important;
-      box-shadow: inset 1px 2px 3px #b8b9be, inset -1px -1px 4px #ffffff;
+      box-shadow: inset 1px 2px 3px var(--gray), inset -1px -1px 4px var(--white);
     }
   }
 }

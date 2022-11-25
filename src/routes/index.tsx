@@ -8,7 +8,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/">
         <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="/dashboard/*" element={<DashboardRoutes />} />
+        <Route path="dashboard/*" element={<DashboardRoutes />} />
         <Route path="login" element={<Login />} />
         <Route path="signup/*" element={<SignUp />} />
         <Route path="get-access" element={<GetAccess />} />

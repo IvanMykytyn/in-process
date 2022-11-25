@@ -1,4 +1,5 @@
-import {FC, useEffect} from 'react'
+import {FC, useEffect, useRef} from 'react'
+import ReactToPrint from 'react-to-print'
 
 // styles
 import cn from 'classnames'
@@ -6,10 +7,11 @@ import css from './timeline.module.scss'
 
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {roomActions} from "../../../store";
+import {print} from '../../../assets/images/icons'
 
 const Timeline: FC = () => {
     const {soonestBookings} = useAppSelector(state => state.rooms);
-
+    const componentRef = useRef(null);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -17,35 +19,46 @@ const Timeline: FC = () => {
     }, [dispatch]);
 
     return (
-        <div className={css.timeline}>
-            <h3 className={css.timeline__title}>
-                Soonest Bookings
-            </h3>
-                <ul className={css.timeline__items}>
-                <li className={css.timeline__item}>
-                    {/*{soonestBookings && soonestBookings.soonestBookings.map(booking =>*/}
-                    {/*<details className={css.timeline__details}>*/}
-                    {/*    <summary className={css.timeline__summary}>Name : {booking.name}</summary>*/}
-                    {/*    <ul>*/}
-                    {/*        <li>Start: {booking.start}</li>*/}
-                    {/*        <li>End: {booking.end}</li>*/}
-                    {/*        <li>Description: {booking.description}</li>*/}
-                    {/*        <ul>*/}
-                    {/*        {booking.users.map(user =>*/}
-                    {/*        <li>User: {user.firstName} {user.lastName} {user.email}</li>*/}
-                    {/*        )}*/}
-                    {/*        </ul>*/}
-                    {/*    </ul>*/}
-                    {/*</details>*/}
-                    {/*)}*/}
-                    <details className={css.timeline__details}>
-                        <summary className={css.timeline__summary}>Event 1</summary>
-                        <div>
-                            <p className={css.timeline__description}>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, dicta!
-                            </p>
+        <div className={cn(css.timeline)} ref={componentRef}>
+            {/*<div className={cn(css.timeline__header)}>*/}
+                <div className={cn(css.timeline__title)}>
+                    Soonest Bookings
+                </div>
+                <ReactToPrint trigger={() => {
+                    return (
+                        <div className={cn(css.timeline__print)}>
+                            <img src={print} alt="print" height={15} width={15}/>
+                        </div>)
+                }}
+                              content={() => componentRef.current}
+                />
+            {/*</div>*/}
+            <ul className={cn(css.timeline__items)}>
+                <li className={cn(css.timeline__item)}>
+                    {soonestBookings && soonestBookings.soonestBookings.map(booking =>
+                        <div className={cn(css.timeline__wrapper)}>
+                            <div className={cn(css.timeline__time_wrapper)}>
+                                <div className={cn(css.timeline__time)}>
+                                    {booking.start.substring(0, 16).replace('T', ' ')}
+                                </div>
+                                <div className={cn(css.timeline__time)}>
+                                    {booking.end.substring(0, 16).replace('T', ' ')}
+                                </div>
+                            </div>
+                            <div className={cn(css.timeline__details)}>
+                                <ul>
+                                    <li>Name: {booking.name}</li>
+                                    <li>Description: {booking.description}</li>
+                                    <ul className={cn(css.timeline__users)}>
+                                        Users:
+                                        {booking.users.map(user =>
+                                            <li> {user.email}</li>
+                                        )}
+                                    </ul>
+                                </ul>
+                            </div>
                         </div>
-                    </details>
+                    )}
                 </li>
             </ul>
         </div>
