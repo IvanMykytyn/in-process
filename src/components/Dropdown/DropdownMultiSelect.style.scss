@@ -1,106 +1,90 @@
 @import '../../styles/global.module';
 
-//.filter_form{
-//  border: none!important;
-//  padding: 10px 10px!important;
-//  border-radius: 10px!important;
-//  box-shadow: $outerBoxShadow!important;
-//  background-color: var(--background)!important;
-//
-//  &__input{
-//    color: var(--accent-text-color)!important;
-//  }
-//}
-//.filter_text{
-//  padding: 10px 20px;
-//  font-family: "Montserrat-SemiBold", sans-serif;
-//  color: var(--accent-text-color)!important;
-//}
-.MuiInputBase-root {
-  color: var(--accent-text-color);
+.filter_form {
+  border: none !important;
+  padding: 10px 10px !important;
+  border-radius: 10px !important;
+  // box-shadow: $outerBoxShadow !important;
+  // background-color: var(--background) !important;
+}
+
+
+.filter_form__input {
+  padding-bottom: 10px;
+}
+
+.filter_form {
   .MuiFormControl-root {
-    width: 300px;
-    margin: 0;
+    .MuiFormLabel-root[data-shrink="true"] {
+      display: none !important;
+    }
   }
-
-  .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    font-family: 'Montserrat-Regular', sans-serif;
+  .MuiList-root div{
     color: var(--accent-text-color) !important;
+
   }
 
-  .MuiFormLabel-root-MuiInputLabel-root {
-    display: none;
-  }
-
-  .filter_text {
-    padding: 10px 10px 10px 20px;
-    font-family: 'Montserrat-SemiBold', sans-serif;
-    font-weight: 300;
-    color: var(--accent-text-color) !important;
-  }
-
-  .MuiSvgIcon-root {
-    color: var(--accent-text-color) !important;
-  }
-
-  .MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
-    .MuiOutlinedInput-notchedOutline,
-  .MuiOutlinedInput-notchedOutline {
-    border: none !important;
-  }
-
-  .MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-    backdrop-filter: blur(20px) !important;
-  }
-
-  .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    padding: 10px 10px;
+  
+  .MuiInputBase-root {
+    padding: 0 10px;
     border-radius: 10px;
     box-shadow: $outerBoxShadow;
     background-color: var(--background);
-  }
 
-  .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus {
-    border-radius: 10px;
-    border: none;
-  }
+    .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+      font-family: 'Montserrat-Regular', sans-serif;
+      color: var(--accent-text-color) !important;
+    }
 
-  .MuiFormLabel-root-MuiInputLabel-root {
-    font-family: 'Montserrat-Regular', sans-serif;
-    top: -5px;
-    left: 0;
-    color: var(--accent-text-color);
-  }
+    .MuiSvgIcon-root {
+      color: var(--accent-text-color) !important;
+    }
 
-  .MuiList-root-MuiMenu-list {
-    border-radius: 15px;
-    backdrop-filter: blur(20px) !important;
-  }
+    .MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+      .MuiOutlinedInput-notchedOutline,
+    .MuiOutlinedInput-notchedOutline {
+      border: none !important;
+    }
 
-  .MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-    box-shadow: none;
-    border-radius: 15px;
-    margin-top: 10px;
-    background: none !important;
-    top: 105px !important;
-  }
+    .MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+      backdrop-filter: blur(20px) !important;
+    }
 
-  .MuiTypography-root {
-    font-family: 'Montserrat-Regular', sans-serif;
-  }
+    .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select:focus {
+      border-radius: 10px;
+      border: none;
+    }
 
-  .MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover {
-    backdrop-filter: blur(20px) !important;
-  }
+    .MuiList-root-MuiMenu-list {
+      border-radius: 15px;
+      backdrop-filter: blur(20px) !important;
+    }
 
-  .MuiList-root-MuiMenu-list {
-    backdrop-filter: blur(20px) !important;
-  }
+    .MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+      box-shadow: none;
+      border-radius: 15px;
+      margin-top: 10px;
+      background: none !important;
+      top: 105px !important;
+    }
 
-  .MuiPaper-root {
-    padding: 10px 10px;
-    border-radius: 10px;
-    box-shadow: $outerBoxShadow;
-    background-color: var(--background);
+    .MuiTypography-root {
+      font-family: 'Montserrat-Regular', sans-serif;
+    }
+
+    .MuiPaper-root {
+      box-shadow: none;
+      border-radius: 15px;
+      margin-top: 10px;
+      background: var(--background) !important;
+      box-shadow: $outerBoxShadow;
+      top: 105px !important;
+      backdrop-filter: blur(20px) !important;
+      padding: 10px;
+    }
+
+    .MuiSelect-select.MuiSelect-outlined {
+      padding: 10px 25px 10px 10px;
+    }
   }
 }
