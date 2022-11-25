@@ -28,7 +28,12 @@ const Select: FC<SelectProps & CustomSelectProps> = ({
 }) => {
   return (
     <div className="custom-select">
-      <SelectMui value={value} onChange={handleChange} disabled={disabled}>
+      <SelectMui
+        value={value}
+        onChange={handleChange}
+        disabled={disabled}
+        MenuProps={{ disablePortal: true }}
+      >
         {options.map((option) => {
           return (
             <MenuItem key={option} value={option}>

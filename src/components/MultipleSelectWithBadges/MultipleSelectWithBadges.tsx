@@ -58,6 +58,7 @@ const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
 
           return handleChange(e, members);
         }}
+        disablePortal={true}
         renderTags={(value: readonly string[], getTagProps) => (
           <div className="badges-container">
             {value.map((option: string, index: number) => (

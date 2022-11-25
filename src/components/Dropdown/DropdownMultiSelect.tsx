@@ -85,7 +85,7 @@ const DropdownMultiSelect: FC<FilterProps> = (({filterItems, filterCapacity, nam
                         onChange={handleChange}
                         input={<OutlinedInput label={name}/>}
                         renderValue={(selected) => selected.join(', ')}
-                        MenuProps={{ classes: { paper: classes.select} }}
+                        MenuProps={{ classes: { paper: classes.select}, disablePortal: true }}
                     >
                         <div className={css.filter_text}>
                             Filter by capacity
