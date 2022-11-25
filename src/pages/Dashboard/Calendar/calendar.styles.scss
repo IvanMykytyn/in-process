@@ -41,6 +41,7 @@ $lineColor: $nowIndicatorColor;
         @include centerDiv;
         border-right: $border500;
         color: var(--text-color-400);
+
         a {
           font-size: 0.8rem;
           font-weight: 600;
@@ -65,7 +66,7 @@ $lineColor: $nowIndicatorColor;
 
 .fc-today-button {
   text-transform: capitalize;
-  border: 0 !important ;
+  border: 0 !important;
   // color: $primaryColor400 !important;
   color: var(--accent-text-color) !important;
   background: var(--background) !important;
@@ -95,6 +96,7 @@ $lineColor: $nowIndicatorColor;
     opacity: 0.85 !important;
   }
 }
+
 .fc-button-group {
   height: 40px;
   background: var(--background);
@@ -104,6 +106,7 @@ $lineColor: $nowIndicatorColor;
   margin-right: 5px;
   border-radius: 8px;
   box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white);
+
   .fc-today-button,
   .fc-timeGridWeek-button,
   .fc-dayGridMonth-button,
@@ -163,6 +166,7 @@ $lineColor: $nowIndicatorColor;
     }
   }
 }
+
 .fc-addBooking-button {
   text-transform: capitalize;
   border: none !important;
@@ -180,6 +184,7 @@ $lineColor: $nowIndicatorColor;
 
   font-family: 'Montserrat-Regular', sans-serif !important;
   font-size: 0.875rem !important;
+
   &:hover,
   &:focus,
   &:active {
@@ -188,7 +193,9 @@ $lineColor: $nowIndicatorColor;
     border-color: var(--background) !important;
     text-shadow: var(--primary-color) 1px 0 50px;
   }
+
   position: relative;
+
   &::after {
     content: '';
     height: 100%;
@@ -226,6 +233,7 @@ $lineColor: $nowIndicatorColor;
     align-items: center;
   }
 }
+
 .fc-toolbar-title {
   font-weight: 600;
   font-size: 1.15rem !important;
@@ -233,12 +241,14 @@ $lineColor: $nowIndicatorColor;
   text-align: center;
   color: var(--text-color-300);
 }
+
 .fc-prev-button,
 .fc-next-button {
   background: transparent !important;
   border: 0 !important;
   font-size: 1.2rem !important;
 }
+
 .fc-button-primary:not(:disabled):active:focus,
 .fc-button-primary:focus {
   box-shadow: none !important;
@@ -246,36 +256,44 @@ $lineColor: $nowIndicatorColor;
 
 .fc-prev-button {
   padding-right: 65px !important;
+
   &:hover,
   &:active,
   &:focus {
     box-shadow: 0 !important;
   }
 }
+
 .fc-next-button {
   padding-left: 65px !important;
 }
+
 .fc-icon {
   color: var(--text-color-300);
 }
+
 .fc-timegrid-slots {
 }
+
 .fc-timegrid-slot-label-frame {
   display: flex;
   justify-content: center;
   width: 100%;
 }
+
 .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion li {
   width: 64px !important;
   border-right: 0 !important;
   border-left: 2px solid var(--gray) !important;
 }
+
 .fc-timegrid-slot-label-cushion {
   padding: 0 !important;
   width: 62px;
   left: -2px !important;
   right: 12px !important;
 }
+
 .fc-timegrid-body,
 .fc-daygrid-body,
 .fc-listweek-body {
@@ -290,12 +308,15 @@ $lineColor: $nowIndicatorColor;
     // padding: 11px 0 0 0 !important;
   }
 }
+
 .fc-scrollgrid-section-body {
   padding: 11px 0 0 0 !important;
 }
+
 .fc-scrollgrid-section-header {
   background: var(--background) !important;
 }
+
 .fc-timegrid-slot-label {
   position: relative;
   height: 96px;
@@ -305,13 +326,16 @@ $lineColor: $nowIndicatorColor;
   border-top: 0 !important;
   border-bottom: 0 !important;
 }
+
 .fc-theme-standard td {
   border: $border300;
 }
+
 .fc-timegrid-axis {
   border-right: $border500 !important;
   background: var(--background);
 }
+
 .fc-timegrid-slot-label-frame {
   height: 96px;
 }
@@ -326,6 +350,7 @@ $lineColor: $nowIndicatorColor;
   height: 96px;
   background: var(--light-gray-940) !important;
 }
+
 .fc-timegrid-axis-frame {
   background: var(--light-gray-940) !important;
 }
@@ -345,12 +370,17 @@ $lineColor: $nowIndicatorColor;
   border-color: $lineColor !important;
 }
 
+.fc .fc-scrollgrid-section > * {
+  border-right-width: 0;
+}
+
 .fc-timegrid-event {
   border-radius: 5px;
   border: 0 !important;
   box-shadow: none !important;
 
   z-index: 0;
+
   &::before {
     content: '';
     position: absolute;
@@ -363,6 +393,7 @@ $lineColor: $nowIndicatorColor;
     border-radius: 5px;
     // box-shadow: $outerBoxShadow;
   }
+
   .event__colored-line {
     width: 2px;
   }
@@ -383,14 +414,17 @@ $lineColor: $nowIndicatorColor;
 .fc-daygrid-event-harness {
   cursor: pointer;
 }
+
 .fc-timegrid-event.fc-timegrid-dot-event,
 .fc-daygrid-event.fc-daygrid-dot-event {
   background: transparent !important;
+
   &:hover {
     background: transparent !important;
     transition: 0.5s ease-in-out all;
   }
 }
+
 .fc-popover-body {
   display: flex;
   flex-direction: column;
@@ -416,6 +450,7 @@ $lineColor: $nowIndicatorColor;
     transition: 0.5s ease-in-out all;
   }
 }
+
 .fc-event-selected:after,
 .fc-event:focus:after {
   background: transparent;
@@ -437,9 +472,11 @@ $lineColor: $nowIndicatorColor;
   .contained-styles::after {
     height: 30px;
   }
+
   .contained-styles:hover:enabled {
     color: var(--primary-color);
   }
+
   button {
     height: 30px;
     padding: 15px 30px;
@@ -452,11 +489,13 @@ tr.fc-list-event {
     opacity: 0.8;
   }
 }
+
 .fc-list-event-graphic {
   .fc-list-event-dot {
     border: 5px solid var(--primary-color) !important;
   }
 }
+
 .fc-list-day-cushion {
   background: var(--background) !important;
   box-shadow: $outerBoxShadow !important;
@@ -465,6 +504,7 @@ tr.fc-list-event {
 .fc-theme-standard .fc-list {
   border: 0 !important;
 }
+
 .fc-dayGridMonth-view {
   .fc-scrollgrid-section {
     // overflow-y: scroll;
@@ -472,7 +512,7 @@ tr.fc-list-event {
 }
 
 .fc-list-day-side-text,
-.fc-list-day-text{
+.fc-list-day-text {
   color: var(--text-color-500);
 
 }
@@ -481,6 +521,7 @@ tr.fc-list-event {
 .fc-list-event-time {
   color: var(--text-color);
 }
-.fc-list-day th{
+
+.fc-list-day th {
   z-index: 10;
 }
