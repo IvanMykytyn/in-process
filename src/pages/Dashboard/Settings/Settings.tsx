@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 
 import {PersonalInformationSection} from './PersonalInformationSection';
 import {ChangePasswordSection} from './ChangePasswordSection';
@@ -9,11 +9,10 @@ import {UserInterface} from 'models';
 
 // styles
 import scss from './settings.module.scss';
-// import {sun, moon} from '../../../assets/images/icons';
+import {sun, moon} from '../../../assets/images/icons';
 
 import {UsersManagementSection} from './UsersManagementSection';
 import useLocalStorage from 'use-local-storage';
-import {GeneralSettingsSection} from './GeneralSettingsSection';
 import {Checkbox} from 'components';
 import {adminService} from 'services';
 
@@ -54,8 +53,7 @@ const Settings: FC = () => {
                         </div>
                     )}
                     <button className={scss.settings__theme} onClick={toggleTheme}>
-                        AAAA
-                        {/* <img src={newTheme === 'light' ? sun : moon} alt="change theme" height={15} width={15}/> */}
+                        <img src={newTheme === 'light' ? sun : moon} alt="change theme" height={15} width={15}/>
                     </button>
                 </div>
             </div>

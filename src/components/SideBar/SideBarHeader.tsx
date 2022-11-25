@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
-import { logoutUser, selectUser} from 'store';
-import {useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutUser, selectUser } from 'store';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectBooking } from 'store/slices/booking.slice';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout, setting } from 'assets/images/icons';
@@ -20,8 +20,8 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { firstName, lastName, email } = user || ({} as UserInterface);
-  const fullName = getFullName(firstName, lastName);;
+  const { firstName, lastName, email, avatar_url } = user || ({} as UserInterface);
+  const fullName = getFullName(firstName, lastName);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -32,13 +32,17 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
     <header className={isSideBarOpen ? `${scss.info}` : `${scss.info} ${scss.hide}`}>
       <div className={cn(scss['user-information'])}>
         <div role="img" className={cn(scss['initials-avatar'])}>
+          {avatar_url ? (
+            <img src={avatar_url} alt={'avatar'} />
+          ) : (
             <div>{getInitials(firstName, lastName)}</div>
+          )}
         </div>
-        <Link to={'/dashboard/settings'} >
-        <div>
-          <h4 className={cn(scss.info__userName)}>{fullName ?? ''}</h4>
-          <p className={cn(scss.info__email)}>{email ?? ''}</p>
-        </div>
+        <Link to={'/dashboard/settings'}>
+          <div>
+            <h4 className={cn(scss.info__userName)}>{fullName ?? ''}</h4>
+            <p className={cn(scss.info__email)}>{email ?? ''}</p>
+          </div>
         </Link>
       </div>
       <div className={cn(scss.icons)}>

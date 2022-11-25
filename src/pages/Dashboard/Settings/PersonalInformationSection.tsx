@@ -25,8 +25,8 @@ const PersonalInfoValidator = Joi.object({
 });
 
 const PersonalInformationSection: FC = () => {
-  const { user, isLoading } = useAppSelector(selectUser);
-  const { firstName, lastName, email } = user || ({} as UserInterface);
+  const { user} = useAppSelector(selectUser);
+  const { firstName, lastName, email, avatar_url } = user || ({} as UserInterface);
 
   const fullName = getFullName(firstName, lastName);
   const dispatch = useAppDispatch();
@@ -61,7 +61,7 @@ const PersonalInformationSection: FC = () => {
     >
       <div className={scss['section-avatar']}>
         <div className={scss['section-avatar__wrapper']}>
-          <img src={avatar} className={scss['section-avatar__img']} alt="avatar" />
+          <img src={avatar_url ??avatar} className={scss['section-avatar__img']} alt="avatar" />
         </div>
         <div className={scss['section__user-details']}>
           <h3>{fullName ?? ''}</h3>
