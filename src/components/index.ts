@@ -18,3 +18,4 @@ export * from './TimePicker/TimePicker';
 export * from './DatePicker/DatePicker';
 export * from './DaysPicker/DaysPicker';
 export * from './Select/Select';
+export * from './Loading/Loading'

@@ -11,10 +11,10 @@ import {useAppSelector} from 'hooks';
 import {selectTheme} from "./store";
 
 function App() {
-    const {newTheme} = useAppSelector(selectTheme);
+    const {mode} = useAppSelector(selectTheme);
     return (
         <div role={'application'} className={'app'}
-             data-theme={newTheme}>
+             data-theme={mode}>
             <AppRoutes/>
             <ToastifyContainer/>
         </div>

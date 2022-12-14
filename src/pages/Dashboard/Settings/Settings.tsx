@@ -12,7 +12,6 @@ import scss from './settings.module.scss';
 import {sun, moon} from '../../../assets/images/icons';
 
 import {UsersManagementSection} from './UsersManagementSection';
-import useLocalStorage from 'use-local-storage';
 import {Checkbox} from 'components';
 import {adminService} from 'services';
 
@@ -20,14 +19,12 @@ const Settings: FC = () => {
     const {user} = useAppSelector(selectUser);
     const {role, isHidden} = user || ({} as UserInterface);
 
-    const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light', 'theme');
-    const {newTheme} = useAppSelector(selectTheme);
+    const {mode} = useAppSelector(selectTheme);
     const dispatch = useAppDispatch();
 
     const toggleTheme = () => {
-        const currentTheme = theme === 'light' ? 'dark' : 'light';
-        dispatch(setNewTheme(currentTheme));
-        setTheme(currentTheme);
+        const newMode = mode === 'light' ? 'dark' : 'light';
+        dispatch(setNewTheme(newMode));
     };
 
     const handleIsHiddenToggle = async () => {
@@ -53,7 +50,7 @@ const Settings: FC = () => {
                         </div>
                     )}
                     <button className={scss.settings__theme} onClick={toggleTheme}>
-                        <img src={newTheme === 'light' ? sun : moon} alt="change theme" height={15} width={15}/>
+                        <img src={mode === 'light' ? sun : moon} alt="change theme" height={15} width={15}/>
                     </button>
                 </div>
             </div>

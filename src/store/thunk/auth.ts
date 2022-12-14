@@ -114,6 +114,7 @@ export const addUsers = createAsyncThunk<
     if (!error.response) {
       throw err;
     }
+    
     return rejectWithValue(error.response.data);
   }
 });

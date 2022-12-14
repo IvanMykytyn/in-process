@@ -1,15 +1,14 @@
-import {createSlice, current} from "@reduxjs/toolkit"
+import {createSlice} from "@reduxjs/toolkit"
 
 import {RootState} from "../store";
-import {actions} from "@storybook/addon-actions";
-import {getFromLocalStorage} from "../../utils";
+import {getFromLocalStorage, setToLocalStorage} from "../../utils";
 
 interface IState {
-    newTheme: string;
+    mode: string;
 };
 
 const initialState: IState = {
-    newTheme: getFromLocalStorage('dark'),
+    mode: getFromLocalStorage('mode') ?? 'light',
 };
 
 
@@ -18,7 +17,8 @@ const themeSlice = createSlice({
         initialState: initialState,
         reducers: {
             setNewTheme: (state, action) => {
-                state.newTheme = action.payload;
+                state.mode = action.payload;
+                setToLocalStorage('mode', action.payload)
             }
         },
     }

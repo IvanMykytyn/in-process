@@ -2,17 +2,15 @@ import css from './Booking-room.module.scss';
 import cn from 'classnames';
 
 import { FC } from 'react';
-import { InstrumentsProps } from 'models';
+import { EquipmentsProps } from 'models';
 import { staff } from 'utils/tools/staff';
-import { room1 } from 'assets/images/bg';
-import { getRoomImage } from 'utils/tools/rooms.img';
 
 interface BookingRoomProps {
   id: number;
   name: string;
   floor: number;
   maxCapacity: number;
-  equipments: InstrumentsProps[];
+  equipments: EquipmentsProps[];
   handleChange: (id: number) => void;
   roomImg: string;
   disabled?: boolean;

@@ -15,6 +15,8 @@ import { ExtendedSingleBooking } from 'models';
 const Event: FC<ExtendedSingleBooking> = (eventData) => {
   const dispatch = useAppDispatch();
   const { rooms } = useAppSelector(selectRooms);
+  const {isBookingLoading} = useAppSelector(store=> store.bookings)
+
   const { color, viewType } = eventData;
 
   const eventPosition = useMemo(
@@ -35,6 +37,9 @@ const Event: FC<ExtendedSingleBooking> = (eventData) => {
     );
     dispatch(togglePopover());
   };
+  if(isBookingLoading){
+    return <></>
+  }
 
   return (
     <>
