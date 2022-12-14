@@ -28,7 +28,7 @@ const SideBar: FC = () => {
     };
 
     const toggleAccordion = (index: number) => {
-        setAccordionIndex(index);
+        setAccordionIndex(prev => prev === index ? -1 : index);
     };
 
     const getPageNumber = (id: string) => {
@@ -41,7 +41,7 @@ const SideBar: FC = () => {
 
     useEffect(() => {
         dispatch(bookingActions.getAllOwnBookings({page: pageNumber, limit: 10}));
-    }, [pageNumber]);
+    }, [dispatch, pageNumber]);
 
     useEffect(() => {
         function first() {
@@ -51,7 +51,7 @@ const SideBar: FC = () => {
         };
 
         first();
-    }, [dispatch])
+    }, [dispatch, pageNumber])
 
     return (
         <div className={isSideBarOpen ? `${scss.sidebar}` : `${scss.sidebar} ${scss.hide}`}>

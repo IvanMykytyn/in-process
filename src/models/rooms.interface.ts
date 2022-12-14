@@ -1,6 +1,15 @@
-export interface InstrumentsProps {
+export interface EquipmentsProps {
     id: number,
     name: string
+};
+
+export interface CapacityRangeProps {
+    id: number,
+    name: string,
+    range: [
+        number,
+        number
+    ]
 };
 
 export interface IRooms {
@@ -10,7 +19,7 @@ export interface IRooms {
     floor: number,
     maxCapacity: number,
     currentBooking: [],
-    equipments: InstrumentsProps[],
+    equipments: EquipmentsProps[],
     roomImg: string,
 };
 

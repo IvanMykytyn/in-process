@@ -271,6 +271,8 @@ $eventBorderRadius: 5px;
   height: 26px;
   width: 26px;
   transition: transform 0.3s;
+  
+  filter: invert(0%) sepia(1%) saturate(2046%) hue-rotate(24deg) brightness(55%) contrast(100%);
 
   &:hover {
     transform: rotate(90deg);

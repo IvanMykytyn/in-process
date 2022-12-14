@@ -26,7 +26,7 @@ interface BookingState {
   isPopoverOpen: boolean;
 
   bookingsOwn: IBookingOwn | null;
-  bookingLoading: boolean;
+  isBookingLoading: boolean;
   oneTimeLoading: boolean;
   ownLoading: boolean;
 
@@ -39,7 +39,7 @@ interface BookingState {
 
 const initialBookingState: BookingState = {
   bookingsOwn: null,
-  bookingLoading: false,
+  isBookingLoading: false,
   oneTimeLoading: false,
   ownLoading: false,
   bookings: [],
@@ -68,25 +68,31 @@ const bookingSlice = createSlice({
     togglePopover: (state) => {
       state.isPopoverOpen = !state.isPopoverOpen;
     },
+    closePopover: (state) => {
+      state.isPopoverOpen = false
+    },
     setCurrentBooking: (
       state,
       { payload }: PayloadAction<ExtendedSingleISOBooking>
     ) => {
       state.currentBooking = payload;
     },
+    resetIsSuccess: (state) => {
+      state.isSuccess = false
+    }
   },
   extraReducers: (builder) => {
     builder
       // get all bookings
       .addCase(getAllBookings.pending, (state) => {
-        state.bookingLoading = true;
+        state.isBookingLoading = true;
       })
       .addCase(getAllBookings.fulfilled, (state, { payload }) => {
-        state.bookingLoading = false;
+        state.isBookingLoading = false;
         state.bookings = payload;
       })
       .addCase(getAllBookings.rejected, (state, { payload }) => {
-        state.bookingLoading = false;
+        state.isBookingLoading = false;
       })
 
       // recurring post
@@ -108,7 +114,7 @@ const bookingSlice = createSlice({
           error = formatErrorDate(message);
         }
 
-        NotifyService.update(state.notifyId, error, 'error', 8000);
+        NotifyService.update(state.notifyId, "The room for this date is already booked", 'error', 8000);
         state.oneTimeLoading = false;
       })
 
@@ -147,7 +153,7 @@ const bookingSlice = createSlice({
           error = formatErrorDate(message);
         }
         
-        NotifyService.update(state.notifyId, error, 'error', 8000);
+        NotifyService.update(state.notifyId,  "The room for this date is already booked", 'error', 8000);
         state.oneTimeLoading = false;
       })
 
@@ -180,7 +186,7 @@ const bookingSlice = createSlice({
 
 const {
   reducer: bookingReducer,
-  actions: { toggleSideBar, removeBooking, togglePopover, setCurrentBooking },
+  actions: { toggleSideBar, removeBooking, togglePopover, setCurrentBooking, resetIsSuccess, closePopover },
 } = bookingSlice;
 
 const selectBooking = (state: RootState) => state.bookings;
@@ -204,4 +210,6 @@ export {
   removeBooking,
   togglePopover,
   setCurrentBooking,
+  resetIsSuccess,
+  closePopover,
 };

@@ -24,7 +24,7 @@
 
     .MuiStepIcon-text {
       font-size: 0.8rem;
-      fill: var(--text-color-700);
+      fill: var(--background);
     }
 
     .Mui-active,
@@ -88,7 +88,7 @@
   span {
     max-width: 250px;
     @extend %montserrat-medium-500;
-    color: var(--text-color);
+    // color: var(--text-color);
     font-size: 0.9rem;
     margin-top: 2px !important;
   }

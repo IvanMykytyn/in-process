@@ -525,3 +525,12 @@ tr.fc-list-event {
 .fc-list-day th {
   z-index: 10;
 }
+
+.loading-wrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 25;
+  
+}

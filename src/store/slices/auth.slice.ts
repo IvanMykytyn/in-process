@@ -123,6 +123,7 @@ const authSlice = createSlice({
       state.isLoading = true;
 
       state.notifyId = NotifyService.loading();
+      
     });
 
     builder.addCase(addUsers.fulfilled, (state) => {
@@ -132,8 +133,8 @@ const authSlice = createSlice({
 
     builder.addCase(addUsers.rejected, (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload?.message ?? 'Add Users Failed.';
-      NotifyService.update(state.notifyId, state.error, 'error');
+      const errorMsg = payload?.message ?? 'Add Users Failed.';
+      NotifyService.update(state.notifyId, errorMsg, 'error');
     });
 
     // logout
@@ -146,7 +147,7 @@ const authSlice = createSlice({
 
     builder.addCase(logoutUser.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-
+      localStorage.clear()
       const { notify } = payload;
       if (notify)
         NotifyService.update(state.notifyId, `Successfully log out`, 'success');

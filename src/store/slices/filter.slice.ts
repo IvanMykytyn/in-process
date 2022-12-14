@@ -1,41 +1,46 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface IRoom {
-    itemId: number[],
-    capacityId: Array<[
+    equipmentIds: number[],
+    capacityRanges: Array<[
         number,
         number
     ]>
+    filterItems: string[]
 };
 
 const initialState: IRoom = {
-    itemId: [],
-    capacityId: []
+    equipmentIds: [],
+    capacityRanges: [],
+    filterItems: [],
 };
 
 const filterSlice = createSlice({
     name: 'filterSlice',
     initialState: initialState,
     reducers: {
-        setItemId(state, action){
-            const filterIndex = state.itemId.indexOf(action.payload);
+        setEquipmentIds(state, action){
+            const filterIndex = state.equipmentIds.indexOf(action.payload);
             if (filterIndex < 0) {
-                state.itemId = [...state.itemId, action.payload];
+                state.equipmentIds = [...state.equipmentIds, action.payload];
             }else {
-                state.itemId = state.itemId.filter((value) => value !== action.payload);
+                state.equipmentIds = state.equipmentIds.filter((value) => value !== action.payload);
             }
         },
-        setCapacityId(state,action){
-            const filterIndex = state.capacityId.indexOf(action.payload);
+        setCapacityRanges(state,action){
+            const filterIndex = state.capacityRanges.findIndex(range => range[0] === action.payload[0]);
             if (filterIndex < 0) {
-                state.capacityId = [...state.capacityId, action.payload];
+                state.capacityRanges = [...state.capacityRanges, action.payload];
             }else {
-                state.capacityId = state.capacityId.filter((value) => value !== action.payload);
+                state.capacityRanges = state.capacityRanges.filter(range => range[0] !== action.payload[0]);
             }
+        },
+        setFilterItems: (state, action) => {
+            state.filterItems = action.payload
         }
     }
 });
 
-export const { setItemId, setCapacityId}= filterSlice.actions;
+export const { setEquipmentIds, setCapacityRanges, setFilterItems } = filterSlice.actions;
 
 export default filterSlice.reducer;

@@ -23,7 +23,7 @@ const roomSlice = createSlice({
   name: 'roomSlice',
   initialState: initialRoomState,
   reducers: {
-    getFilteredRooms(state, action) {
+    setFilteredRooms(state, action) {
       state.filteredRooms = action.payload;
     },
   },
@@ -47,7 +47,7 @@ const roomSlice = createSlice({
 
 const {
   reducer: roomReducer,
-  actions: { getFilteredRooms },
+  actions: { setFilteredRooms },
 } = roomSlice;
 
 const selectRooms = (state: RootState) => state.rooms;
@@ -56,4 +56,4 @@ const roomActions = {
   getAllSoonestBookings,
 };
 
-export { roomReducer, roomActions, selectRooms, initialRoomState, getFilteredRooms };
+export { roomReducer, roomActions, selectRooms, initialRoomState, setFilteredRooms };

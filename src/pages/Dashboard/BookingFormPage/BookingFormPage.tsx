@@ -1,21 +1,26 @@
-import { FC, useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Step, StepLabel, Stepper } from '@mui/material';
-import moment, { Moment } from 'moment';
-import 'moment-timezone';
+import { FC, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Step, StepLabel, Stepper } from "@mui/material";
+import moment, { Moment } from "moment";
+import "moment-timezone";
 
-import css from './BookingForm.module.scss';
-import './BookingForm.styles.scss';
-import cn from 'classnames';
+import css from "./BookingForm.module.scss";
+import "./BookingForm.styles.scss";
+import cn from "classnames";
 
-import { FormFirstStep } from './BookingFormSteps/FormFirstStep';
-import { FormThirdStep } from './BookingFormSteps/FormThirdStep';
-import { FormSecondStep } from './BookingFormSteps/FormSecondStep';
+import { FormFirstStep } from "./BookingFormSteps/FormFirstStep";
+import { FormThirdStep } from "./BookingFormSteps/FormThirdStep";
+import { FormSecondStep } from "./BookingFormSteps/FormSecondStep";
 
-import { IBookingOneTime, IBookingRecurring, PatternType } from 'models';
-import { getNextDay } from 'utils';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { bookingActions, selectBooking, selectRooms } from 'store';
+import { IBookingOneTime, IBookingRecurring, PatternType } from "models";
+import { getNextDay } from "utils";
+import { useAppDispatch, useAppSelector } from "hooks";
+import {
+  bookingActions,
+  resetIsSuccess,
+  selectBooking,
+  selectRooms,
+} from "store";
 
 export interface ValuesType {
   name: string;
@@ -33,9 +38,9 @@ export interface ErrorsType {
   [key: string]: string;
 }
 const steps = [
-  'Enter Information about this Meeting',
-  'Select Date and Time',
-  'Select Room',
+  "Enter Information about this Meeting",
+  "Select Date and Time",
+  "Select Room",
 ];
 
 const BookingFormPage: FC = () => {
@@ -43,25 +48,25 @@ const BookingFormPage: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const paramsDate = params.get('date');
+  const paramsDate = params.get("date");
   const isValidParamsDate = !!paramsDate && moment(paramsDate).isValid();
   const defaultParamsDate = isValidParamsDate ? moment(paramsDate) : moment();
   const { rooms } = useAppSelector(selectRooms);
   const { isSuccess } = useAppSelector(selectBooking);
 
   const initialValues: ValuesType = {
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     users: [],
     pattern: {
-      kind: 'EVERY_N_DAYS',
+      kind: "EVERY_N_DAYS",
       days: 1,
     },
-    startTime: moment('2023-08-18T00:00:00'),
-    endTime: moment('2023-08-18T00:00:00'),
+    startTime: moment("2023-08-18T00:00:00"),
+    endTime: moment("2023-08-18T00:00:00"),
     startDate: defaultParamsDate,
     endDate: getNextDay(defaultParamsDate.clone()),
-    roomId: (parseInt(params.get('roomId') ?? '') || rooms[0]?.id) ?? 2,
+    roomId: (parseInt(params.get("roomId") ?? "") || rooms[0]?.id) ?? 2,
     isRecurring: false,
   };
 
@@ -98,12 +103,13 @@ const BookingFormPage: FC = () => {
   useEffect(() => {
     if (isSuccess) {
       navigate(-1);
+      dispatch(resetIsSuccess())
     }
-  }, [navigate, isSuccess]);
+  }, [dispatch, navigate, isSuccess]);
 
   return (
     <form className={css.booking} onSubmit={handleBookingFormSubmit}>
-      <div className={'stepper'}>
+      <div className={"stepper"}>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label, index) => (
             <Step key={label} className={cn({ isActive: activeStep <= index })}>
@@ -112,7 +118,7 @@ const BookingFormPage: FC = () => {
           ))}
         </Stepper>
       </div>
-      <div className={css['stepper-form']}>
+      <div className={css["stepper-form"]}>
         {buildStep(activeStep)({
           activeStep,
           handleBack,
@@ -157,10 +163,21 @@ const buildStep = (activeStep: number) => {
 const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
   const { name, description, roomId, users } = values;
 
-  
-  const date = values.startDate.clone().add(2, 'hours').toISOString(false).slice(0, 10);
-  const startTime = values.startTime.clone().add(1, 'hours').toISOString().slice(10);
-  const endTime = values.endTime.clone().add(1, 'hours').toISOString().slice(10);
+  const date = values.startDate
+    .clone()
+    .add(2, "hours")
+    .toISOString(false)
+    .slice(0, 10);
+  const startTime = values.startTime
+    .clone()
+    .add(1, "hours")
+    .toISOString()
+    .slice(10);
+  const endTime = values.endTime
+    .clone()
+    .add(1, "hours")
+    .toISOString()
+    .slice(10);
 
   const start = date + startTime;
   const end = date + endTime;
@@ -178,10 +195,10 @@ const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
 const getRecurringBooking = (values: ValuesType): IBookingRecurring => {
   const { name, description, roomId, users, pattern } = values;
 
-  const since = values.startDate.clone().add(2, 'hours').toISOString();
-  const until = values.endDate.clone().add(2, 'hours').toISOString();
-  const start = values.startTime.clone().add(-2, 'hours').format('HH:mm');
-  const end = values.endTime.clone().add(-2, 'hours').format('HH:mm');
+  const since = values.startDate.clone().add(2, "hours").toISOString();
+  const until = values.endDate.clone().add(2, "hours").toISOString();
+  const start = values.startTime.clone().add(-2, "hours").format("HH:mm");
+  const end = values.endTime.clone().add(-2, "hours").format("HH:mm");
 
   return {
     since,

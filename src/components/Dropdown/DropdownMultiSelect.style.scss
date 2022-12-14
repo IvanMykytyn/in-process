@@ -15,8 +15,12 @@
 
 .filter_form {
   .MuiFormControl-root {
-    .MuiFormLabel-root[data-shrink="true"] {
-      display: none !important;
+    .MuiFormLabel-root {
+      font-family: 'Montserrat-Regular', sans-serif;
+      color: var(--accent-text-color) !important;
+    }
+    .MuiFormLabel-root[data-shrink="false"] {
+      top: -5px;
     }
   }
 
