@@ -1,13 +1,13 @@
-import React, { FC, useMemo, useState } from 'react';
-import moment, { Moment } from 'moment';
+import React, { FC, useMemo, useState } from "react";
+import moment, { Moment } from "moment";
 
-import { SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from "@mui/material";
 
-import css from '../BookingForm.module.scss';
-import '../BookingForm.styles.scss';
-import cn from 'classnames';
+import css from "../BookingForm.module.scss";
+import "../BookingForm.styles.scss";
+import cn from "classnames";
 
-import { BuildStepProps, ErrorsType, ValuesType } from '../BookingFormPage';
+import { BuildStepProps, ErrorsType, ValuesType } from "../BookingFormPage";
 import {
   Input,
   DatePicker,
@@ -16,28 +16,29 @@ import {
   Select,
   DaysPicker,
   Button,
-} from 'components';
+} from "components";
 
 import {
   DaysOfEveryNWeeksType,
   EveryNDayType,
   PatternType,
   XDayOfEveryNMonthType,
-} from 'models';
+} from "models";
 
-import { getDiffInMinutes } from 'utils';
+import { getDiffInMinutes } from "utils";
 
-const selectRepeatingRange = ['day', 'week', 'month', 'year'];
+const selectRepeatingRange = ["day", "week", "month", "year"];
 
 const FormSecondStep: FC<BuildStepProps> = ({
   handleBack,
   handleNext,
+  handleCancelEdit,
   values,
   setValues,
   errors,
   setErrors,
+  isEditing,
 }) => {
-
   const { currDays, currGeneralCount, currSelect } = useMemo(
     () => getDefaultPatternValues(values.pattern),
     [values.pattern]
@@ -62,14 +63,14 @@ const FormSecondStep: FC<BuildStepProps> = ({
       ...prevValues,
       isRecurring: !prevValues.isRecurring,
     }));
-    delete errors['generalCount'];
-    delete errors['endDate'];
+    delete errors["generalCount"];
+    delete errors["endDate"];
   };
 
   const handleCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     setGeneralCount(value);
-    delete errors['generalCount'];
+    delete errors["generalCount"];
   };
 
   const handleRangeChange = (event: SelectChangeEvent) => {
@@ -80,39 +81,39 @@ const FormSecondStep: FC<BuildStepProps> = ({
     let pattern: PatternType = values.pattern;
 
     let isValid = false;
-    let errorsObj = isValidSecondStep(values, values.isRecurring);
+    let errorsObj = isValidSecondStep(values, values.isRecurring, isEditing);
 
     if (values.isRecurring) {
       switch (select) {
-        case 'day':
+        case "day":
           pattern = {
-            kind: 'EVERY_N_DAYS',
+            kind: "EVERY_N_DAYS",
             days: generalCount,
           };
           errorsObj = { ...errorsObj, ...isValidSelectDay(pattern) };
 
           break;
-        case 'week':
+        case "week":
           pattern = {
-            kind: 'DAYS_OF_EVERY_N_WEEKS',
+            kind: "DAYS_OF_EVERY_N_WEEKS",
             days: days,
             weeks: generalCount,
           };
           errorsObj = { ...errorsObj, ...isValidSelectWeek(pattern) };
 
           break;
-        case 'month':
+        case "month":
           pattern = {
-            kind: 'X_DAY_OF_EVERY_N_MONTH',
+            kind: "X_DAY_OF_EVERY_N_MONTH",
             days: values.startDate?.date() || 0,
             month: generalCount,
           };
 
           errorsObj = { ...errorsObj, ...isValidSelectMonth(pattern) };
           break;
-        case 'year':
+        case "year":
           pattern = {
-            kind: 'X_DAY_OF_EVERY_N_MONTH',
+            kind: "X_DAY_OF_EVERY_N_MONTH",
             days: values.startDate?.date() || 0,
             month: generalCount * 12,
           };
@@ -136,93 +137,115 @@ const FormSecondStep: FC<BuildStepProps> = ({
 
   return (
     <>
-      <div className={cn(css['step-form'], css['second-step-form'])}>
-        <div className={css['second-step-form__left-side']}>
-          <div className={css['date-picker-fields']}>
-            <label data-label={'Select a date'} className={css.booking__label}>
+      <div
+        className={cn(css["step-form"], css["second-step-form"], {
+          [css["second-step-form-editing"]]: isEditing,
+        })}
+      >
+        <div className={css["second-step-form__left-side"]}>
+          <div className={css["date-picker-fields"]}>
+            <label data-label={"Select a date"} className={css.booking__label}>
               <DatePicker
                 date={values.startDate}
-                handleChange={handleDateChange('startDate')}
+                handleChange={handleDateChange("startDate")}
                 error={!!errors?.startDate}
                 errorText={errors.startDate}
               />
             </label>
-            <label data-label={'Start Time'} className={css.booking__label}>
+            <label data-label={"Start Time"} className={css.booking__label}>
               <TimePicker
                 time={values.startTime}
-                handleChange={handleDateChange('startTime')}
+                handleChange={handleDateChange("startTime")}
                 error={!!errors?.startTime}
                 errorText={errors.startTime}
               />
             </label>
-            <label data-label={'End Time'} className={css.booking__label}>
+            <label data-label={"End Time"} className={css.booking__label}>
               <TimePicker
                 time={values.endTime}
-                handleChange={handleDateChange('endTime')}
+                handleChange={handleDateChange("endTime")}
                 error={!!errors?.endTime}
                 errorText={errors.endTime}
               />
             </label>
           </div>
-
-          <div className={css['form-checkbox']}>
-            <Checkbox circled checked={values.isRecurring} onChange={handleToggle} />
-            <p role={'button'} onClick={handleToggle}>
-              Recurring Booking
-            </p>
-          </div>
-        </div>
-        <div
-          className={cn(css['second-step-form__right-side'], {
-            [css['recurring-booking']]: values.isRecurring,
-          })}
-        >
-          <div
-            data-label={'Repeat every: '}
-            className={cn(css['repeat-range'], css.booking__label)}
-          >
-            <div className={'second-step-form__count-input'}>
-              <Input
-                fullWidth
-                type={'number'}
-                inputProps={{ min: 1, max: 150 }}
-                value={generalCount}
-                onChange={handleCountChange}
-                error={!!errors?.generalCount}
+          {!isEditing && (
+            <div className={css["form-checkbox"]}>
+              <Checkbox
+                circled
+                checked={values.isRecurring}
+                onChange={handleToggle}
               />
+              <p role={"button"} onClick={handleToggle}>
+                Recurring Booking
+              </p>
             </div>
-            <Select
-              value={select}
-              handleChange={handleRangeChange}
-              options={selectRepeatingRange}
-              count={generalCount}
-            />
-            {!!errors?.generalCount && (
-              <span className={css['repeat-range__error']}>
-                {errors?.generalCount}
-              </span>
-            )}
-          </div>
-
-          {select === 'week' && <DaysPicker values={days} setValues={setDays} />}
-          <label
-            data-label={'Ends on '}
-            className={`${css.booking__label} ${css['label__end-date']}`}
-          >
-            <DatePicker
-              date={values.endDate}
-              handleChange={handleDateChange('endDate')}
-              error={!!errors?.endDate}
-              errorText={errors.endDate}
-            />
-          </label>
+          )}
         </div>
+        {!isEditing && (
+          <div
+            className={cn(css["second-step-form__right-side"], {
+              [css["recurring-booking"]]: values.isRecurring,
+            })}
+          >
+            <div
+              data-label={"Repeat every: "}
+              className={cn(css["repeat-range"], css.booking__label)}
+            >
+              <div className={"second-step-form__count-input"}>
+                <Input
+                  fullWidth
+                  type={"number"}
+                  inputProps={{ min: 1, max: 150 }}
+                  value={generalCount}
+                  onChange={handleCountChange}
+                  error={!!errors?.generalCount}
+                />
+              </div>
+              <Select
+                value={select}
+                handleChange={handleRangeChange}
+                options={selectRepeatingRange}
+                count={generalCount}
+              />
+              {!!errors?.generalCount && (
+                <span className={css["repeat-range__error"]}>
+                  {errors?.generalCount}
+                </span>
+              )}
+            </div>
+
+            {select === "week" && (
+              <DaysPicker values={days} setValues={setDays} />
+            )}
+            <label
+              data-label={"Ends on "}
+              className={`${css.booking__label} ${css["label__end-date"]}`}
+            >
+              <DatePicker
+                date={values.endDate}
+                handleChange={handleDateChange("endDate")}
+                error={!!errors?.endDate}
+                errorText={errors.endDate}
+              />
+            </label>
+          </div>
+        )}
       </div>
       <div className={css.buttons}>
-        <Button type={'button'} onClick={handleBack}>
+        {isEditing && (
+          <Button
+            type={"button"}
+            onClick={handleCancelEdit}
+            variant="cancel-edit"
+          >
+            Cancel Editing
+          </Button>
+        )}
+        <Button type={"button"} onClick={handleBack}>
           Back
         </Button>
-        <Button type={'button'} onClick={handleNextStage}>
+        <Button type={"submit"} onClick={handleNextStage}>
           Next
         </Button>
       </div>
@@ -232,42 +255,47 @@ const FormSecondStep: FC<BuildStepProps> = ({
 
 export { FormSecondStep };
 
-const isValidSecondStep = (values: ValuesType, isRecurring: boolean) => {
+const isValidSecondStep = (
+  values: ValuesType,
+  isRecurring: boolean,
+  isEditing: boolean
+) => {
   let errors: ErrorsType = {};
 
   if (!values.startDate) {
-    errors.startDate = 'This Field is required';
+    errors.startDate = "This Field is required";
   } else if (!values.startDate.isValid()) {
-    errors.startDate = 'Invalid date format';
+    errors.startDate = "Invalid date format";
   } else if (
-    !(values.startDate.isAfter() || values.startDate.isSame(moment(), 'day'))
+    !isEditing &&
+    !(values.startDate.isAfter() || values.startDate.isSame(moment(), "day"))
   ) {
-    errors.startDate = 'The date cannot be less than today';
+    errors.startDate = "The date cannot be less than today";
   }
 
   if (isRecurring) {
     if (!values.endDate) {
-      errors.endDate = 'This Field is required';
+      errors.endDate = "This Field is required";
     } else if (!values.endDate.isValid()) {
-      errors.endDate = 'Invalid date format';
+      errors.endDate = "Invalid date format";
     } else if (getDiffInMinutes(values.startDate, values.endDate) <= 0) {
-      errors.endDate = 'The end date cannot be less than start date';
+      errors.endDate = "The end date cannot be less than start date";
     }
   }
   if (!values.startTime) {
-    errors.startTime = 'This Field is required';
+    errors.startTime = "This Field is required";
   } else if (!values.startTime.isValid()) {
-    errors.startTime = 'Invalid time format';
+    errors.startTime = "Invalid time format";
   }
 
   if (!values.endTime) {
-    errors.endTime = 'This Field is required';
+    errors.endTime = "This Field is required";
   } else if (!values.endTime.isValid()) {
-    errors.endTime = 'Invalid time format';
+    errors.endTime = "Invalid time format";
   } else if (getDiffInMinutes(values.startTime, values.endTime) <= 0) {
-    errors.endTime = 'The end time cannot be less than start time';
+    errors.endTime = "The end time cannot be less than start time";
   } else if (getDiffInMinutes(values.startTime, values.endTime) < 15) {
-    errors.endTime = 'Minimum Duration is 15 minutes';
+    errors.endTime = "Minimum Duration is 15 minutes";
   }
 
   return errors;
@@ -276,9 +304,9 @@ const isValidSecondStep = (values: ValuesType, isRecurring: boolean) => {
 const isValidSelectDay = (pattern: EveryNDayType) => {
   let errors: ErrorsType = {};
   if (pattern.days < 0) {
-    errors.generalCount = 'Value must be greater than 0';
+    errors.generalCount = "Value must be greater than 0";
   } else if (pattern.days > 365) {
-    errors.generalCount = 'Value must be less than 365';
+    errors.generalCount = "Value must be less than 365";
   }
   return errors;
 };
@@ -286,9 +314,9 @@ const isValidSelectDay = (pattern: EveryNDayType) => {
 const isValidSelectWeek = (pattern: DaysOfEveryNWeeksType) => {
   let errors: ErrorsType = {};
   if (pattern.weeks < 0) {
-    errors.generalCount = 'Value must be greater than 0';
+    errors.generalCount = "Value must be greater than 0";
   } else if (pattern.weeks > 60) {
-    errors.generalCount = 'Value must be less than 60';
+    errors.generalCount = "Value must be less than 60";
   }
   return errors;
 };
@@ -296,27 +324,26 @@ const isValidSelectWeek = (pattern: DaysOfEveryNWeeksType) => {
 const isValidSelectMonth = (pattern: XDayOfEveryNMonthType) => {
   let errors: ErrorsType = {};
   if (pattern.days < 0) {
-    errors.generalCount = 'Value must be greater than 0';
+    errors.generalCount = "Value must be greater than 0";
   } else if (pattern.month > 80) {
-    errors.generalCount = 'Value must be less than 80';
+    errors.generalCount = "Value must be less than 80";
   }
   return errors;
 };
 
 const getDefaultPatternValues = (pattern: PatternType) => {
-
   let currDays = [moment().day()];
   let currSelect = selectRepeatingRange[1];
   let currGeneralCount = 1;
 
-  if (pattern.kind === 'DAYS_OF_EVERY_N_WEEKS') {
+  if (pattern.kind === "DAYS_OF_EVERY_N_WEEKS") {
     currSelect = selectRepeatingRange[1];
     currDays = pattern.days;
     currGeneralCount = pattern.weeks;
-  } else if (pattern.kind === 'EVERY_N_DAYS') {
+  } else if (pattern.kind === "EVERY_N_DAYS") {
     currSelect = selectRepeatingRange[0];
     currGeneralCount = pattern.days;
-  } else if (pattern.kind === 'X_DAY_OF_EVERY_N_MONTH') {
+  } else if (pattern.kind === "X_DAY_OF_EVERY_N_MONTH") {
     if (pattern.month % 12 === 0) {
       currSelect = selectRepeatingRange[3];
       currGeneralCount = pattern.month / 12;

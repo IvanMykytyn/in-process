@@ -1,11 +1,13 @@
-@import 'styles/global.module';
+@import "styles/global.module";
 
 .custom-select {
   padding: 0 5px 5px;
   .MuiInputBase-root {
+    color: var(--text-color);
     .MuiOutlinedInput-input {
       border-radius: 10px;
-      box-shadow: inset 1px 1px 3px var(--gray),inset -1px -1px 3px var(--white);
+      box-shadow: inset 1px 1px 3px var(--gray),
+        inset -1px -1px 3px var(--white);
     }
 
     min-width: 100px;
@@ -23,18 +25,16 @@
     padding: 11px 12px;
   }
 
-  .css-1rndd9j-MuiPopper-root-MuiAutocomplete-popper > *,
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
-  color: var(--text-color) !important;
-}
-
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
-  background-color: var(--background) !important;
-}
-
-.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
-  path{
-    color: var(--text-color);
+  .MuiPaper-root {
+    background-color: var(--background) !important;
+    box-shadow: 2px 2px 4px var(--gray),
+    -2px -2px 4px var(--white) !important;
+    path {
+      color: var(--text-color);
+    }
+    
+    .MuiMenuItem-root{
+      color: var(--accent-text-color) !important;
+    }
   }
-}
 }

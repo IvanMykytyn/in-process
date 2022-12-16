@@ -2,7 +2,7 @@
 
 $errorTextColor: #d32f2f;
 
-.multi-select {
+.multi-select,.single-select-dropdown {
   position: relative;
   width: 100%;
 
@@ -10,7 +10,7 @@ $errorTextColor: #d32f2f;
     min-height: 30px;
     // height: 30px;
     overflow-y: scroll;
-    max-height: 60px;
+    max-height: 85px;
 
     //display: flex;
     //flex-wrap: wrap-reverse;
@@ -25,6 +25,7 @@ $errorTextColor: #d32f2f;
   }
 
   .MuiAutocomplete-root {
+
     .MuiFormControl-root {
       height: 100%;
     }
@@ -76,17 +77,23 @@ $errorTextColor: #d32f2f;
     }
   }
 }
+.multi-select, .single-select-dropdown{
 
-.MuiAutocomplete-popper {
-  padding-bottom: 5px;
-  .MuiAutocomplete-listbox,
-  .MuiAutocomplete-noOptions {
-    overflow-x: hidden;
-    background: var(--more-card-background);
-    box-shadow: $outerBoxShadow;
-    font-size: 0.9rem;
-    max-height: 200px;
+  .MuiAutocomplete-popper {
+    box-shadow: $outerBoxShadow !important;
+    
+    .MuiAutocomplete-listbox,
+    .MuiAutocomplete-noOptions {
+      overflow-x: hidden;
+      background: var(--background);
+      box-shadow: $outerBoxShadow;
+      font-size: 0.9rem;
+      max-height: 200px;
+      
+      color: var(--accent-text-color)
+    }
   }
+  
 }
 
 .multi-select-large {
@@ -127,4 +134,14 @@ $errorTextColor: #d32f2f;
 
 .MuiChip-label {
   color: var(--accent-text-color);
+}
+
+.single-select-dropdown{
+  .MuiInputBase-input{
+    box-shadow: none !important;
+    padding: 5px 4px 5px 6px !important;
+  }
+  .text-field{
+    padding-bottom: 0;
+  }
 }

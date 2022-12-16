@@ -48,7 +48,9 @@ interface IBookingOneTime {
 interface IBookingOneTimePut extends IBookingOneTime {
   id: number;
 }
-
+interface IBookingOneTimePutEdited extends Omit<IBookingOneTimePut, 'users'>{
+  usersIds: string[];
+}
 interface IBookingOneTimeDelete {
   bookingId: number;
 }
@@ -149,4 +151,5 @@ export type {
   SingleBooking,
   ExtendedSingleBooking,
   ExtendedSingleISOBooking,
+  IBookingOneTimePutEdited,
 };

@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
+import scss from "./settings.module.scss";
 
 import { SectionLayout } from './SectionLayout';
 import { SectionInput } from './SectionInput';
@@ -53,7 +54,8 @@ const ChangePasswordSection: FC = () => {
   };
 
   return (
-    <SectionLayout headerText={'Password Change'} onSubmit={handleSubmit(submit)}>
+    <SectionLayout headerText={'Password Change'}>
+      <form className={scss['settings__section-body']} onSubmit={handleSubmit(submit)}></form>
       <SectionInput
         type={'password'}
         text={'New Password'}

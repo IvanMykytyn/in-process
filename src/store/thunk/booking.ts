@@ -9,6 +9,7 @@ import {
   IBookingOwn,
   GetAllBookingsResponse,
   ErrorMessageObject,
+  IBookingOneTimePutEdited,
 } from 'models';
 import { bookingService } from 'services';
 
@@ -116,16 +117,23 @@ export const oneTimeDelete = createAsyncThunk<
 
 export const oneTimePut = createAsyncThunk<
   IBookingOneTimePut,
-  { bookingId: number; newBooking: IBookingOneTimePut }
+  IBookingOneTimePutEdited,
+  {
+    rejectValue: ErrorMessageObject;
+  }
 >(
   'bookingSlice/oneTimePut',
-  async ({ bookingId, newBooking }, { rejectWithValue }) => {
+  async (booking, { rejectWithValue }) => {
     try {
-      const { data } = await bookingService.putBookingOneTime(bookingId, newBooking);
+      const { data } = await bookingService.putBookingOneTime(booking);
       return data;
-    } catch (e) {
-      const err = e as AxiosError;
-      return rejectWithValue(err.response?.data);
+    } catch (err) {
+      const error = err as AxiosError<ErrorMessageObject>;
+
+      if (!error.response) {
+        throw err;
+      }
+      return rejectWithValue(error.response.data);
     }
   }
 );

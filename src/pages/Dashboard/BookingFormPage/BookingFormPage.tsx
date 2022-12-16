@@ -13,10 +13,11 @@ import { FormThirdStep } from "./BookingFormSteps/FormThirdStep";
 import { FormSecondStep } from "./BookingFormSteps/FormSecondStep";
 
 import { IBookingOneTime, IBookingRecurring, PatternType } from "models";
-import { getNextDay } from "utils";
+import { getNextDay, getValidDateFromString, PAGE_SIDEBAR_LIMIT } from "utils";
 import { useAppDispatch, useAppSelector } from "hooks";
 import {
   bookingActions,
+  getAllOwnBookings,
   resetIsSuccess,
   selectBooking,
   selectRooms,
@@ -48,24 +49,36 @@ const BookingFormPage: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const paramsDate = params.get("date");
-  const isValidParamsDate = !!paramsDate && moment(paramsDate).isValid();
-  const defaultParamsDate = isValidParamsDate ? moment(paramsDate) : moment();
-  const { rooms } = useAppSelector(selectRooms);
-  const { isSuccess } = useAppSelector(selectBooking);
+  const defaultParamsStartDate = getValidDateFromString(
+    params.get("date") ?? ""
+  );
+  const defaultParamsEndDate = getValidDateFromString(params.get("end") ?? "");
 
+  const defaultStartTime = defaultParamsStartDate.clone();
+  const startRemainder = 15 - (defaultStartTime.minute() % 15);
+  defaultStartTime.add(startRemainder, "minutes");
+
+  const defaultEndTime = defaultParamsEndDate.clone();
+  const endRemainder = 15 - (defaultEndTime.minute() % 15) + 60;
+  defaultEndTime.add(endRemainder, "minutes");
+
+  const { rooms } = useAppSelector(selectRooms);
+  const { isSuccess, isEditing, editingBookingId, page } =
+    useAppSelector(selectBooking);
+
+  const paramUsers = params.get("users");
   const initialValues: ValuesType = {
-    name: "",
-    description: "",
-    users: [],
+    name: params.get("name") ?? "",
+    description: params.get("description") ?? "",
+    users: !!paramUsers ? paramUsers.split(",") : [],
     pattern: {
       kind: "EVERY_N_DAYS",
       days: 1,
     },
-    startTime: moment("2023-08-18T00:00:00"),
-    endTime: moment("2023-08-18T00:00:00"),
-    startDate: defaultParamsDate,
-    endDate: getNextDay(defaultParamsDate.clone()),
+    startTime: defaultStartTime,
+    endTime: defaultEndTime,
+    startDate: defaultParamsStartDate.clone(),
+    endDate: getNextDay(defaultParamsStartDate.clone()),
     roomId: (parseInt(params.get("roomId") ?? "") || rooms[0]?.id) ?? 2,
     isRecurring: false,
   };
@@ -83,27 +96,48 @@ const BookingFormPage: FC = () => {
     setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
   };
 
+  const handleCancelEdit = () => {
+    dispatch(bookingActions.resetEditingId());
+    navigate(-1);
+  };
+
   const handleBookingFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (Object.keys(errors).length === 0) {
         if (!values.isRecurring) {
-          const booking = getOneTimeBooking(values);
-          await dispatch(bookingActions.oneTimePost({ booking }));
+          const booking = getOneTimeBooking(values, isEditing);
+          console.log(booking);
+          if (isEditing) {
+            await dispatch(
+              bookingActions.oneTimePut({
+                ...booking,
+                usersIds: booking.users,
+                id: editingBookingId,
+              })
+            );
+          } else {
+            await dispatch(bookingActions.oneTimePost({ booking }));
+          }
         } else {
           const booking = getRecurringBooking(values);
           await dispatch(bookingActions.recPost({ booking }));
         }
+
+        await dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT }));
       }
     } catch (error) {
       // console.log(error);
     }
   };
+  // useEffect(() => {
+
+  // }, [])
 
   useEffect(() => {
     if (isSuccess) {
       navigate(-1);
-      dispatch(resetIsSuccess())
+      dispatch(resetIsSuccess());
     }
   }, [dispatch, navigate, isSuccess]);
 
@@ -123,10 +157,12 @@ const BookingFormPage: FC = () => {
           activeStep,
           handleBack,
           handleNext,
+          handleCancelEdit,
           values,
           setValues,
           errors,
           setErrors,
+          isEditing,
         })}
       </div>
     </form>
@@ -139,10 +175,12 @@ export interface BuildStepProps {
   activeStep: number;
   handleBack: () => void;
   handleNext: () => void;
+  handleCancelEdit: () => void;
   values: ValuesType;
   setValues: React.Dispatch<React.SetStateAction<ValuesType>>;
   errors: ErrorsType;
   setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>;
+  isEditing: boolean;
 }
 const buildStep = (activeStep: number) => {
   return ({ ...props }: BuildStepProps) => {
@@ -160,24 +198,24 @@ const buildStep = (activeStep: number) => {
   };
 };
 
-const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
+const getOneTimeBooking = (
+  values: ValuesType,
+  isEditing: boolean
+): IBookingOneTime => {
   const { name, description, roomId, users } = values;
 
-  const date = values.startDate
-    .clone()
-    .add(2, "hours")
-    .toISOString(false)
-    .slice(0, 10);
-  const startTime = values.startTime
-    .clone()
-    .add(1, "hours")
-    .toISOString()
-    .slice(10);
-  const endTime = values.endTime
-    .clone()
-    .add(1, "hours")
-    .toISOString()
-    .slice(10);
+  let dateMoment = values.startDate.clone();
+  let startTimeMoment = values.startTime.clone();
+  let endTimeMoment = values.endTime.clone();
+
+  if (!isEditing) {
+    dateMoment = dateMoment.add(2, "hours");
+    // startTimeMoment = startTimeMoment.add(0, "hours");
+    // endTimeMoment = endTimeMoment.add(0, "hours");
+  }
+  const date = dateMoment.toISOString(false).slice(0, 10);
+  const startTime = startTimeMoment.toISOString().slice(10);
+  const endTime = endTimeMoment.toISOString().slice(10);
 
   const start = date + startTime;
   const end = date + endTime;

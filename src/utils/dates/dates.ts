@@ -33,3 +33,8 @@ export const getTimeFromDate = (currentDate: Moment): string => {
 export const getFullDateRange = (start: Moment, end: Moment) => {
   return `${start.format('LLLL')} - ${getTimeFromDate(end)}`;
 };
+
+export const getValidDateFromString = (strDate: string): Moment => {
+  const isValidParamsDate = !!strDate && moment(strDate).isValid();
+  return isValidParamsDate ? moment(strDate) : moment();
+}

@@ -1,10 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from 'store';
-import { Id } from 'react-toastify';
-import {
-  ExtendedSingleISOBooking,
-  IBookingOwn,
-} from 'models';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "store";
+import { Id } from "react-toastify";
+import { ExtendedSingleISOBooking, IBookingOwn } from "models";
 
 import {
   getAllBookings,
@@ -16,9 +13,9 @@ import {
   oneTimeDelete,
   getAllOwnBookings,
   GetAllBookings,
-} from '../thunk';
-import { NotifyService } from 'services';
-import { formatErrorDate } from 'utils';
+} from "../thunk";
+import { NotifyService } from "services";
+import { formatErrorDate } from "utils";
 
 interface BookingState {
   isLoading: boolean;
@@ -30,11 +27,16 @@ interface BookingState {
   oneTimeLoading: boolean;
   ownLoading: boolean;
 
+  isEditing: boolean;
+  editingBookingId: number;
+
   bookings: GetAllBookings;
   currentBooking: ExtendedSingleISOBooking | null;
 
   notifyId: Id;
   isSuccess: boolean;
+
+  page: number;
 }
 
 const initialBookingState: BookingState = {
@@ -49,27 +51,33 @@ const initialBookingState: BookingState = {
   isLoading: false,
   isSideBarOpen: true,
   isPopoverOpen: false,
+  isEditing: false,
+  editingBookingId: NaN,
 
   isSuccess: false,
 
-  notifyId: '',
+  page: 1,
+
+  notifyId: "",
 };
 
 const bookingSlice = createSlice({
-  name: 'bookingSlice',
+  name: "bookingSlice",
   initialState: initialBookingState,
   reducers: {
     toggleSideBar: (state) => {
       state.isSideBarOpen = !state.isSideBarOpen;
     },
     removeBooking: (state, { payload }: PayloadAction<number>) => {
-      state.bookings = state.bookings.filter((booking) => booking.id !== payload);
+      state.bookings = state.bookings.filter(
+        (booking) => booking.id !== payload
+      );
     },
     togglePopover: (state) => {
       state.isPopoverOpen = !state.isPopoverOpen;
     },
     closePopover: (state) => {
-      state.isPopoverOpen = false
+      state.isPopoverOpen = false;
     },
     setCurrentBooking: (
       state,
@@ -78,8 +86,19 @@ const bookingSlice = createSlice({
       state.currentBooking = payload;
     },
     resetIsSuccess: (state) => {
-      state.isSuccess = false
-    }
+      state.isSuccess = false;
+    },
+    setEditingId: (state, { payload }) => {
+      state.isEditing = !!payload;
+      state.editingBookingId = payload;
+    },
+    resetEditingId: (state) => {
+      state.isEditing = false;
+      state.editingBookingId = NaN;
+    },
+    setPage: (state, { payload }) => {
+      state.page = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -104,17 +123,22 @@ const bookingSlice = createSlice({
         state.oneTimeLoading = false;
         state.isSuccess = true;
 
-        NotifyService.update(state.notifyId, `Successfully booked`, 'success');
+        NotifyService.update(state.notifyId, `Successfully booked`, "success");
       })
       .addCase(recPost.rejected, (state, { payload }) => {
         const { message, statusCode } = payload || {};
 
-        let error = message ?? 'Something went Wrong';
+        let error = message ?? "Something went Wrong";
         if (statusCode === 400 && !!message) {
           error = formatErrorDate(message);
         }
 
-        NotifyService.update(state.notifyId, "The room for this date is already booked", 'error', 8000);
+        NotifyService.update(
+          state.notifyId,
+          "The room for this date is already booked",
+          "error",
+          8000
+        );
         state.oneTimeLoading = false;
       })
 
@@ -123,13 +147,15 @@ const bookingSlice = createSlice({
         state.notifyId = NotifyService.loading();
       })
       .addCase(recDelete.fulfilled, (state, action) => {
-        state.bookings = state.bookings.length > 0 ? [state.bookings[0]] : [];
+        state.bookings = state.bookings.filter(
+          (booking) => booking?.schedule?.id !== action.payload.scheduleId
+        );;
 
-        NotifyService.update(state.notifyId, `Successfully deleted`, 'success');
+        NotifyService.update(state.notifyId, `Successfully deleted`, "success");
       })
       .addCase(recDelete.rejected, (state) => {
-        const error = 'Something went Wrong';
-        NotifyService.update(state.notifyId, error, 'error');
+        const error = "Something went Wrong";
+        NotifyService.update(state.notifyId, error, "error");
         state.oneTimeLoading = false;
       })
 
@@ -143,17 +169,50 @@ const bookingSlice = createSlice({
         state.isSuccess = true;
         state.oneTimeLoading = false;
 
-        NotifyService.update(state.notifyId, `Successfully booked`, 'success');
+        NotifyService.update(state.notifyId, `Successfully booked`, "success");
       })
       .addCase(oneTimePost.rejected, (state, { payload }) => {
         const { message, statusCode } = payload || {};
 
-        let error = message ?? 'Something went Wrong';
+        let error = message ?? "Something went Wrong";
         if (statusCode === 400 && !!message) {
           error = formatErrorDate(message);
         }
-        
-        NotifyService.update(state.notifyId,  "The room for this date is already booked", 'error', 8000);
+
+        NotifyService.update(
+          state.notifyId,
+          "The room for this date is already booked",
+          "error",
+          8000
+        );
+        state.oneTimeLoading = false;
+      })
+
+      // one time put
+      .addCase(oneTimePut.pending, (state) => {
+        state.isSuccess = false;
+        state.notifyId = NotifyService.loading();
+      })
+      .addCase(oneTimePut.fulfilled, (state, action) => {
+        state.isSuccess = true;
+        state.editingBookingId = NaN;
+        state.isEditing = false;
+        NotifyService.update(state.notifyId, `Successfully Updated`, "success");
+      })
+      .addCase(oneTimePut.rejected, (state, { payload }) => {
+        const { message, statusCode } = payload || {};
+
+        let error = message ?? "Something went Wrong";
+        if (statusCode === 400 && !!message) {
+          error = formatErrorDate(message);
+        }
+
+        NotifyService.update(
+          state.notifyId,
+          "The room for this date is already booked",
+          "error",
+          8000
+        );
         state.oneTimeLoading = false;
       })
 
@@ -165,20 +224,25 @@ const bookingSlice = createSlice({
         state.bookings = state.bookings.filter(
           (booking) => booking.id !== action.payload.bookingId
         );
-        NotifyService.update(state.notifyId, `Successfully deleted`, 'success');
+        NotifyService.update(state.notifyId, `Successfully deleted`, "success");
       })
       .addCase(oneTimeDelete.rejected, (state) => {
-        const error = 'Something went Wrong';
-        NotifyService.update(state.notifyId, error, 'error');
+        const error = "Something went Wrong";
+        NotifyService.update(state.notifyId, error, "error");
         state.oneTimeLoading = false;
       })
 
       // get all own Bookings
       .addCase(getAllOwnBookings.pending, (state) => {
-        state.ownLoading = true;
+        if (state.bookingsOwn?.data.length === 0) {
+          state.ownLoading = true;
+        }
       })
       .addCase(getAllOwnBookings.fulfilled, (state, action) => {
-        state.bookingsOwn = action.payload;
+        const updatedBookings = action.payload;
+        if (state.bookingsOwn?.totalCount !== updatedBookings.data.length) {
+          state.bookingsOwn = updatedBookings;
+        }
         state.ownLoading = false;
       });
   },
@@ -186,7 +250,17 @@ const bookingSlice = createSlice({
 
 const {
   reducer: bookingReducer,
-  actions: { toggleSideBar, removeBooking, togglePopover, setCurrentBooking, resetIsSuccess, closePopover },
+  actions: {
+    toggleSideBar,
+    removeBooking,
+    togglePopover,
+    setCurrentBooking,
+    resetIsSuccess,
+    closePopover,
+    setEditingId,
+    setPage,
+    resetEditingId,
+  },
 } = bookingSlice;
 
 const selectBooking = (state: RootState) => state.bookings;
@@ -200,6 +274,9 @@ const bookingActions = {
   oneTimeDelete,
   oneTimePut,
   getAllOwnBookings,
+  setEditingId,
+  setPage,
+  resetEditingId,
 };
 
 export {

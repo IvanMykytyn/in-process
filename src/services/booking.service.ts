@@ -9,7 +9,8 @@ import {
     IBookingOneTime,
     IBookingOneTimeDelete,
     IBookingOwn,
-    GetAllBookingsResponse
+    GetAllBookingsResponse,
+    IBookingOneTimePutEdited
 } from 'models';
 
 
@@ -23,7 +24,7 @@ const bookingService = {
 
     postBookingOneTime: (booking: IBookingOneTime): AxiosRes<IBookingOneTime> => axiosService.post(`${urls.bookings}/one-time`, booking),
     deleteBookingOneTime: (bookingId: number): AxiosRes<IBookingOneTimeDelete> => axiosService.delete(`${urls.bookings}/one-time`, { data: { bookingId } }),
-    putBookingOneTime: (bookingId: number, newBooking: IBookingOneTimePut): AxiosRes<IBookingOneTimePut> => axiosService.put(`${urls.bookings}/${bookingId}`, newBooking),
+    putBookingOneTime: (booking: IBookingOneTimePutEdited): AxiosRes<IBookingOneTimePut> => axiosService.put(`${urls.bookings}/one-time`, booking),
 
     getBookingOwn: (page: number, limit: number): AxiosRes<IBookingOwn> => axiosService.get(`${urls.bookings}/own?page=${page}&limit=${limit}`)
 };

@@ -49,7 +49,7 @@ const Settings: FC = () => {
                             </div>
                         </div>
                     )}
-                    <button className={scss.settings__theme} onClick={toggleTheme}>
+                    <button className={scss.settings__theme} onClick={toggleTheme} disabled={true}>
                         <img src={mode === 'light' ? sun : moon} alt="change theme" height={15} width={15}/>
                     </button>
                 </div>

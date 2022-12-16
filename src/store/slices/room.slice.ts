@@ -25,7 +25,7 @@ const roomSlice = createSlice({
   reducers: {
     setFilteredRooms(state, action) {
       state.filteredRooms = action.payload;
-    },
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -56,4 +56,4 @@ const roomActions = {
   getAllSoonestBookings,
 };
 
-export { roomReducer, roomActions, selectRooms, initialRoomState, setFilteredRooms };
+export { roomReducer, roomActions, selectRooms, initialRoomState, setFilteredRooms};

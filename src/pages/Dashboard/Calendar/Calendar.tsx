@@ -15,7 +15,11 @@ import "./calendar.styles.scss";
 
 import { getAllBookings } from "store";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { closePopover, selectBooking } from "store/slices/booking.slice";
+import {
+  bookingActions,
+  closePopover,
+  selectBooking,
+} from "store/slices/booking.slice";
 
 import { colorFromString } from "utils";
 
@@ -76,6 +80,7 @@ const Calendar: FC = () => {
       })
     );
   };
+  
   useEffect(() => {
     dispatch(closePopover());
   }, [dispatch]);
@@ -91,7 +96,7 @@ const Calendar: FC = () => {
   return (
     <div className="full-calendar">
       {isBookingLoading && (
-        <div className='loading-wrapper'>
+        <div className="loading-wrapper">
           <Loading />
         </div>
       )}
@@ -144,7 +149,8 @@ const Calendar: FC = () => {
             click: () => {
               const { currentDate } =
                 calendarRef?.current?.getApi?.().currentDataManager.data;
-              const date = moment(currentDate).toISOString();
+              const date = moment(currentDate).add(-2, "hours").toISOString();
+              dispatch(bookingActions.resetEditingId());
               navigate(`/dashboard/booking-form?date=${date}`);
             },
           },
