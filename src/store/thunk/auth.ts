@@ -18,7 +18,7 @@ import { userService, adminService } from "services";
 
 import { clearUser } from "store/slices/auth.slice";
 
-import { AppDispatch } from "store";
+import { AppDispatch, roomActions } from "store";
 
 export const loginUser = createAsyncThunk<
   UserWithToken,
@@ -94,7 +94,7 @@ export const logoutUser = createAsyncThunk<
 >("auth/logoutUser", async (notify = true, thunkAPI) => {
   try {
     thunkAPI.dispatch(clearUser());
-    // thunkAPI.dispatch(clearRooms());
+    // thunkAPI.dispatch(roomActions.clearRooms);
     return { notify };
   } catch (err) {
     return thunkAPI.rejectWithValue("Logout failed");

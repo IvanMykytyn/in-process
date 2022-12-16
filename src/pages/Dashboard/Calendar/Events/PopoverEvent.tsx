@@ -1,8 +1,12 @@
 import { FC, useState } from "react";
 
-import { oneTimeDelete, recDelete, selectUser } from "store";
+import { getAllOwnBookings, oneTimeDelete, recDelete, selectUser } from "store";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import { bookingActions, togglePopover } from "store/slices/booking.slice";
+import {
+  bookingActions,
+  selectBooking,
+  togglePopover,
+} from "store/slices/booking.slice";
 
 import cn from "classnames";
 import scss from "./events.module.scss";
@@ -17,7 +21,11 @@ import {
   room as roomIcon,
   trash,
 } from "assets/images/icons";
-import { getFullDateRange, getParamsFromObject } from "utils";
+import {
+  getFullDateRange,
+  getParamsFromObject,
+  PAGE_SIDEBAR_LIMIT,
+} from "utils";
 import { ExtendedSingleBooking } from "models";
 import { useNavigate } from "react-router";
 import { DeletePopover } from "components";
@@ -31,6 +39,7 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
   const navigate = useNavigate();
 
   const { user } = useAppSelector(selectUser);
+  const { page } = useAppSelector(selectBooking);
   const {
     name,
     description,
@@ -46,7 +55,7 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
 
   const handleEdit = () => {
     dispatch(bookingActions.setEditingId(id));
-    
+
     const url = getParamsFromObject({
       name,
       description,
@@ -80,6 +89,7 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
     } else {
       dispatch(oneTimeDelete({ bookingId: id }));
     }
+    dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT }));
     setIsOpen(false);
     handleClose();
   };
@@ -115,13 +125,19 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
 
       <main className={scss["body-container"]}>
         <div className={scss["body"]}>
-          <h3 className={scss["title"]}>{name}</h3>
+          <h3 className={cn(scss["title"])} style={{ wordBreak: "break-all" }}>
+            {name}
+          </h3>
           <p className={scss["date-information"]}>
             {getFullDateRange(start, end)}
           </p>
           <div className={scss["content-wrapper"]}>
             {!!description && (
-              <ContentWithIcon icon={details} text={description} />
+              <ContentWithIcon
+                className="content-text"
+                icon={details}
+                text={description}
+              />
             )}
             {usersEmails.length > 0 && (
               <ContentWithIcon

@@ -201,8 +201,10 @@ const bookingSlice = createSlice({
       })
       .addCase(oneTimePut.rejected, (state, { payload }) => {
         const { message, statusCode } = payload || {};
+        console.log(payload);
 
         let error = message ?? "Something went Wrong";
+        
         if (statusCode === 400 && !!message) {
           error = formatErrorDate(message);
         }
@@ -289,4 +291,5 @@ export {
   setCurrentBooking,
   resetIsSuccess,
   closePopover,
+  initialBookingState,
 };

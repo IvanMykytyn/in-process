@@ -6,11 +6,11 @@ import { setupStore } from './store';
 import { Provider } from 'react-redux';
 import { setupAxiosInterceptors } from 'services';
 import { logoutUser } from 'store';
-import { ThemeOptions, ThemeProvider } from '@mui/material';
 
 export const store = setupStore();
 
 const { dispatch } = store;
+
 setupAxiosInterceptors(() => {
   dispatch(logoutUser());
 });

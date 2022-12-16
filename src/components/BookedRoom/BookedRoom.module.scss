@@ -72,7 +72,7 @@
     }
 
     img,
-    ul, {
+    ul{
       font-size: 0;
       height: 0;
       width: 0;
@@ -109,6 +109,8 @@
       height: 100%;
       width: 100%;
     }
+
+    
   }
 
   &__list {
@@ -164,6 +166,13 @@
     align-items: center;
     font-size: 14px;
     color: var(--accent-text-color);
+    
+    .meetingName{
+      word-break: break-all;
+      @include threeDotsOnOverflow(2);
+      padding-right: 20px;
+      
+    }
 
     div {
       @extend %montserrat-semi-bold-600;
@@ -212,5 +221,13 @@
   100% {
     background-color: var(--primary-color);
     box-shadow: 0 0 5px var(--primary-color);
+  }
+}
+
+.active{
+  .booked__info {
+    .meetingName{
+      display: block;
+    } 
   }
 }

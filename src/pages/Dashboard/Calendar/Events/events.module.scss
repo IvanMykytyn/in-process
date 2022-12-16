@@ -305,6 +305,7 @@ $eventBorderRadius: 5px;
   flex-direction: column;
   gap: 10px;
   color: var(--text-color-500);
+  max-width: 100%;
 }
 
 .date-information {
@@ -393,4 +394,10 @@ $eventBorderRadius: 5px;
     max-height: 150px;
     overflow-y: auto;
   }
+}
+
+.content-text{
+  p{
+    word-break: break-all;
+ } 
 }

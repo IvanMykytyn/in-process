@@ -44,10 +44,10 @@ const BookedRoom: FC<Props> = ({
                 startTime >= 0 ?
                     `${isActive && `${css.booked__item} ${css.active}` || `${css.booked__item}`}`
                     :
-                    `${css.booked__item} ${css.glowing}`
+                    `${isActive && `${css.booked__item} ${css.active}` || `${css.booked__item}`} ${css.glowing}`
         }>
             <div className={css.booked__info}>
-                <span>
+                <span className={css.meetingName}>
                     {meetingName}
                 </span>
             </div>
@@ -65,7 +65,7 @@ const BookedRoom: FC<Props> = ({
                             "The event is already over"
                             :
                             startTime >= 0 ?
-                                <Moment fromNow ago interval={15000}>
+                                <Moment fromNow ago interval={5000}>
                                     {getRoomStartDateTime}
                                 </Moment>
                                 :

@@ -153,7 +153,15 @@ const isValidFirstStep = (values: ValuesType) => {
   let errors: ErrorsType = {};
   if (!values.name) {
     errors.name = "This Field is required";
+  }else if(values.name.length > 200){
+    errors.name = "The maximum length is 200 characters"
   }
+
+  if(values.description.length > 200){
+    errors.description = "The maximum length is 1500 characters"
+  }
+
+  
 
   return errors;
 };

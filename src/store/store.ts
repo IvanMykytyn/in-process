@@ -10,7 +10,7 @@ import { bookingReducer, roomReducer, themeReducer } from "./slices";
 import filterSlice from "./slices/filter.slice";
 import { logoutUser } from "./thunk";
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   auth: authSlice,
   bookings: bookingReducer,
   rooms: roomReducer,
@@ -18,15 +18,15 @@ const appReducer = combineReducers({
   themes: themeReducer,
 });
 
-const rootReducer = (
-  state: ReturnType<typeof appReducer> | undefined,
-  action: AnyAction
-) => {
-  if (action.type === `${logoutUser.typePrefix}/fulfilled`) {
-    return appReducer(undefined, action);
-  }
-  return appReducer(state, action);
-};
+// const rootReducer = (
+//   state: ReturnType<typeof appReducer> | undefined,
+//   action: AnyAction
+// ) => {
+//   if (action.type === `${logoutUser.typePrefix}/fulfilled`) {
+//     return appReducer(undefined, { type: undefined });
+//   }
+//   return appReducer(state, action);
+// };
 
 const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({

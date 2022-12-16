@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 // styles
 import cn from 'classnames';
 import scss from './sidebar.module.scss';
-import { logoutUser, selectUser } from 'store';
+import { logoutUser, roomActions, selectUser } from 'store';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectBooking } from 'store/slices/booking.slice';
 import { Link, useNavigate } from 'react-router-dom';
@@ -25,6 +25,7 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    dispatch(roomActions.clearRooms())
     navigate('/login');
   };
 

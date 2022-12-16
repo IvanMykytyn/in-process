@@ -13,7 +13,7 @@ const CalendarDayHeader: FC = () => {
       {rooms.map((room) => {
         return (
           <li key={room.id} className={scss['calendar__header-room']}>
-            {room.name}
+            {room.name} / {room.floor} floor
           </li>
         );
       })}

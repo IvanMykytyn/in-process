@@ -3,18 +3,18 @@ import {EquipmentsProps, CapacityRangeProps} from "models";
 export const capacityFilter: CapacityRangeProps[] = [
     {
         id: 0,
-        name: '1-10',
-        range: [1, 10]
+        name: '1-2',
+        range: [1, 2]
     },
     {
         id: 1,
-        name: '11-20',
-        range: [11, 20]
+        name: '3-6',
+        range: [3, 6]
     },
     {
         id: 2,
-        name: '21-30',
-        range: [21, 30]
+        name: '7+',
+        range: [7, 200]
     }
 ]
 export const equipmentsFilter: EquipmentsProps[] = [

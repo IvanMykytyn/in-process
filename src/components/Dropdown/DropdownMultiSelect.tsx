@@ -47,7 +47,7 @@ const DropdownMultiSelect: FC<FilterProps> = ({
       const isValidCapacity =
         isCapacitySelected ||
         capacityRanges.some(
-          (range) => capacity > range[0] && capacity <= range[1]
+          (range) => capacity >= range[0] && capacity <= range[1]
         );
 
       return isValidEquipment && isValidCapacity;

@@ -19,6 +19,7 @@ import { SideBarHeader } from "./SideBarHeader";
 import { arrowLeft, arrowRight } from "../../assets/images/icons";
 import { SideBarSkeleton } from "components";
 import { PAGE_SIDEBAR_LIMIT } from "utils";
+import moment from "moment";
 
 const SideBar: FC = () => {
   const [accordionIndex, setAccordionIndex] = useState<number>(-1);
@@ -76,6 +77,8 @@ const SideBar: FC = () => {
     };
   }, [dispatch, page]);
 
+  const reminding = 60 - (moment().seconds() % 60)
+
   return (
     <div
       className={
@@ -95,7 +98,7 @@ const SideBar: FC = () => {
           }
         >
           <img src={clock} alt="clock" width={15} height={15} color={"red"} />
-          <Moment locale={"uk"} local={true} format={`LLL`} interval={30000} />
+          <Moment locale={"uk"} local={true} format={`LLL`} interval={1000} />
         </span>
         {ownLoading ? (
           <ul
@@ -114,7 +117,7 @@ const SideBar: FC = () => {
             }
           >
             {bookingsOwn?.data.length !== 0 ? (
-              bookingsOwn &&
+              !!bookingsOwn &&
               bookingsOwn.data.map((value) => (
                 <li key={value.id} onClick={() => toggleAccordion(value.id)}>
                   <BookedRoom
