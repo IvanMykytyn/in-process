@@ -138,7 +138,7 @@ const SideBar: FC = () => {
           </ul>
         )}
       </div>
-      {bookingsOwn?.totalCount && bookingsOwn?.totalCount > PAGE_SIDEBAR_LIMIT && (
+      {!!bookingsOwn?.totalCount && bookingsOwn?.totalCount > PAGE_SIDEBAR_LIMIT && (
         <div className={scss.sidebar__buttons}>
           <button
             className={
