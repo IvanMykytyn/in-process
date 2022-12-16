@@ -90,6 +90,10 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
+  &-editing{
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    max-width: 600px
+  }
   &__left-side {
     padding: 0 20px 10px;
     display: flex;

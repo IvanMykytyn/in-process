@@ -13,6 +13,7 @@ import {
   resetPassword,
   getMe,
   updateMe,
+  deleteUser,
 } from 'store/thunk';
 
 import { setToLocalStorage, removeFromLocalStorage } from 'utils';
@@ -49,13 +50,16 @@ const authSlice = createSlice({
       state.isLoading = true;
 
       state.notifyId = NotifyService.loading();
+      console.log(state.notifyId);
+
     });
 
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
       const { access_token, ...restUserData } = payload;
       state.user = restUserData;
       setToLocalStorage('token', payload.access_token);
-
+      console.log(state.notifyId);
+      
       state.isLoading = false;
       NotifyService.update(
         state.notifyId,
@@ -67,7 +71,10 @@ const authSlice = createSlice({
     builder.addCase(loginUser.rejected, (state, { payload }) => {
       state.isLoading = false;
 
+      console.log(state.notifyId);
+      
       state.error = payload?.message ?? 'Something went Wrong';
+      
       NotifyService.update(state.notifyId, state.error, 'error');
     });
 
@@ -267,6 +274,29 @@ const authSlice = createSlice({
     });
 
     builder.addCase(updateMe.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload?.message ?? 'Error! Try Again Later';
+      NotifyService.update(state.notifyId, state.error, 'error');
+    });
+
+    // delete user
+    builder.addCase(deleteUser.pending, (state) => {
+      state.isLoading = true;
+
+      state.notifyId = NotifyService.loading();
+    });
+
+    builder.addCase(deleteUser.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+
+      NotifyService.update(
+        state.notifyId,
+        `User Successfully deleted`,
+        'success'
+      );
+    });
+
+    builder.addCase(deleteUser.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload?.message ?? 'Error! Try Again Later';
       NotifyService.update(state.notifyId, state.error, 'error');

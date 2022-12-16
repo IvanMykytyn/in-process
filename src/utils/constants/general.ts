@@ -1,0 +1,5 @@
+const PAGE_SIDEBAR_LIMIT = 10
+
+export {
+    PAGE_SIDEBAR_LIMIT
+}

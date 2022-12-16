@@ -1,5 +1,5 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 
 import type {
   UserLoginProps,
@@ -12,12 +12,13 @@ import type {
   UserFields,
   UpdateMeResponse,
   ExtendedUserInterface,
-} from 'models';
+} from "models";
 
-import { userService, adminService } from 'services';
+import { userService, adminService } from "services";
 
-import { clearUser } from 'store/slices/auth.slice';
-import type { AppDispatch } from 'store';
+import { clearUser } from "store/slices/auth.slice";
+
+import { AppDispatch } from "store";
 
 export const loginUser = createAsyncThunk<
   UserWithToken,
@@ -25,7 +26,7 @@ export const loginUser = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/loginUser', async (userData, { rejectWithValue }) => {
+>("auth/loginUser", async (userData, { rejectWithValue }) => {
   try {
     const response = await userService.loginRequest(userData);
     return response.data;
@@ -45,7 +46,7 @@ export const signUpUser = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/signUpUser', async (userData, { rejectWithValue }) => {
+>("auth/signUpUser", async (userData, { rejectWithValue }) => {
   try {
     const response = await userService.signUpRequest(userData);
     return response.data;
@@ -66,7 +67,7 @@ export const getAccessUser = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/getAccessUser', async ({ email }, { rejectWithValue }) => {
+>("auth/getAccessUser", async ({ email }, { rejectWithValue }) => {
   try {
     const response = await userService.getAccessRequest({ email });
     return response.data;
@@ -90,12 +91,13 @@ export const logoutUser = createAsyncThunk<
     rejectValue: string;
     dispatch?: AppDispatch;
   }
->('auth/logoutUser', async (notify = true, thunkAPI) => {
+>("auth/logoutUser", async (notify = true, thunkAPI) => {
   try {
     thunkAPI.dispatch(clearUser());
+    // thunkAPI.dispatch(clearRooms());
     return { notify };
   } catch (err) {
-    return thunkAPI.rejectWithValue('Logout failed');
+    return thunkAPI.rejectWithValue("Logout failed");
   }
 });
 
@@ -105,7 +107,7 @@ export const addUsers = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/addUsers', async (users, { rejectWithValue }) => {
+>("auth/addUsers", async (users, { rejectWithValue }) => {
   try {
     await adminService.addUsersRequest(users);
   } catch (err) {
@@ -114,7 +116,7 @@ export const addUsers = createAsyncThunk<
     if (!error.response) {
       throw err;
     }
-    
+
     return rejectWithValue(error.response.data);
   }
 });
@@ -129,7 +131,7 @@ export const changePassword = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/changePassword', async ({ newPassword }, { rejectWithValue }) => {
+>("auth/changePassword", async ({ newPassword }, { rejectWithValue }) => {
   try {
     const response = await userService.changePasswordRequest({ newPassword });
     return response.data;
@@ -149,7 +151,7 @@ export const forgotPassword = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/forgotPassword', async ({ email }, { rejectWithValue }) => {
+>("auth/forgotPassword", async ({ email }, { rejectWithValue }) => {
   try {
     const response = await userService.forgotPasswordRequest({ email });
     return response.data;
@@ -169,9 +171,12 @@ export const resetPassword = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/resetPassword', async ({ id, newPassword }, { rejectWithValue }) => {
+>("auth/resetPassword", async ({ id, newPassword }, { rejectWithValue }) => {
   try {
-    const response = await userService.resetPasswordRequest({ id, newPassword });
+    const response = await userService.resetPasswordRequest({
+      id,
+      newPassword,
+    });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -189,7 +194,7 @@ export const getMe = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/getMe', async (_, { rejectWithValue }) => {
+>("auth/getMe", async (_, { rejectWithValue }) => {
   try {
     const response = await userService.getMeRequest();
     return response.data;
@@ -209,7 +214,7 @@ export const updateMe = createAsyncThunk<
   {
     rejectValue: ErrorMessageObject;
   }
->('auth/updateMe', async (userData, { rejectWithValue }) => {
+>("auth/updateMe", async (userData, { rejectWithValue }) => {
   try {
     const response = await userService.updateMeRequest(userData);
     return response.data;
@@ -222,3 +227,30 @@ export const updateMe = createAsyncThunk<
     return rejectWithValue(error.response.data);
   }
 });
+
+interface DeleteUserId {
+  id: string
+}
+
+export const deleteUser = createAsyncThunk<
+void,
+DeleteUserId,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>("auth/deleteUser", async ({id}, { rejectWithValue }) => {
+  try {
+    await adminService.deleteUserById(id);
+    // return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+
+

@@ -11,6 +11,7 @@
   overflow-y: auto;
   color: var(--accent-text-color);
 
+  padding-bottom: 100px;
   &::-webkit-scrollbar,
   &::-webkit-scrollbar-thumb {
     width: 0;
@@ -37,6 +38,13 @@
     background-color: var(--background);
     box-shadow: 2px 2px 5px var(--gray), -3px -2px 5px var(--white);
     border-radius: 50%;
+
+    &:disabled{
+      opacity: 0.5;
+      &:hover{
+        box-shadow: 2px 2px 5px var(--gray), -3px -2px 5px var(--white);
+      }
+    }
 
     &:hover {
       box-shadow: inset 1px 1px 5px var(--gray), inset 2px 2px 6px var(--white);
@@ -177,7 +185,18 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
   gap: 15px;
 }
+.section-single-input{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: 15px;
 
+  padding-top: 40px;
+}
+
+.section-input__delete{
+  width: 80%;
+
+}
 .is-hidden-toggle__container {
   width: 100%;
   display: grid;
@@ -204,4 +223,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.section-input-delete{
+  position: absolute;
+  left: 35%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }

@@ -69,7 +69,7 @@ const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
                 {...getTagProps({ index })}
               />
             ))}
-            <div ref={badgeContainerRef} />
+            {/* <div ref={badgeContainerRef} /> */}
           </div>
         )}
         {...rest}

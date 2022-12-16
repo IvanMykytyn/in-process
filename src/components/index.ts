@@ -19,3 +19,5 @@ export * from './DatePicker/DatePicker';
 export * from './DaysPicker/DaysPicker';
 export * from './Select/Select';
 export * from './Loading/Loading'
+export * from './DeletePopover/DeletePopover'
+

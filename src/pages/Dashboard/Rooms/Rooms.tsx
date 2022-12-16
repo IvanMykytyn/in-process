@@ -1,41 +1,21 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, {
-  Scrollbar,
-  Navigation,
-  Keyboard,
-  Mousewheel,
-  FreeMode,
-  Autoplay,
-} from "swiper";
+import { Keyboard, Mousewheel, FreeMode } from "swiper";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 // styles
 import cn from "classnames";
 import css from "./rooms.module.scss";
 
-// import 'swiper/css';
 import "swiper/swiper.min.css";
-// import 'swiper/css/navigation';
-// import "swiper/css/scrollbar";
 
 import { Room, DropdownMultiSelect } from "../../../components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useWindowDimensionsHook,
-} from "../../../hooks";
+import { useAppSelector } from "../../../hooks";
 
-import { roomActions } from "store";
 import { RoomSkeleton } from "../../../components/Skeleton/RoomSkeleton";
 import { capacityFilter, equipmentsFilter } from "./constants";
 
-// SwiperCore.use([Scrollbar]);
-// SwiperCore.use([Keyboard, Mousewheel]);
-// SwiperCore.use([Autoplay]);
-
 const Rooms: FC = () => {
-  // const [isLoading,setIsLoading] = useState(true);
   const { rooms, filteredRooms, isLoading } = useAppSelector(
     (state) => state.rooms
   );
@@ -58,26 +38,9 @@ const Rooms: FC = () => {
           </div>
           <Swiper
             className={cn(css.my_swiper)}
-            breakpoints={{
-              // when window width is >= 1100px
-              
-              1100: {
-                width: 1100,
-                slidesPerView: 4.5,
-              },
-              1500: {
-                width: 1500,
-                slidesPerView: 6,
-              },
-              // when window width is >= 1900px
-              1900: {
-                width: 1900,
-                slidesPerView: 7,
-              },
-            }}
-            loop={true}
             mousewheel={true}
             freeMode={true}
+            slidesPerView="auto"
             scrollbar={true}
             modules={[Keyboard, Mousewheel, FreeMode]}
             spaceBetween={5}
@@ -115,26 +78,9 @@ const Rooms: FC = () => {
           </div>
           <Swiper
             className={cn(css.my_swiper)}
-            breakpoints={{
-              // when window width is >= 1100px
-              
-              1100: {
-                width: 1100,
-                slidesPerView: 4.5,
-              },
-              1500: {
-                width: 1500,
-                slidesPerView: 6,
-              },
-              // when window width is >= 1900px
-              1900: {
-                width: 1900,
-                slidesPerView: 7,
-              },
-            }}
-            loop={true}
             mousewheel={true}
             freeMode={true}
+            slidesPerView="auto"
             scrollbar={true}
             modules={[Keyboard, Mousewheel, FreeMode]}
             spaceBetween={5}

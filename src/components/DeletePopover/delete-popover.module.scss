@@ -1,0 +1,53 @@
+@import 'styles/global.module';
+
+.delete-popover {
+    position: absolute;
+    top: 0;
+    left: 100px;
+  
+    z-index: 110;
+  
+    box-shadow: $outerBoxShadow;
+  
+    width: 250px;
+    // height: 125px;
+  
+    padding: 15px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+  
+    background: var(--background);
+  
+    border-radius: 10px;
+  
+    &__text {
+      font-size: 1.4rem;
+      padding: 10px 0;
+    }
+  
+    &__checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+  
+      padding: 5px 20px 10px;
+  
+      p {
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        padding-top: 4px;
+  
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  
+    .exit-wrapper {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+    }
+  }

@@ -7,14 +7,15 @@ import scss from './settings.module.scss';
 interface SectionButtonsProps {
   isLoading?: boolean;
   handleCancel?: () => void;
+  submitText?: string;
 }
 
-const SectionButtons: FC<SectionButtonsProps> = ({ isLoading, handleCancel }) => {
+const SectionButtons: FC<SectionButtonsProps> = ({ isLoading, handleCancel,submitText = "Save" }) => {
   return (
     <div className={scss['section__buttons']}>
       <div>
         <Button type="submit" loading={isLoading}>
-          Save
+          {submitText}
         </Button>
         <Button type="reset" disabled={isLoading} onClick={handleCancel}>
           Cancel
