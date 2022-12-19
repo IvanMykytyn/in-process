@@ -1,5 +1,6 @@
-import { FC } from "react";
+import { FC, useCallback, useState } from "react";
 
+import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
@@ -8,7 +9,7 @@ import { SectionLayout } from "./SectionLayout";
 import { SectionInput } from "./SectionInput";
 import { SectionButtons } from "./SectionButtons";
 
-import { selectUser, updateMe } from "store";
+import { deleteAvatar, getMe, selectUser, setAvatar, updateMe } from "store";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { UserInterface, UserFields } from "models";
 import { getFullName, validateName } from "utils";
@@ -17,7 +18,8 @@ import { getFullName, validateName } from "utils";
 import scss from "./settings.module.scss";
 
 // icons
-import { user as avatar } from "assets/images/icons";
+import { close, edit, exit, user as avatar } from "assets/images/icons";
+import { DeletePopover } from "components";
 
 const PersonalInfoValidator = Joi.object({
   firstName: validateName,
@@ -31,6 +33,8 @@ const PersonalInformationSection: FC = () => {
 
   const fullName = getFullName(firstName, lastName);
   const dispatch = useAppDispatch();
+
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const {
     register,
@@ -55,6 +59,41 @@ const PersonalInformationSection: FC = () => {
     reset();
   };
 
+  const AvatarDeleteOpenPopover = () => {
+    setIsOpen(true);
+  };
+  const handleSubmitDelete = () => {
+    dispatch(deleteAvatar());
+    dispatch(getMe());
+  };
+  const handleCancelDelete = () => {
+    setIsOpen(false);
+  };
+
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      try {
+        const formData = new FormData();
+        formData.append("file", acceptedFiles[0]);
+        await dispatch(setAvatar(formData));
+        await dispatch(getMe());
+      } catch (error) {}
+    },
+    [dispatch]
+  );
+
+  const onError = useCallback((err: Error) => {
+    console.log(err);
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      "image/jpeg": [".jpeg", ".png"],
+    },
+    onDrop,
+    onError,
+  });
+
   return (
     <SectionLayout headerText={"Personal Information"}>
       <form
@@ -68,6 +107,24 @@ const PersonalInformationSection: FC = () => {
               className={scss["section-avatar__img"]}
               alt="avatar"
             />
+            <div
+              className={scss["avatar-delete"]}
+              onClick={AvatarDeleteOpenPopover}
+            >
+              <img src={close} alt="delete" />
+            </div>
+            <div {...getRootProps({ className: scss["avatar-edit"] })}>
+              <input {...getInputProps()} />
+              <img src={edit} alt="edit" />
+            </div>
+
+            <div className={scss["avatar-delete-popover"]}>
+              <DeletePopover
+                isOpen={isOpen}
+                handleCancel={handleCancelDelete}
+                handleConfirm={handleSubmitDelete}
+              />
+            </div>
           </div>
           <div className={scss["section__user-details"]}>
             <h3>{fullName ?? ""}</h3>
@@ -76,7 +133,7 @@ const PersonalInformationSection: FC = () => {
         </div>
 
         <SectionInput
-          defaultValue={firstName ?? ""}
+          defaultValue={firstName}
           label={"First Name"}
           type={"text"}
           {...register("firstName")}
@@ -85,7 +142,7 @@ const PersonalInformationSection: FC = () => {
         />
 
         <SectionInput
-          defaultValue={lastName ?? ""}
+          defaultValue={lastName}
           label={"Last Name"}
           type={"text"}
           {...register("lastName")}

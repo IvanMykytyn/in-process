@@ -1,18 +1,8 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 
-import {
-  AutocompleteRenderInputParams,
-  SelectChangeEvent,
-} from "@mui/material";
+import { AutocompleteRenderInputParams } from "@mui/material";
 
-import {
-  Checkbox,
-  DeletePopover,
-  Input,
-  MultipleSelectWithBadges,
-  Select,
-  Toggle,
-} from "components";
+import { DeletePopover, Input, MultipleSelectWithBadges } from "components";
 import { SectionLayout } from "./SectionLayout";
 import { SectionButtons } from "./SectionButtons";
 
@@ -27,18 +17,15 @@ import { userService } from "services";
 import DropdownSingleSelect from "components/DropdownSingleSelect/DropdownSingleSelect";
 
 const UsersManagementSection: FC = () => {
-  const { isLoading, error: serverError } = useAppSelector(selectUser);
+  const { error: serverError } = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
 
   const [allUsers, setAllUsers] = useState<
     Array<{ email: string; id: string }>
   >([]);
-
   const [userEmails, setUserEmails] = useState<Array<string>>([]);
   const [userToDelete, setUserToDelete] = useState<string | null>(null);
   const [error, setError] = useState<string>("");
-
-  const dispatch = useAppDispatch();
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleCancelDelete = () => {
@@ -72,9 +59,10 @@ const UsersManagementSection: FC = () => {
       }
 
       await dispatch(addUsers(userEmails));
-      if (!serverError) clearField();
     } catch (err) {
       // console.log(err);
+    } finally {
+      if (!serverError) clearField();
     }
   };
 
@@ -104,6 +92,7 @@ const UsersManagementSection: FC = () => {
   const clearField = (): void => {
     setUserEmails([]);
     setError("");
+    setUserToDelete(null);
   };
 
   const clearDeleteField = (): void => {

@@ -47,6 +47,10 @@ const isLoggedIn = (): boolean => {
   return !!token;
 };
 
+const setAvatarRequest = (file: FormData) => axiosService.post(`${urls.users}/avatar`, file)
+
+const deleteAvatarRequest = () => axiosService.delete(`${urls.users}/avatar`)
+
 const userService = {
   loginRequest,
   signUpRequest,
@@ -58,6 +62,8 @@ const userService = {
   getMeRequest,
   getUsersRequest,
   updateMeRequest,
+  setAvatarRequest,
+  deleteAvatarRequest,
 };
 
 export { userService };

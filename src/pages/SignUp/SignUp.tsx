@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC,} from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ import { Input, Button } from 'components/index';
 import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
 import { UserSignUpProps } from 'models';
-import { userService, NotifyService } from 'services';
+import { NotifyService } from 'services';
 import { getUrlId } from 'utils';
 
 const initialValues = {
@@ -28,13 +28,7 @@ const SignUp: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, isLoading } = useAppSelector(selectUser);
-
-  useEffect(() => {
-    if (userService.isLoggedIn()) {
-      navigate('/dashboard');
-    }
-  }, [user, navigate]);
+  const { isLoading } = useAppSelector(selectUser);
 
   const {
     register,
@@ -78,6 +72,7 @@ const SignUp: FC = () => {
           inputRef={register('firstName').ref}
           error={!!errors.firstName}
           errorText={errors.firstName?.message}
+          autoComplete={"off"}
         />
 
         <Input
@@ -87,6 +82,7 @@ const SignUp: FC = () => {
           inputRef={register('lastName').ref}
           error={!!errors.lastName}
           errorText={errors.lastName?.message}
+          autoComplete={"off"}
         />
 
         <Input
@@ -96,6 +92,7 @@ const SignUp: FC = () => {
           inputRef={register('password').ref}
           error={!!errors.password}
           errorText={errors.password?.message}
+          autoComplete={"new-password"}
         />
 
         <Button

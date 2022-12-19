@@ -96,11 +96,13 @@
     @include gridSeparateContent;
     gap: 20px;
     padding: 5px 0 25px;
-
+    
     &__wrapper {
       display: flex;
       justify-content: flex-end;
       padding: 0 10px 0;
+
+      position: relative;
     }
 
     &__img {
@@ -111,6 +113,54 @@
       border: 4px solid var(--light-blue);
       box-shadow: 2px 2px 4px var(--gray), -2px -2px 4px var(--white),
       inset 1px 1px 2px var(--gray), inset -1px -1px 2px var(--white);
+    }
+
+    .avatar-delete{
+      position: absolute;
+      right: 7px;
+      top: 5px;  
+
+      width: 24px;
+      height: 24px;
+      padding: 5px;
+
+      border-radius: 50%;
+      background: var(--background);
+      box-shadow: 2px 2px 4px var(--gray),
+      -2px -2px 4px var(--white);
+
+      cursor: pointer;
+
+      opacity: 0.95;
+
+      &:hover{
+        box-shadow: $innerBoxShadow;
+      }
+
+    }
+    
+    .avatar-edit{
+      position: absolute;
+      right: 7px;
+      bottom: 5px;  
+
+      width: 24px;
+      height: 24px;
+      padding: 5px;
+
+      border-radius: 50%;
+      background: var(--background);
+      box-shadow: 2px 2px 4px var(--gray),
+      -2px -2px 4px var(--white);
+
+      cursor: pointer;
+
+      opacity: 0.95;
+
+      &:hover{
+        box-shadow: $innerBoxShadow;
+      }
+
     }
   }
 
@@ -231,4 +281,10 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+}
+
+.avatar-delete-popover{
+  position: absolute;
+  right: -150px;
+  top: 20px
 }

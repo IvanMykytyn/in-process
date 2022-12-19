@@ -14,6 +14,8 @@ import {
   getMe,
   updateMe,
   deleteUser,
+  setAvatar,
+  deleteAvatar,
 } from 'store/thunk';
 
 import { setToLocalStorage, removeFromLocalStorage } from 'utils';
@@ -297,6 +299,52 @@ const authSlice = createSlice({
     });
 
     builder.addCase(deleteUser.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload?.message ?? 'Error! Try Again Later';
+      NotifyService.update(state.notifyId, state.error, 'error');
+    });
+
+    // set avatar
+    builder.addCase(setAvatar.pending, (state) => {
+      state.isLoading = true;
+
+      state.notifyId = NotifyService.loading();
+    });
+
+    builder.addCase(setAvatar.fulfilled, (state) => {
+      state.isLoading = false;
+
+      NotifyService.update(
+        state.notifyId,
+        `User Avatar Successfully set`,
+        'success'
+      );
+    });
+
+    builder.addCase(setAvatar.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload?.message ?? 'Error! Try Again Later';
+      NotifyService.update(state.notifyId, state.error, 'error');
+    });
+    
+    // delete avatar
+    builder.addCase(deleteAvatar.pending, (state) => {
+      state.isLoading = true;
+
+      state.notifyId = NotifyService.loading();
+    });
+
+    builder.addCase(deleteAvatar.fulfilled, (state) => {
+      state.isLoading = false;
+
+      NotifyService.update(
+        state.notifyId,
+        `User Avatar Successfully deleted`,
+        'success'
+      );
+    });
+
+    builder.addCase(deleteAvatar.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload?.message ?? 'Error! Try Again Later';
       NotifyService.update(state.notifyId, state.error, 'error');
