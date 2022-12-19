@@ -8,7 +8,6 @@ import type {
   UserEmailField,
   UserWithToken,
   ResetPasswordProps,
-  UserInterface,
   UserFields,
   UpdateMeResponse,
   ExtendedUserInterface,
@@ -18,7 +17,7 @@ import { userService, adminService } from "services";
 
 import { clearUser } from "store/slices/auth.slice";
 
-import { AppDispatch, roomActions } from "store";
+import { AppDispatch } from "store";
 
 export const loginUser = createAsyncThunk<
   UserWithToken,
@@ -252,5 +251,42 @@ DeleteUserId,
   }
 });
 
+export const setAvatar = createAsyncThunk<
+void,
+FormData,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>("auth/setAvatar", async (formData, { rejectWithValue }) => {
+  try {
+    await userService.setAvatarRequest(formData);
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const deleteAvatar = createAsyncThunk<
+void,
+void,
+  {
+    rejectValue: ErrorMessageObject;
+  }
+>("auth/deleteAvatar", async (_, { rejectWithValue }) => {
+  try {
+    await userService.deleteAvatarRequest();
+  } catch (err) {
+    const error = err as AxiosError<ErrorMessageObject>;
+
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
 
 

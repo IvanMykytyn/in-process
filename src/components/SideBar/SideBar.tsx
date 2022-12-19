@@ -19,7 +19,6 @@ import { SideBarHeader } from "./SideBarHeader";
 import { arrowLeft, arrowRight } from "../../assets/images/icons";
 import { SideBarSkeleton } from "components";
 import { PAGE_SIDEBAR_LIMIT } from "utils";
-import moment from "moment";
 
 const SideBar: FC = () => {
   const [accordionIndex, setAccordionIndex] = useState<number>(-1);
@@ -77,7 +76,6 @@ const SideBar: FC = () => {
     };
   }, [dispatch, page]);
 
-  const reminding = 60 - (moment().seconds() % 60)
 
   return (
     <div

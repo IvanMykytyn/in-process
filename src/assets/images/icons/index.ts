@@ -26,6 +26,7 @@ import logout from './logout.svg';
 import print from './print.svg';
 import sun from './sun.svg';
 import moon from './moon.svg';
+import close from './close.svg'
 
 export {
     keyIcon,
@@ -55,5 +56,6 @@ export {
     logout,
     print,
     sun,
-    moon
+    moon,
+    close,
 };
