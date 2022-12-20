@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from "react";
+import React, { FC } from "react";
 import { AutocompleteRenderInputParams, TextField } from "@mui/material";
 import { BuildStepProps, ErrorsType, ValuesType } from "../BookingFormPage";
 
@@ -9,8 +9,7 @@ import cn from "classnames";
 import { Input } from "components/Input/Input";
 import { MultipleSelectWithBadges } from "components/MultipleSelectWithBadges/MultipleSelectWithBadges";
 import { Button } from "components/Button/Button";
-
-import { userService } from "services";
+import { useSearchParams } from "react-router-dom";
 
 const FormFirstStep: FC<BuildStepProps> = ({
   handleNext,
@@ -20,10 +19,12 @@ const FormFirstStep: FC<BuildStepProps> = ({
   errors,
   setErrors,
   isEditing,
+  allUsers,
 }) => {
-  const [allUsers, setAllUsers] = useState<
-    Array<{ email: string; id: string }>
-  >([]);
+  const [params, _] = useSearchParams();
+
+  const paramUsers = params.get("users");
+  const defaultUsers = !!paramUsers ? paramUsers.split(',') : []
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -44,22 +45,6 @@ const FormFirstStep: FC<BuildStepProps> = ({
     });
     delete errors["users"];
   };
-
-  const getUsers = useCallback(async () => {
-    const response = await userService.getUsersRequest();
-    const usersData = response.data.map((user) => {
-      const { email, id } = user;
-      return {
-        email,
-        id,
-      };
-    });
-    setAllUsers(usersData);
-  }, [setAllUsers]);
-
-  useEffect(() => {
-    getUsers();
-  }, [getUsers]);
 
   const handleNextStage = () => {
     let isValid = false;
@@ -122,7 +107,7 @@ const FormFirstStep: FC<BuildStepProps> = ({
             label={"Select Members"}
             inputError={!!errors?.users}
             inputTextError={errors.users}
-            defaultValue={values.users}
+            defaultValue={defaultUsers}
             renderInput={(params: AutocompleteRenderInputParams) => (
               <TextField {...params} />
             )}

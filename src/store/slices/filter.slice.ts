@@ -37,10 +37,13 @@ const filterSlice = createSlice({
         },
         setFilterItems: (state, action) => {
             state.filterItems = action.payload
+        },
+        clearFilter: (state) => {
+            return initialState
         }
     }
 });
 
-export const { setEquipmentIds, setCapacityRanges, setFilterItems } = filterSlice.actions;
+export const { setEquipmentIds, setCapacityRanges, setFilterItems, clearFilter } = filterSlice.actions;
 
 export default filterSlice.reducer;

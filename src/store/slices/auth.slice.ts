@@ -52,7 +52,6 @@ const authSlice = createSlice({
       state.isLoading = true;
 
       state.notifyId = NotifyService.loading();
-      console.log(state.notifyId);
 
     });
 
@@ -60,7 +59,6 @@ const authSlice = createSlice({
       const { access_token, ...restUserData } = payload;
       state.user = restUserData;
       setToLocalStorage('token', payload.access_token);
-      console.log(state.notifyId);
       
       state.isLoading = false;
       NotifyService.update(
@@ -73,8 +71,6 @@ const authSlice = createSlice({
     builder.addCase(loginUser.rejected, (state, { payload }) => {
       state.isLoading = false;
 
-      console.log(state.notifyId);
-      
       state.error = payload?.message ?? 'Something went Wrong';
       
       NotifyService.update(state.notifyId, state.error, 'error');
@@ -205,7 +201,7 @@ const authSlice = createSlice({
 
       NotifyService.update(
         state.notifyId,
-        `Instructions for changing the password have been sent to the mail`,
+        `Instructions for changing the password have been sent to the email`,
         'success'
       );
     });
@@ -316,7 +312,7 @@ const authSlice = createSlice({
 
       NotifyService.update(
         state.notifyId,
-        `User Avatar Successfully set`,
+        `User Avatar Successfully updated`,
         'success'
       );
     });

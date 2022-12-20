@@ -85,10 +85,10 @@ const Login: FC = () => {
           Login
         </Button>
 
-        <div className={css['navigate-form-wrapper']}>
+        {/* <div className={css['navigate-form-wrapper']}>
           Don't have access yet?
           <Link to={'/get-access'}>Get Access</Link>
-        </div>
+        </div> */}
       </form>
     </FormLayout>
   );

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Step, StepLabel, Stepper } from "@mui/material";
 import moment, { Moment } from "moment";
@@ -22,6 +22,7 @@ import {
   selectBooking,
   selectRooms,
 } from "store";
+import { userService } from "services";
 
 export interface ValuesType {
   name: string;
@@ -49,28 +50,36 @@ const BookingFormPage: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const { rooms } = useAppSelector(selectRooms);
+  const { isSuccess, isEditing, editingBookingId, page } =
+    useAppSelector(selectBooking);
+
   const defaultParamsStartDate = getValidDateFromString(
     params.get("date") ?? ""
   );
   const defaultParamsEndDate = getValidDateFromString(params.get("end") ?? "");
 
   const defaultStartTime = defaultParamsStartDate.clone();
-  const startRemainder = 15 - (defaultStartTime.minute() % 15);
+  const startRemainder = !isEditing ? 15 - (defaultStartTime.minute() % 15) : 0;
   defaultStartTime.add(startRemainder, "minutes");
 
   const defaultEndTime = defaultParamsEndDate.clone();
-  const endRemainder = 15 - (defaultEndTime.minute() % 15) + 60;
+  const endRemainder = !isEditing ?  15 - (defaultEndTime.minute() % 15) + 60 : 0;
   defaultEndTime.add(endRemainder, "minutes");
 
-  const { rooms } = useAppSelector(selectRooms);
-  const { isSuccess, isEditing, editingBookingId, page } =
-    useAppSelector(selectBooking);
+  const [allUsers, setAllUsers] = useState<
+    Array<{ email: string; id: string }>
+  >([]);
 
   const paramUsers = params.get("users");
   const initialValues: ValuesType = {
     name: params.get("name") ?? "",
     description: params.get("description") ?? "",
-    users: !!paramUsers ? paramUsers.split(",") : [],
+    users: !!paramUsers
+      ? allUsers
+          .filter((user) => paramUsers.split(",").includes(user.email))
+          .map((user) => user.id)
+      : [],
     pattern: {
       kind: "EVERY_N_DAYS",
       days: 1,
@@ -105,20 +114,18 @@ const BookingFormPage: FC = () => {
     e.preventDefault();
     try {
       if (Object.keys(errors).length === 0) {
-        if (!values.isRecurring) {
+        if (isEditing) {
           const booking = getOneTimeBooking(values, isEditing);
-          console.log(booking);
-          if (isEditing) {
-            await dispatch(
-              bookingActions.oneTimePut({
-                ...booking,
-                usersIds: booking.users,
-                id: editingBookingId,
-              })
-            );
-          } else {
-            await dispatch(bookingActions.oneTimePost({ booking }));
-          }
+          await dispatch(
+            bookingActions.oneTimePut({
+              ...booking,
+              usersIds: booking.users,
+              id: editingBookingId,
+            })
+          );
+        } else if (!values.isRecurring) {
+          const booking = getOneTimeBooking(values, isEditing);
+          await dispatch(bookingActions.oneTimePost({ booking }));
         } else {
           const booking = getRecurringBooking(values);
           await dispatch(bookingActions.recPost({ booking }));
@@ -130,9 +137,21 @@ const BookingFormPage: FC = () => {
       // console.log(error);
     }
   };
-  // useEffect(() => {
+  const getUsers = useCallback(async () => {
+    const response = await userService.getUsersRequest();
+    const usersData = response.data.map((user) => {
+      const { email, id } = user;
+      return {
+        email,
+        id,
+      };
+    });
+    setAllUsers(usersData);
+  }, [setAllUsers]);
 
-  // }, [])
+  useEffect(() => {
+    getUsers();
+  }, [getUsers]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -163,6 +182,7 @@ const BookingFormPage: FC = () => {
           errors,
           setErrors,
           isEditing,
+          allUsers,
         })}
       </div>
     </form>
@@ -181,6 +201,7 @@ export interface BuildStepProps {
   errors: ErrorsType;
   setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>;
   isEditing: boolean;
+  allUsers: Array<{ email: string; id: string }>;
 }
 const buildStep = (activeStep: number) => {
   return ({ ...props }: BuildStepProps) => {

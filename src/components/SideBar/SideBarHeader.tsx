@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout, setting } from 'assets/images/icons';
 import { UserInterface } from 'models';
 import { getFullName, getInitials } from 'utils';
+import { clearFilter } from 'store/slices/filter.slice';
 
 interface SideBarHeaderProps {}
 
@@ -26,6 +27,7 @@ const SideBarHeader: FC<SideBarHeaderProps> = (props) => {
   const handleLogout = () => {
     dispatch(logoutUser());
     dispatch(roomActions.clearRooms())
+    dispatch(clearFilter())
     navigate('/login');
   };
 

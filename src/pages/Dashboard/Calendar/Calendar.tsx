@@ -135,17 +135,15 @@ const Calendar: FC = () => {
         dayMaxEvents={true}
         nowIndicator={true}
         navLinks={true}
-        // loading={(isLoading) => {
-        //   if(isLoading) return <Loading />
-        // }}
         // weekends={false}
+
         // event
         events={fullCalendarBookings}
         eventContent={buildEvents}
         // buttons
         customButtons={{
           addBooking: {
-            text: "Add",
+            text: "Book",
             click: () => {
               const { currentDate } =
                 calendarRef?.current?.getApi?.().currentDataManager.data;
