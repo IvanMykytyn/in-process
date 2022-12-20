@@ -28,7 +28,7 @@ const Rooms: FC = () => {
       <ul className={cn(css.room_container)}>
         <li className={cn(css.floor)}>
           <div className={cn(css.room_container__floor)}>
-            {firstFloorRooms.length !== 0 && (
+            {(firstFloorRooms.length !== 0 || isLoading) && (
               <span className={cn(css.room_container__span)}>1-st floor</span>
             )}
             <div className={cn(css.filter)}>
@@ -41,7 +41,6 @@ const Rooms: FC = () => {
               </StyledEngineProvider>
             </div>
           </div>
-          {firstFloorRooms.length !== 0 && (
             <Swiper
               className={cn(css.my_swiper)}
               mousewheel={true}
@@ -50,6 +49,8 @@ const Rooms: FC = () => {
               scrollbar={true}
               modules={[Keyboard, Mousewheel, FreeMode]}
               spaceBetween={5}
+              hidden={firstFloorRooms?.length === 0 && !isLoading}
+
             >
               <ul className={cn(css.room_container__rooms)}>
                 {isLoading
@@ -62,7 +63,7 @@ const Rooms: FC = () => {
                         <RoomSkeleton key={index} />
                       </SwiperSlide>
                     ))
-                  : firstFloorRooms &&
+                  : firstFloorRooms?.length !== 0 &&
                     firstFloorRooms.map((room) => (
                       <SwiperSlide
                         className={cn(css.my_swiper__swiperslide)}
@@ -74,9 +75,7 @@ const Rooms: FC = () => {
                     ))}
               </ul>
             </Swiper>
-          )}
         </li>
-        {secondFloorRooms.length !== 0 && (
           <li className={cn(css.floor)}>
             <div className={cn(css.room_container__floor)}>
               <span className={cn(css.room_container__span)}>2-nd floor</span>
@@ -89,6 +88,7 @@ const Rooms: FC = () => {
               scrollbar={true}
               modules={[Keyboard, Mousewheel, FreeMode]}
               spaceBetween={5}
+              hidden={(secondFloorRooms?.length === 0 && !isLoading)}
             >
               <ul className={cn(css.room_container__rooms)}>
                 {isLoading
@@ -101,7 +101,7 @@ const Rooms: FC = () => {
                         <RoomSkeleton key={index} />
                       </SwiperSlide>
                     ))
-                  : secondFloorRooms &&
+                  : secondFloorRooms?.length !== 0 &&
                     secondFloorRooms.map((room) => (
                       <SwiperSlide
                         className={cn(css.my_swiper__swiperslide)}
@@ -114,7 +114,6 @@ const Rooms: FC = () => {
               </ul>
             </Swiper>
           </li>
-        )}
       </ul>
     </div>
   );
