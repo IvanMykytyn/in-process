@@ -34,7 +34,7 @@ const PersonalInformationSection: FC = () => {
   const fullName = getFullName(firstName, lastName);
   const dispatch = useAppDispatch();
 
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const {
     register,
