@@ -115,6 +115,7 @@ const Rooms: FC = () => {
             </Swiper>
           </li>
       </ul>
+      <div className={css.shadow}></div>
     </div>
   );
 };
