@@ -1,9 +1,5 @@
 # In-Process Project
 
-### Test User
-email: mukutunivan04@gmail.com
-password: Password
-
 At the moment we have eight components.
 - Button
 - Input
