@@ -77,8 +77,9 @@ const DropdownMultiSelect: FC<FilterProps> = ({
         <InputLabel
           id="multiple-checkbox-label"
           className={"filter_form__input"}
+          shrink={false}
         >
-          Filter
+          {!filterItems.length && "Filter"}
         </InputLabel>
         <Select
           labelId="multiple-checkbox-label"
