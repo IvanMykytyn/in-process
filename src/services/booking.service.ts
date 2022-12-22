@@ -15,8 +15,8 @@ import {
 
 
 const bookingService = {
-    getAllBookings: (startDate: string, endDate: string, officeId: number = 2, roomId?: string): AxiosRes<GetAllBookingsResponse> =>
-        axiosService.get(`${urls.bookings}?startDate=${startDate}&endDate=${endDate}&officeId=${officeId}${!!roomId ? '&roomId=' + roomId : ''}`),
+    getAllBookings: (startDate: string, endDate: string, officeId: number = 2, roomId?: string, own?: boolean): AxiosRes<GetAllBookingsResponse> =>
+        axiosService.get(`${urls.bookings}?startDate=${startDate}&endDate=${endDate}&officeId=${officeId}${!!roomId ? '&roomId=' + roomId : ''}${!!own ? '&own=true' : '&own=false'}`),
 
     recurringPost: (booking: IBookingRecurring): AxiosRes<IBookingRecurring> => axiosService.post(`${urls.bookings}/recurring`, booking),
     recurringPut: (scheduleId: number, newBooking: IBookingPut): AxiosRes<IBookingPut> => axiosService.put(`${urls.bookings}/recurring/${scheduleId}`, newBooking),

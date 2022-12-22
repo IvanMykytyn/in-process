@@ -22,7 +22,7 @@
 
     width: 100%;
     height: 100%;
-    // z-index: 2;
+    z-index: -1;
   }
 
   
@@ -38,6 +38,7 @@
   flex-direction: column;
   grid-gap: 20px;
   padding: 15px;
+  
 
   height: 100%;
 
@@ -84,6 +85,7 @@
   display: flex;
   grid-gap: 15px;
   align-items: center;
+  // z-index: 2;
 }
 
 .my_swiper {
@@ -91,8 +93,10 @@
   padding: 5px;
   position: relative;
   border-radius: 10px;
+  z-index: 5;
 
   &__swiperslide {
+    z-index: 5;
     padding: 10px 5px;
     border-radius: 10px;
     --webkit-transform: translateZ(0);

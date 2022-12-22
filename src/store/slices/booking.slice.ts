@@ -37,6 +37,8 @@ interface BookingState {
   isSuccess: boolean;
 
   page: number;
+
+  own: boolean;
 }
 
 const initialBookingState: BookingState = {
@@ -57,6 +59,7 @@ const initialBookingState: BookingState = {
   isSuccess: false,
 
   page: 1,
+  own: false,
 
   notifyId: "",
 };
@@ -99,6 +102,9 @@ const bookingSlice = createSlice({
     setPage: (state, { payload }) => {
       state.page = payload;
     },
+    toggleOwn: (state) => {
+      state.own = !state.own
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -260,6 +266,7 @@ const {
     setEditingId,
     setPage,
     resetEditingId,
+    toggleOwn,
   },
 } = bookingSlice;
 
@@ -277,6 +284,7 @@ const bookingActions = {
   setEditingId,
   setPage,
   resetEditingId,
+  toggleOwn,
 };
 
 export {

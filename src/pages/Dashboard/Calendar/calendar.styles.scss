@@ -1,4 +1,4 @@
-@import 'styles/global.module';
+@import "styles/global.module";
 
 $roomWidth: 140px;
 $lineColor: $nowIndicatorColor;
@@ -14,7 +14,7 @@ $lineColor: $nowIndicatorColor;
 .fc {
   border-radius: 5px;
 
-  thead[role='rowgroup'] {
+  thead[role="rowgroup"] {
     border-radius: 5px;
     border: $border500;
   }
@@ -76,7 +76,7 @@ $lineColor: $nowIndicatorColor;
   align-items: center;
   justify-content: center;
 
-  font-family: 'Montserrat-Regular', sans-serif !important;
+  font-family: "Montserrat-Regular", sans-serif !important;
   font-weight: 500 !important;
   text-transform: capitalize !important;
   font-size: 0.875rem !important;
@@ -100,7 +100,7 @@ $lineColor: $nowIndicatorColor;
 .fc-button-group {
   height: 40px;
   background: var(--background);
-  font-family: 'Montserrat-Regular', sans-serif;
+  font-family: "Montserrat-Regular", sans-serif;
   font-weight: 400;
 
   margin-right: 5px;
@@ -122,7 +122,7 @@ $lineColor: $nowIndicatorColor;
     align-items: center;
     justify-content: center;
 
-    font-family: 'Montserrat-Regular', sans-serif;
+    font-family: "Montserrat-Regular", sans-serif;
 
     font-size: 0.875rem;
 
@@ -167,6 +167,54 @@ $lineColor: $nowIndicatorColor;
   }
 }
 
+.fc-button.fc-button-primary.fc-showOwn-button {
+  border: none !important;
+  color: $primaryColor400 !important;
+  background: var(--background) !important;
+  box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white) !important;
+
+  border-radius: 50%;
+
+  font-weight: 500;
+  width: 20px;
+  height: 20px;
+
+  margin-right: 5px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--primary-color) !important;
+    background: var(--background) !important;
+    border-color: var(--background) !important;
+    box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white) !important;
+  }
+  position: relative;
+
+  &::before {
+    content: "own";
+    position: absolute;
+    right: 30px;
+    color: var(--accent-text-color);
+  }
+}
+.calendar-own .fc-button.fc-button-primary.fc-showOwn-button {
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    // animation: zooming 0.5s forwards 1;
+    box-shadow: 0 0 10px var(--primary-color);
+  }
+}
+
 .fc-addBooking-button {
   text-transform: capitalize;
   border: none !important;
@@ -182,7 +230,7 @@ $lineColor: $nowIndicatorColor;
   align-items: center;
   justify-content: center;
 
-  font-family: 'Montserrat-Regular', sans-serif !important;
+  font-family: "Montserrat-Regular", sans-serif !important;
   font-size: 0.875rem !important;
 
   &:hover,
@@ -197,7 +245,7 @@ $lineColor: $nowIndicatorColor;
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     height: 100%;
     width: 100%;
     background-color: transparent;
@@ -212,12 +260,13 @@ $lineColor: $nowIndicatorColor;
 
   &:hover:enabled {
     &::after {
-      content: '';
+      content: "";
       height: 100%;
       width: 100%;
       background-color: transparent;
       border: 1px solid var(--primary-color);
-      box-shadow: inset 0 0 2px var(--primary-color), 0 0 1px var(--primary-color);
+      box-shadow: inset 0 0 2px var(--primary-color),
+        0 0 1px var(--primary-color);
       position: absolute;
       left: 50%;
       top: 50%;
@@ -382,7 +431,7 @@ $lineColor: $nowIndicatorColor;
   z-index: 0;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
@@ -514,9 +563,7 @@ tr.fc-list-event {
 .fc-list-day-side-text,
 .fc-list-day-text {
   color: var(--text-color-500);
-
 }
-
 
 .fc-list-event-time {
   color: var(--text-color);
@@ -526,12 +573,10 @@ tr.fc-list-event {
   z-index: 10;
 }
 
-.loading-wrapper{
+.loading-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 25;
-  
 }
-

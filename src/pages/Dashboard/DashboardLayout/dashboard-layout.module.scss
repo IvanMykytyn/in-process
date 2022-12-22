@@ -49,7 +49,7 @@
   position: relative;
   top: 180px;
 
-  &__btn {
+  &__item {
     background: var(--background);
     border-radius: 15px 15px 0 0;
     box-shadow: -1px -3px 3px var(--box-shadow-sidebar-btn-color);
@@ -59,12 +59,20 @@
     transition: 0.5s color, padding 0.5s;
     @extend %montserrat-regular-400;
 
-
-    &:hover,
-    &:focus,
-    &:active {
-      color: var(--primary-color);
-      //padding: 7px 37px 17px 37px;
+    .active {
+      button {
+        color: var(--primary-color);
+      }
+    }
+    
+    button {
+      color: var(--accent-text-color);
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--primary-color);
+        //padding: 7px 37px 17px 37px;
+      }
     }
   }
 }

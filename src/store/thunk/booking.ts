@@ -17,16 +17,17 @@ export type GetAllBookings = GetAllBookingsResponse['data']['bookings'];
 
 export const getAllBookings = createAsyncThunk<
   GetAllBookings,
-  { startDate: string; endDate: string; officeId: number; roomId?: string }
+  { startDate: string; endDate: string; officeId: number; roomId?: string, own?: boolean }
 >(
   'bookingSlice/getAllBookings',
-  async ({ startDate, endDate, officeId, roomId }, { rejectWithValue }) => {
+  async ({ startDate, endDate, officeId, roomId, own }, { rejectWithValue }) => {
     try {
       const { data } = await bookingService.getAllBookings(
         startDate,
         endDate,
         officeId,
-        roomId
+        roomId,
+        own,
       );
       return data.data.bookings;
     } catch (e) {

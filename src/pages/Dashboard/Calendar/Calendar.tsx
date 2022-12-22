@@ -12,6 +12,7 @@ import { useNavigate } from "react-router";
 
 // styles
 import "./calendar.styles.scss";
+import cn from 'classnames'
 
 import { getAllBookings } from "store";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
@@ -40,6 +41,7 @@ const Calendar: FC = () => {
     bookings,
     isPopoverOpen,
     currentBooking,
+    own,
   } = useAppSelector(selectBooking);
 
   const fullCalendarBookings = bookings.map((book) => {
@@ -71,16 +73,17 @@ const Calendar: FC = () => {
     };
   });
 
-  const getRangeOfBookings = (start: string, end: string) => {
+  const getRangeOfBookings = (start: string, end: string, newOwn: boolean) => {
     dispatch(
       getAllBookings({
         startDate: start,
         endDate: end,
         officeId: 2,
+        own: newOwn,
       })
     );
   };
-  
+
   useEffect(() => {
     dispatch(closePopover());
   }, [dispatch]);
@@ -94,7 +97,7 @@ const Calendar: FC = () => {
   // const scrollTo = moment().format('HH') + ':00:00';
 
   return (
-    <div className="full-calendar">
+    <div className={cn("full-calendar", {'calendar-own': own})}>
       {isBookingLoading && (
         <div className="loading-wrapper">
           <Loading />
@@ -128,7 +131,7 @@ const Calendar: FC = () => {
         headerToolbar={{
           left: "addBooking today",
           center: "prev,title,next",
-          right: "day,timeGridWeek,dayGridMonth,listWeek",
+          right: "showOwn day,timeGridWeek,dayGridMonth,listWeek",
         }}
         selectable={false}
         selectMirror={false}
@@ -149,15 +152,35 @@ const Calendar: FC = () => {
                 calendarRef?.current?.getApi?.().currentDataManager.data;
               const date = moment(currentDate).add(-2, "hours").toISOString();
               dispatch(bookingActions.resetEditingId());
-              navigate(`/dashboard/booking-form?date=${date}`);
+              navigate(`/dashboard/booking-form?date=${date}&isCalendar=true`);
+            },
+          },
+          showOwn: {
+            text: " ",
+            click: () => {
+              const { renderRange } =
+              calendarRef?.current?.getApi?.().currentDataManager.state
+              .dateProfile;
+              
+              const { start, end } = renderRange;
+              console.log(own);
+              
+              getRangeOfBookings(
+                moment(start).toISOString(),
+                moment(end).toISOString(),
+                !own
+                );
+              dispatch(bookingActions.toggleOwn())
             },
           },
         }}
         datesSet={(params) => {
           const { endStr, startStr } = params;
+
           getRangeOfBookings(
             moment(startStr).toISOString(),
-            moment(endStr).toISOString()
+            moment(endStr).toISOString(),
+            own,
           );
         }}
       />

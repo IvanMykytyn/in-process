@@ -95,6 +95,7 @@
         content: '.';
       }
     }
+    
 
     img {
       width: 15px;
@@ -127,6 +128,10 @@
     margin-right: 5px;
     padding: 0 0 0 10px;
     position: relative;
+
+    &-text{
+       
+    }
 
     &::before {
       content: '';
@@ -230,4 +235,19 @@
       display: block;
     } 
   }
+}
+
+.active .booked__all-information-name{
+  &:not(:last-child) {
+    &::after {
+      content: '';
+    }
+  }
+}
+.active .booked__all-information-name__creator{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 95%;
+
 }

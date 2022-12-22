@@ -8,5 +8,6 @@ export const ToastifyContainer = () => (
     pauseOnFocusLoss={false}
     data-testid='toast-container'
     limit={3}
+    closeOnClick
   />
 );

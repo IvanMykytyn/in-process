@@ -83,13 +83,13 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
     setIsOpen(false);
   };
 
-  const handleConfirmDelete = (deleteAllType: boolean = false) => {
+  const handleConfirmDelete = async (deleteAllType: boolean = false) => {
     if (schedule && deleteAllType) {
-      dispatch(recDelete({ scheduleId: schedule.id }));
+      await dispatch(recDelete({ scheduleId: schedule.id }));
     } else {
-      dispatch(oneTimeDelete({ bookingId: id }));
+      await dispatch(oneTimeDelete({ bookingId: id }));
     }
-    dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT }));
+    await dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT }));
     setIsOpen(false);
     handleClose();
   };

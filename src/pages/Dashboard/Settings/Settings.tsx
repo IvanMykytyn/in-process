@@ -58,7 +58,7 @@ const Settings: FC = () => {
               </div>
             </div>
           )}
-          <button
+          {/* <button
             className={scss.settings__theme}
             onClick={toggleTheme}
             disabled={true}
@@ -69,7 +69,7 @@ const Settings: FC = () => {
               height={15}
               width={15}
             />
-          </button>
+          </button> */}
         </div>
       </div>
       <PersonalInformationSection />

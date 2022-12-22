@@ -194,7 +194,7 @@ $eventBorderRadius: 5px;
 .clock {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
   opacity: 0.8;
 
   img {
@@ -363,7 +363,6 @@ $eventBorderRadius: 5px;
 
   h3 {
     overflow: hidden;
-    max-width: 45%;
     color: var(--text-color-400);
   }
 }

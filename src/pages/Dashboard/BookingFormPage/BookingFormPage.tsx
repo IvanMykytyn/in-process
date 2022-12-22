@@ -59,7 +59,8 @@ const BookingFormPage: FC = () => {
   );
   const defaultParamsEndDate = getValidDateFromString(params.get("end") ?? "");
 
-  const defaultStartTime = defaultParamsStartDate.clone();
+  const defaultStartTime = !!params.get('isCalendar') ? moment() : defaultParamsStartDate.clone() ;
+  
   const startRemainder = !isEditing ? 15 - (defaultStartTime.minute() % 15) : 0;
   defaultStartTime.add(startRemainder, "minutes");
 

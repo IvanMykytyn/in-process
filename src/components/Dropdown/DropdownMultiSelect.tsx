@@ -75,14 +75,14 @@ const DropdownMultiSelect: FC<FilterProps> = ({
     <div className={cn("filter_form")}>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel
-          id="demo-multiple-checkbox-label"
+          id="multiple-checkbox-label"
           className={"filter_form__input"}
         >
           Filter
         </InputLabel>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
+          labelId="multiple-checkbox-label"
+          id="multiple-checkbox"
           multiple
           value={filterItems}
           onChange={handleChange}
