@@ -3,7 +3,7 @@ import Moment from "react-moment";
 import moment from "moment";
 
 import css from "./BookedRoom.module.scss";
-import cn from 'classnames'
+import cn from "classnames";
 
 import { clock, calendar } from "../../assets/images/icons";
 import { IRooms, IUserOwn } from "../../models";
@@ -62,7 +62,7 @@ const BookedRoom: FC<Props> = ({
       </div>
       <ul className={css.booked__time}>
         <li className={css.booked__info}>
-          <img src={calendar} alt="Data" height={15} width={15} />
+          <img src={calendar} alt='Data' height={15} width={15} />
           <Moment format={"YY-MM-DD | H:mm"}>{startDate}</Moment>
         </li>
         <li className={css.booked__info}>
@@ -80,7 +80,13 @@ const BookedRoom: FC<Props> = ({
       </ul>
       <div className={css["booked__all-information"]}>
         <ul className={css["booked__information-wrapper"]}>
-          <li className={cn(css["booked__all-information"], css['booked__all-information-name'], css['booked__all-information-name__creator'])}>
+          <li
+            className={cn(
+              css["booked__all-information"],
+              css["booked__all-information-name"],
+              css["booked__all-information-name__creator"]
+            )}
+          >
             <span className={css["booked__information-name"]}>Creator:</span>
             <p>{email}</p>
           </li>
@@ -139,19 +145,28 @@ const BookedRoom: FC<Props> = ({
             </div>
           </div>
           <div>
-            <div className={cn(css["booked__all-information"], css['booked__all-information-name'])}>
-              <span className={cn(css["booked__information-name"])}>Members:</span>
+            <div
+              className={cn(
+                css["booked__all-information"],
+                css["booked__all-information-name"]
+              )}
+            >
+              <span className={cn(css["booked__information-name"])}>
+                Members: {!members.length && '0'}
+              </span>
             </div>
             <li>
               <div className={css.booked__list}>
-                {members.map((user) => (
-                  <div
-                    key={user.id}
-                    className={css["booked__information-member"]}
-                  >
-                    <span>{user.email}</span>
-                  </div>
-                ))}
+                {!!members.length && (
+                  members.map((user) => (
+                    <div
+                      key={user.id}
+                      className={css["booked__information-member"]}
+                    >
+                      <span>{user.email}</span>
+                    </div>
+                  ))
+                )}
               </div>
             </li>
           </div>

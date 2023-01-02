@@ -1,4 +1,4 @@
-import { FC,} from 'react';
+import { FC, useEffect,} from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ import { Input, Button } from 'components/index';
 import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
 import { UserSignUpProps } from 'models';
-import { NotifyService } from 'services';
+import { NotifyService, userService } from 'services';
 import { getUrlId } from 'utils';
 
 const initialValues = {
@@ -28,7 +28,7 @@ const SignUp: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoading } = useAppSelector(selectUser);
+  const { user, isLoading } = useAppSelector(selectUser);
 
   const {
     register,
@@ -53,6 +53,12 @@ const SignUp: FC = () => {
       // console.log(err);
     }
   };
+
+   useEffect(() => {
+    if (userService.isLoggedIn()) {
+      navigate('/dashboard');
+    }
+  }, [navigate, user]);
 
   return (
     <FormLayout

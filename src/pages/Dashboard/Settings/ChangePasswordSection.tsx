@@ -1,22 +1,22 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { useForm } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
-import Joi from 'joi';
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
 import scss from "./settings.module.scss";
 
-import { SectionLayout } from './SectionLayout';
-import { SectionInput } from './SectionInput';
-import { SectionButtons } from './SectionButtons';
+import { SectionLayout } from "./SectionLayout";
+import { SectionInput } from "./SectionInput";
+import { SectionButtons } from "./SectionButtons";
 
-import { changePassword, selectUser } from 'store';
-import {useAppDispatch, useAppSelector} from '../../../hooks';
-import { validatePassword, validateConfirmPassword } from 'utils';
-import { changePasswordProps } from 'models';
+import { changePassword, selectUser } from "store";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { validatePassword, validateConfirmPassword } from "utils";
+import { changePasswordProps } from "models";
 
 const initialValues: changePasswordProps = {
-  newPassword: '',
-  confirmPassword: '',
+  newPassword: "",
+  confirmPassword: "",
 };
 
 const changePasswordValidator = Joi.object({
@@ -37,7 +37,7 @@ const ChangePasswordSection: FC = () => {
   } = useForm({
     defaultValues: initialValues,
     resolver: joiResolver(changePasswordValidator),
-    mode: 'onSubmit',
+    mode: "onSubmit",
   });
 
   const submit = async ({ newPassword }: changePasswordProps) => {
@@ -54,24 +54,28 @@ const ChangePasswordSection: FC = () => {
   };
 
   return (
-    <SectionLayout headerText={'Password Change'}>
-      <form className={scss['settings__section-body']} onSubmit={handleSubmit(submit)}></form>
-      <SectionInput
-        type={'password'}
-        text={'New Password'}
-        {...register('newPassword')}
-        error={!!errors.newPassword}
-        errorText={errors.newPassword?.message}
-      />
+    <SectionLayout headerText={"Password Change"}>
+      <form
+        className={scss["settings__section-body"]}
+        onSubmit={handleSubmit(submit)}
+      >
+        <SectionInput
+          type={"password"}
+          text={"New Password"}
+          {...register("newPassword")}
+          error={!!errors.newPassword}
+          errorText={errors.newPassword?.message}
+        />
 
-      <SectionInput
-        type={'password'}
-        text={'Confirm Password'}
-        {...register('confirmPassword')}
-        error={!!errors.confirmPassword}
-        errorText={errors.confirmPassword?.message}
-      />
-      <SectionButtons handleCancel={handleCancel} />
+        <SectionInput
+          type={"password"}
+          text={"Confirm Password"}
+          {...register("confirmPassword")}
+          error={!!errors.confirmPassword}
+          errorText={errors.confirmPassword?.message}
+        />
+        <SectionButtons handleCancel={handleCancel} />
+      </form>
     </SectionLayout>
   );
 };

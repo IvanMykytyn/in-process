@@ -8,7 +8,7 @@ import { SectionButtons } from "./SectionButtons";
 
 import { addUsers, deleteUser, selectUser } from "store";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { validateAddUserEmail, validateArrayOfEmails } from "utils";
+import { validateArrayOfEmails, validateEmail } from "utils";
 
 // styles
 import cn from "classnames";
@@ -25,6 +25,7 @@ const UsersManagementSection: FC = () => {
   >([]);
   const [userEmails, setUserEmails] = useState<Array<string>>([]);
   const [userToDelete, setUserToDelete] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -52,17 +53,18 @@ const UsersManagementSection: FC = () => {
     e.preventDefault();
     try {
       const { error } = validateArrayOfEmails.validate(userEmails);
-
-      if (!!error) {
-        setError(error?.message ?? "");
-        return;
+      if (error && inputValue) {
+        setError("Press Enter to submit this email.");
+      } else if (error) {
+        setError(error?.message || "");
+      } else {
+        await dispatch(addUsers(userEmails));
+        await getUsers();
+        if (!serverError) clearField();
       }
-
-      await dispatch(addUsers(userEmails));
     } catch (err) {
-      // console.log(err);
-    } finally {
       if (!serverError) clearField();
+      // console.log(err);
     }
   };
 
@@ -100,11 +102,17 @@ const UsersManagementSection: FC = () => {
   };
 
   const handleSelectedChange = (_: React.SyntheticEvent, values: string[]) => {
-    const { error } = validateAddUserEmail.validate(values.at(-1));
+    const { error } = validateEmail.validate(values.at(-1));
     setError(error?.message ?? "");
 
     if (!!error) values.pop();
     setUserEmails(values);
+  };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!!error) {
+      setError("");
+    }
+    setInputValue(e?.target.value);
   };
 
   return (
@@ -123,6 +131,8 @@ const UsersManagementSection: FC = () => {
               inputError={!!error}
               inputTextError={error}
               handleChange={handleSelectedChange}
+              inputValue={inputValue}
+              handleInputChange={handleInputChange}
               renderInput={(params: AutocompleteRenderInputParams) => (
                 <Input {...params} />
               )}

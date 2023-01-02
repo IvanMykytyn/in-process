@@ -15,10 +15,12 @@ interface CustomProps {
   handleChange: (e: React.SyntheticEvent, values: string[]) => void;
   options?: Array<string>;
   expandSize?: boolean;
-  handleInputChange?: () => void;
+  handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   inputError?: boolean;
   inputTextError?: string;
   label?: string;
+  helperText?: string;
+  inputValue?: string;
 }
 
 type AutocompleteSetup = AutocompleteProps<
@@ -37,6 +39,7 @@ const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
   inputError,
   label,
   inputTextError,
+  inputValue,
   ...rest
 }) => {
 
@@ -74,7 +77,14 @@ const MultipleSelectWithBadges: FC<CustomProps & AutocompleteSetup> = ({
         )}
         {...rest}
         renderInput={(params: AutocompleteRenderInputParams) => (
-          <TextField {...params} error={inputError} helperText={inputTextError} label={label}/>
+          <TextField
+            {...params}
+            value={inputValue}
+            onChange={handleInputChange}
+            error={inputError}
+            helperText={inputTextError}
+            label={label}
+        />
         )}
       />
     </div>
