@@ -70,6 +70,7 @@ const FormThirdStep: FC<BuildStepProps> = ({
                         <img
                           src={tool.img}
                           alt={tool.alt}
+                          title={tool.alt}
                           width={20}
                           height={20}
                         />

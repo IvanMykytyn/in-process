@@ -18,16 +18,19 @@ import { userService, adminService } from "services";
 import { clearUser } from "store/slices/auth.slice";
 
 import { AppDispatch } from "store";
+import { getAllRooms } from "store/thunk/room";
 
 export const loginUser = createAsyncThunk<
   UserWithToken,
   UserLoginProps,
   {
     rejectValue: ErrorMessageObject;
+    dispatch?: AppDispatch;
   }
->("auth/loginUser", async (userData, { rejectWithValue }) => {
+>("auth/loginUser", async (userData, { rejectWithValue, dispatch }) => {
   try {
     const response = await userService.loginRequest(userData);
+    dispatch(getAllRooms({ officeId: 2 }));
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -44,10 +47,12 @@ export const signUpUser = createAsyncThunk<
   UserSignUpProps,
   {
     rejectValue: ErrorMessageObject;
+    dispatch?: AppDispatch;
   }
->("auth/signUpUser", async (userData, { rejectWithValue }) => {
+>("auth/signUpUser", async (userData, { rejectWithValue, dispatch }) => {
   try {
     const response = await userService.signUpRequest(userData);
+    dispatch(getAllRooms({ officeId: 2 }));
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -228,16 +233,16 @@ export const updateMe = createAsyncThunk<
 });
 
 interface DeleteUserId {
-  id: string
+  id: string;
 }
 
 export const deleteUser = createAsyncThunk<
-void,
-DeleteUserId,
+  void,
+  DeleteUserId,
   {
     rejectValue: ErrorMessageObject;
   }
->("auth/deleteUser", async ({id}, { rejectWithValue }) => {
+>("auth/deleteUser", async ({ id }, { rejectWithValue }) => {
   try {
     await adminService.deleteUserById(id);
     // return response.data;
@@ -252,8 +257,8 @@ DeleteUserId,
 });
 
 export const setAvatar = createAsyncThunk<
-void,
-FormData,
+  void,
+  FormData,
   {
     rejectValue: ErrorMessageObject;
   }
@@ -271,8 +276,8 @@ FormData,
 });
 
 export const deleteAvatar = createAsyncThunk<
-void,
-void,
+  void,
+  void,
   {
     rejectValue: ErrorMessageObject;
   }
@@ -288,5 +293,3 @@ void,
     return rejectWithValue(error.response.data);
   }
 });
-
-

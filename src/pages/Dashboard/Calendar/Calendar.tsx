@@ -163,7 +163,6 @@ const Calendar: FC = () => {
               .dateProfile;
               
               const { start, end } = renderRange;
-              console.log(own);
               
               getRangeOfBookings(
                 moment(start).toISOString(),

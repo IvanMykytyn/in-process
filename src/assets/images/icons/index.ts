@@ -27,6 +27,7 @@ import print from './print.svg';
 import sun from './sun.svg';
 import moon from './moon.svg';
 import close from './close.svg'
+import lock from './lock.svg'
 
 export {
     keyIcon,
@@ -58,4 +59,5 @@ export {
     sun,
     moon,
     close,
+    lock,
 };

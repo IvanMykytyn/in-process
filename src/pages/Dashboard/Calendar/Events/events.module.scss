@@ -48,6 +48,8 @@ $eventBorderRadius: 5px;
     background: var(--card-hover-background);
     transition: 0.5s ease-in-out all;
   }
+
+  
 }
 
 .month {
@@ -86,6 +88,7 @@ $eventBorderRadius: 5px;
   width: 100%;
 
   .event {
+
     &__colored-line {
       width: 3px;
     }
@@ -109,6 +112,11 @@ $eventBorderRadius: 5px;
   border-radius: $eventBorderRadius;
 
   padding: 2px 8px;
+  
+  &.private-event{
+    opacity: 0.6;
+    background-color: var(--light-gray-280p);
+  }
 
   &::before {
     content: '';
@@ -355,8 +363,9 @@ $eventBorderRadius: 5px;
 .event-calendar-content {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   max-width: 250px;
+  min-height: 18px;
   padding-right: 5px;
   width: 100%;
   justify-content: space-between;
@@ -370,12 +379,12 @@ $eventBorderRadius: 5px;
 .event-calendar-content-list {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   max-width: 250px;
   padding-right: 5px;
   padding: 3px;
   width: 100%;
-  justify-content: space-between;
+  // justify-content: space-between;
 
   h3 {
     overflow: hidden;
@@ -399,4 +408,9 @@ $eventBorderRadius: 5px;
   p{
     word-break: break-all;
  } 
+}
+
+.event_lock-icon{
+  width: 18px;
+  height: 18px;
 }

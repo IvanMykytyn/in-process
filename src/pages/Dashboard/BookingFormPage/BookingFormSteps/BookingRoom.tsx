@@ -54,7 +54,7 @@ const BookingRoom: FC<BookingRoomProps> = ({
               (inst) =>
                 inst.id === tool.id && (
                   <li key={tool.id}>
-                    {<img src={tool.img} alt={tool.alt} width={20} height={20} />}
+                    {<img src={tool.img} title={tool.alt} alt={tool.alt} width={20} height={20} />}
                   </li>
                 )
             )

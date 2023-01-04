@@ -71,7 +71,6 @@ const BookingFormPage: FC = () => {
   if(isEditing){    
     defaultStartTime = moment({hours: defaultStartTime.hours(), minutes: defaultStartTime.minutes()})
     defaultEndTime = moment({hours: defaultEndTime.hours(), minutes: defaultStartTime.minutes()})
-    console.log(defaultEndTime);
   }
 
   const [allUsers, setAllUsers] = useState<
@@ -122,10 +121,7 @@ const BookingFormPage: FC = () => {
     try {
       if (Object.keys(errors).length === 0) {
         if (isEditing) {
-          console.log(values);
           const booking = getOneTimeBooking(values, isEditing);
-          console.log(booking);
-          
           await dispatch(
             bookingActions.oneTimePut({
               ...booking,

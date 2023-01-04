@@ -67,6 +67,7 @@ const Room: FC<RoomProps> = ({ room }) => {
                       <img
                         src={tool.img}
                         alt={tool.alt}
+                        title={tool.alt}
                         width={15}
                         height={15}
                       />
