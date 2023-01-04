@@ -22,7 +22,7 @@ const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
       dispatch(roomActions.getAllRooms({ officeId: 2 }));
     }
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [user, dispatch]);
 
   if (!userService.isLoggedIn()) {
     // NotifyService.error('Please login');

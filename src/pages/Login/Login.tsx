@@ -1,10 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 // styles
-import cn from 'classnames';
 import css from './login.module.scss';
 
 import login from 'assets/images/icons/login.png';

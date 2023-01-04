@@ -18,7 +18,6 @@ import { userService, adminService } from "services";
 import { clearUser } from "store/slices/auth.slice";
 
 import { AppDispatch } from "store";
-import { getAllRooms } from "store/thunk/room";
 
 export const loginUser = createAsyncThunk<
   UserWithToken,
@@ -30,7 +29,6 @@ export const loginUser = createAsyncThunk<
 >("auth/loginUser", async (userData, { rejectWithValue, dispatch }) => {
   try {
     const response = await userService.loginRequest(userData);
-    dispatch(getAllRooms({ officeId: 2 }));
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
@@ -52,7 +50,6 @@ export const signUpUser = createAsyncThunk<
 >("auth/signUpUser", async (userData, { rejectWithValue, dispatch }) => {
   try {
     const response = await userService.signUpRequest(userData);
-    dispatch(getAllRooms({ officeId: 2 }));
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;
