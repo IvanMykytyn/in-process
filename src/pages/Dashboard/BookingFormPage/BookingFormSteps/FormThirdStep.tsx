@@ -9,6 +9,7 @@ import { Button } from "components/Button/Button";
 import { BookingRoom } from "./BookingRoom";
 import { staff } from "utils/tools/staff";
 import { useAppSelector } from "hooks";
+import { selectBooking } from "store";
 
 const FormThirdStep: FC<BuildStepProps> = ({
   handleBack,
@@ -18,6 +19,7 @@ const FormThirdStep: FC<BuildStepProps> = ({
   isEditing,
 }) => {
   const { rooms } = useAppSelector((state) => state.rooms);
+  const { isLoading } = useAppSelector(selectBooking);
 
   const handleChangeRoom = (id: number) => {
     setValues({ ...values, roomId: id });
@@ -43,7 +45,7 @@ const FormThirdStep: FC<BuildStepProps> = ({
     <div className={cn(css["third-step-form"])}>
       <div className={css["booking-room__left-side"]}>
         <div className={css.booking__image}>
-          <img className={css["booking-img"]} src={roomImg} alt="room" />
+          <img className={css["booking-img"]} src={roomImg} alt='room' />
           <div className={css["booking-room__capacity"]}>
             <img src={usersIcon} alt={"users-icon"} />
             <p>{maxCapacity} capacity</p>
@@ -92,20 +94,27 @@ const FormThirdStep: FC<BuildStepProps> = ({
             ))}
           </div>
         </div>
-        <div className={css.buttons}>
+        <div
+          className={cn(
+            { "third-step-editing-buttons": isEditing },
+            css.buttons
+          )}
+        >
           {isEditing && (
             <Button
               type={"button"}
               onClick={handleCancelEdit}
-              variant="cancel-edit"
+              variant='cancel-edit'
             >
               Cancel Editing
             </Button>
           )}
-          <Button type={"button"} onClick={handleBack}>
+          <Button type={"button"} disabled={isLoading} onClick={handleBack}>
             Back
           </Button>
-          <Button type={"submit"}>Submit</Button>
+          <Button type={"submit"} disabled={isLoading}>
+            Submit
+          </Button>
         </div>
       </div>
     </div>

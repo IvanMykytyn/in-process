@@ -16,6 +16,9 @@
   transition:  0.5s, text-shadow 0.5s, border 0.5s;
   position: relative;
 
+  @media (max-width: 1251px) {
+    grid-template-columns: minmax(0, 350px) minmax(0, auto);
+  }
   &:disabled{
     opacity: 0.7;
   }

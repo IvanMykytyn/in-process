@@ -143,3 +143,21 @@
     opacity: 0.7;
   }
 }
+
+.third-step-editing-buttons{
+  .button{
+    @media (max-width: 1441px) {
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+    @media (max-width: 1231px) {
+      font-size: 0.95rem;
+      padding: 10px 20px;
+    }
+    @media (max-width: 1131px) {
+      font-size: 0.85rem;
+      padding: 8px 15px;
+    }
+    
+  }
+}

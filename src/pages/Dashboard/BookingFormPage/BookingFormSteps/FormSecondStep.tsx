@@ -25,7 +25,7 @@ import {
   XDayOfEveryNMonthType,
 } from "models";
 
-import { getDiffInMinutes } from "utils";
+import { getDiffInDays, getDiffInMinutes } from "utils";
 
 const selectRepeatingRange = ["day", "week", "month", "year"];
 
@@ -81,7 +81,13 @@ const FormSecondStep: FC<BuildStepProps> = ({
     let pattern: PatternType = values.pattern;
 
     let isValid = false;
-    let errorsObj = isValidSecondStep(values, values.isRecurring, isEditing);
+    let errorsObj = isValidSecondStep(
+      values,
+      values.isRecurring,
+      isEditing,
+      select,
+      generalCount
+    );
 
     if (values.isRecurring) {
       switch (select) {
@@ -237,7 +243,7 @@ const FormSecondStep: FC<BuildStepProps> = ({
           <Button
             type={"button"}
             onClick={handleCancelEdit}
-            variant="cancel-edit"
+            variant='cancel-edit'
           >
             Cancel Editing
           </Button>
@@ -258,7 +264,9 @@ export { FormSecondStep };
 const isValidSecondStep = (
   values: ValuesType,
   isRecurring: boolean,
-  isEditing: boolean
+  isEditing: boolean,
+  select: string,
+  count: number
 ) => {
   let errors: ErrorsType = {};
 
@@ -280,6 +288,31 @@ const isValidSecondStep = (
       errors.endDate = "Invalid date format";
     } else if (getDiffInMinutes(values.startDate, values.endDate) <= 0) {
       errors.endDate = "The end date cannot be less than start date";
+    }
+
+    if (
+      select === "day" &&
+      getDiffInDays(values.startDate, values.endDate) + 1 < count
+    ) {
+      errors.endDate = "End date date should be later";
+    }
+    if (
+      select === "week" &&
+      getDiffInDays(values.startDate, values.endDate) + 1 < 7 * count
+    ) {
+      errors.endDate = "End date date should be later";
+    }
+    if (
+      select === "month" &&
+      getDiffInDays(values.startDate, values.endDate) + 1 < 30 * count
+    ) {
+      errors.endDate = "End date date should be later";
+    }
+    if (
+      select === "year" &&
+      getDiffInDays(values.startDate, values.endDate) + 1 < 365 * count
+    ) {
+      errors.endDate = "End date date should be later";
     }
   }
   if (!values.startTime) {

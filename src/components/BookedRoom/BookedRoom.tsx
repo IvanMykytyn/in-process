@@ -95,8 +95,8 @@ const BookedRoom: FC<Props> = ({
             {floor}
           </li>
           <li className={css["booked__all-information"]}>
-            <span className={css["booked__information-name"]}>Room:</span>
-            {id}
+            <span className={css["booked__information-name"]}>{name?.split(' ')?.[0]}</span>
+            {name?.split(' ')?.[1]}
           </li>
           <li className={css["booked__all-information"]}>
             <span className={css["booked__information-name"]}>Capacity:</span>

@@ -1,9 +1,9 @@
-@import '../../styles/global.module';
+@import "../../styles/global.module";
 
 .sidebar {
   max-width: 350px;
   width: 100%;
-  max-height: 100vh;
+  height: calc(100vh - 30px);
   border-radius: 25px;
   box-shadow: $outerBoxShadow;
   padding: 15px;
@@ -13,6 +13,25 @@
   background: var(--background);
   color: var(--accent-text-color);
 
+  @media (max-width: 1151px) {
+    max-width: 300px;
+  }
+
+  @media (max-width: 1101px) {
+    &.hide{
+      position: static;
+      transition: position 0.7s;
+    }
+    position: absolute;
+    transition: position 0.7s;
+
+  
+    right: 0;
+    top: 15px;
+    bottom: 15px;
+    z-index: 100;
+    max-width: 300px;
+  }
   &__buttons {
     display: flex;
     grid-gap: 25px;
@@ -28,7 +47,8 @@
     border-radius: 5px;
 
     &:hover {
-      box-shadow: inset 1px 1px 2px var(--gray), inset -2px -1px 4px var(--white)
+      box-shadow: inset 1px 1px 2px var(--gray),
+        inset -2px -1px 4px var(--white);
     }
   }
 }
@@ -130,7 +150,8 @@
     border-radius: 50%;
 
     // text-color filter
-    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg)
+      brightness(84%) contrast(83%);
     transition: 0.5s ease-in-out;
 
     cursor: pointer;
@@ -139,7 +160,8 @@
     &:focus,
     &:active {
       // primary-color filter
-      filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%) contrast(94%);
+      filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg)
+        brightness(91%) contrast(94%);
     }
   }
 
@@ -164,17 +186,18 @@
 
 .logout-btn {
   img {
-    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg) brightness(84%) contrast(83%);
+    filter: invert(63%) sepia(7%) saturate(7%) hue-rotate(329deg)
+      brightness(84%) contrast(83%);
     transition: all 0.5s ease-in-out;
     width: 20px;
-
   }
 
   &:hover,
   &:focus,
   &:active {
     // primary-color filter
-    filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg) brightness(91%) contrast(94%);
+    filter: invert(53%) sepia(38%) saturate(582%) hue-rotate(170deg)
+      brightness(91%) contrast(94%);
   }
 }
 
@@ -236,7 +259,7 @@ button {
   color: var(--accent-text-color);
 
   &::after {
-    content: '';
+    content: "";
     height: 100%;
     width: 100%;
     background-color: transparent;
@@ -270,7 +293,6 @@ button {
   }
 }
 
-
 .null {
   text-align: center;
   font-size: 14px;
@@ -295,11 +317,10 @@ button {
   padding: 4px;
   box-shadow: 1px 1px 2px var(--gray), -1px -1px 2px var(--white);
 
-  img{
+  img {
     height: 100%;
     width: 100%;
     border-radius: 50%;
-
   }
   div {
     color: #5a5a5a;

@@ -122,6 +122,7 @@ const bookingSlice = createSlice({
 
       // recurring post
       .addCase(recPost.pending, (state) => {
+        state.isLoading = true;
         state.notifyId = NotifyService.loading();
         state.isSuccess = false;
       })
@@ -130,6 +131,7 @@ const bookingSlice = createSlice({
         state.isSuccess = true;
 
         NotifyService.update(state.notifyId, `Successfully booked`, "success");
+        state.isLoading = false
       })
       .addCase(recPost.rejected, (state, { payload }) => {
         const { message, statusCode } = payload || {};
@@ -145,7 +147,7 @@ const bookingSlice = createSlice({
           "error",
           8000
         );
-        state.oneTimeLoading = false;
+        state.isLoading = false;
       })
 
       // recurring delete
@@ -162,18 +164,17 @@ const bookingSlice = createSlice({
       .addCase(recDelete.rejected, (state) => {
         const error = "Something went Wrong";
         NotifyService.update(state.notifyId, error, "error");
-        state.oneTimeLoading = false;
       })
 
       // one time post
       .addCase(oneTimePost.pending, (state) => {
         state.isSuccess = false;
-        state.oneTimeLoading = true;
+        state.isLoading = true;
         state.notifyId = NotifyService.loading();
       })
       .addCase(oneTimePost.fulfilled, (state, action) => {
         state.isSuccess = true;
-        state.oneTimeLoading = false;
+        state.isLoading = false;
 
         NotifyService.update(state.notifyId, `Successfully booked`, "success");
       })
@@ -191,11 +192,12 @@ const bookingSlice = createSlice({
           "error",
           8000
         );
-        state.oneTimeLoading = false;
+        state.isLoading = false;
       })
 
       // one time put
       .addCase(oneTimePut.pending, (state) => {
+        state.isLoading = true;
         state.isSuccess = false;
         state.notifyId = NotifyService.loading();
       })
@@ -204,6 +206,7 @@ const bookingSlice = createSlice({
         state.editingBookingId = NaN;
         state.isEditing = false;
         NotifyService.update(state.notifyId, `Successfully Updated`, "success");
+        state.isLoading = false
       })
       .addCase(oneTimePut.rejected, (state, { payload }) => {
         const { message, statusCode } = payload || {};
@@ -219,7 +222,7 @@ const bookingSlice = createSlice({
           "error",
           8000
         );
-        state.oneTimeLoading = false;
+        state.isLoading = false
       })
 
       // one time delete

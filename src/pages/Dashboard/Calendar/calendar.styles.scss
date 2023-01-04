@@ -81,6 +81,10 @@ $lineColor: $nowIndicatorColor;
   text-transform: capitalize !important;
   font-size: 0.875rem !important;
 
+  @media (max-width: 1301px) {
+    font-size: 0.75rem !important;
+  }
+
   &:hover,
   &:focus,
   &:active {
@@ -106,6 +110,12 @@ $lineColor: $nowIndicatorColor;
   margin-right: 5px;
   border-radius: 8px;
   box-shadow: 3px 3px 7px var(--gray), -1px -2px 5px var(--white);
+
+  @media (max-width: 1301px) {
+    button {
+      font-size: 0.75rem !important;
+    }
+  }
 
   .fc-today-button,
   .fc-timeGridWeek-button,
@@ -200,11 +210,12 @@ $lineColor: $nowIndicatorColor;
     position: absolute;
     right: 30px;
     color: var(--accent-text-color);
+    font-size: 0.9rem;
   }
 }
 .calendar-own .fc-button.fc-button-primary.fc-showOwn-button {
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 10px;
     height: 10px;
@@ -233,6 +244,9 @@ $lineColor: $nowIndicatorColor;
   font-family: "Montserrat-Regular", sans-serif !important;
   font-size: 0.875rem !important;
 
+  @media (max-width: 1301px) {
+    font-size: 0.75rem !important;
+  }
   &:hover,
   &:focus,
   &:active {
@@ -289,6 +303,10 @@ $lineColor: $nowIndicatorColor;
   letter-spacing: 1px;
   text-align: center;
   color: var(--text-color-300);
+
+  @media (max-width: 1301px) {
+    font-size: 1rem !important;
+  }
 }
 
 .fc-prev-button,
@@ -306,6 +324,13 @@ $lineColor: $nowIndicatorColor;
 .fc-prev-button {
   padding-right: 65px !important;
 
+  @media (max-width: 1301px) {
+    padding-right: 25px !important;
+  }
+
+  @media (max-width: 1201px) {
+    padding-right: 10px !important;
+  }
   &:hover,
   &:active,
   &:focus {
@@ -315,6 +340,14 @@ $lineColor: $nowIndicatorColor;
 
 .fc-next-button {
   padding-left: 65px !important;
+
+  @media (max-width: 1301px) {
+    padding-left: 25px !important;
+  }
+
+  @media (max-width: 1201px) {
+    padding-left: 10px !important;
+  }
 }
 
 .fc-icon {
@@ -579,4 +612,19 @@ tr.fc-list-event {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 25;
+}
+
+@media (max-width: 812.98px) {
+  .fc .fc-toolbar.fc-header-toolbar {
+    display: block;
+    text-align: center;
+  }
+
+  .fc-header-toolbar .fc-toolbar-chunk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
 }

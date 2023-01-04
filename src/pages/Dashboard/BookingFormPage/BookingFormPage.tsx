@@ -59,13 +59,20 @@ const BookingFormPage: FC = () => {
   );
   const defaultParamsEndDate = getValidDateFromString(params.get("end") ?? "");
 
-  const defaultStartTime = !!params.get('isCalendar') ? moment() : defaultParamsStartDate.clone() ;
+  
+  let defaultStartTime = !!params.get('isCalendar') ? moment() : defaultParamsStartDate.clone() ;
   const startRemainder = !isEditing ? 15 - (defaultStartTime.minute() % 15) : 0;
   defaultStartTime.add(startRemainder, "minutes");
 
-  const defaultEndTime = defaultParamsEndDate.clone();
+  let defaultEndTime = defaultParamsEndDate.clone();
   const endRemainder = !isEditing ?  15 - (defaultEndTime.minute() % 15) + 60 : 0;
   defaultEndTime.add(endRemainder, "minutes");
+
+  if(isEditing){    
+    defaultStartTime = moment({hours: defaultStartTime.hours(), minutes: defaultStartTime.minutes()})
+    defaultEndTime = moment({hours: defaultEndTime.hours(), minutes: defaultStartTime.minutes()})
+    console.log(defaultEndTime);
+  }
 
   const [allUsers, setAllUsers] = useState<
     Array<{ email: string; id: string }>
@@ -115,7 +122,10 @@ const BookingFormPage: FC = () => {
     try {
       if (Object.keys(errors).length === 0) {
         if (isEditing) {
+          console.log(values);
           const booking = getOneTimeBooking(values, isEditing);
+          console.log(booking);
+          
           await dispatch(
             bookingActions.oneTimePut({
               ...booking,
@@ -229,12 +239,10 @@ const getOneTimeBooking = (
   let startTimeMoment = values.startTime.clone();
   let endTimeMoment = values.endTime.clone();
 
-  if (!isEditing) {
-    dateMoment = dateMoment.add(2, "hours");
-    // startTimeMoment = startTimeMoment.add(0, "hours");
-    // endTimeMoment = endTimeMoment.add(0, "hours");
-  }
+  dateMoment = dateMoment.add(2, "hours");
+
   const date = dateMoment.toISOString(false).slice(0, 10);
+  
   const startTime = startTimeMoment.toISOString().slice(10);
   const endTime = endTimeMoment.toISOString().slice(10);
 

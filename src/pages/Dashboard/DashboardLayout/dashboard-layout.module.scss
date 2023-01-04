@@ -15,6 +15,14 @@
   grid-gap: 20px;
   padding: 15px;
   max-height: 100%;
+  position: relative;
+
+}
+
+.with-closed-sidebar{
+  @media (max-width: 1101px) {
+    padding-right: 65px !important;
+  }
 }
 
 .dashboard-page {

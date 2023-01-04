@@ -24,6 +24,9 @@ export const getNextDay = (currentDate: Moment) => {
 export const getDiffInMinutes = (startDate: Moment, endDate: Moment): number => {
   return endDate.diff(startDate, 'minutes');
 };
+export const getDiffInDays = (startDate: Moment, endDate: Moment): number => {
+  return endDate.diff(startDate, 'days');
+};
 
 export const getTimeFromDate = (currentDate: Moment): string => {
   const format = 'HH:mm';

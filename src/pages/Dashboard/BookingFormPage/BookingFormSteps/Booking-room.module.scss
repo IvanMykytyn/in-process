@@ -1,6 +1,7 @@
 @import 'styles/global.module';
 
 .booking-room {
+  max-height: 140px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   border-radius: 10px;

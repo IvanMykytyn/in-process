@@ -5,18 +5,26 @@ import cn from "classnames";
 import css from "./dashboard-layout.module.scss";
 
 // router-dom
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 // components
 import { SideBar } from "components";
+import { useAppSelector } from "hooks";
+import { selectBooking } from "store";
 
 const DashboardLayout: FC = () => {
+  const { isSideBarOpen } = useAppSelector(selectBooking);
+
   return (
     <main>
       <div className={css.container}>
-        <div className={cn(css.dashboard)}>
+        <div className={cn(css.dashboard, {
+                [css["with-closed-sidebar"]]: isSideBarOpen,
+              })}>
           <div className={cn(css.inner)}>
-            <div className={cn(css["dashboard-page"])}>
+            <div
+              className={cn(css["dashboard-page"])}
+            >
               <Outlet />
             </div>
             <ul className={cn(css.bookmarks)}>

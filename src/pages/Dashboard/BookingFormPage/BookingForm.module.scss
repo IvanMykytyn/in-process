@@ -1,4 +1,4 @@
-@import 'styles/global.module';
+@import "styles/global.module";
 
 .stepper-form {
   display: flex;
@@ -71,13 +71,15 @@
   padding-right: 50px;
   justify-content: flex-end;
   width: 95%;
-  max-width: 900px;
 }
 
 .step-form {
   padding: 70px 50px 20px;
   max-width: 900px;
   width: 100%;
+  @media (max-height: 701px) {
+    padding: 30px 30px 10px;
+  }
 }
 
 .first-step-form {
@@ -90,9 +92,9 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  &-editing{
+  &-editing {
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    max-width: 600px
+    max-width: 600px;
   }
   &__left-side {
     padding: 0 20px 10px;
@@ -166,18 +168,47 @@
   margin-top: 30px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(0, 450px) minmax(0, auto);
+  grid-template-columns: minmax(0, 425px) minmax(0, auto);
   box-shadow: 0 0 7px var(--gray), 0px 0 5px var(--white);
+
+  @media (max-width: 1331px) {
+    grid-template-columns: minmax(0, 350px) minmax(0, auto);
+  }
+  @media (max-width: 1201px) {
+    grid-template-columns: minmax(0, 300px) minmax(0, auto);
+  }
+  @media (max-width: 819px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, auto) minmax(0, 1fr);
+  }
 
   .booking-room__left-side {
     max-width: 450px;
+    position: relative;
+    @media (max-width: 819px) {
+      max-width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 3px;
+        background-color: var(--primary-color);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        box-shadow: 0 0 7px var(--primary-color);
+        z-index: 10;
+      }
+    }
   }
 
   .booking__image {
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       width: 100%;
       height: 5px;
       background-color: var(--primary-color);
@@ -186,6 +217,9 @@
       bottom: 0;
       box-shadow: 0 0 7px var(--primary-color);
       z-index: 10;
+      @media (max-width: 819px) {
+        content: none;
+      }
     }
 
     .booking-img {
@@ -205,6 +239,9 @@
     @extend %montserrat-semi-bold-600;
     font-size: 26px;
     margin-bottom: 8px;
+    @media (max-width: 819px) {
+      font-size: 18px;
+    }
   }
 }
 
@@ -228,7 +265,7 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    max-height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
 
@@ -238,7 +275,6 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     transition: 2s ease-in-out all;
     gap: 20px;
-
   }
 }
 
@@ -264,15 +300,24 @@
 .booking__description {
   font-size: 1.1rem;
   margin-bottom: 25px;
+  @media (max-width: 819px) {
+    font-size: 0.9rem;
+  }
 }
 
 .booking__floor {
   font-size: 1.1rem;
   padding-left: 5px;
+  @media (max-width: 819px) {
+    font-size: 0.9rem;
+  }
 
   span {
     font-weight: 600;
     font-size: 1.2rem;
+    @media (max-width: 819px) {
+      font-size: 1rem;
+    }
   }
 }
 
