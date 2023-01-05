@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {IRooms, IRoomsWithSoonestBookings, ISoonestBookings} from "../../models";
+import {IRooms, IRoomsWithSoonestBookings } from "../../models";
 import {roomsService} from "../../services";
 import {AxiosError} from "axios";
 

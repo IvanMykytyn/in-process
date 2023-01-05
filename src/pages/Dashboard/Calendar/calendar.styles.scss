@@ -497,6 +497,10 @@ $lineColor: $nowIndicatorColor;
   cursor: pointer;
 }
 
+.fc-timegrid-event-harness{
+  min-width: 35px;
+}
+
 .fc-timegrid-event.fc-timegrid-dot-event,
 .fc-daygrid-event.fc-daygrid-dot-event {
   background: transparent !important;
