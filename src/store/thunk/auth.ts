@@ -18,6 +18,7 @@ import { userService, adminService } from "services";
 import { clearUser } from "store/slices/auth.slice";
 
 import { AppDispatch } from "store";
+import { NavigateFunction } from "react-router";
 
 export const loginUser = createAsyncThunk<
   UserWithToken,
@@ -42,14 +43,17 @@ export const loginUser = createAsyncThunk<
 
 export const signUpUser = createAsyncThunk<
   UserWithToken,
-  UserSignUpProps,
+  UserSignUpProps & {navigate: NavigateFunction},
   {
     rejectValue: ErrorMessageObject;
     dispatch?: AppDispatch;
   }
 >("auth/signUpUser", async (userData, { rejectWithValue, dispatch }) => {
   try {
-    const response = await userService.signUpRequest(userData);
+    const {id, firstName, lastName, password, navigate} = userData
+    const response = await userService.signUpRequest({id, firstName, lastName, password});
+
+    navigate('/dashboard')
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ErrorMessageObject>;

@@ -143,7 +143,7 @@ const buildEventContentDay = (
 
 const getClockContent = (showEvent: boolean, startTime: string, endTime?: string): JSX.Element => {
   return (
-    <div className={scss['clock']}>
+    <div className={scss['clock']} style={{paddingRight: !showEvent ? 15 : undefined}}>
       {!showEvent && <img className={scss['event_lock-icon']} src={lock} alt="lock" />}
 
       <img src={clock} alt={'clock'} />

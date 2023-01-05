@@ -1,4 +1,4 @@
-import { FC, useEffect,} from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -9,14 +9,15 @@ import css from '../Login/login.module.scss';
 import registration from 'assets/images/icons/registration.png';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectUser } from 'store';
+import { roomActions, selectUser } from 'store';
 import { signUpUser } from 'store/thunk';
 import { Input, Button } from 'components/index';
 import { signUpValidator } from './sign-up.validators';
 import { FormLayout } from '../';
 import { UserSignUpProps } from 'models';
-import { NotifyService, userService } from 'services';
+import { NotifyService } from 'services';
 import { getUrlId } from 'utils';
+import { clearFilter } from 'store/slices/filter.slice';
 
 const initialValues = {
   firstName: '',
@@ -28,7 +29,7 @@ const SignUp: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, isLoading } = useAppSelector(selectUser);
+  const { isLoading } = useAppSelector(selectUser);
 
   const {
     register,
@@ -44,7 +45,9 @@ const SignUp: FC = () => {
     try {
       const userId = getUrlId(location.pathname, '/signup/');
       if (!!userId) {
-        await dispatch(signUpUser({ ...values, id: userId }));
+        await dispatch(signUpUser({ ...values, id: userId, navigate }));
+        await dispatch(roomActions.clearRooms())
+        await dispatch(clearFilter())
       } else {
         NotifyService.error('Invalid Link');
         navigate('/login');
@@ -54,11 +57,6 @@ const SignUp: FC = () => {
     }
   };
 
-   useEffect(() => {
-    if (userService.isLoggedIn()) {
-      navigate('/dashboard');
-    }
-  }, [navigate, user]);
 
   return (
     <FormLayout

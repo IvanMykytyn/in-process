@@ -75,14 +75,18 @@ const UsersManagementSection: FC = () => {
 
   const handleSubmitDelete = async () => {
     try {
+      if(!userToDelete){
+        return;
+      }
+
       const currIdOfDeleteUser = allUsers.find(
         (user) => user.email === userToDelete
       )?.id;
 
       await dispatch(deleteUser({ id: currIdOfDeleteUser ?? "" }));
       if (!serverError) {
-        getUsers();
-        clearDeleteField();
+        await getUsers();
+        await clearDeleteField();
       }
     } catch (err) {
       // console.log(err);

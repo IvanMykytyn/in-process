@@ -632,3 +632,9 @@ tr.fc-list-event {
     padding-bottom: 10px;
   }
 }
+
+.fc {
+  .fc-scroller.fc-scroller-liquid-absolute{
+    background: var(--background);
+  }
+}
