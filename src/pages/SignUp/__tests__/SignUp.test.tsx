@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { renderWithProviders } from 'utils/tests/test-utils';
 
 import { initialUserState, signUpUser, setupStore, logoutUser } from 'store';
@@ -16,6 +16,14 @@ const setup = () => {
     </Router>
   );
 };
+
+const mockedUsedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+   ...jest.requireActual('react-router-dom') as any,
+  useNavigate: () => mockedUsedNavigate,
+}));
+
 
 describe('Test Sign up page', () => {
   it('should render the component with no errors', async () => {
@@ -44,6 +52,8 @@ describe('Test Sign up page', () => {
       </Router>,
       { store: storeSetup }
     );
+    const navigate = useNavigate()
+
     await act(async () => {
       await store.dispatch(
         signUpUser({
@@ -51,6 +61,7 @@ describe('Test Sign up page', () => {
           lastName: 'Yu',
           password: 'Password',
           id: 'id',
+          navigate
         })
       );
     });
