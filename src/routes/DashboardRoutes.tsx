@@ -4,7 +4,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   Calendar,
   DashboardLayout,
-  Map,
   ProtectedRoute,
   Rooms,
   Settings,
@@ -24,7 +23,6 @@ const DashboardRoutes: FC = () => {
       >
         <Route path="/" element={<Navigate to="rooms" />} />
         <Route path="rooms" element={<Rooms />} />
-        <Route path="map" element={<Map />} />
         <Route path="timeline" element={<Timeline />} />
         <Route path="calendar" element={<Calendar />} />
         <Route path="settings" element={<Settings />} />

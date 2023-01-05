@@ -70,7 +70,7 @@ const BookingFormPage: FC = () => {
 
   if(isEditing){    
     defaultStartTime = moment({hours: defaultStartTime.hours(), minutes: defaultStartTime.minutes()})
-    defaultEndTime = moment({hours: defaultEndTime.hours(), minutes: defaultStartTime.minutes()})
+    defaultEndTime = moment({hours: defaultEndTime.hours(), minutes: defaultEndTime.minutes()})
   }
 
   const [allUsers, setAllUsers] = useState<

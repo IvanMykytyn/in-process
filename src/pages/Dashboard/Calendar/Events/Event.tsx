@@ -83,6 +83,7 @@ const buildEventContentDay = (
 
 
   const name = showEvent ? evenName : 'Private Booking'
+
   if (isMonthViewType) {
     const clockContent = getClockContent(showEvent, getTimeFromDate(start));
     return (

@@ -94,8 +94,6 @@ const Calendar: FC = () => {
     }, 1200);
   }, [isSideBarOpen]);
 
-  // const scrollTo = moment().format('HH') + ':00:00';
-
   return (
     <div className={cn("full-calendar", {'calendar-own': own})}>
       {isBookingLoading && (
