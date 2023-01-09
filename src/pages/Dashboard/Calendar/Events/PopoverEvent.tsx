@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 
 import { getAllOwnBookings, oneTimeDelete, recDelete, selectUser } from "store";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
@@ -67,32 +67,35 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
     navigate(`/dashboard/booking-form?${url}`);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch(togglePopover());
-  };
+  }, [dispatch]);
 
   const showControlIcons: boolean =
     user?.role === "admin" || creator.email === user?.email;
 
-  const usersEmails = users.map((user) => user.email);
+  const usersEmails = useMemo(() => users.map((user) => user.email), [users]);
 
   // delete popup
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const handleCancelDelete = () => {
+  const handleCancelDelete = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
-  const handleConfirmDelete = async (deleteAllType: boolean = false) => {
-    if (schedule && deleteAllType) {
-      await dispatch(recDelete({ scheduleId: schedule.id }));
-    } else {
-      await dispatch(oneTimeDelete({ bookingId: id }));
-    }
-    await dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT }));
-    setIsOpen(false);
-    handleClose();
-  };
+  const handleConfirmDelete = useCallback(
+    async (deleteAllType: boolean = false) => {
+      if (schedule && deleteAllType) {
+        await dispatch(recDelete({ scheduleId: schedule.id }));
+      } else {
+        await dispatch(oneTimeDelete({ bookingId: id }));
+      }
+      await dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT, showSkeleton: true }));
+      setIsOpen(false);
+      handleClose();
+    },
+    [dispatch, handleClose, id, page, schedule]
+  );
 
   return (
     <div className={scss["event-popover"]}>
@@ -101,13 +104,13 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
           <div className={scss["tools-wrapper"]}>
             <img
               src={edit}
-              alt="edit"
+              alt='edit'
               className={scss["edit-icon"]}
               onClick={handleEdit}
             />
             <img
               src={trash}
-              alt="trash"
+              alt='trash'
               className={scss["trash-icon"]}
               onClick={() => setIsOpen(true)}
             />
@@ -116,7 +119,7 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
         <div className={scss["exit-wrapper"]}>
           <img
             src={exit}
-            alt="exit"
+            alt='exit'
             className={scss["exit-icon"]}
             onClick={handleClose}
           />
@@ -134,14 +137,14 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
           <div className={scss["content-wrapper"]}>
             {!!description && (
               <ContentWithIcon
-                className="content-text"
+                className='content-text'
                 icon={details}
                 text={description}
               />
             )}
             {usersEmails.length > 0 && (
               <ContentWithIcon
-                className="user-emails"
+                className='user-emails'
                 icon={people}
                 text={usersEmails.join(", ")}
               />
@@ -193,7 +196,7 @@ const ContentWithIcon: FC<ContentWithIconProps> = ({
 }) => {
   return (
     <div className={cn(scss["content-with-icon"], scss[`${className}`])}>
-      <img src={icon} className={scss["content-icon"]} alt="icon" />
+      <img src={icon} className={scss["content-icon"]} alt='icon' />
       <p className={scss["content-text"]}>{text}</p>
     </div>
   );

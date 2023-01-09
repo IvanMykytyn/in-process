@@ -1,7 +1,7 @@
 import css from './Booking-room.module.scss';
 import cn from 'classnames';
 
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { EquipmentsProps } from 'models';
 import { staff } from 'utils/tools/staff';
 
@@ -17,7 +17,7 @@ interface BookingRoomProps {
   isActive?: boolean;
 }
 
-const BookingRoom: FC<BookingRoomProps> = ({
+const BookingRoom: FC<BookingRoomProps> = memo(({
   id,
   name,
   floor,
@@ -63,6 +63,6 @@ const BookingRoom: FC<BookingRoomProps> = ({
       </div>
     </div>
   );
-};
+});
 
 export { BookingRoom };

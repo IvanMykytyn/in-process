@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 // full calendar plugins
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 
 // styles
 import "./calendar.styles.scss";
-import cn from 'classnames'
+import cn from "classnames";
 
 import { getAllBookings } from "store";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
@@ -44,34 +44,38 @@ const Calendar: FC = () => {
     own,
   } = useAppSelector(selectBooking);
 
-  const fullCalendarBookings = bookings.map((book) => {
-    const {
-      name,
-      start,
-      end,
-      description,
-      room,
-      id,
-      users,
-      creator,
-      schedule,
-    } = book;
+  const fullCalendarBookings = useMemo(
+    () =>
+      bookings.map((book) => {
+        const {
+          name,
+          start,
+          end,
+          description,
+          room,
+          id,
+          users,
+          creator,
+          schedule,
+        } = book;
 
-    return {
-      id: id.toString(),
-      title: name,
-      start,
-      end,
-      extendedProps: {
-        description: description,
-        room: room,
-        users: users,
-        color: colorFromString(name ?? ""),
-        creator,
-        schedule,
-      },
-    };
-  });
+        return {
+          id: id.toString(),
+          title: name,
+          start,
+          end,
+          extendedProps: {
+            description: description,
+            room: room,
+            users: users,
+            color: colorFromString(name ?? ""),
+            creator,
+            schedule,
+          },
+        };
+      }),
+    [ bookings ]
+  );
 
   const getRangeOfBookings = (start: string, end: string, newOwn: boolean) => {
     dispatch(
@@ -95,9 +99,9 @@ const Calendar: FC = () => {
   }, [isSideBarOpen]);
 
   return (
-    <div className={cn("full-calendar", {'calendar-own': own})}>
+    <div className={cn("full-calendar", { "calendar-own": own })}>
       {isBookingLoading && (
-        <div className="loading-wrapper">
+        <div className='loading-wrapper'>
           <Loading />
         </div>
       )}
@@ -110,7 +114,7 @@ const Calendar: FC = () => {
           listPlugin,
         ]}
         ref={calendarRef}
-        timeZone="local"
+        timeZone='local'
         initialView={"dayGridMonth"}
         locale={"en-GB"}
         allDaySlot={false}
@@ -123,7 +127,7 @@ const Calendar: FC = () => {
           omitZeroMinute: false,
         }}
         slotLabelContent={(props) => (
-          <TimeSlot hour={+props.text.split(":")[0]} {...props} />
+          <TimeSlot hour={+props.text.split(":")[0]} />
         )}
         // header
         headerToolbar={{
@@ -157,27 +161,26 @@ const Calendar: FC = () => {
             text: " ",
             click: () => {
               const { renderRange } =
-              calendarRef?.current?.getApi?.().currentDataManager.state
-              .dateProfile;
-              
+                calendarRef?.current?.getApi?.().currentDataManager.state
+                  .dateProfile;
+
               const { start, end } = renderRange;
-              
+
               getRangeOfBookings(
                 moment(start).toISOString(),
                 moment(end).toISOString(),
                 !own
-                );
-              dispatch(bookingActions.toggleOwn())
+              );
+              dispatch(bookingActions.toggleOwn());
             },
           },
         }}
         datesSet={(params) => {
           const { endStr, startStr } = params;
-
           getRangeOfBookings(
             moment(startStr).toISOString(),
             moment(endStr).toISOString(),
-            own,
+            own
           );
         }}
       />

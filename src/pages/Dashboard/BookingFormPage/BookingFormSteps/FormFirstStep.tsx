@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import { AutocompleteRenderInputParams, TextField } from "@mui/material";
 import { BuildStepProps, ErrorsType, ValuesType } from "../BookingFormPage";
 
@@ -23,8 +23,10 @@ const FormFirstStep: FC<BuildStepProps> = ({
 }) => {
   const [params, _] = useSearchParams();
 
-  const paramUsers = params.get("users");
-  const defaultUsers = !!paramUsers ? paramUsers.split(',') : []
+  const defaultUsers = useMemo(() => {
+    const paramUsers = params.get("users");
+    return !!paramUsers ? paramUsers.split(",") : [];
+  }, [params]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -119,7 +121,7 @@ const FormFirstStep: FC<BuildStepProps> = ({
           <Button
             type={"button"}
             onClick={handleCancelEdit}
-            variant="cancel-edit"
+            variant='cancel-edit'
           >
             Cancel Editing
           </Button>
@@ -138,15 +140,13 @@ const isValidFirstStep = (values: ValuesType) => {
   let errors: ErrorsType = {};
   if (!values.name) {
     errors.name = "This Field is required";
-  }else if(values.name.length > 200){
-    errors.name = "The maximum length is 200 characters"
+  } else if (values.name.length > 200) {
+    errors.name = "The maximum length is 200 characters";
   }
 
-  if(values.description.length > 200){
-    errors.description = "The maximum length is 1500 characters"
+  if (values.description.length > 200) {
+    errors.description = "The maximum length is 1500 characters";
   }
-
-  
 
   return errors;
 };

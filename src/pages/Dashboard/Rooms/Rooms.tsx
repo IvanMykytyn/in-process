@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Keyboard, Mousewheel, FreeMode } from "swiper";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -20,8 +20,15 @@ const Rooms: FC = () => {
     (state) => state.rooms
   );
 
-  const firstFloorRooms = filteredRooms.filter((room) => room.floor === 1);
-  const secondFloorRooms = filteredRooms.filter((room) => room.floor === 2);
+  const firstFloorRooms = useMemo(
+    () => filteredRooms.filter((room) => room.floor === 1),
+    [filteredRooms]
+  );
+  
+  const secondFloorRooms = useMemo(
+    () => filteredRooms.filter((room) => room.floor === 2),
+    [filteredRooms]
+  );
 
   return (
     <div className={cn(css.wrapper)}>
@@ -41,79 +48,78 @@ const Rooms: FC = () => {
               </StyledEngineProvider>
             </div>
           </div>
-            <Swiper
-              className={cn(css.my_swiper)}
-              mousewheel={true}
-              freeMode={true}
-              slidesPerView="auto"
-              scrollbar={true}
-              modules={[Keyboard, Mousewheel, FreeMode]}
-              spaceBetween={5}
-              hidden={firstFloorRooms?.length === 0 && !isLoading}
-
-            >
-              <ul className={cn(css.room_container__rooms)}>
-                {isLoading
-                  ? [...new Array(8)].map((_, index) => (
-                      <SwiperSlide
-                        className={cn(css.my_swiper__swiperslide)}
-                        key={index}
-                        virtualIndex={index}
-                      >
-                        <RoomSkeleton key={index} />
-                      </SwiperSlide>
-                    ))
-                  : firstFloorRooms?.length !== 0 &&
-                    firstFloorRooms.map((room) => (
-                      <SwiperSlide
-                        className={cn(css.my_swiper__swiperslide)}
-                        key={room.id}
-                        virtualIndex={room.id}
-                      >
-                        <Room key={room.id} room={room} />
-                      </SwiperSlide>
-                    ))}
-              </ul>
-            </Swiper>
+          <Swiper
+            className={cn(css.my_swiper)}
+            mousewheel={true}
+            freeMode={true}
+            slidesPerView='auto'
+            scrollbar={true}
+            modules={[Keyboard, Mousewheel, FreeMode]}
+            spaceBetween={5}
+            hidden={firstFloorRooms?.length === 0 && !isLoading}
+          >
+            <ul className={cn(css.room_container__rooms)}>
+              {isLoading
+                ? [...new Array(8)].map((_, index) => (
+                    <SwiperSlide
+                      className={cn(css.my_swiper__swiperslide)}
+                      key={index}
+                      virtualIndex={index}
+                    >
+                      <RoomSkeleton key={index} />
+                    </SwiperSlide>
+                  ))
+                : firstFloorRooms?.length !== 0 &&
+                  firstFloorRooms.map((room) => (
+                    <SwiperSlide
+                      className={cn(css.my_swiper__swiperslide)}
+                      key={room.id}
+                      virtualIndex={room.id}
+                    >
+                      <Room key={room.id} room={room} />
+                    </SwiperSlide>
+                  ))}
+            </ul>
+          </Swiper>
         </li>
-          <li className={cn(css.floor)}>
-            <div className={cn(css.room_container__floor)}>
-              <span className={cn(css.room_container__span)}>2-nd floor</span>
-            </div>
-            <Swiper
-              className={cn(css.my_swiper)}
-              mousewheel={true}
-              freeMode={true}
-              slidesPerView="auto"
-              scrollbar={true}
-              modules={[Keyboard, Mousewheel, FreeMode]}
-              spaceBetween={5}
-              hidden={(secondFloorRooms?.length === 0 && !isLoading)}
-            >
-              <ul className={cn(css.room_container__rooms)}>
-                {isLoading
-                  ? [...new Array(8)].map((_, index) => (
-                      <SwiperSlide
-                        className={cn(css.my_swiper__swiperslide)}
-                        key={index}
-                        virtualIndex={index}
-                      >
-                        <RoomSkeleton key={index} />
-                      </SwiperSlide>
-                    ))
-                  : secondFloorRooms?.length !== 0 &&
-                    secondFloorRooms.map((room) => (
-                      <SwiperSlide
-                        className={cn(css.my_swiper__swiperslide)}
-                        key={room.id}
-                        virtualIndex={room.id}
-                      >
-                        <Room key={room.id} room={room} />
-                      </SwiperSlide>
-                    ))}
-              </ul>
-            </Swiper>
-          </li>
+        <li className={cn(css.floor)}>
+          <div className={cn(css.room_container__floor)}>
+            <span className={cn(css.room_container__span)}>2-nd floor</span>
+          </div>
+          <Swiper
+            className={cn(css.my_swiper)}
+            mousewheel={true}
+            freeMode={true}
+            slidesPerView='auto'
+            scrollbar={true}
+            modules={[Keyboard, Mousewheel, FreeMode]}
+            spaceBetween={5}
+            hidden={secondFloorRooms?.length === 0 && !isLoading}
+          >
+            <ul className={cn(css.room_container__rooms)}>
+              {isLoading
+                ? [...new Array(8)].map((_, index) => (
+                    <SwiperSlide
+                      className={cn(css.my_swiper__swiperslide)}
+                      key={index}
+                      virtualIndex={index}
+                    >
+                      <RoomSkeleton key={index} />
+                    </SwiperSlide>
+                  ))
+                : secondFloorRooms?.length !== 0 &&
+                  secondFloorRooms.map((room) => (
+                    <SwiperSlide
+                      className={cn(css.my_swiper__swiperslide)}
+                      key={room.id}
+                      virtualIndex={room.id}
+                    >
+                      <Room key={room.id} room={room} />
+                    </SwiperSlide>
+                  ))}
+            </ul>
+          </Swiper>
+        </li>
       </ul>
       <div className={css.shadow}></div>
     </div>

@@ -141,8 +141,8 @@ export const oneTimePut = createAsyncThunk<
 
 export const getAllOwnBookings = createAsyncThunk<
   IBookingOwn,
-  { page: number; limit: number }
->('bookingSlice/getAllOwnBookings', async ({ page, limit }, { rejectWithValue }) => {
+  { page: number; limit: number, showSkeleton: boolean }
+>('bookingSlice/getAllOwnBookings', async ({ page, limit, showSkeleton }, { rejectWithValue }) => {
   try {
     const { data } = await bookingService.getBookingOwn(page, limit);
     return data;

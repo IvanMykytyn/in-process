@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { Link } from "react-router-dom";
 
 // styles
@@ -16,7 +16,7 @@ interface RoomProps {
   room: IRooms;
 }
 
-const Room: FC<RoomProps> = ({ room }) => {
+const Room: FC<RoomProps> = memo(({ room }) => {
   const { id, name, equipments, maxCapacity, description, roomImg } =
     room && room;
   const dispatch = useAppDispatch();
@@ -38,8 +38,6 @@ const Room: FC<RoomProps> = ({ room }) => {
                     key={photo.id}
                     className={cn(css.container__img)}
                     alt="img"
-                    height={150}
-                    width={150}
                   />
                 ) : (
                   ""
@@ -52,11 +50,6 @@ const Room: FC<RoomProps> = ({ room }) => {
             </div>
             <h3 className={cn(css.container__name)}>{name}</h3>
             <p className={cn(css.container__description)}>{description}</p>
-            {/*<div className={cn(css.pre_button)}>*/}
-            {/*    <Link to={'/dashboard/timeline'}>*/}
-            {/*        <button className={cn(css.pre_button__button)}>Soonest Booking</button>*/}
-            {/*    </Link>*/}
-            {/*</div>*/}
           </div>
           <ul className={cn(css.container__equipment)}>
             {staff.map((tool) =>
@@ -83,6 +76,6 @@ const Room: FC<RoomProps> = ({ room }) => {
       </Link>
     </div>
   );
-};
+});
 
 export { Room };

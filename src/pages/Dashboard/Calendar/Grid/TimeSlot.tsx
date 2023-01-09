@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 import cn from 'classnames';
 import scss from './time-grid.module.scss';
@@ -7,7 +7,7 @@ interface TimeSlotProps {
   hour: number;
 }
 
-const TimeSlot: FC<TimeSlotProps> = ({ hour }) => {
+const TimeSlot: FC<TimeSlotProps> = memo(({ hour }) => {
   return (
     <>
       <li className={cn(scss['time-number'], scss['hour'])}>{hour}</li>
@@ -16,6 +16,6 @@ const TimeSlot: FC<TimeSlotProps> = ({ hour }) => {
       <li className={cn(scss['time-number'], scss['plus-15'])}>: {45}</li>
     </>
   );
-};
+});
 
 export { TimeSlot };

@@ -242,8 +242,8 @@ const bookingSlice = createSlice({
       })
 
       // get all own Bookings
-      .addCase(getAllOwnBookings.pending, (state) => {
-        if (state.bookingsOwn?.data.length === 0) {
+      .addCase(getAllOwnBookings.pending, (state, action) => {
+        if (state.bookingsOwn?.data.length === 0 || action.meta.arg.showSkeleton) {
           state.ownLoading = true;
         }
       })

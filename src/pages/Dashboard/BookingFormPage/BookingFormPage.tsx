@@ -1,7 +1,7 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Step, StepLabel, Stepper } from "@mui/material";
-import moment, { Moment } from "moment";
+import { Moment } from "moment";
 import "moment-timezone";
 
 import css from "./BookingForm.module.scss";
@@ -23,6 +23,7 @@ import {
   selectRooms,
 } from "store";
 import { userService } from "services";
+import { getDateFromParams } from "./BookingFormSteps/helpers";
 
 export interface ValuesType {
   name: string;
@@ -54,30 +55,32 @@ const BookingFormPage: FC = () => {
   const { isSuccess, isEditing, editingBookingId, page } =
     useAppSelector(selectBooking);
 
-  const defaultParamsStartDate = getValidDateFromString(
-    params.get("date") ?? ""
+  const defaultStartDate = useMemo(
+    () => getValidDateFromString(params.get("date") ?? ""),
+    [params]
   );
-  const defaultParamsEndDate = getValidDateFromString(params.get("end") ?? "");
 
-  
-  let defaultStartTime = !!params.get('isCalendar') ? moment() : defaultParamsStartDate.clone() ;
-  const startRemainder = !isEditing ? 15 - (defaultStartTime.minute() % 15) : 0;
-  defaultStartTime.add(startRemainder, "minutes");
+  const defaultStartTime = useMemo(
+    () => getDateFromParams(params, defaultStartDate, isEditing),
+    [params, defaultStartDate, isEditing]
+  );
 
-  let defaultEndTime = defaultParamsEndDate.clone();
-  const endRemainder = !isEditing ?  15 - (defaultEndTime.minute() % 15) + 60 : 0;
-  defaultEndTime.add(endRemainder, "minutes");
+  const defaultEndDate = useMemo(
+    () => getValidDateFromString(params.get("end") ?? ""),
+    [params]
+  );
 
-  if(isEditing){    
-    defaultStartTime = moment({hours: defaultStartTime.hours(), minutes: defaultStartTime.minutes()})
-    defaultEndTime = moment({hours: defaultEndTime.hours(), minutes: defaultEndTime.minutes()})
-  }
+  const defaultEndTime = useMemo(
+    () => getDateFromParams(params, defaultEndDate, isEditing, 60),
+    [params, defaultEndDate, isEditing]
+  );
 
   const [allUsers, setAllUsers] = useState<
     Array<{ email: string; id: string }>
   >([]);
 
   const paramUsers = params.get("users");
+
   const initialValues: ValuesType = {
     name: params.get("name") ?? "",
     description: params.get("description") ?? "",
@@ -92,8 +95,8 @@ const BookingFormPage: FC = () => {
     },
     startTime: defaultStartTime,
     endTime: defaultEndTime,
-    startDate: defaultParamsStartDate.clone(),
-    endDate: getNextDay(defaultParamsStartDate.clone()),
+    startDate: defaultStartTime.clone(),
+    endDate: getNextDay(defaultStartTime.clone()),
     roomId: (parseInt(params.get("roomId") ?? "") || rooms[0]?.id) ?? 2,
     isRecurring: false,
   };
@@ -103,25 +106,25 @@ const BookingFormPage: FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [values, setValues] = useState<ValuesType>(initialValues);
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
-  };
+  }, []);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
-  };
+  }, []);
 
-  const handleCancelEdit = () => {
+  const handleCancelEdit = useCallback(() => {
     dispatch(bookingActions.resetEditingId());
     navigate(-1);
-  };
+  }, [dispatch, navigate]);
 
   const handleBookingFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (Object.keys(errors).length === 0) {
         if (isEditing) {
-          const booking = getOneTimeBooking(values, isEditing);
+          const booking = getOneTimeBooking(values);
           await dispatch(
             bookingActions.oneTimePut({
               ...booking,
@@ -130,14 +133,14 @@ const BookingFormPage: FC = () => {
             })
           );
         } else if (!values.isRecurring) {
-          const booking = getOneTimeBooking(values, isEditing);
+          const booking = getOneTimeBooking(values);
           await dispatch(bookingActions.oneTimePost({ booking }));
         } else {
           const booking = getRecurringBooking(values);
           await dispatch(bookingActions.recPost({ booking }));
         }
 
-        await dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT }));
+        await dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT, showSkeleton: true }));
       }
     } catch (error) {
       // console.log(error);
@@ -166,6 +169,38 @@ const BookingFormPage: FC = () => {
     }
   }, [dispatch, navigate, isSuccess]);
 
+  const buildFormStepComponent = useMemo(
+    () => buildStep(activeStep),
+    [activeStep]
+  );
+
+  const formStepComponent = useCallback(
+    () =>
+      buildFormStepComponent({
+        activeStep,
+        handleBack,
+        handleNext,
+        handleCancelEdit,
+        values,
+        setValues,
+        errors,
+        setErrors,
+        isEditing,
+        allUsers,
+      }),
+    [
+      activeStep,
+      allUsers,
+      buildFormStepComponent,
+      errors,
+      handleBack,
+      handleCancelEdit,
+      handleNext,
+      isEditing,
+      values,
+    ]
+  );
+
   return (
     <form className={css.booking} onSubmit={handleBookingFormSubmit}>
       <div className={"stepper"}>
@@ -177,20 +212,7 @@ const BookingFormPage: FC = () => {
           ))}
         </Stepper>
       </div>
-      <div className={css["stepper-form"]}>
-        {buildStep(activeStep)({
-          activeStep,
-          handleBack,
-          handleNext,
-          handleCancelEdit,
-          values,
-          setValues,
-          errors,
-          setErrors,
-          isEditing,
-          allUsers,
-        })}
-      </div>
+      <div className={css["stepper-form"]}>{formStepComponent()}</div>
     </form>
   );
 };
@@ -220,15 +242,12 @@ const buildStep = (activeStep: number) => {
         return <FormThirdStep {...props} />;
 
       default:
-        break;
+        return <FormFirstStep {...props} />;
     }
   };
 };
 
-const getOneTimeBooking = (
-  values: ValuesType,
-  isEditing: boolean
-): IBookingOneTime => {
+const getOneTimeBooking = (values: ValuesType): IBookingOneTime => {
   const { name, description, roomId, users } = values;
 
   let dateMoment = values.startDate.clone();
@@ -238,7 +257,7 @@ const getOneTimeBooking = (
   dateMoment = dateMoment.add(2, "hours");
 
   const date = dateMoment.toISOString(false).slice(0, 10);
-  
+
   const startTime = startTimeMoment.toISOString().slice(10);
   const endTime = endTimeMoment.toISOString().slice(10);
 

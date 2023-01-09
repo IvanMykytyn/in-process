@@ -1,5 +1,5 @@
 import "moment/locale/uk";
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import Moment from "react-moment";
 
 // styles
@@ -26,8 +26,10 @@ const SideBar: FC = () => {
     useAppSelector(selectBooking);
   const dispatch = useAppDispatch();
 
-  const getTotalCountOfPages =
-    bookingsOwn && Math.ceil(bookingsOwn.totalCount / 10);
+  const totalCountOfPages = useMemo(
+    () => bookingsOwn && Math.ceil(bookingsOwn.totalCount / 10),
+    [bookingsOwn]
+  );
 
   const handleClick = () => {
     dispatch(toggleSideBar());
@@ -40,8 +42,8 @@ const SideBar: FC = () => {
   const getPage = (id: string) => {
     if (
       id === "+" &&
-      typeof getTotalCountOfPages === "number" &&
-      page < getTotalCountOfPages
+      typeof totalCountOfPages === "number" &&
+      page < totalCountOfPages
     ) {
       dispatch(bookingActions.setPage(page + 1));
     } else if (id === "-" && page > 1) {
@@ -54,6 +56,7 @@ const SideBar: FC = () => {
       bookingActions.getAllOwnBookings({
         page: page,
         limit: PAGE_SIDEBAR_LIMIT,
+        showSkeleton: true
       })
     );
   }, [dispatch, page]);
@@ -65,6 +68,8 @@ const SideBar: FC = () => {
           bookingActions.getAllOwnBookings({
             page: page,
             limit: PAGE_SIDEBAR_LIMIT,
+            showSkeleton: false
+            
           })
         );
       }, 60000);
@@ -75,7 +80,6 @@ const SideBar: FC = () => {
       clearInterval(interval);
     };
   }, [dispatch, page]);
-
 
   return (
     <div
@@ -95,7 +99,7 @@ const SideBar: FC = () => {
             isSideBarOpen ? `${scss.clock}` : `${scss.clock} ${scss.hide}`
           }
         >
-          <img src={clock} alt="clock" width={15} height={15} color={"red"} />
+          <img src={clock} alt='clock' width={15} height={15} color={"red"} />
           <Moment locale={"uk"} local={true} format={`LLL`} interval={1000} />
         </span>
         {ownLoading ? (
@@ -139,37 +143,43 @@ const SideBar: FC = () => {
           </ul>
         )}
       </div>
-      {!!bookingsOwn?.totalCount && bookingsOwn?.totalCount > PAGE_SIDEBAR_LIMIT && (
-        <div className={scss.sidebar__buttons}>
-          <button
-            className={
-              isSideBarOpen
-                ? ownLoading ||
-                  (typeof getTotalCountOfPages === "number" && page === 1)
-                  ? `${scss.sidebar__button} ${scss.disabled}`
-                  : `${scss.sidebar__button}`
-                : `${scss.sidebar__button} ${scss.hide}`
-            }
-            onClick={() => getPage("-")}
-            disabled={ownLoading || page === 0}
-          >
-            <img src={arrowLeft} alt={"arrow left"} height={10} width={10} />
-          </button>
-          <button
-            className={
-              isSideBarOpen
-                ? ownLoading || page === getTotalCountOfPages
-                  ? `${scss.sidebar__button} ${scss.disabled}`
-                  : `${scss.sidebar__button}`
-                : `${scss.sidebar__button} ${scss.hide}`
-            }
-            onClick={() => getPage("+")}
-            disabled={ownLoading || page === getTotalCountOfPages}
-          >
-            <img src={arrowRight} alt={"arrow right"} height={10} width={10} />
-          </button>
-        </div>
-      )}
+      {!!bookingsOwn?.totalCount &&
+        bookingsOwn?.totalCount > PAGE_SIDEBAR_LIMIT && (
+          <div className={scss.sidebar__buttons}>
+            <button
+              className={
+                isSideBarOpen
+                  ? ownLoading ||
+                    (typeof totalCountOfPages === "number" && page === 1)
+                    ? `${scss.sidebar__button} ${scss.disabled}`
+                    : `${scss.sidebar__button}`
+                  : `${scss.sidebar__button} ${scss.hide}`
+              }
+              onClick={() => getPage("-")}
+              disabled={ownLoading || page === 0}
+            >
+              <img src={arrowLeft} alt={"arrow left"} height={10} width={10} />
+            </button>
+            <button
+              className={
+                isSideBarOpen
+                  ? ownLoading || page === totalCountOfPages
+                    ? `${scss.sidebar__button} ${scss.disabled}`
+                    : `${scss.sidebar__button}`
+                  : `${scss.sidebar__button} ${scss.hide}`
+              }
+              onClick={() => getPage("+")}
+              disabled={ownLoading || page === totalCountOfPages}
+            >
+              <img
+                src={arrowRight}
+                alt={"arrow right"}
+                height={10}
+                width={10}
+              />
+            </button>
+          </div>
+        )}
     </div>
   );
 };

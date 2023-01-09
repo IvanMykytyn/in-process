@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { BuildStepProps } from "../BookingFormPage";
 import css from "../BookingForm.module.scss";
 import "../BookingForm.styles.scss";
@@ -21,9 +21,9 @@ const FormThirdStep: FC<BuildStepProps> = ({
   const { rooms } = useAppSelector((state) => state.rooms);
   const { isLoading } = useAppSelector(selectBooking);
 
-  const handleChangeRoom = (id: number) => {
+  const handleChangeRoom = useCallback((id: number) => {
     setValues({ ...values, roomId: id });
-  };
+  }, [setValues, values]);
 
   const bookingRooms = useMemo(() => {
     return rooms.map((room) => {
@@ -37,9 +37,7 @@ const FormThirdStep: FC<BuildStepProps> = ({
   }, [rooms, values.roomId]);
 
   const { id, description, name, floor, maxCapacity, equipments, roomImg } =
-    useMemo(() => {
-      return currentBookingRoom;
-    }, [currentBookingRoom]) || {};
+    currentBookingRoom || {};
 
   return (
     <div className={cn(css["third-step-form"])}>
