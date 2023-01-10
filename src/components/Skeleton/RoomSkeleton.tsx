@@ -10,7 +10,7 @@ const RoomSkeleton = () => {
   const { mode } = useAppSelector(selectTheme);
 
   return (
-    <div className={cn(css.container)}>
+    <div data-testid={'room-skeleton'} className={cn(css.container)}>
       <ContentLoader
         speed={2}
         width={240}

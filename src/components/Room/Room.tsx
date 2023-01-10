@@ -26,7 +26,7 @@ const Room: FC<RoomProps> = memo(({ room }) => {
   };
 
   return (
-    <div className={css.cardLinkWrapper}>
+    <div data-testid={'room'} className={css.cardLinkWrapper}>
       <Link to={`/dashboard/booking-form?roomId=${id}`} onClick={handleClick}>
         <div className={cn(css.container)}>
           <div className={cn(css.cardWrapper)}>

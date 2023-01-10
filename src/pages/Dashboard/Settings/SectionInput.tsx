@@ -14,7 +14,7 @@ const SectionInput: FC<TextFieldProps & SectionInputProps> = React.forwardRef(
     return (
       <div className={scss['section-input']}>
         <p className={scss['section-input__label']}>{text ?? label}:</p>
-        <Input label={label} {...rest} ref={ref} />
+        <Input label={undefined} {...rest} ref={ref} />
       </div>
     );
   }

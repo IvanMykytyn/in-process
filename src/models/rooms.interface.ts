@@ -1,3 +1,4 @@
+
 export interface EquipmentsProps {
     id: number,
     name: string
@@ -18,15 +19,9 @@ export interface IRooms {
     description: string,
     floor: number,
     maxCapacity: number,
-    currentBooking: [],
     equipments: EquipmentsProps[],
     roomImg: string,
-};
-
-export interface Room {
-    id: string;
-    name: string;
-    description: string;
+    currentBooking: never[]
 };
 
 export interface IUsers{

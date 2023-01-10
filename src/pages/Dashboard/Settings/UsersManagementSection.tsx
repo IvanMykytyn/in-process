@@ -98,7 +98,7 @@ const UsersManagementSection: FC = () => {
   const clearField = (): void => {
     setUserEmails([]);
     setError("");
-    setUserToDelete(null);
+    setInputValue("");
   };
 
   const clearDeleteField = (): void => {
@@ -144,7 +144,7 @@ const UsersManagementSection: FC = () => {
           </div>
         </div>
 
-        <SectionButtons handleCancel={clearField} />
+        <SectionButtons handleCancel={clearField} resetBtnType="button" />
       </form>
       <form onSubmit={handleDeleteClick}>
         <div

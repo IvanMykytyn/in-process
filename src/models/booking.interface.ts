@@ -138,6 +138,7 @@ export type {
   IBookingRecurring,
   IBookingPut,
   IBookingDelete,
+  IBookingOwnData,
   IBookingOneTime,
   IBookingOneTimePut,
   IBookingOneTimeDelete,

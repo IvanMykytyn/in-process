@@ -59,6 +59,7 @@ const SideBar: FC = () => {
         showSkeleton: true
       })
     );
+    setAccordionIndex(-1);
   }, [dispatch, page]);
 
   useEffect(() => {

@@ -18,7 +18,7 @@ import { getFullName, validateName } from "utils";
 import scss from "./settings.module.scss";
 
 // icons
-import { close, edit, exit, user as avatar } from "assets/images/icons";
+import { close, edit, user as avatar } from "assets/images/icons";
 import { DeletePopover } from "components";
 
 const PersonalInfoValidator = Joi.object({
@@ -50,21 +50,24 @@ const PersonalInformationSection: FC = () => {
   const submit = async ({ firstName, lastName }: UserFields) => {
     try {
       await dispatch(updateMe({ firstName, lastName }));
+      reset({ firstName, lastName })
     } catch (err) {
       // console.log(err);
     }
   };
 
   const handleCancel = () => {
-    reset();
+    reset({ firstName, lastName });
   };
 
   const AvatarDeleteOpenPopover = () => {
     setIsOpen(true);
   };
-  const handleSubmitDelete = () => {
-    dispatch(deleteAvatar());
-    dispatch(getMe());
+  const handleSubmitDelete = async () => {
+    await dispatch(deleteAvatar());
+    await dispatch(getMe());
+    setIsOpen(false)
+
   };
   const handleCancelDelete = () => {
     setIsOpen(false);
@@ -150,7 +153,7 @@ const PersonalInformationSection: FC = () => {
           errorText={errors.lastName?.message}
         />
 
-        <SectionButtons handleCancel={handleCancel} />
+        <SectionButtons handleCancel={handleCancel} resetBtnType="button"/>
       </form>
     </SectionLayout>
   );

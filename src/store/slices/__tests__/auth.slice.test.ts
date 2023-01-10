@@ -17,6 +17,7 @@ describe('Auth Slice testing', () => {
         lastName: 'Last Name',
         email: 'test@incorainc.com',
         role: 'user',
+        avatar_url: null,
       },
       isLoading: false,
       error: '',

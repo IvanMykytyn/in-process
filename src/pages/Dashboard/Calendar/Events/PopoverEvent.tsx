@@ -85,14 +85,14 @@ const PopoverEvent: FC<PopoverEventProps> = ({ event }) => {
 
   const handleConfirmDelete = useCallback(
     async (deleteAllType: boolean = false) => {
+      handleClose();
+      setIsOpen(false);
       if (schedule && deleteAllType) {
         await dispatch(recDelete({ scheduleId: schedule.id }));
       } else {
         await dispatch(oneTimeDelete({ bookingId: id }));
       }
       await dispatch(getAllOwnBookings({ page, limit: PAGE_SIDEBAR_LIMIT, showSkeleton: true }));
-      setIsOpen(false);
-      handleClose();
     },
     [dispatch, handleClose, id, page, schedule]
   );

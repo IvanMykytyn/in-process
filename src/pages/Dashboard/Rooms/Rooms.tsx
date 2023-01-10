@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Keyboard, Mousewheel, FreeMode } from "swiper";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -10,12 +10,14 @@ import css from "./rooms.module.scss";
 import "swiper/swiper.min.css";
 
 import { Room, DropdownMultiSelect } from "../../../components";
-import { useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 
 import { RoomSkeleton } from "../../../components/Skeleton/RoomSkeleton";
 import { capacityFilter, equipmentsFilter } from "./constants";
+import { clearFilter } from "store/slices/filter.slice";
 
 const Rooms: FC = () => {
+  const dispatch = useAppDispatch()
   const { rooms, filteredRooms, isLoading } = useAppSelector(
     (state) => state.rooms
   );
@@ -30,8 +32,12 @@ const Rooms: FC = () => {
     [filteredRooms]
   );
 
+  useEffect(() => {
+    dispatch(clearFilter())
+  }, [dispatch])
+
   return (
-    <div className={cn(css.wrapper)}>
+    <div role="main" className={cn(css.wrapper)}>
       <ul className={cn(css.room_container)}>
         <li className={cn(css.floor)}>
           <div className={cn(css.room_container__floor)}>
