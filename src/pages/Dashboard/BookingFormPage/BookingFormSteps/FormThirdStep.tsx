@@ -36,7 +36,7 @@ const FormThirdStep: FC<BuildStepProps> = ({
     return rooms.find((room) => room.id === values.roomId);
   }, [rooms, values.roomId]);
 
-  const { id, description, name, floor, maxCapacity, equipments, roomImg } =
+  const { description, name, floor, maxCapacity, equipments, roomImg } =
     currentBookingRoom || {};
 
   return (
@@ -59,24 +59,21 @@ const FormThirdStep: FC<BuildStepProps> = ({
             {(floor === 1 ? "st" : "nd") + " floor"}
           </h4>
           <ul className={cn(css.container__equipment)}>
-            {staff.map((tool) =>
-              equipments?.map(
-                (inst) =>
-                  inst.id === tool.id && (
-                    <li key={tool.id}>
-                      {
-                        <img
-                          src={tool.img}
-                          alt={tool.alt}
-                          title={tool.alt}
-                          width={20}
-                          height={20}
-                        />
-                      }
-                    </li>
-                  )
-              )
+            {staff.map((tool) => {
+              if(equipments && equipments?.findIndex(inst => inst.id === tool.id) > -1){
+                return  <img
+                  key={tool.id}
+                  src={tool.img}
+                  alt={tool.alt}
+                  title={tool.alt}
+                  width={20}
+                  height={20}
+                />
+              }
+              return null
+              }
             )}
+
           </ul>
         </div>
       </div>

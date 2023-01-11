@@ -1,6 +1,6 @@
 import {axiosService} from './axios.service';
 import {urls} from 'utils';
-import {AxiosRes, IRoomsWithSoonestBookings, ISoonestBookings} from 'models';
+import {AxiosRes, IRoomsWithSoonestBookings} from 'models';
 import {IRooms} from "../models";
 
 export const roomsService = {

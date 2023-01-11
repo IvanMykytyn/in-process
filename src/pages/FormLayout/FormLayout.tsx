@@ -1,7 +1,6 @@
 import { FC, PropsWithChildren, CSSProperties } from 'react';
 
 // styles
-import cn from 'classnames';
 import css from './form-layout.module.scss';
 
 interface CustomForgotPasswordProps {

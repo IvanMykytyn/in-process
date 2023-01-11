@@ -1,8 +1,6 @@
-import React, {FC, useState} from 'react';
+import { FC, useState } from 'react';
 
 import './modal.styles.scss';
-
-import {Button} from '../index'
 
 interface ModalProps {
     children?: any;

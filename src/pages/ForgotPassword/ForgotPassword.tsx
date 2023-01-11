@@ -13,7 +13,7 @@ import { Button, Input } from 'components';
 import { validateEmail } from '../../utils';
 import { FormLayout } from 'pages/FormLayout/FormLayout';
 import { arrowLeft, keyIcon } from 'assets/images/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { forgotPassword } from 'store';
 import {useAppDispatch} from '../../hooks';
 import { UserEmailField } from 'models';

@@ -47,7 +47,7 @@ const steps = [
 ];
 
 const BookingFormPage: FC = () => {
-  const [params, _] = useSearchParams();
+  const [params] = useSearchParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

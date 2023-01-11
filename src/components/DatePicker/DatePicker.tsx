@@ -8,7 +8,6 @@ import { MainCalendar } from 'components/MainCalendar/MainCalendar';
 import { calendar } from 'assets/images/icons';
 
 import css from './date-picker.module.scss';
-import cn from 'classnames';
 
 type DatePickerProps = {
   date: Moment | null;

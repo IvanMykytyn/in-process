@@ -1,8 +1,7 @@
 import { Autocomplete } from "@mui/material";
 import { Input } from "components/Input/Input";
-import React, { FC } from "react";
+import { FC } from "react";
 
-import cn from "classnames";
 import "./dropdown-single-select.styles.scss";
 
 interface CustomDropdownSingleSelectProps {

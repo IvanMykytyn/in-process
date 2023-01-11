@@ -1,10 +1,8 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { FC } from 'react';
 import './select.styles.scss';
-import cn from 'classnames';
 
 import {
   Select as SelectMui,
-  InputLabel,
   MenuItem,
   SelectChangeEvent,
   SelectProps,

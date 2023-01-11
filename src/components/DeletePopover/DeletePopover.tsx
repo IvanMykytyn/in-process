@@ -1,7 +1,6 @@
 import { ClickAwayListener } from "@mui/material";
 import { FC, useState } from "react";
 
-import cn from "classnames";
 import scss from "./delete-popover.module.scss";
 import { exit } from "assets/images/icons";
 import { Checkbox } from "components/Checkbox/Checkbox";

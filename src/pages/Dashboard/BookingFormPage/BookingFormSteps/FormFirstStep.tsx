@@ -21,7 +21,7 @@ const FormFirstStep: FC<BuildStepProps> = ({
   isEditing,
   allUsers,
 }) => {
-  const [params, _] = useSearchParams();
+  const [params] = useSearchParams();
 
   const defaultUsers = useMemo(() => {
     const paramUsers = params.get("users");

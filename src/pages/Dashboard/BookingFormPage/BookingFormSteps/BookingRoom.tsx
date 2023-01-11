@@ -49,16 +49,20 @@ const BookingRoom: FC<BookingRoomProps> = memo(({
         </div>
         <ul className={cn(css.container__equipment)}>
           <li className={css['floor-number']}>{floor}</li>
-          {staff.map((tool) =>
-            equipments?.map(
-              (inst) =>
-                inst.id === tool.id && (
-                  <li key={tool.id}>
-                    {<img src={tool.img} title={tool.alt} alt={tool.alt} width={20} height={20} />}
-                  </li>
-                )
-            )
-          )}
+          {staff.map((tool) => {
+              if(equipments && equipments?.findIndex(inst => inst.id === tool.id) > -1){
+                return <img
+                  key={tool.id}
+                  src={tool.img}
+                  alt={tool.alt}
+                  title={tool.alt}
+                  width={18}
+                  height={18}
+                />
+              }
+              return null
+              }
+            )}
         </ul>
       </div>
     </div>

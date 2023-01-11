@@ -9,6 +9,7 @@ import { UserInterface } from "models";
 
 // styles
 import scss from "./settings.module.scss";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { sun, moon } from "../../../assets/images/icons";
 
 import { UsersManagementSection } from "./UsersManagementSection";
@@ -23,6 +24,7 @@ const Settings: FC = () => {
   const dispatch = useAppDispatch();
 
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const toggleTheme = () => {
     const newMode = mode === "light" ? "dark" : "light";
     dispatch(setNewTheme(newMode));

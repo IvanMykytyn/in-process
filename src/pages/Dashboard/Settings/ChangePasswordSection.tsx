@@ -9,8 +9,8 @@ import { SectionLayout } from "./SectionLayout";
 import { SectionInput } from "./SectionInput";
 import { SectionButtons } from "./SectionButtons";
 
-import { changePassword, selectUser } from "store";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { changePassword } from "store";
+import { useAppDispatch } from "../../../hooks";
 import { validatePassword, validateConfirmPassword } from "utils";
 import { changePasswordProps } from "models";
 
@@ -25,7 +25,6 @@ const changePasswordValidator = Joi.object({
 });
 
 const ChangePasswordSection: FC = () => {
-  const { isLoading } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
   const {

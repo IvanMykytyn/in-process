@@ -1,5 +1,4 @@
 import {
-  AnyAction,
   combineReducers,
   configureStore,
   PreloadedState,
@@ -8,7 +7,6 @@ import {
 import authSlice from "./slices/auth.slice";
 import { bookingReducer, roomReducer, themeReducer } from "./slices";
 import filterSlice from "./slices/filter.slice";
-import { logoutUser } from "./thunk";
 
 const rootReducer = combineReducers({
   auth: authSlice,
@@ -17,16 +15,6 @@ const rootReducer = combineReducers({
   filterRoom: filterSlice,
   themes: themeReducer,
 });
-
-// const rootReducer = (
-//   state: ReturnType<typeof appReducer> | undefined,
-//   action: AnyAction
-// ) => {
-//   if (action.type === `${logoutUser.typePrefix}/fulfilled`) {
-//     return appReducer(undefined, { type: undefined });
-//   }
-//   return appReducer(state, action);
-// };
 
 const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({

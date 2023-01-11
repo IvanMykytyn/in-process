@@ -15,6 +15,7 @@ const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
     if (userService.isLoggedIn() && !user) {
       dispatch(getMe());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {

@@ -1,10 +1,9 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 import {joiResolver} from '@hookform/resolvers/joi';
 
 // styles
-import cn from 'classnames';
 import css from '../Login/login.module.scss';
 
 import registration from 'assets/images/icons/registration.png';
@@ -18,7 +17,6 @@ const GetAccess: FC = () => {
         register,
         handleSubmit,
         formState: {errors},
-        reset,
     } = useForm({
         defaultValues: {
             email: '',

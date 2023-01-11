@@ -7,7 +7,6 @@ import cn from "classnames";
 
 import { clock, calendar } from "../../assets/images/icons";
 import { IRooms, IUserOwn } from "../../models";
-import { staff } from "../../utils/tools/staff";
 
 interface Props {
   room: IRooms;
@@ -116,35 +115,6 @@ const BookedRoom: FC<Props> = ({
             <span> - </span>
             <Moment format={"H:mm"}>{endDate}</Moment>
           </li>
-          <div className={css.booked__staff}>
-            <div
-              className={css["booked__all-information"]}
-              style={{ display: "flex", gridGap: "5px" }}
-            >
-              <span className={css["booked__information-name"]}>
-                Equipments:
-              </span>
-              {staff.map((tool) =>
-                equipments.map((equipment) =>
-                  equipment.id === tool.id ? (
-                    <div key={tool.id}>
-                      {
-                        <img
-                          src={tool.img}
-                          alt={tool.alt}
-                          title={tool.alt}
-                          width={15}
-                          height={15}
-                        />
-                      }
-                    </div>
-                  ) : (
-                    ""
-                  )
-                )
-              )}
-            </div>
-          </div>
           <div>
             <div
               className={cn(

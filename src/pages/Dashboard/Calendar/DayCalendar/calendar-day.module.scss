@@ -30,6 +30,7 @@ $calendarHeaderHeight: 35px;
       width: fit-content;
       height: $calendarHeaderHeight;
       padding-left: $leftBarWidth;
+      padding-right: 1px;
       border-radius: 5px 5px 0 0;
 
       background: var(--background);
@@ -69,7 +70,7 @@ $calendarHeaderHeight: 35px;
   position: absolute;
   left: 0;
   top: 0;
-  width: $leftBarWidth + 4.5px;
+  width: $leftBarWidth + 4px;
   height: $calendarHeaderHeight;
   border-radius: 5px 0 0 0;
   border: $border500;

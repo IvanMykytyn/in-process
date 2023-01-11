@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IRooms, IRoomsWithSoonestBookings, ISoonestBookings } from 'models';
+import { IRooms, IRoomsWithSoonestBookings } from 'models';
 import { getAllRooms, getAllSoonestBookings } from '../thunk';
 import { RootState } from 'store/store';
 import { getRoomImage } from 'utils/tools/rooms.img';
@@ -26,7 +26,7 @@ const roomSlice = createSlice({
     setFilteredRooms(state, action) {
       state.filteredRooms = action.payload;
     },
-    clearRooms(state) {
+    clearRooms() {
       return initialRoomState
     },
   },

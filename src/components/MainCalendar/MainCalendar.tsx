@@ -1,12 +1,9 @@
-import { FC, useState } from 'react';
-import moment, { Moment } from 'moment';
+import { FC } from 'react';
+import { Moment } from 'moment';
 import { Calendar } from 'react-calendar';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 import css from './MainCalendar.module.scss';
-
-import { SetStateType } from 'models';
-
 interface Props {
   range?: boolean;
   handleClickAway: () => void;
