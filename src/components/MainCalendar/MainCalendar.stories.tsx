@@ -1,28 +1,27 @@
-// import { MainCalendar } from './MainCalendar';
+import { MainCalendar } from "./MainCalendar";
 
-// import { Story } from '@storybook/react';
-// import { SetStateType } from 'models';
-// import moment, { Moment } from 'moment';
+import { Story } from "@storybook/react";
+import moment, { Moment } from "moment";
 
-// export default {
-//   title: 'Calendar',
-//   component: MainCalendar,
-// };
+export default {
+  title: "Calendar Picker",
+  component: MainCalendar,
+};
 
-// interface Props {
-//   range?: boolean;
-//   handleClickAway: (e: MouseEvent | TouchEvent) => void;
-//   setDate?: SetStateType<Moment>;
-//   date?: Moment;
-// }
+interface Props {
+  range?: boolean;
+  handleClickAway: () => void;
+  handleChange: (selectedDate: Date) => void;
+  date: Moment | null;
+}
 
-// const Template: Story<Props> = (args) => <MainCalendar {...args} />;
+const Template: Story<Props> = (args) => <MainCalendar {...args} />;
 
-// export const Default = Template.bind({});
+export const Default = Template.bind({});
 
-// Default.args = {
-//   date: moment(),
-//   handleClickAway: (e: MouseEvent | TouchEvent) => {},
-//   range: false,
-// };
-export {}
+Default.args = {
+  date: moment(),
+  handleChange: (e) => {},
+  handleClickAway: () => {},
+  range: false,
+};

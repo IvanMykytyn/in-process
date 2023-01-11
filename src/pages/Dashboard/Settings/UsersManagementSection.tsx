@@ -27,6 +27,7 @@ const UsersManagementSection: FC = () => {
   const [userToDelete, setUserToDelete] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [errorDelete, setErrorDelete] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleCancelDelete = () => {
@@ -70,6 +71,10 @@ const UsersManagementSection: FC = () => {
 
   const handleDeleteClick = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(!userToDelete){
+      setErrorDelete("Field cannot be empty");
+      return;
+    }
     setIsOpen(true);
   };
 
@@ -103,6 +108,7 @@ const UsersManagementSection: FC = () => {
 
   const clearDeleteField = (): void => {
     setUserToDelete(null);
+    setErrorDelete("")
   };
 
   const handleSelectedChange = (_: React.SyntheticEvent, values: string[]) => {
@@ -155,9 +161,12 @@ const UsersManagementSection: FC = () => {
             <DropdownSingleSelect
               value={userToDelete}
               handleChange={(_, value) => {
+                setErrorDelete("")
                 return setUserToDelete(value ?? "");
               }}
               options={allUsers.map((user) => user.email)}
+              inputError={!!errorDelete}
+              inputTextError={errorDelete}
             />
           </div>
           <div className={scss["section-input-delete"]}>
@@ -168,7 +177,7 @@ const UsersManagementSection: FC = () => {
             />
           </div>
         </div>
-        <SectionButtons submitText={"Delete"} handleCancel={clearField} />
+        <SectionButtons submitText={"Delete"} handleCancel={clearDeleteField} />
       </form>
     </SectionLayout>
   );

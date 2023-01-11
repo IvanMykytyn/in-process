@@ -102,7 +102,7 @@ $errorTextColor: #d32f2f;
   }
 }
 
-.multi-select__error {
+.multi-select__error,.single-select-dropdown__error {
   .MuiInputBase-root,
   .MuiFormControl-root {
     border-radius: 12px;
@@ -135,8 +135,12 @@ $errorTextColor: #d32f2f;
 .MuiChip-label {
   color: var(--accent-text-color);
 }
+.single-select-dropdown__error .text-field__errorText{
+  top: 55px;
+}
 
 .single-select-dropdown{
+  padding-bottom: 10px;
   .MuiInputBase-input{
     box-shadow: none !important;
     padding: 5px 4px 5px 6px !important;

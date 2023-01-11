@@ -1,7 +1,6 @@
 import { MultipleSelectWithBadges } from './MultipleSelectWithBadges';
 
 import { Story } from '@storybook/react';
-import { Dispatch, SetStateAction } from 'react';
 import { AutocompleteRenderInputParams, TextField } from '@mui/material';
 
 export default {
@@ -61,6 +60,6 @@ const names = [
 
 Default.args = {
   options: names,
-  handleChange: (e, values) => alert(e),
+  handleChange: (e, values) => {},
   style: { width: '400px' },
 };

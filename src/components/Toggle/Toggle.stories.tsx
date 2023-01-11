@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Toggle } from './Toggle';
@@ -11,9 +9,9 @@ export default {
 
 const Template: ComponentStory<typeof Toggle> = (args) => <Toggle {...args}/>
 
-export const NotToggle = Template.bind({});
+export const NotToggled = Template.bind({});
 
-NotToggle.args = {
+NotToggled.args = {
     checked: false,
     label: 'Toggle',
 };
